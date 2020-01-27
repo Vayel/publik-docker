@@ -10,7 +10,7 @@ if [ ! -f ./data/hosts ]; then
   touch ./data/hosts
 fi
 
-docker-compose -p "$COMPOSE_PROJECT_NAME" -f docker-compose-local.yml up
+docker-compose -p "$COMPOSE_PROJECT_NAME" -f docker-compose.certificates.yml up
 
 zip -r data.zip data
 
