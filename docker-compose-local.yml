@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  proxy:
+    container_name: proxy-certificates
+    build:
+      context: ./proxy
+    tty: true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/ssl:/etc/nginx/ssl
+      - ./data/letsencrypt:/etc/letsencrypt
+      - /etc/hosts:/etc/hosts
+    links:
+      - mailcatcher:fargo
+      - mailcatcher:combo
+      - mailcatcher:rabbitmq
+      - mailcatcher:authentic
+      - mailcatcher:wcs
+      - mailcatcher:passerelle
+      - mailcatcher:hobo
+      - mailcatcher:pgadmin
+      - mailcatcher:webmail
+    env_file:
+      - .env
+      - config.env
+      - secret.env
+
+  mailcatcher:
+    container_name: mailcatcher
+    image: ascendhit/mailcatcher

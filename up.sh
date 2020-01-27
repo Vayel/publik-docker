@@ -8,4 +8,4 @@ if [ ! -f ./data/hosts ]; then
   touch ./data/hosts
 fi
 
-docker-compose -p $COMPOSE_PROJECT_NAME up --no-build --abort-on-container-exit
+docker-compose -p "$COMPOSE_PROJECT_NAME" up --no-build --abort-on-container-exit

@@ -8,22 +8,22 @@ services:
     image: julienbayle/publik:latest-proxy
     tty: true
     ports:
-     - "${HTTP_PORT}:80"
-     - "${HTTPS_PORT}:443"
+      - "${HTTP_PORT}:80"
+      - "${HTTPS_PORT}:443"
     volumes:
-     - ./data/ssl:/etc/nginx/ssl
-     - ./data/letsencrypt:/etc/letsencrypt
-     - ./data/hosts:/etc/hosts
+      - ./data/ssl:/etc/nginx/ssl
+      - ./data/letsencrypt:/etc/letsencrypt
+      - ./data/hosts:/etc/hosts
     links:
-     - components:authentic
-     - components:combo
-     - components:fargo
-     - components:hobo
-     - components:passerelle
-     - components:wcs
-     - rabbitmq:rabbitmq
-     - pgadmin:pgadmin
-     - mailcatcher:webmail
+      - components:authentic
+      - components:combo
+      - components:fargo
+      - components:hobo
+      - components:passerelle
+      - components:wcs
+      - rabbitmq:rabbitmq
+      - pgadmin:pgadmin
+      - mailcatcher:webmail
     env_file:
       - .env
       - config.env
