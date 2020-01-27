@@ -66,7 +66,7 @@ RUN usermod fargo -s /bin/bash
 COPY tmp/* /tmp/
 RUN mkdir -p /etc/hobo/settings.d/ /etc/hobo-agent/settings.d
 COPY hobo.settings.py /etc/hobo/settings.d/custom.py
-COPY hobo-agent.settings.template /etc/hobo-agent/settings.d/custom.template
+COPY hobo-agent.settings.py /etc/hobo-agent/settings.d/custom.py
 RUN usermod hobo -s /bin/bash
 
 # PASSERELLE
