@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  proxy:
+    environment:
+      DEBUG=""
+
+  components:
+    environment:
+      DEBUG=""
