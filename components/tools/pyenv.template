@@ -1,0 +1,34 @@
+# To pass env vars to Python scripts run by Publik in services which remove custom env vars:
+# https://unix.stackexchange.com/questions/44370/how-to-make-unix-service-see-environment-variables
+# So we hardcode the values when the container starts
+
+# TODO: escape quotes
+
+DEBUG = bool('$DEBUG')
+LOG_LEVEL = '$LOG_LEVEL'
+
+ALLOWED_HOSTS = '$ALLOWED_HOSTS'
+if ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ALLOWED_HOSTS.split(';')
+else:
+    ALLOWED_HOSTS = []
+
+DB_PORT = '$DB_PORT'
+DB_HOBO_PASS = '$DB_HOBO_PASS'
+DB_PASSERELLE_PASS = '$DB_PASSERELLE_PASS'
+DB_COMBO_PASS = '$DB_COMBO_PASS'
+DB_FARGO_PASS = '$DB_FARGO_PASS'
+DB_WCS_PASS = '$DB_WCS_PASS'
+DB_AUTHENTIC_PASS = '$DB_AUTHENTIC_PASS'
+
+RABBITMQ_DEFAULT_USER = '$RABBITMQ_DEFAULT_USER'
+RABBITMQ_DEFAULT_PASS = '$RABBITMQ_DEFAULT_PASS'
+RABBITMQ_PORT = '$RABBITMQ_PORT'
+
+ERROR_MAIL_AUTHOR = '$ERROR_MAIL_AUTHOR'
+ERROR_MAIL_ADDR = '$ERROR_MAIL_ADDR'
+
+SMTP_HOST = '$SMTP_HOST'
+SMTP_USER = '$SMTP_USER'
+SMTP_PASS = '$SMTP_PASS'
+SMTP_PORT = '$SMTP_PORT'

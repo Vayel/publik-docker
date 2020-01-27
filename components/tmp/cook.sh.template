@@ -1,0 +1,77 @@
+#!/bin/bash
+
+COMBO_OK="Combo fonctionne"
+AUTHENTIC_OK="Connexion"
+
+function retry() {
+    local -r -i max_attempts="$1"; shift
+    local -r cmd="$@"
+    local -i attempt_num=1
+
+    until $cmd
+    do
+        if (( attempt_num == max_attempts ))
+        then
+            echo "Attempt $attempt_num failed and there are no more attempts left!"
+            exit 1
+        else
+            echo "Attempt $attempt_num failed! Trying again in 10 seconds..."
+            let attempt_num++
+	    sleep 10
+        fi
+    done
+}
+
+function testHttpCode {
+	t=`wget --spider https://$1 2>&1 | grep $3 | wc -l`
+	if [ $t -eq 0 ]
+	then
+       		echo "ERROR: $2 is not ready for configuration"
+		return 1
+	fi
+	echo "OK: $2 is ready"
+}
+
+function testHttpContains {
+        t=`wget -O - https://$1 2>&1 | grep $3 | wc -l`
+        if [ $t -eq 0 ]
+        then
+                echo "ERROR: $2 is not ready for configuration"
+                return 1
+        fi
+        echo "OK: $2 is ready"
+}
+
+# Before cook, wait for all services to be ready
+
+retry 300 testHttpCode ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 404
+retry 300 testHttpCode ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 404
+retry 300 testHttpCode ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 404
+retry 300 testHttpCode ${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 404
+retry 300 testHttpCode ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic 404
+retry 300 testHttpCode ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 404
+retry 300 testHttpCode ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 404
+
+# ZIP template for WCS
+zip /tmp/publik.zip /tmp/config.json /tmp/site-options.cfg
+cp /tmp/publik.zip /var/lib/wcs/skeletons
+
+# Execute cook in hobo (Many time as recommended by Entr'ouvert)
+runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
+runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
+runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
+runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
+runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
+
+# After cook, test all services
+set -e
+testHttpContains ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo $COMBO_OK
+testHttpCode ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 200
+testHttpContains ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle $AUTHENTIC_OK
+testHttpContains ${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs $AUTHENTIC_OK
+testHttpContains ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic $COMBO_OK
+testHttpContains ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo $AUTHENTIC_OK
+testHttpContains ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo $AUTHENTIC_OK
+
+echo "Configuration OK (Hobo cook)"
+touch /tmp/success

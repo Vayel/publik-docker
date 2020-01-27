@@ -1,0 +1,74 @@
+{
+   "variables":{
+      "hobo":"${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}",
+      "authentic":"${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}",
+      "combo":"${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}",
+      "combo_agent":"${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}",
+      "passerelle":"${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}",
+      "wcs":"${WCS_SUBDOMAIN}${ENV}.${DOMAIN}",
+      "fargo":"${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}"
+   },
+   "steps":[
+      {
+         "create-hobo":{
+            "url":"https://${hobo}/"
+         }
+      },
+      {
+         "create-superuser":{
+            "email":"${EMAIL}",
+            "password":"${SUPERUSER_PASS}"
+         }
+      },
+      {
+         "create-authentic":{
+            "url":"https://${authentic}/",
+            "title":"Connexion"
+         }
+      },
+      {
+         "set-idp":{
+
+         }
+      },
+      {
+         "create-combo":{
+            "url":"https://${combo}/",
+            "title":"Compte citoyen",
+            "template_name":"portal-user"
+         }
+      },
+      {
+         "create-combo":{
+            "url":"https://${combo_agent}/",
+            "slug":"portal-agent",
+            "title":"Portail agent",
+            "template_name":"portal-agent"
+         }
+      },
+      {
+         "create-wcs":{
+            "url":"https://${wcs}/",
+            "title":"Démarches",
+            "template_name": "publik.zip"
+	}
+      },
+      {
+         "create-fargo":{
+            "url":"https://${fargo}/",
+            "title":"Porte-documents"
+         }
+      },
+      {
+         "create-passerelle":{
+            "url":"https://${passerelle}/",
+            "title":"Passerelle"
+         }
+      },
+      {
+         "set-theme":{
+            "theme":"publik"
+         }
+      }
+   ]
+}
