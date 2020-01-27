@@ -48,6 +48,19 @@ variables à substituer ont pour extension `.template`. Comme la valeur des vari
 d'environnement peut changer d'une exécution à l'autre, il est important de conserver
 le modèle d'origine et de ne pas faire une substitution en place.
 
+Les variables sont définies dans trois fichiers `xxx.env.template`. Il ne faut
+PAS les éditer, une copie `xxx.env` non traquée par git en sera faite au moment
+du déploiement :
+
+* `.env` : hostnames et ports, utilisés dans les fichiers `docker-compose<.xxx>.yml`
+* `secret.env` : les mots de passe
+* `config.env` : d'autres variables
+
+Comme indiqué en commentaires de ces fichiers, certaines variables peuvent être vides,
+d'autres non.
+
+Notons également que ces fichiers sont au format `ini` et ne sont PAS des scripts shell.
+
 ## Déploiement
 
 ### Pré-requis
@@ -85,3 +98,4 @@ Pour la suite, se référer à :
 * `docs/deploy-local.md` pour une installation sur une machine **non accessible** depuis Internet
 * `docs/deploy-dev.md` pour une installation de développement sur une machine **accessible** depuis Internet
 * `docs/deploy-prod.md` pour une installation de production sur une machine **accessible** depuis Internet
+* `docs/manage.md` pour administrer des conteneurs déjà déployés

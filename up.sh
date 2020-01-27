@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./load-env.sh
+. ./init-env.sh
 
 # If we don't create it ourselves a folder is created instead of a file
 mkdir -p data
