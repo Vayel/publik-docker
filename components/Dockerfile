@@ -40,6 +40,7 @@ RUN chmod +x /root/*.sh
 RUN mkdir /root/bin
 COPY bin/* /root/bin/
 RUN chmod +x /root/bin/* && mv /root/bin/* /usr/local/bin && rm -r /root/bin
+COPY settings.template /home/
 
 # AUTHENTIC
 COPY authentic.config.py /etc/authentic2-multitenant/config.py

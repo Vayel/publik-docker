@@ -8,7 +8,7 @@ mkdir -p /home/http
 chmod 777 /home/http
 
 err=false
-for VAR in DOMAIN PGADMIN_PORT RABBITMQ_MANAGEMENT_PORT MAILCATCHER_HTTP_PORT EMAIL
+for VAR in DOMAIN PGADMIN_PORT RABBITMQ_MANAGEMENT_PORT MAILCATCHER_HTTP_PORT ADMIN_MAIL_ADDR
 do
   if [ -z "${!VAR}" ]
   then
@@ -47,7 +47,7 @@ function generatecertificate() {
 		certbot certonly --webroot -n --agree-tos \
 			-w /home/http \
 			-d $1${ENV}.${DOMAIN} \
-			--email ${EMAIL}
+			--email ${ADMIN_MAIL_ADDR}
 		service nginx stop
 	fi
 }

@@ -3,7 +3,7 @@
 # So we hardcode the values in the file below when the container starts
 import sys
 sys.path.insert(0, "/home")
-from pyenv import *
+from publik_settings import *
 
 # Databases
 # w.c.s. doesn't use Django ORM (yet) so do not declare any database for now.
@@ -18,18 +18,8 @@ from pyenv import *
 LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'Europe/Paris'
 
-# Email configuration
-EMAIL_SUBJECT_PREFIX = '[combo] '
-SERVER_EMAIL = EMAIL
-DEFAULT_FROM_EMAIL = EMAIL
-
-# SMTP configuration
-EMAIL_HOST = SMTP_HOST
-EMAIL_HOST_USER = SMTP_USER
-EMAIL_HOST_PASSWORD = SMTP_PASS
-EMAIL_PORT = SMTP_PORT
+EMAIL_SUBJECT_PREFIX = '[wcs] '
 
 # HTTPS Security
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-

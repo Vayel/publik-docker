@@ -3,7 +3,7 @@
 # So we hardcode the values in the file below when the container starts
 import sys
 sys.path.insert(0, "/home")
-from pyenv import *
+from publik_settings import *
 
 # Databases
 DATABASES['default']['ENGINE'] = 'tenant_schemas.postgresql_backend'
@@ -24,18 +24,7 @@ LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'Europe/Paris'
 
 # Email configuration
-ADMINS = (
-  (ERROR_MAIL_AUTHOR, ERROR_MAIL_ADDR),
-)
 EMAIL_SUBJECT_PREFIX = '[authentic] '
-SERVER_EMAIL = ERROR_MAIL_ADDR
-DEFAULT_FROM_EMAIL = ERROR_MAIL_ADDR
-
-# SMTP configuration
-EMAIL_HOST = SMTP_HOST
-EMAIL_HOST_USER = SMTP_USER
-EMAIL_HOST_PASSWORD = SMTP_PASS
-EMAIL_PORT = SMTP_PORT
 
 # HTTPS Security
 CSRF_COOKIE_SECURE = True

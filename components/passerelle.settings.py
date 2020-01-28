@@ -3,7 +3,7 @@
 # So we hardcode the values in the file below when the container starts
 import sys
 sys.path.insert(0, "/home")
-from pyenv import *
+from publik_settings import *
 
 # Databases
 DATABASES['default']['ENGINE'] = 'tenant_schemas.postgresql_backend'
@@ -16,3 +16,5 @@ DATABASES['default']['PORT'] = DB_PORT
 # Zone
 LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'Europe/Paris'
+
+EMAIL_SUBJECT_PREFIX = '[passerelle] '
