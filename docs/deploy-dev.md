@@ -62,7 +62,23 @@ Vous devez alors obtenir quelque chose comme :
 Dans un autre shell (en conservant le premier ouvert) :
 
 ```
-./init-components.sh  # Prend un peu de temps
+# Prend un peu de temps. Doit se terminer sur :
+#
+# OK: combo is ready
+# OK: combo_agent is ready
+# OK: passerelle is ready
+# OK: wcs is ready
+# OK: authentic is ready
+# OK: fargo is ready
+# OK: hobo is ready
+# Configuration OK (Hobo cook)
+
+./init-components.sh
+
+# Doit se terminer sur :
+#
+# Deployment looks OK
+
 ./check-deployment.sh
 ```
 
