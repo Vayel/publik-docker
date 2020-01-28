@@ -22,4 +22,7 @@ check "/var/lib/hobo/tenants"
 check "/var/lib/passerelle/tenants"
 check "/var/lib/wcs"
 
+echo ""
+echo "*******************"
 echo "Deployment looks OK"
+echo "*******************"
