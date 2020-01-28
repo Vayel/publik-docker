@@ -13,7 +13,11 @@ avec `Ctrl+C`.
 ## Debug
 
 Il est possible de personnaliser le niveau de logging via la variable `LOG_LEVEL`
-dans le fichier `config.env`.
+dans le fichier `config.env`. Les logs sont configurés dans les fichiers de
+configuration nginx `components/nginx/*` et dans `components/tools.pyenv.template`.
+
+Les logs des composants Django sont écrits dans la console et capturés par `service`
+qui les sauvegarde dans des fichiers (cf. plus bas).
 
 Pour consulter les messages de logging, se connecter au conteneur (une fois démarré) :
 
@@ -25,4 +29,4 @@ Pour consulter les messages de logging, se connecter au conteneur (une fois dém
 Il y a alors deux types de logs :
 
 * `/var/log/nginx/` : les logs de nginx (uniquement dans les conteneurs `proxy` et `components`)
-* `/var/log/<composant>/` : les logs du composant Django (uniquement dans le conteneur `components`)
+* `/var/log/uwsgi.COMPOSANT.log` : les logs du composant Django (uniquement dans le conteneur `components`)
