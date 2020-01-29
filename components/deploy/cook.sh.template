@@ -12,10 +12,10 @@ function retry() {
   do
     if (( attempt_num == max_attempts ))
     then
-      echo "Attempt $attempt_num failed and there are no more attempts left!"
+      echo "Component not ready and there are no more attempts left!"
       exit 1
     else
-      echo "Attempt $attempt_num failed! Trying again in 10 seconds..."
+      echo "Component not ready yet. Trying again in 10 seconds..."
       let attempt_num++
 	    sleep 10
     fi
@@ -29,17 +29,17 @@ function testHttpCode {
     echo "ERROR: $2 returned http code $t instead of expected $3"
     return 1
   fi
-  echo "OK: $2 returns the expected $3 http code"
+  echo "OK: $2 returned the expected $3 http code"
 }
 
 function testHttpContains {
   t=`wget -O - https://$1 2>&1 | grep $3 | wc -l`
   if [ $t -eq 0 ]
   then
-    echo "ERROR: $2 html doen not contain $3"
+    echo "ERROR: $2 html does not contain $3"
     return 1
   fi
-  echo "OK: $2 returns a html containing $3"
+  echo "OK: $2 returned a html containing $3"
 }
 
 # Before cook, wait for all services to be ready
