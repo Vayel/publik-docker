@@ -43,7 +43,9 @@ function testHttpContains {
 }
 
 # Before cook, wait for all services to be ready
+echo "###"
 echo "### Checking components..."
+echo "###"
 retry 300 testHttpCode ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 404
 retry 300 testHttpCode ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 404
 retry 300 testHttpCode ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 404
@@ -53,11 +55,15 @@ retry 300 testHttpCode ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 40
 retry 300 testHttpCode ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 404
 
 # ZIP template for WCS
+echo "###"
 echo "### Building WCS template..."
+echo "###"
 zip -j /var/lib/wcs/skeletons/publik.zip /tmp/wcs-template/*
 
 # Execute cook in hobo (Many time as recommended by Entr'ouvert)
+echo "###"
 echo "### Deploying components..."
+echo "###"
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
@@ -65,12 +71,16 @@ runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 
 # Import site template
+echo "###"
 echo "### Importing site skeleton..."
+echo "###"
 sudo -u wcs wcs-manage import_site -d ${WCS_SUBDOMAIN}${ENV}.${DOMAIN} /var/lib/wcs/skeletons/publik.zip
 
 # After cook, test all services
 set -e
+echo "###"
 echo "### Checking deployment..."
+echo "###"
 testHttpContains ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo $COMBO_OK
 testHttpContains ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent $COMBO_OK
 testHttpContains ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle $AUTHENTIC_OK
@@ -87,4 +97,6 @@ testHttpCode ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic 302
 testHttpCode ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
 testHttpCode ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
-echo "Configuration OK (Hobo cook)"
+echo "###"
+echo "### Configuration OK (Hobo cook)"
+echo "###"
