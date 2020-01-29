@@ -3,7 +3,7 @@
         "theme": "publik"
     },
     "debug": {
-        "error_email": "${EMAIL}"
+        "error_email": "${ADMIN_MAIL_ADDR}"
     },
     "language": {
         "language": "fr"

@@ -19,9 +19,9 @@ envsubst '$DEBUG $LOG_LEVEL $ALLOWED_HOSTS $DB_PORT $DB_HOBO_PASS $DB_PASSERELLE
 # Needs to be in a directory that can be read by a non-root user, so not "/root"
 chmod 755 /home/publik_settings.py
 
-envsubst '${EMAIL} ${ENV} ${DOMAIN} ${HTTPS_PORT} ${DB_WCS_PASS} $COMBO_SUBDOMAIN' < /tmp/config.template > /tmp/config.json
-envsubst '${EMAIL} ${ENV} ${DOMAIN} ${HTTPS_PORT} ${SUPERUSER_PASS} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < /tmp/hobo.recipe.template > /tmp/recipe.json
-envsubst '${EMAIL} ${ENV} ${DOMAIN} ${HTTPS_PORT} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < /tmp/cook.sh.template > /tmp/cook.sh
+envsubst '${ADMIN_MAIL_ADDR} ${ENV} ${DOMAIN} ${HTTPS_PORT} ${DB_WCS_PASS} $COMBO_SUBDOMAIN' < /tmp/config.template > /tmp/config.json
+envsubst '${ADMIN_MAIL_ADDR} ${ENV} ${DOMAIN} ${HTTPS_PORT} ${SUPERUSER_PASS} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < /tmp/hobo.recipe.template > /tmp/recipe.json
+envsubst '${ADMIN_MAIL_ADDR} ${ENV} ${DOMAIN} ${HTTPS_PORT} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < /tmp/cook.sh.template > /tmp/cook.sh
 chmod +x /tmp/cook.sh
 
 # To be allowed to write logs
