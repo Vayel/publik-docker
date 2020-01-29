@@ -1,0 +1,32 @@
+{
+    "branding": {
+        "theme": "publik"
+    },
+    "debug": {
+        "error_email": "${ADMIN_MAIL_ADDR}"
+    },
+    "language": {
+        "language": "fr"
+    },
+    "misc": {
+        "charset": "utf-8",
+        "homepage-redirect-url": "https://${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}",
+        "backoffice-url": "https://${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}",
+        "default-position": "$DEFAULT_POSITION"
+    },
+    "emails": {
+        "smtp_server": "$SMTP_HOST",
+        "smtp_login": "$SMTP_USER",
+        "smtp_password": "$SMTP_PASS",
+        "from": "$ADMIN_MAIL_ADDR",
+        "reply_to": "$ADMIN_MAIL_ADDR",
+    },
+    "postgresql": {
+        "database-template-name": "wcs_%s",
+        "database": "postgres",
+        "host": "db",
+        "user": "wcs",
+        "password": "${DB_WCS_PASS}",
+        "port": ${DB_PORT}
+    }
+}

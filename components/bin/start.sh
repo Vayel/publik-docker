@@ -4,24 +4,27 @@
 set -eu
 
 # Wait for dependencies
-/root/wait-for-it.sh -t 60 db:${DB_PORT}
-/root/wait-for-it.sh -t 60 rabbitmq:${RABBITMQ_PORT}
+wait-for-it.sh -t 60 db:${DB_PORT}
+wait-for-it.sh -t 60 rabbitmq:${RABBITMQ_PORT}
 
-/root/check-env.sh
+check-env.sh
+
+SUBST_STR='$DOMAIN $ADMIN_MAIL_ADDR $ADMIN_MAIL_AUTHOR $RABBITMQ_DEFAULT_USER $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN $LOG_LEVEL $DEFAULT_POSITION $BROKER_TASK_EXPIRES $DEBUG $ENV $ALLOWED_HOSTS $SMTP_USER $DB_PORT $RABBITMQ_PORT $RABBITMQ_MANAGEMENT_PORT $HTTP_PORT $HTTPS_PORT $SMTP_HOST $SMTP_PORT $MAILCATCHER_HTTP_PORT $PGADMIN_PORT $DOCKER_PROJECT_NAME $POSTGRES_PASSWORD $DB_AUTHENTIC_PASS $DB_COMBO_PASS $DB_FARGO_PASS $DB_HOBO_PASS $DB_PASSERELLE_PASS $DB_WCS_PASS $RABBITMQ_DEFAULT_PASS $SUPERUSER_PASS $SMTP_PASS'
 
 for COMP in authentic combo fargo hobo passerelle wcs
 do
-  envsubst '${ENV} ${DOMAIN} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < "/etc/nginx/conf.d/$COMP.template" > "/etc/nginx/conf.d/$COMP.conf"
+  envsubst "$SUBST_STR" < "/etc/nginx/conf.d/$COMP.template" > "/etc/nginx/conf.d/$COMP.conf"
 done
 
 # Cannot use "settings.py" as it seems to be in conflict with Django's settings
-envsubst '$DEBUG $LOG_LEVEL $ALLOWED_HOSTS $DB_PORT $DB_HOBO_PASS $DB_PASSERELLE_PASS $DB_COMBO_PASS $DB_FARGO_PASS $DB_WCS_PASS $DB_AUTHENTIC_PASS $RABBITMQ_DEFAULT_USER $RABBITMQ_DEFAULT_PASS $RABBITMQ_PORT $ADMIN_MAIL_AUTHOR $ADMIN_MAIL_ADDR $SMTP_HOST $SMTP_USER $SMTP_PASS $SMTP_PORT' < /home/settings.template > /home/publik_settings.py
 # Needs to be in a directory that can be read by a non-root user, so not "/root"
+envsubst "$SUBST_STR" < /home/settings.template > /home/publik_settings.py
 chmod 755 /home/publik_settings.py
 
-envsubst '${ADMIN_MAIL_ADDR} ${ENV} ${DOMAIN} ${HTTPS_PORT} ${DB_WCS_PASS} $COMBO_SUBDOMAIN' < /tmp/config.template > /tmp/config.json
-envsubst '${ADMIN_MAIL_ADDR} ${ENV} ${DOMAIN} ${HTTPS_PORT} ${SUPERUSER_PASS} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < /tmp/hobo.recipe.template > /tmp/recipe.json
-envsubst '${ADMIN_MAIL_ADDR} ${ENV} ${DOMAIN} ${HTTPS_PORT} $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN' < /tmp/cook.sh.template > /tmp/cook.sh
+mkdir -p /tmp/wcs-template
+envsubst "$SUBST_STR" < /tmp/config.template > /tmp/wcs-template/config.json
+envsubst "$SUBST_STR" < /tmp/hobo.recipe.template > /tmp/recipe.json
+envsubst "$SUBST_STR" < /tmp/cook.sh.template > /tmp/cook.sh
 chmod +x /tmp/cook.sh
 
 # To be allowed to write logs

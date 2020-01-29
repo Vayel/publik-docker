@@ -35,8 +35,6 @@ RUN apt-get update \
 COPY nginx/*.template /etc/nginx/conf.d/ 
 
 # SCRIPTS
-COPY tools/* /root/
-RUN chmod +x /root/*.sh
 RUN mkdir /root/bin
 COPY bin/* /root/bin/
 RUN chmod +x /root/bin/* && mv /root/bin/* /usr/local/bin && rm -r /root/bin
@@ -62,7 +60,7 @@ RUN chmod 755 /etc/fargo/secret
 RUN usermod fargo -s /bin/bash
 
 # HOBO
-COPY tmp/* /tmp/
+COPY deploy/* /tmp/
 RUN mkdir -p /etc/hobo/settings.d/ /etc/hobo-agent/settings.d
 COPY hobo.settings.py /etc/hobo/settings.d/custom.py
 COPY hobo-agent.settings.py /etc/hobo-agent/settings.d/custom.py

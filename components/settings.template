@@ -70,3 +70,4 @@ BROKER_URL = 'amqp://{user}:{password}@rabbitmq:{port}//'.format(
     password=RABBITMQ_DEFAULT_PASS,
     port=RABBITMQ_PORT,
 )
+BROKER_TASK_EXPIRES = $BROKER_TASK_EXPIRES
