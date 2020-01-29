@@ -13,12 +13,6 @@ DATABASES['default']['PASSWORD'] = DB_HOBO_PASS
 DATABASES['default']['HOST'] = 'db'
 DATABASES['default']['PORT'] = DB_PORT
 
-BROKER_URL = 'amqp://{user}:{password}@rabbitmq:{port}//'.format(
-    user=RABBITMQ_DEFAULT_USER,
-    password=RABBITMQ_DEFAULT_PASS,
-    port=RABBITMQ_PORT,
-)
-
 LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'Europe/Paris'
 
