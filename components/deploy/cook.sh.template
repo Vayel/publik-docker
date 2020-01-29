@@ -43,6 +43,7 @@ function testHttpContains {
 }
 
 # Before cook, wait for all services to be ready
+echo "### Checking components..."
 retry 300 testHttpCode ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 404
 retry 300 testHttpCode ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 404
 retry 300 testHttpCode ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 404
@@ -52,17 +53,24 @@ retry 300 testHttpCode ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 40
 retry 300 testHttpCode ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 404
 
 # ZIP template for WCS
+echo "### Building WCS template..."
 zip -j /var/lib/wcs/skeletons/publik.zip /tmp/wcs-template/*
 
 # Execute cook in hobo (Many time as recommended by Entr'ouvert)
+echo "### Deploying components..."
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 
+# Import site template
+echo "### Importing site skeleton..."
+sudo -u wcs wcs-manage import_site -d ${WCS_SUBDOMAIN}${ENV}.${DOMAIN} /var/lib/wcs/skeletons/publik.zip
+
 # After cook, test all services
 set -e
+echo "### Checking deployment..."
 testHttpContains ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo $COMBO_OK
 testHttpContains ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent $COMBO_OK
 testHttpContains ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle $AUTHENTIC_OK
@@ -80,4 +88,3 @@ testHttpCode ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
 testHttpCode ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
 echo "Configuration OK (Hobo cook)"
-touch /tmp/success
