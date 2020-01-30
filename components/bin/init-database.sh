@@ -1,9 +1,8 @@
 #!/bin/bash
 
-PGPASSWORD="$DB_HOBO_PASS" psql -h "$DB_HOST" -p "$DB_PORT" -U "hobo" -v ON_ERROR_STOP=1 --no-password <<-EOSQL
-EOSQL
+count=`PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" --no-password -q -l | grep hobo | wc -l`
 
-if [ $? -eq 0 ]; then
+if [ "$count" != "0" ]; then
   echo "Database already configured"
   echo ""
   exit 0
