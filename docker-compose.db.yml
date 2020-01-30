@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+  components:
+    links:
+      - db:db
+      - rabbitmq:rabbitmq
+    depends_on: 
+      - db
+      - rabbitmq
+
+  db:
+    container_name: db
+    build:
+      context: ./postgresql
+    image: publik-pgsql
+    ports:
+      - "${DB_PORT}:5432"
+    env_file:
+      - .env
+      - config.env
+      - secret.env
+    environment:
+      - "POSTGRES_USER=$DB_ADMIN_USER"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./postgresql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+
+volumes:
+  dbdata:

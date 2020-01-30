@@ -1,8 +1,18 @@
 #!/bin/bash
+
+PGPASSWORD="$DB_HOBO_PASS" psql -h "$DB_HOST" -p "$DB_PORT" -U "hobo" -v ON_ERROR_STOP=1 --no-password <<-EOSQL
+EOSQL
+
+if [ $? -eq 0 ]; then
+  echo "Database already configured"
+  echo ""
+  exit 0
+fi
+
 set -e
 
 # Create all databases except WCS one which is created when first started
-psql -U "$POSTGRES_USER" -v ON_ERROR_STOP=1 <<-EOSQL
+PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" -v ON_ERROR_STOP=1 --no-password <<-EOSQL
     CREATE USER hobo;
     CREATE DATABASE hobo TEMPLATE=template0 ENCODING 'UTF8' LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
     GRANT ALL PRIVILEGES ON DATABASE hobo TO hobo;

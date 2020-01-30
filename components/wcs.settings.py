@@ -7,12 +7,12 @@ from publik_settings import *
 
 # Databases
 # w.c.s. doesn't use Django ORM (yet) so do not declare any database for now.
-#DATABASES['default']['ENGINE'] = 'tenant_schemas.postgresql_backend'
 #DATABASES['default']['NAME'] = 'wcs'
 #DATABASES['default']['USER'] = 'wcs'
 #DATABASES['default']['PASSWORD'] = DB_WCS_PASS
-#DATABASES['default']['HOST'] = 'db'
-#DATABASES['default']['PORT'] = DB_PORT
+
+# Override shared settings
+DATABASES = {}
 
 # Zone
 LANGUAGE_CODE = 'fr-fr'

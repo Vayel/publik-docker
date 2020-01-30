@@ -6,12 +6,10 @@ sys.path.insert(0, "/home")
 from publik_settings import *
 
 # Databases
-DATABASES['default']['ENGINE'] = 'tenant_schemas.postgresql_backend'
+# See shared settings
 DATABASES['default']['NAME'] = 'combo'
 DATABASES['default']['USER'] = 'combo'
 DATABASES['default']['PASSWORD'] = DB_COMBO_PASS
-DATABASES['default']['HOST'] = 'db'
-DATABASES['default']['PORT'] = DB_PORT
 
 # Zone
 LANGUAGE_CODE = 'fr-fr'

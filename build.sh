@@ -2,5 +2,5 @@
 
 . ./init-env.sh
 
-docker-compose -p $COMPOSE_PROJECT_NAME build
+docker-compose -f docker-compose.yml -f docker-compose.db.yml -p $COMPOSE_PROJECT_NAME build
 docker-compose -p $COMPOSE_PROJECT_NAME pull rabbitmq

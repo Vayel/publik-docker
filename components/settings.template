@@ -13,6 +13,7 @@ if ALLOWED_HOSTS:
 else:
     ALLOWED_HOSTS = []
 
+DB_HOST = '$DB_HOST'
 DB_PORT = '$DB_PORT'  # Must be a string: https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-DATABASES
 DB_HOBO_PASS = '$DB_HOBO_PASS'
 DB_PASSERELLE_PASS = '$DB_PASSERELLE_PASS'
@@ -21,8 +22,17 @@ DB_FARGO_PASS = '$DB_FARGO_PASS'
 DB_WCS_PASS = '$DB_WCS_PASS'
 DB_AUTHENTIC_PASS = '$DB_AUTHENTIC_PASS'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'tenant_schemas.postgresql_backend',
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+    }
+}
+
 RABBITMQ_DEFAULT_USER = '$RABBITMQ_DEFAULT_USER'
 RABBITMQ_DEFAULT_PASS = '$RABBITMQ_DEFAULT_PASS'
+RABBITMQ_HOST = '$RABBITMQ_HOST'
 RABBITMQ_PORT = $RABBITMQ_PORT
 
 ADMIN_MAIL_AUTHOR = '$ADMIN_MAIL_AUTHOR'
@@ -65,9 +75,10 @@ LOGGING = {
     },
 }
 
-BROKER_URL = 'amqp://{user}:{password}@rabbitmq:{port}//'.format(
+BROKER_URL = 'amqp://{user}:{password}@{host}:{port}//'.format(
     user=RABBITMQ_DEFAULT_USER,
     password=RABBITMQ_DEFAULT_PASS,
+    host=RABBITMQ_HOST,
     port=RABBITMQ_PORT,
 )
 BROKER_TASK_EXPIRES = $BROKER_TASK_EXPIRES

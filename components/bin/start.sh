@@ -3,13 +3,21 @@
 # Fail on errors
 set -eu
 
-# Wait for dependencies
-wait-for-it.sh -t 60 db:${DB_PORT}
-wait-for-it.sh -t 60 rabbitmq:${RABBITMQ_PORT}
-
 check-env.sh
 
-SUBST_STR='$DOMAIN $ADMIN_MAIL_ADDR $ADMIN_MAIL_AUTHOR $RABBITMQ_DEFAULT_USER $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN $LOG_LEVEL $DEFAULT_POSITION $BROKER_TASK_EXPIRES $DEBUG $ENV $ALLOWED_HOSTS $SMTP_USER $DB_PORT $RABBITMQ_PORT $RABBITMQ_MANAGEMENT_PORT $HTTP_PORT $HTTPS_PORT $SMTP_HOST $SMTP_PORT $DOCKER_PROJECT_NAME $POSTGRES_PASSWORD $DB_AUTHENTIC_PASS $DB_COMBO_PASS $DB_FARGO_PASS $DB_HOBO_PASS $DB_PASSERELLE_PASS $DB_WCS_PASS $RABBITMQ_DEFAULT_PASS $SUPERUSER_PASS $SMTP_PASS'
+# Wait for dependencies
+wait-for-it.sh -t 60 $DB_HOST:${DB_PORT}
+wait-for-it.sh -t 60 $RABBITMQ_HOST:${RABBITMQ_PORT}
+
+echo "*********************"
+echo "Initializing database"
+echo "*********************"
+init-database.sh
+
+echo "*********************"
+echo "Substituting env vars"
+echo "*********************"
+SUBST_STR='$DOMAIN $ADMIN_MAIL_ADDR $ADMIN_MAIL_AUTHOR $RABBITMQ_HOST $RABBITMQ_DEFAULT_USER $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN $LOG_LEVEL $DEFAULT_POSITION $BROKER_TASK_EXPIRES $DEBUG $ENV $ALLOWED_HOSTS $SMTP_USER $DB_HOST $DB_PORT $RABBITMQ_PORT $RABBITMQ_MANAGEMENT_PORT $HTTP_PORT $HTTPS_PORT $SMTP_HOST $SMTP_PORT $DOCKER_PROJECT_NAME $POSTGRES_PASSWORD $DB_AUTHENTIC_PASS $DB_COMBO_PASS $DB_FARGO_PASS $DB_HOBO_PASS $DB_PASSERELLE_PASS $DB_WCS_PASS $RABBITMQ_DEFAULT_PASS $SUPERUSER_PASS $SMTP_PASS'
 
 for COMP in authentic combo fargo hobo passerelle wcs
 do
@@ -30,6 +38,9 @@ chmod +x /tmp/cook.sh
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs
 
+echo "*****************"
+echo "Starting services"
+echo "*****************"
 function check_services {
   for S in combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
   do

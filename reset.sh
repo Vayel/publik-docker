@@ -2,5 +2,5 @@
 
 . ./init-env.sh
 
-docker-compose -p $COMPOSE_PROJECT_NAME down -v
-docker-compose -p $COMPOSE_PROJECT_NAME rm -v
+docker-compose -f docker-compose.yml -f docker-compose.db.yml -p $COMPOSE_PROJECT_NAME down -v
+docker-compose -f docker-compose.yml -f docker-compose.db.yml -p $COMPOSE_PROJECT_NAME rm -v

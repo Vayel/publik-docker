@@ -42,29 +42,14 @@ services:
       - wcsdata:/var/lib/wcs
       - ./data/hosts:/etc/hosts
     links:
-      - db:db
       - rabbitmq:rabbitmq
     depends_on: 
-      - db
       - rabbitmq
     tty: true
     env_file:
       - .env
       - config.env
       - secret.env
-
-  db:
-    container_name: db
-    build:
-      context: ./postgresql
-    image: publik-pgsql
-    ports:
-      - "${DB_PORT}:5432"
-    env_file:
-      - secret.env
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-      - ./postgresql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
 
   rabbitmq:
     container_name: rabbitmq
@@ -79,7 +64,6 @@ services:
       - config.env
 
 volumes:
-  dbdata:
   authentic2data:
   combodata:
   fargodata:
