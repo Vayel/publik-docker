@@ -81,8 +81,8 @@ git clone https://github.com/Vayel/publik-docker.git
 cd publik
 sudo ./install-on-debian.sh
 cd ..
-sudo mv publik /home/publik/
-sudo chown publik:publik /home/publik/publik -R
+sudo mv publik-docker /home/publik/
+sudo chown publik:publik /home/publik/publik-docker -R
 ```
 
 > Note aux utilisateurs derrière un PROXY : Penser à installer les certificats dans le magasin de l'OS 
