@@ -77,7 +77,7 @@ Caractéristiques minimales de la machine :
 ```bash
 sudo apt-get update
 sudo apt-get install -y git
-git clone https://github.com/Vayel/publik.git
+git clone https://github.com/Vayel/publik-docker.git
 cd publik
 sudo ./install-on-debian.sh
 cd ..
