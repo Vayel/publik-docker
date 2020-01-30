@@ -22,8 +22,8 @@
     },
     "postgresql": {
         "database-template-name": "wcs_%s",
-        "database": "postgres",
-        "host": "db",
+        "database": "$DB_ADMIN_USER",
+        "host": "${DB_HOST}",
         "user": "wcs",
         "password": "${DB_WCS_PASS}",
         "port": ${DB_PORT}
