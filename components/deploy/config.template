@@ -14,7 +14,7 @@
         "default-position": "$DEFAULT_POSITION"
     },
     "emails": {
-        "smtp_server": "$SMTP_HOST",
+        "smtp_server": "$SMTP_HOST:$SMTP_PORT",
         "smtp_login": "$SMTP_USER",
         "smtp_password": "$SMTP_PASS",
         "from": "$ADMIN_MAIL_ADDR",

@@ -22,8 +22,6 @@ services:
       - components:passerelle
       - components:wcs
       - rabbitmq:rabbitmq
-      - pgadmin:pgadmin
-      - mailcatcher:webmail
     env_file:
       - .env
       - config.env
@@ -46,7 +44,6 @@ services:
     links:
       - db:db
       - rabbitmq:rabbitmq
-      - mailcatcher:${SMTP_HOST}
     depends_on: 
       - db
       - rabbitmq
@@ -69,14 +66,6 @@ services:
       - dbdata:/var/lib/postgresql/data
       - ./postgresql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
 
-  pgadmin:
-    container_name: pgadmin
-    image: chorss/docker-pgadmin4
-    links:
-      - db:db
-    ports:
-      - "${PGADMIN_PORT}:5050"
-
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3-management
@@ -85,16 +74,10 @@ services:
     ports:
       - "${RABBITMQ_PORT}:5672"
     env_file:
+      - .env
       - secret.env
       - config.env
 
-  mailcatcher:
-    container_name: mailcatcher
-    image: ascendhit/mailcatcher
-    ports:
-      - "${SMTP_PORT}:1025"
-      - "${MAILCATCHER_HTTP_PORT}:1080"
-     
 volumes:
   dbdata:
   authentic2data:
