@@ -30,6 +30,19 @@ chmod +x /tmp/cook.sh
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs
 
+function check_services {
+  for S in combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
+  do
+    service $S status
+    if [ $? -ne 0 ]; then
+      service $S stop
+      sleep 2
+      service $S start
+    fi
+  done
+}
+
+
 service combo start
 service passerelle start
 service fargo start
@@ -41,11 +54,4 @@ service nginx start
 
 sleep 2
 
-service combo status
-service passerelle status
-service fargo status
-service hobo status
-service supervisor status
-service authentic2-multitenant status
-service wcs status
-service nginx status
+check_services
