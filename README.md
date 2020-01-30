@@ -3,8 +3,6 @@
 Ce projet facilite le déploiement de [Publik](https://publik.entrouvert.com/)
 à l'aide de conteneurs Docker. Ce dépôt n'engage pas la société Entr'ouvert.
 
-Ce projet s'inspire de [https://github.com/departement-loire-atlantique/publik](https://github.com/departement-loire-atlantique/publik).
-
 ## Architecture de Publik
 
 Nous résumons ici l'architecture de Publik mais conseillons évidemment de lire
@@ -99,3 +97,9 @@ Pour la suite, se référer à :
 * `docs/deploy-dev.md` pour une installation de développement sur une machine **accessible** depuis Internet
 * `docs/deploy-prod.md` pour une installation de production sur une machine **accessible** depuis Internet
 * `docs/manage.md` pour administrer des conteneurs déjà déployés
+
+## Contribution
+
+Ce projet se base sur [https://github.com/departement-loire-atlantique/publik](https://github.com/departement-loire-atlantique/publik).
+
+Il a été initialement développé chez [https://www.laetis.fr/](https://www.laetis.fr/).
