@@ -18,8 +18,8 @@ services:
       - "${DB_PORT}:5432"
     env_file:
       - .env
-      - config.env
-      - secret.env
+      - ./data/config.env
+      - ./data/secret.env
     environment:
       - "POSTGRES_USER=$DB_ADMIN_USER"
     volumes:

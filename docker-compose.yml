@@ -24,8 +24,8 @@ services:
       - rabbitmq:rabbitmq
     env_file:
       - .env
-      - config.env
-      - secret.env
+      - ./data/config.env
+      - ./data/secret.env
   
   components:
     container_name: components
@@ -48,8 +48,8 @@ services:
     tty: true
     env_file:
       - .env
-      - config.env
-      - secret.env
+      - ./data/config.env
+      - ./data/secret.env
 
   rabbitmq:
     container_name: rabbitmq
@@ -60,8 +60,8 @@ services:
       - "${RABBITMQ_PORT}:5672"
     env_file:
       - .env
-      - secret.env
-      - config.env
+      - ./data/secret.env
+      - ./data/config.env
 
 volumes:
   authentic2data:

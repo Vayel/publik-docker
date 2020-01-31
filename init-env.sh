@@ -18,9 +18,9 @@ function generate_passwords {
 for file in config.env .env secret.env
 do
   if [ ! -f $file ]; then
-    cp "$file.template" $file
+    cp "$file.template" ./data/$file
     if [ "$file" == "secret.env" ]; then
-      generate_passwords "$file"
+      generate_passwords "./data/$file"
     fi
   fi
 done

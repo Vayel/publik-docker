@@ -25,8 +25,8 @@ services:
       - mailcatcher:webmail
     env_file:
       - .env
-      - config.env
-      - secret.env
+      - ./data/config.env
+      - ./data/secret.env
 
   mailcatcher:
     container_name: mailcatcher
