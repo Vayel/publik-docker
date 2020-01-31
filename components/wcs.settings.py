@@ -1,16 +1,8 @@
-# To pass env vars to Python scripts run by Publik in services which remove custom env vars:
-# https://unix.stackexchange.com/questions/44370/how-to-make-unix-service-see-environment-variables
-# So we hardcode the values in the file below when the container starts
-import sys
-sys.path.insert(0, "/home")
-from publik_settings import *
+# This file is imported in the original settings.py file,
+# AFTER /etc/wcs/settings.d/_settings.py
 
 # Databases
 # w.c.s. doesn't use Django ORM (yet) so do not declare any database for now.
-#DATABASES['default']['NAME'] = 'wcs'
-#DATABASES['default']['USER'] = 'wcs'
-#DATABASES['default']['PASSWORD'] = DB_WCS_PASS
-
 # Override shared settings
 DATABASES = {}
 

@@ -19,15 +19,16 @@ echo "Substituting env vars"
 echo "*********************"
 SUBST_STR='$DOMAIN $ADMIN_MAIL_ADDR $ADMIN_MAIL_AUTHOR $RABBITMQ_HOST $RABBITMQ_DEFAULT_USER $AUTHENTIC_SUBDOMAIN $COMBO_SUBDOMAIN $COMBO_ADMIN_SUBDOMAIN $FARGO_SUBDOMAIN $HOBO_SUBDOMAIN $PASSERELLE_SUBDOMAIN $WCS_SUBDOMAIN $LOG_LEVEL $DEFAULT_POSITION $BROKER_TASK_EXPIRES $DEBUG $ENV $ALLOWED_HOSTS $SMTP_USER $DB_ADMIN_USER $DB_HOST $DB_PORT $RABBITMQ_PORT $RABBITMQ_MANAGEMENT_PORT $HTTP_PORT $HTTPS_PORT $SMTP_HOST $SMTP_PORT $DOCKER_PROJECT_NAME $POSTGRES_PASSWORD $DB_AUTHENTIC_PASS $DB_COMBO_PASS $DB_FARGO_PASS $DB_HOBO_PASS $DB_PASSERELLE_PASS $DB_WCS_PASS $RABBITMQ_DEFAULT_PASS $SUPERUSER_PASS $SMTP_PASS'
 
-for COMP in authentic combo fargo hobo passerelle wcs
+# To pass env vars to Python scripts run by Publik in services which remove custom env vars:
+# https://unix.stackexchange.com/questions/44370/how-to-make-unix-service-see-environment-variables
+# So we hardcode the values in the file below when the container starts
+envsubst "$SUBST_STR" < /tmp/settings.template > /tmp/_settings.py
+for COMP in authentic2-multitenant combo fargo hobo passerelle wcs
 do
   envsubst "$SUBST_STR" < "/etc/nginx/conf.d/$COMP.template" > "/etc/nginx/conf.d/$COMP.conf"
+  cp /tmp/_settings.py "/etc/$COMP/setting.d/"
 done
-
-# Cannot use "settings.py" as it seems to be in conflict with Django's settings
-# Needs to be in a directory that can be read by a non-root user, so not "/root"
-envsubst "$SUBST_STR" < /home/settings.template > /home/publik_settings.py
-chmod 755 /home/publik_settings.py
+cp /tmp/_settings.py /etc/hobo-agent/setting.d/
 
 mkdir -p /tmp/wcs-template
 envsubst "$SUBST_STR" < /tmp/config.template > /tmp/wcs-template/config.json
@@ -52,7 +53,6 @@ function check_services {
     fi
   done
 }
-
 
 service combo start
 service passerelle start
