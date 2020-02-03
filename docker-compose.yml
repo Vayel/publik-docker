@@ -14,7 +14,7 @@ services:
       - ./data/ssl:/etc/nginx/ssl
       - ./data/letsencrypt:/etc/letsencrypt
       - ./data/hosts:/etc/hosts
-      - ./data/publik:/home/publik-data
+      - ./data/publik:/tmp/publik-data
     links:
       - components:authentic
       - components:combo

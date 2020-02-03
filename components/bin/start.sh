@@ -39,15 +39,11 @@ envsubst "$SUBST_STR" < /tmp/hobo.recipe.template > /tmp/recipe.json
 envsubst "$SUBST_STR" < /tmp/cook.sh.template > /tmp/cook.sh
 chmod +x /tmp/cook.sh
 
-# TODO:
-# * Read /home/publik-data
-# * Subst env vars in .template files
-#for PREFIX in /tmp/combo-site /tmp/combo-agent-site
-#do
-#  if [ -f "$PREFIX.template" ]; then
-#    envsubst "$SUBST_STR" < "$PREFIX.template" > "$PREFIX.json"
-#  fi
-#done
+for path in /tmp/publik-data/*.template
+do
+  dest=${path::-9}
+  envsubst "$SUBST_STR" < "$path" > "$dest"
+done
 
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs
