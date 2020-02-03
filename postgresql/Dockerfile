@@ -1,6 +1,8 @@
+# See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+
 FROM postgres
 
-MAINTAINER Julien BAYLE <julien.bayle@loire-atlantique.fr>
+MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 
 # TIMEZONE
 # TIMEZONE

@@ -1,3 +1,5 @@
+# See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+
 FROM debian:stretch
 
 MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
@@ -6,6 +8,7 @@ MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 RUN echo "Europe/Paris" > /etc/timezone \
     && apt-get update \
     && apt-get install -y locales \
+    && rm -rf /var/lib/apt/lists/* \
     && dpkg-reconfigure -f noninteractive tzdata \
     && sed -i -e 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen \
     && echo 'LANG="fr_FR.UTF-8"' > /etc/default/locale \
@@ -22,6 +25,7 @@ RUN apt-get update \
     && echo "deb http://ftp.fr.debian.org/debian stretch-updates main" >> /etc/apt/sources.list \
     && echo "deb http://ftp.fr.debian.org/debian stretch-backports main" >> /etc/apt/sources.list \
     && echo "deb http://deb.entrouvert.org/ stretch main" > /etc/apt/sources.list.d/entrouvert-tmp.list \
+    && set -o pipefail \
     && wget -q -O- https://deb.entrouvert.org/entrouvert.gpg | apt-key add - \
     && apt-get update \
     && apt-get install -y entrouvert-repository \
@@ -29,7 +33,8 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \
     && apt-get install -y zip ca-certificates-entrouvert libreoffice publik-base-theme publik-common \
-    && apt-get install -y combo passerelle fargo hobo hobo-agent authentic2-multitenant wcs wcs-au-quotidien
+    && apt-get install -y combo passerelle fargo hobo hobo-agent authentic2-multitenant wcs wcs-au-quotidien \
+    && rm -rf /var/lib/apt/lists/* \
 
 # NGINX
 COPY nginx/*.template /etc/nginx/conf.d/ 
