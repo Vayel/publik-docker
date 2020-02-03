@@ -39,10 +39,14 @@ envsubst "$SUBST_STR" < /tmp/hobo.recipe.template > /tmp/recipe.json
 envsubst "$SUBST_STR" < /tmp/cook.sh.template > /tmp/cook.sh
 chmod +x /tmp/cook.sh
 
-for path in /tmp/publik-data/*.template
+for path in /tmp/site/*.template
 do
-  dest=${path::-9}
-  envsubst "$SUBST_STR" < "$path" > "$dest"
+  # If there are no .template files, $path is equal to "/tmp/site/*.template",
+  # which doesn't exist
+  if [ -f "$path" ]; then
+    dest=${path::-9}
+    envsubst "$SUBST_STR" < "$path" > "$dest"
+  fi
 done
 
 # To be allowed to write logs

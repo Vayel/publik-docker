@@ -14,7 +14,6 @@ services:
       - ./data/ssl:/etc/nginx/ssl
       - ./data/letsencrypt:/etc/letsencrypt
       - ./data/hosts:/etc/hosts
-      - ./data/publik:/tmp/publik-data
     links:
       - components:authentic
       - components:combo
@@ -42,6 +41,7 @@ services:
       - passerelledata:/var/lib/passerelle/tenants
       - wcsdata:/var/lib/wcs
       - ./data/hosts:/etc/hosts
+      - ./data/site:/tmp/site
     links:
       - rabbitmq:rabbitmq
     depends_on: 

@@ -1,6 +1,6 @@
 # Administration des conteneurs
 
-## ArrÃªt
+## Arrêt
 
 Envoyer un signal `SIGINT` au processus `up.sh` ou `up-prod.sh`, par exemple
 avec `Ctrl+C`.
@@ -30,3 +30,7 @@ Il y a alors deux types de logs :
 
 * `/var/log/nginx/` : les logs de nginx (uniquement dans les conteneurs `proxy` et `components`)
 * `/var/log/uwsgi.COMPOSANT.log` : les logs du composant Django (uniquement dans le conteneur `components`)
+
+## Importer des données
+
+TODO

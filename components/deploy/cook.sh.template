@@ -73,7 +73,7 @@ runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 echo "###"
 echo "### Importing site data..."
 echo "###"
-import-publik-data.sh
+import-site.sh
 
 # After cook, test all services
 set -e
