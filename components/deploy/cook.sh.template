@@ -70,11 +70,6 @@ runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 
-echo "###"
-echo "### Importing site data..."
-echo "###"
-import-site.sh
-
 # After cook, test all services
 set -e
 echo "###"
@@ -95,6 +90,11 @@ testHttpCode ${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 302
 testHttpCode ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic 302
 testHttpCode ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
 testHttpCode ${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
+
+echo "###"
+echo "### Importing site data..."
+echo "###"
+import-site.sh
 
 echo "###"
 echo "### Configuration OK (Hobo cook)"
