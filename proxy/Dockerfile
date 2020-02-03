@@ -9,7 +9,8 @@ RUN apt-get update \
 	  && apt-get install -y certbot \
     && rm -rf /var/lib/apt/lists/*
 
-ADD *.template /etc/nginx/conf.d/ 
+COPY http.conf /etc/nginx/conf.d/ 
+COPY *.template /etc/nginx/conf.d/ 
 
 # TIMEZONE
 RUN rm /etc/localtime \

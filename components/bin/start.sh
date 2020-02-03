@@ -39,7 +39,7 @@ envsubst "$SUBST_STR" < /tmp/hobo.recipe.template > /tmp/recipe.json
 envsubst "$SUBST_STR" < /tmp/cook.sh.template > /tmp/cook.sh
 chmod +x /tmp/cook.sh
 
-for path in /tmp/site/*.template
+for path in /tmp/site/*.template /tmp/site/recipes/*.template
 do
   # If there are no .template files, $path is equal to "/tmp/site/*.template",
   # which doesn't exist

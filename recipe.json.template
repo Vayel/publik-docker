@@ -1,0 +1,70 @@
+{
+  "variables": {
+    "organization": "${SLUG}",
+    "title": "${TITLE}", 
+    "hobo": "${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}",
+    "authentic": "${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}",
+    "combo": "${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}",
+    "combo_agent": "${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}",
+    "passerelle": "${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}",
+    "wcs": "${WCS_SUBDOMAIN}${ENV}.${DOMAIN}",
+    "fargo": "${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}"
+  },
+  "steps": [
+    {
+      "create-hobo": {
+        "url":"https://${hobo}/"
+      }
+    },
+    {
+      "create-hobo": {
+        "url": "https://${organization}.${hobo}/",
+        "title": "${title}",
+        "slug": "hobo-${organization}" 
+      }
+    },
+    {
+      "set-idp": {
+      }
+    },
+    {
+      "create-combo": {
+        "url": "https://${organization}.${combo}/",
+        "title": "Compte citoyen",
+        "template_name": "portal-user" 
+      }
+    },
+    {
+      "create-combo": {
+        "url": "https://${organization}.${combo_agent}/",
+        "slug": "portal-agent",
+        "title": "Portail agent",
+        "template_name": "portal-agent" 
+      }
+    },
+    {
+      "create-passerelle": {
+        "url": "https://${organization}.${passerelle}/",
+        "title": "Passerelle" 
+      }
+    },
+    {
+      "create-wcs": {
+        "url": "https://${organization}.${wcs}/",
+        "title": "Démarches",
+        "template_name": "publik.zip" 
+      }
+    },
+    {
+      "create-fargo":{
+        "url": "https://${organization}.${fargo}/",
+        "title": "Porte-documents"
+      }
+    },
+    {
+      "set-theme": {
+        "theme": "${organization}" 
+      }
+    }
+  ]
+}

@@ -60,15 +60,27 @@ echo "### Building WCS template..."
 echo "###"
 zip -j /var/lib/wcs/skeletons/publik.zip /tmp/wcs-template/*
 
-# Execute cook in hobo (Many time as recommended by Entr'ouvert)
 echo "###"
 echo "### Deploying components..."
 echo "###"
-runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
-runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
-runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
-runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
-runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
+function cook {
+  echo "*** Deploying $1"
+  # Execute cook in hobo (Many time as recommended by Entr'ouvert)
+  runuser -l hobo -c "hobo-manage cook $1 -v 2"
+  runuser -l hobo -c "hobo-manage cook $1 -v 2"
+  runuser -l hobo -c "hobo-manage cook $1 -v 2"
+  runuser -l hobo -c "hobo-manage cook $1 -v 2"
+  runuser -l hobo -c "hobo-manage cook $1 -v 2"
+}
+
+for recipe in /tmp/recipe.json /tmp/site/recipes/*.json
+do
+  # If there are no .template files, $path is equal to "/tmp/site/*.template",
+  # which doesn't exist
+  if [ -f "$recipe" ]; then
+    cook $recipe
+  fi
+done
 
 # After cook, test all services
 set -e

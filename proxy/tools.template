@@ -1,13 +1,13 @@
 server {
-        listen 80;
-        listen [::]:80;
+  listen 80;
+  listen [::]:80;
 
-        server_name rabbitmq${ENV}.${DOMAIN};
+  server_name rabbitmq${ENV}.${DOMAIN};
 
-        # On interdit les dotfiles
-        location ~ /\. { deny all; }
+  # On interdit les dotfiles
+  location ~ /\. { deny all; }
 
-        location / {
-            proxy_pass http://rabbitmq:${RABBITMQ_MANAGEMENT_PORT};
-        }
+  location / {
+      proxy_pass http://rabbitmq:${RABBITMQ_MANAGEMENT_PORT};
+  }
 } 

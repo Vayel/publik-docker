@@ -5,6 +5,7 @@ services:
     container_name: proxy-certificates
     build:
       context: ./proxy
+    image: publik-proxy
     tty: true
     ports:
       - 80:80
@@ -13,6 +14,7 @@ services:
       - ./data/ssl:/etc/nginx/ssl
       - ./data/letsencrypt:/etc/letsencrypt
       - /etc/hosts:/etc/hosts
+      - ./data/site:/tmp/site
     links:
       - mailcatcher:fargo
       - mailcatcher:combo

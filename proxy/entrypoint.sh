@@ -52,29 +52,53 @@ function generatecertificate() {
 	fi
 }
 
-generateconf ${COMBO_SUBDOMAIN} combo http
-generateconf ${COMBO_ADMIN_SUBDOMAIN} combo http
-generateconf ${FARGO_SUBDOMAIN} fargo http
-generateconf ${AUTHENTIC_SUBDOMAIN} authentic http
-generateconf ${HOBO_SUBDOMAIN} hobo http
-generateconf ${WCS_SUBDOMAIN} wcs http
-generateconf ${PASSERELLE_SUBDOMAIN} passerelle http
+function generateall() {
+  ORG=""
+  if [ "$#" -ne 0 ]; then
+    ORG="$1."
+  fi
 
-generatecertificate ${COMBO_SUBDOMAIN}
-generatecertificate ${COMBO_ADMIN_SUBDOMAIN}
-generatecertificate ${FARGO_SUBDOMAIN}
-generatecertificate ${AUTHENTIC_SUBDOMAIN}
-generatecertificate ${HOBO_SUBDOMAIN}
-generatecertificate ${WCS_SUBDOMAIN}
-generatecertificate ${PASSERELLE_SUBDOMAIN}
+  generateconf ${ORG}${COMBO_SUBDOMAIN} combo http
+  generateconf ${ORG}${COMBO_ADMIN_SUBDOMAIN} combo http
+  generateconf ${ORG}${FARGO_SUBDOMAIN} fargo http
+  generateconf ${ORG}${AUTHENTIC_SUBDOMAIN} authentic http
+  generateconf ${ORG}${HOBO_SUBDOMAIN} hobo http
+  generateconf ${ORG}${WCS_SUBDOMAIN} wcs http
+  generateconf ${ORG}${PASSERELLE_SUBDOMAIN} passerelle http
 
-generateconf ${COMBO_SUBDOMAIN} combo https
-generateconf ${COMBO_ADMIN_SUBDOMAIN} combo https
-generateconf ${FARGO_SUBDOMAIN} fargo https
-generateconf ${AUTHENTIC_SUBDOMAIN} authentic https
-generateconf ${HOBO_SUBDOMAIN} hobo https
-generateconf ${WCS_SUBDOMAIN} wcs https
-generateconf ${PASSERELLE_SUBDOMAIN} passerelle https
+  generatecertificate ${ORG}${COMBO_SUBDOMAIN}
+  generatecertificate ${ORG}${COMBO_ADMIN_SUBDOMAIN}
+  generatecertificate ${ORG}${FARGO_SUBDOMAIN}
+  generatecertificate ${ORG}${AUTHENTIC_SUBDOMAIN}
+  generatecertificate ${ORG}${HOBO_SUBDOMAIN}
+  generatecertificate ${ORG}${WCS_SUBDOMAIN}
+  generatecertificate ${ORG}${PASSERELLE_SUBDOMAIN}
+
+  generateconf ${ORG}${COMBO_SUBDOMAIN} combo https
+  generateconf ${ORG}${COMBO_ADMIN_SUBDOMAIN} combo https
+  generateconf ${ORG}${FARGO_SUBDOMAIN} fargo https
+  generateconf ${ORG}${AUTHENTIC_SUBDOMAIN} authentic https
+  generateconf ${ORG}${HOBO_SUBDOMAIN} hobo https
+  generateconf ${ORG}${WCS_SUBDOMAIN} wcs https
+  generateconf ${ORG}${PASSERELLE_SUBDOMAIN} passerelle https
+}
+
+generateall
+
+# Generate certificates for organizations
+if [ -d "/tmp/site/recipes" ]; then
+  cd /tmp/site/recipes
+  for path in *.template
+  do
+    # If there are no .template files, $path is equal to "/tmp/site/*.template",
+    # which doesn't exist
+    if [ -f "$path" ]; then
+      # Remove ".json.template"
+      org=${path::-14}
+      generateall "$org"
+    fi
+  done
+fi
 
 # Start NGINX (Log on screen)
 nginx -g 'daemon off;'
