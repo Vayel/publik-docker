@@ -22,19 +22,32 @@ SUBST_STR='$DOMAIN $ADMIN_MAIL_ADDR $ADMIN_MAIL_AUTHOR $RABBITMQ_HOST $RABBITMQ_
 # To pass env vars to Python scripts run by Publik in services which remove custom env vars:
 # https://unix.stackexchange.com/questions/44370/how-to-make-unix-service-see-environment-variables
 # So we hardcode the values in the file below when the container starts
-envsubst "$SUBST_STR" < /tmp/settings.template > /tmp/_settings.py
+#
+# The common settings must be imported first by hobo, which uses the alphabetical order
+# (hence the "_")
+envsubst "$SUBST_STR" < /tmp/common.py.template > /tmp/_common.py
 for COMP in authentic2-multitenant combo fargo hobo passerelle wcs
 do
   envsubst "$SUBST_STR" < "/etc/nginx/conf.d/$COMP.template" > "/etc/nginx/conf.d/$COMP.conf"
-  cp /tmp/_settings.py "/etc/$COMP/setting.d/"
+  cp /tmp/_common.py "/etc/$COMP/settings.d/"
 done
-cp /tmp/_settings.py /etc/hobo-agent/setting.d/
+cp /tmp/_common.py /etc/hobo-agent/settings.d/
 
 mkdir -p /tmp/wcs-template
-envsubst "$SUBST_STR" < /tmp/config.template > /tmp/wcs-template/config.json
+envsubst "$SUBST_STR" < /tmp/wcs-config.template > /tmp/wcs-template/config.json
 envsubst "$SUBST_STR" < /tmp/hobo.recipe.template > /tmp/recipe.json
 envsubst "$SUBST_STR" < /tmp/cook.sh.template > /tmp/cook.sh
 chmod +x /tmp/cook.sh
+
+# TODO:
+# * Read /home/publik-data
+# * Subst env vars in .template files
+#for PREFIX in /tmp/combo-site /tmp/combo-agent-site
+#do
+#  if [ -f "$PREFIX.template" ]; then
+#    envsubst "$SUBST_STR" < "$PREFIX.template" > "$PREFIX.json"
+#  fi
+#done
 
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs

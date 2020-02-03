@@ -15,14 +15,15 @@ function generate_passwords {
   rm "$1.tmp"
 }
 
-for file in config.env .env secret.env
-do
-  if [ ! -f $file ]; then
-    cp "$file.template" ./data/$file
-    if [ "$file" == "secret.env" ]; then
-      generate_passwords "./data/$file"
-    fi
-  fi
-done
+if [ ! -f .env ]; then
+  cp .env.template .env
+fi
 
-export COMPOSE_PROJECT_NAME=publik
+if [ ! -f data/config.env ]; then
+  cp config.env.template data/config.env
+fi
+
+if [ ! -f data/secret.env ]; then
+  cp secret.env.template data/secret.env
+  generate_passwords data/secret.env
+fi

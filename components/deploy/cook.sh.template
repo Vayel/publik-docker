@@ -70,11 +70,10 @@ runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 runuser -l hobo -c 'cd /tmp && hobo-manage cook /tmp/recipe.json -v 2'
 
-# Import site template
 echo "###"
-echo "### Importing site skeleton..."
+echo "### Importing site data..."
 echo "###"
-sudo -u wcs wcs-manage import_site -d ${WCS_SUBDOMAIN}${ENV}.${DOMAIN} /var/lib/wcs/skeletons/publik.zip
+import-publik-data.sh
 
 # After cook, test all services
 set -e

@@ -8,4 +8,4 @@ if [ ! -f ./data/hosts ]; then
   touch ./data/hosts
 fi
 
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml -p "$COMPOSE_PROJECT_NAME" up --no-build --abort-on-container-exit
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --no-build --abort-on-container-exit

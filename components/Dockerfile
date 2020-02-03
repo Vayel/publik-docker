@@ -38,7 +38,7 @@ COPY nginx/*.template /etc/nginx/conf.d/
 RUN mkdir /root/bin
 COPY bin/* /root/bin/
 RUN chmod +x /root/bin/* && mv /root/bin/* /usr/local/bin && rm -r /root/bin
-COPY settings.template /tmp/
+COPY common.py.template /tmp/
 
 # AUTHENTIC
 RUN mkdir -p /etc/authentic2-multitenant/settings.d/ 

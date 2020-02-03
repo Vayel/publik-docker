@@ -3,8 +3,8 @@ version: "2"
 services:
   proxy:
     environment:
-      - DEBUG=""
+      - DEBUG=
 
   components:
     environment:
-      - DEBUG=""
+      - DEBUG=
