@@ -24,4 +24,4 @@ EXPOSE 80
 EXPOSE 443
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["/bin/bash"]
+CMD ["nginx", "-g", "'daemon off;'"]

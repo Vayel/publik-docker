@@ -3,8 +3,7 @@ version: "2"
 services:
   proxy:
     container_name: proxy
-    # Exit with error to stop fake_components as well
-    command: exit 1
+    command: ["echo", "'Certificates generated, exiting...'"]
     build:
       context: ./proxy
     image: publik-proxy

@@ -98,7 +98,5 @@ if [ -d "/tmp/sites" ]; then
   done
 fi
 
-# Start NGINX (Log on screen)
-nginx -g 'daemon off;'
-
+# Execute Docker command
 exec "$@"
