@@ -12,9 +12,9 @@ fi
 
 docker-compose -f docker-compose.certificates.yml up --no-build --abort-on-container-exit
 
-zip -r data/letsencrypt.zip data/letsencrypt
-
 echo "***************************************************************"
 echo "SUCCESS: certificates built"
-echo "Download data/letsencrypt.zip and unzip it into the data folder"
+echo "Please run (need sudo access):"
+echo "cd /home/publik/publik-docker/data; sudo zip -r letsencrypt.zip letsencrypt"
+echo "Download letsencrypt.zip and unzip it into the data folder"
 echo "***************************************************************"
