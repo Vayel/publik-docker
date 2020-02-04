@@ -3,13 +3,15 @@ version: "2"
 services:
   proxy:
     container_name: proxy
-    command: exit 0
+    # Exit with error to stop fake_components as well
+    command: exit 1
     build:
       context: ./proxy
     image: publik-proxy
     tty: true
     links:
-      - rabbitmq:components
+      - debian:components
+      - debian:rabbitmq
     ports:
       - 80:80
       - 443:443
@@ -23,6 +25,7 @@ services:
       - ./data/config.env
       - ./data/secret.env
 
-  rabbitmq:
-    container_name: rabbitmq
-    image: rabbitmq:3-management
+  debian:
+    container_name: fake_components
+    image: debian:stretch
+    command: sleep 3600
