@@ -1,7 +1,8 @@
 #!/bin/bash
 
 URL_PREFIX=
-FOLDER=/tmp/sites
+ROOT_FOLDER=/tmp/sites
+FOLDER=$ROOT_FOLDER
 
 if [ "$#" -ne 0 ]; then
   ORG=$1
@@ -29,9 +30,15 @@ sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMA
 if [ -f "$FOLDER/user-portal.json" ]; then
   echo "Importing user portal from $FOLDER..."
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/user-portal.json"
+elif [ -f "$ROOT_FOLDER/user-portal.json" ]; then
+  echo "Importing user portal from $ROOT_FOLDER..."
+  sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/user-portal.json"
 fi
 
 if [ -f "$FOLDER/agent-portal.json" ]; then
   echo "Importing agent portal from $FOLDER..."
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/agent-portal.json"
+elif [ -f "$ROOT_FOLDER/agent-portal.json" ]; then
+  echo "Importing agent portal from $ROOT_FOLDER..."
+  sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/agent-portal.json"
 fi
