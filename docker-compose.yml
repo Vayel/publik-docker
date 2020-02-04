@@ -14,14 +14,9 @@ services:
       - ./data/ssl:/etc/nginx/ssl
       - ./data/letsencrypt:/etc/letsencrypt
       - ./data/hosts:/etc/hosts
-      - ./data/site:/tmp/site
+      - ./data/sites:/tmp/sites
     links:
-      - components:authentic
-      - components:combo
-      - components:fargo
-      - components:hobo
-      - components:passerelle
-      - components:wcs
+      - components:components
       - rabbitmq:rabbitmq
     env_file:
       - .env

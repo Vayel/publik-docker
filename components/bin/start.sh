@@ -34,16 +34,16 @@ done
 cp /tmp/_common.py /etc/hobo-agent/settings.d/
 
 mkdir -p /tmp/wcs-template
-envsubst "$SUBST_STR" < /tmp/wcs-config.template > /tmp/wcs-template/config.json
-envsubst "$SUBST_STR" < /tmp/hobo.recipe.template > /tmp/recipe.json
-envsubst "$SUBST_STR" < /tmp/cook.sh.template > /tmp/cook.sh
-chmod +x /tmp/cook.sh
+envsubst "$SUBST_STR" < /tmp/wcs-config.json.template > /tmp/wcs-template/config.json
+envsubst "$SUBST_STR" < /tmp/hobo-recipe.json.template > /tmp/hobo-recipe.json
+zip -j /var/lib/wcs/skeletons/publik.zip /tmp/wcs-template/*
 
-for path in /tmp/site/*.template /tmp/site/recipes/*.template
+for path in /tmp/sites/*.template /tmp/sites/**/*.template
 do
-  # If there are no .template files, $path is equal to "/tmp/site/*.template",
+  # If there are no .template files, $path is equal to "/tmp/sites/*.template",
   # which doesn't exist
   if [ -f "$path" ]; then
+    # Remove ".template"
     dest=${path::-9}
     envsubst "$SUBST_STR" < "$path" > "$dest"
   fi

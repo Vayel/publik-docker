@@ -10,8 +10,6 @@ if [ ! -f ./data/hosts ]; then
   touch ./data/hosts
 fi
 
-docker-compose -f docker-compose.certificates.yml down -v
-docker-compose -f docker-compose.certificates.yml rm -v
 docker-compose -f docker-compose.certificates.yml up --no-build --abort-on-container-exit
 
 zip -r data.zip data

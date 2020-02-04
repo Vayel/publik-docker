@@ -11,7 +11,7 @@ server {
   location ~ /\. { deny all; }
 
   location / {
-      proxy_pass http://${APP_LINK}:8080;
+      proxy_pass http://components:8080;
       proxy_set_header   Host $http_host;
       proxy_set_header   X-Real-IP       $remote_addr;
       proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;

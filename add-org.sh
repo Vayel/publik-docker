@@ -10,12 +10,11 @@ fi
 
 export SLUG=$1
 export TITLE="$2"
-DIR=data/site/recipes
-DEST="$DIR/$SLUG.json.template"
+DIR="data/sites/$SLUG"
 
-echo "Creating $DEST..."
+echo "Creating $DIR..."
 echo "Slug: $SLUG"
 echo "Title: $TITLE"
 
 mkdir -p $DIR
-envsubst '$SLUG $TITLE' < recipe.json.template > $DEST
+envsubst '$SLUG $TITLE' < hobo-recipe.json.template > "$DIR/hobo-recipe.json.template"

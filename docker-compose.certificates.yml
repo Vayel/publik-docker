@@ -2,11 +2,13 @@ version: "2"
 
 services:
   proxy:
-    container_name: proxy-certificates
+    container_name: proxy
     build:
       context: ./proxy
     image: publik-proxy
     tty: true
+    links:
+      - rabbitmq:components
     ports:
       - 80:80
       - 443:443
@@ -14,22 +16,12 @@ services:
       - ./data/ssl:/etc/nginx/ssl
       - ./data/letsencrypt:/etc/letsencrypt
       - /etc/hosts:/etc/hosts
-      - ./data/site:/tmp/site
-    links:
-      - mailcatcher:fargo
-      - mailcatcher:combo
-      - mailcatcher:rabbitmq
-      - mailcatcher:authentic
-      - mailcatcher:wcs
-      - mailcatcher:passerelle
-      - mailcatcher:hobo
-      - mailcatcher:pgadmin
-      - mailcatcher:webmail
+      - ./data/sites:/tmp/sites
     env_file:
       - .env
       - ./data/config.env
       - ./data/secret.env
 
-  mailcatcher:
-    container_name: mailcatcher
-    image: ascendhit/mailcatcher
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
