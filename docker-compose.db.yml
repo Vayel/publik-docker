@@ -1,3 +1,6 @@
+# To be used with docker-compose.yml
+# docker-compose -f docker-compose.yml -f docker-compose.db.yml xxx
+
 version: "2"
 
 services:

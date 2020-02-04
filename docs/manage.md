@@ -5,6 +5,12 @@
 Envoyer un signal `SIGINT` au processus `up.sh` ou `up-prod.sh`, par exemple
 avec `Ctrl+C`.
 
+Ou sinon :
+
+```
+./stop.sh
+```
+
 ## Suppression
 
 * `./reset.sh` pour supprimer les conteneurs et les volumes, mais conserver les images
