@@ -1,13 +1,24 @@
 #!/bin/bash
 
-ORG=
 URL_PREFIX=
 FOLDER=/tmp/sites
+
 if [ "$#" -ne 0 ]; then
   ORG=$1
   URL_PREFIX="$ORG."
   FOLDER="/tmp/sites/$ORG"
 fi
+
+for path in $FOLDER/*.template
+do
+  # If there are no .template files, $path is equal to "/tmp/sites/*.template",
+  # which doesn't exist
+  if [ -f "$path" ]; then
+    # Remove ".template"
+    dest=${path::-9}
+    subst.sh "$path" "$dest"
+  fi
+done
 
 if [ -f "$FOLDER/wcs.zip" ]; then
   echo "Importing wcs from $FOLDER..."

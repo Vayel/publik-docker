@@ -81,4 +81,4 @@ BROKER_URL = 'amqp://{user}:{password}@{host}:{port}//'.format(
     host=RABBITMQ_HOST,
     port=RABBITMQ_PORT,
 )
-BROKER_TASK_EXPIRES = $BROKER_TASK_EXPIRES
+BROKER_TASK_EXPIRES = $HOBO_DEPLOY_TIMEOUT

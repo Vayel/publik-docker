@@ -37,7 +37,7 @@ services:
       - passerelledata:/var/lib/passerelle/tenants
       - wcsdata:/var/lib/wcs
       - ./data/hosts:/etc/hosts
-      - ./data/site:/tmp/site
+      - ./data/sites:/tmp/sites
     links:
       - rabbitmq:rabbitmq
     depends_on: 

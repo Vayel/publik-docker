@@ -1,14 +1,18 @@
 #!/bin/bash
 
-RECIPE_PATH=
+RECIPE_PATH=/tmp/hobo-recipe.json
 ORG=
 URL_PREFIX=
 if [ "$#" -ne 0 ]; then
   ORG=$1
   URL_PREFIX="$ORG."
-  RECIPE_PATH="/tmp/sites/$ORG/hobo-recipe.json"
-  if [ ! -f $RECIPE_PATH ]; then
-    echo "Cannot find hobo recipe $RECIPE_PATH"
+  TEMPL_PATH="/tmp/sites/$ORG/hobo-recipe.json.template"
+  if [ ! -f $TEMPL_PATH ]; then
+    echo "Cannot find hobo recipe $TEMPL_PATH"
+    exit 1
+  else
+    RECIPE_PATH="/tmp/sites/$ORG/hobo-recipe.json"
+    subst.sh $TEMPL_PATH $RECIPE_PATH
   fi
 fi
 
@@ -72,18 +76,12 @@ echo "###"
 function cook {
   echo "*** Deploying $1"
   # Execute cook in hobo (Many time as recommended by Entr'ouvert)
-  runuser -l hobo -c "hobo-manage cook $1 -v 2"
-  runuser -l hobo -c "hobo-manage cook $1 -v 2"
-  runuser -l hobo -c "hobo-manage cook $1 -v 2"
-  runuser -l hobo -c "hobo-manage cook $1 -v 2"
-  runuser -l hobo -c "hobo-manage cook $1 -v 2"
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
 }
 
-if [ -z "$ORG" ]; then
-  cook /tmp/hobo-recipe.json
-else
-  cook $RECIPE_PATH
-fi
+cook $RECIPE_PATH
 
 # After cook, test all services
 set -e

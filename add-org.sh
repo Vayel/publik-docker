@@ -17,4 +17,8 @@ echo "Slug: $SLUG"
 echo "Title: $TITLE"
 
 mkdir -p $DIR
-envsubst '$SLUG $TITLE' < hobo-recipe.json.template > "$DIR/hobo-recipe.json.template"
+DEST="$DIR/hobo-recipe.json.template"
+envsubst '$SLUG $TITLE' < hobo-recipe.json.template > "$DEST.tmp"
+encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
+iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
+rm "$DEST.tmp"

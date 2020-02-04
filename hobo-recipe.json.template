@@ -13,14 +13,17 @@
   "steps": [
     {
       "create-hobo": {
-        "url":"https://${hobo}/"
+        "url": "https://${hobo}/"
       }
     },
     {
       "create-hobo": {
         "url": "https://${organization}.${hobo}/",
+        "slug": "hobo-${organization}",
         "title": "${title}",
-        "slug": "hobo-${organization}" 
+        "variables": {
+          "collectivite": "${title}"
+        }
       }
     },
     {
@@ -30,35 +33,54 @@
     {
       "create-combo": {
         "url": "https://${organization}.${combo}/",
+        "slug": "portal-user-${organization}",
         "title": "Compte citoyen",
-        "template_name": "portal-user" 
+        "template_name": "portal-user",
+        "variables": {
+          "collectivite": "${title}"
+        }
       }
     },
     {
       "create-combo": {
         "url": "https://${organization}.${combo_agent}/",
-        "slug": "portal-agent",
+        "slug": "portal-agent-${organization}",
         "title": "Portail agent",
-        "template_name": "portal-agent" 
+        "template_name": "portal-agent",
+        "variables": {
+          "collectivite": "${title}"
+        }
       }
     },
     {
       "create-passerelle": {
         "url": "https://${organization}.${passerelle}/",
-        "title": "Passerelle" 
+        "slug": "passerelle-${organization}",
+        "title": "Passerelle",
+        "variables": {
+          "collectivite": "${title}"
+        }
       }
     },
     {
       "create-wcs": {
         "url": "https://${organization}.${wcs}/",
+        "slug": "wcs-${organization}",
         "title": "Démarches",
-        "template_name": "publik.zip" 
+        "template_name": "publik.zip",
+        "variables": {
+          "collectivite": "${title}"
+        }
       }
     },
     {
-      "create-fargo":{
+      "create-fargo": {
         "url": "https://${organization}.${fargo}/",
-        "title": "Porte-documents"
+        "slug": "fargo-${organization}",
+        "title": "Porte-documents",
+        "variables": {
+          "collectivite": "${title}"
+        }
       }
     },
     {
