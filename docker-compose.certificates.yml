@@ -3,6 +3,7 @@ version: "2"
 services:
   proxy:
     container_name: proxy
+    command: exit 0
     build:
       context: ./proxy
     image: publik-proxy

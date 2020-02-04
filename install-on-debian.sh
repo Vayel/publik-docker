@@ -24,7 +24,8 @@ apt-get install -y \
     ca-certificates \
     curl \
     gnupg2 \
-    software-properties-common
+    software-properties-common \
+    zip
 
 curl -fsSL $1 https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add -
 
