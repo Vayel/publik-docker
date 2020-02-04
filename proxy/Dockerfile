@@ -17,11 +17,11 @@ RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
-COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh run-server.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/run-server.sh
 
 EXPOSE 80
 EXPOSE 443
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["nginx", "-g", "'daemon off;'"]
+CMD ["run-server.sh"]
