@@ -12,9 +12,9 @@ fi
 
 docker-compose -f docker-compose.certificates.yml up --no-build --abort-on-container-exit
 
-zip -r data.zip data
+zip -r letsencrypt.zip data/letsencrypt
 
-echo "******************************"
+echo "**********************************************************"
 echo "SUCCESS: certificates built"
-echo "Download data.zip and unzip it"
-echo "******************************"
+echo "Download letsencrypt.zip and unzip it into the data folder"
+echo "**********************************************************"
