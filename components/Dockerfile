@@ -37,6 +37,7 @@ RUN apt-get update \
 
 # NGINX
 COPY nginx/*.template /etc/nginx/conf.d/ 
+COPY nginx/global.conf /etc/nginx/conf.d/ 
 
 # SCRIPTS
 RUN mkdir /root/bin

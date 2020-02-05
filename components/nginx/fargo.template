@@ -1,8 +1,8 @@
 server {
     listen 8080;
-    server_name ${FARGO_SUBDOMAIN}${ENV}.${DOMAIN};
-    access_log /var/log/nginx/fargo-access.log combined;
-    error_log /var/log/nginx/fargo-error.log;
+    server_name ${ORG}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN};
+    access_log /var/log/nginx/fargo-access.${ORG}log combined;
+    error_log /var/log/nginx/fargo-error.${ORG}log;
 
     location ~ ^/static/(.+)$ {
         root /;

@@ -1,8 +1,8 @@
 server {
     listen 8080;
-    server_name ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN};
-    access_log /var/log/nginx/authentic-access.log combined;
-    error_log /var/log/nginx/authentic-error.log;
+    server_name ${ORG}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN};
+    access_log /var/log/nginx/authentic-access.${ORG}log combined;
+    error_log /var/log/nginx/authentic-error.${ORG}log;
 
     location ~ ^/static/(.+)$ {
         root /;

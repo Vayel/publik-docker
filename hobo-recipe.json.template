@@ -22,7 +22,9 @@
         "slug": "hobo-${organization}",
         "title": "${title}",
         "variables": {
-          "collectivite": "${title}"
+          "collectivite": {
+            "value": "${title}"
+          }
         }
       }
     },
@@ -37,7 +39,9 @@
         "title": "Compte citoyen",
         "template_name": "portal-user",
         "variables": {
-          "collectivite": "${title}"
+          "collectivite": {
+            "value": "${title}"
+          }
         }
       }
     },
@@ -48,7 +52,9 @@
         "title": "Portail agent",
         "template_name": "portal-agent",
         "variables": {
-          "collectivite": "${title}"
+          "collectivite": {
+            "value": "${title}"
+          }
         }
       }
     },
@@ -58,7 +64,9 @@
         "slug": "passerelle-${organization}",
         "title": "Passerelle",
         "variables": {
-          "collectivite": "${title}"
+          "collectivite": {
+            "value": "${title}"
+          }
         }
       }
     },
@@ -69,7 +77,9 @@
         "title": "Démarches",
         "template_name": "publik.zip",
         "variables": {
-          "collectivite": "${title}"
+          "collectivite": {
+            "value": "${title}"
+          }
         }
       }
     },
@@ -79,13 +89,15 @@
         "slug": "fargo-${organization}",
         "title": "Porte-documents",
         "variables": {
-          "collectivite": "${title}"
+          "collectivite": {
+            "value": "${title}"
+          }
         }
       }
     },
     {
       "set-theme": {
-        "theme": "${organization}" 
+        "theme": "publik" 
       }
     }
   ]

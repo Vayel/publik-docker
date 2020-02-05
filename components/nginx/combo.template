@@ -1,8 +1,8 @@
 server {
     listen 8080;
-    server_name ${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} ${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN};
-    access_log /var/log/nginx/combo-access.log combined;
-    error_log /var/log/nginx/combo-error.log;
+    server_name ${ORG}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} ${ORG}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN};
+    access_log /var/log/nginx/combo-access.${ORG}log combined;
+    error_log /var/log/nginx/combo-error.${ORG}log;
 
     location ~ ^/static/(.+)$ {
         root /;

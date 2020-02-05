@@ -27,10 +27,16 @@ echo "*********************"
 subst.sh /tmp/common.py.template /tmp/_common.py
 for COMP in authentic2-multitenant combo fargo hobo passerelle wcs
 do
-  subst.sh "/etc/nginx/conf.d/$COMP.template" "/etc/nginx/conf.d/$COMP.conf"
   cp /tmp/_common.py "/etc/$COMP/settings.d/"
 done
 cp /tmp/_common.py /etc/hobo-agent/settings.d/
+
+config-nginx.sh 
+for ORG in /tmp/sites/*/
+do
+  ORG=${ORG:11:-1}
+  config-nginx.sh $ORG
+done
 
 mkdir -p /tmp/wcs-template
 subst.sh /tmp/wcs-config.json.template /tmp/wcs-template/config.json

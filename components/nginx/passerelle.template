@@ -1,8 +1,8 @@
 server {
     listen 8080;
-    server_name ${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN};
-    access_log /var/log/nginx/passerelle-access.log combined;
-    error_log /var/log/nginx/passerelle-error.log;
+    server_name ${ORG}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN};
+    access_log /var/log/nginx/passerelle-access.${ORG}log combined;
+    error_log /var/log/nginx/passerelle-error.${ORG}log;
 
     location ~ ^/static/(.+)$ {
         root /;
