@@ -4,12 +4,6 @@ set -eu
 
 . ./init-env.sh
 
-# If we don't create it ourselves a folder is created instead of a file
-mkdir -p data
-if [ ! -f ./data/hosts ]; then
-  touch ./data/hosts
-fi
-
 docker-compose -f docker-compose.certificates.yml up --no-build --abort-on-container-exit
 
 echo "***************************************************************"

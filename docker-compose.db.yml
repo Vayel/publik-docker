@@ -1,7 +1,7 @@
 # To be used with docker-compose.yml
 # docker-compose -f docker-compose.yml -f docker-compose.db.yml xxx
 
-version: "2"
+version: "2.1"
 
 services:
   components:
@@ -18,7 +18,7 @@ services:
       context: ./postgresql
     image: publik-pgsql
     ports:
-      - "${DB_PORT}:5432"
+      - "${DB_PORT:-5432}:5432"
     env_file:
       - .env
       - ./data/config.env

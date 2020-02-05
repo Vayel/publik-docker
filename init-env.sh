@@ -27,3 +27,12 @@ if [ ! -f data/secret.env ]; then
   cp secret.env.template data/secret.env
   generate_passwords data/secret.env
 fi
+
+# If we don't create it ourselves a folder is created instead of a file
+mkdir -p data
+for fname in hosts
+do
+  if [ ! -f "./data/$fname" ]; then
+    touch "./data/$fname"
+  fi
+done
