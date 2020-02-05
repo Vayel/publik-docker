@@ -44,7 +44,7 @@ echo "*****************"
 echo "Starting services"
 echo "*****************"
 function check_services {
-  for S in combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
+  for S in memcached combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
   do
     service $S status
     if [ $? -ne 0 ]; then
@@ -55,6 +55,7 @@ function check_services {
   done
 }
 
+service memcached start
 service combo start
 service passerelle start
 service fargo start
