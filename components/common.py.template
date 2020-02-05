@@ -52,29 +52,30 @@ EMAIL_HOST_PASSWORD = '$SMTP_PASS'
 EMAIL_PORT = $SMTP_PORT
 
 # Logs are saved by service in /var/log/uwsgi.XXX.log
-LOGGING = {
-    'version': 1,
-    'formatters': {
-        'simple': {
-            'format': '[%(asctime)s][%(levelname)s] %(name)s ([%(filename)s:%(lineno)s - %(funcName)20s()) %(message)s',
-            'datefmt': '%d/%b/%Y %H:%M:%S'
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-    },
-    'loggers': {
-        '':{
-            'handlers': ['console'],
-            'level': LOG_LEVEL,
-            'disabled': False
-        },
-    },
+try:
+    LOGGING
+except NameError:
+    LOGGING = {}
+
+LOGGING['version'] = LOGGING.get('version', 1)
+for k in ['formatters', 'handlers', 'loggers']:
+  LOGGING[k] = LOGGING.get(k, {})
+
+LOGGING['formatters']['simple'] = {
+    'format': '[%(asctime)s][%(levelname)s] %(name)s ([%(filename)s:%(lineno)s - %(funcName)20s()) %(message)s',
+    'datefmt': '%d/%b/%Y %H:%M:%S'
+}
+LOGGING['handlers']['console'] = {
+    'class': 'logging.StreamHandler',
+    'formatter': 'simple'
+}
+LOGGING['loggers'][''] = {
+    'handlers': ['console'],
+    'level': LOG_LEVEL,
+    'disabled': False
 }
 
+# RabbitMQ
 BROKER_URL = 'amqp://{user}:{password}@{host}:{port}//'.format(
     user=RABBITMQ_DEFAULT_USER,
     password=RABBITMQ_DEFAULT_PASS,
