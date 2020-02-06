@@ -34,8 +34,10 @@ cp /tmp/_common.py /etc/hobo-agent/settings.d/
 config-nginx.sh 
 for ORG in /tmp/sites/*/
 do
-  ORG=${ORG:11:-1}
-  config-nginx.sh $ORG
+  if [ -d "$ORG" ]; then
+    ORG=${ORG:11:-1}
+    config-nginx.sh $ORG
+  fi
 done
 
 mkdir -p /tmp/wcs-template
@@ -74,3 +76,4 @@ service nginx start
 sleep 2
 
 check_services
+echo "If all services are running, run ./deploy-org.sh in another shell"

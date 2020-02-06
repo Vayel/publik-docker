@@ -97,7 +97,7 @@ testHttpContains ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} f
 testHttpContains ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo $AUTHENTIC_OK
 
 # Do not check authentic for organizations
-if [ ! -z "$ORG" ]; then
+if [ -z "$ORG" ]; then
   testHttpContains ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic $COMBO_OK
   testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic 302
 fi
