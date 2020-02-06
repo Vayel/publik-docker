@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# "lat;lng"
+export DEFAULT_POSITION="48.866667;2.333333"
+
+export WCS_FROM_EMAIL=
+export WCS_REPLY_TO_EMAIL=$WCS_FROM_EMAIL

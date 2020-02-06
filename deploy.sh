@@ -21,4 +21,4 @@ function retry() {
 
 # hobo waits for db and rabbitmq so doesn't substitute env vars in /tmp.cook.sh.template
 # immediatly
-retry 3 docker exec components cook.sh $@
+retry 3 docker exec components deploy.sh $@

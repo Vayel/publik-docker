@@ -10,15 +10,15 @@
     },
     "misc": {
         "charset": "utf-8",
-        "homepage-redirect-url": "https://${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}",
+        "homepage-redirect-url": "https://${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}",
         "default-position": "$DEFAULT_POSITION"
     },
     "emails": {
         "smtp_server": "$SMTP_HOST:$SMTP_PORT",
         "smtp_login": "$SMTP_USER",
         "smtp_password": "$SMTP_PASS",
-        "from": "$ADMIN_MAIL_ADDR",
-        "reply_to": "$ADMIN_MAIL_ADDR"
+        "from": "$WCS_FROM_EMAIL",
+        "reply_to": "$WCS_REPLY_TO_EMAIL"
     },
     "postgresql": {
         "database-template-name": "wcs_%s",

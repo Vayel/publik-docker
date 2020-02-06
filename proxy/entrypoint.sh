@@ -91,10 +91,14 @@ generateall
 
 # Generate certificates for organizations
 if [ -d "/tmp/sites" ]; then
-  cd /tmp/sites
-  for dir in */
+  for dir in /tmp/sites/*/
   do
-    generateall ${dir::-1}
+    if [ -d "$dir" ]; then
+      ORG=${dir:11:-1}
+      if [ "${ORG:0:1}" != "_" ]; then
+        generateall $ORG
+      fi
+    fi
   done
 fi
 

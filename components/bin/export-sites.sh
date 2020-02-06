@@ -1,10 +1,12 @@
 #!/bin/bash
 
 export-site.sh
-for ORG in /tmp/sites/*/
+for dir in /tmp/sites/*/
 do
-  if [ -d "$ORG" ]; then
-    ORG=${ORG:11:-1}
-    export-site.sh $ORG
+  if [ -d "$dir" ]; then
+    ORG=${dir:11:-1}
+    if [ "${ORG:0:1}" != "_" ]; then
+      export-site.sh $ORG
+    fi
   fi
 done

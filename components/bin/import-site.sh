@@ -17,10 +17,23 @@ fi
 #fi
 
 if [ -f "$FOLDER/wcs.zip" ]; then
-  echo "Importing wcs from $FOLDER/..."
+  echo "Importing wcs content from $FOLDER/..."
   sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/wcs.zip"
 fi
-sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} /var/lib/wcs/skeletons/publik.zip
+
+echo "Importing wcs config from $FOLDER/..."
+if [ -f "$FOLDER/wcs-env.sh" ]; then
+  . "$FOLDER/wcs-env.sh"
+else
+  export WCS_FROM_EMAIL="$ADMIN_MAIL_ADDR"
+  export WCS_REPLY_TO_EMAIL="$ADMIN_MAIL_ADDR"
+fi
+export URL_PREFIX
+mkdir -p "$FOLDER/_build/wcs-template"
+subst.sh /tmp/wcs-config.json.template "$FOLDER/_build/wcs-template/config.json"
+subst.sh "$FOLDER/_build/wcs-template/config.json" "$FOLDER/_build/wcs-template/config.json" '$URL_PREFIX $DEFAULT_POSITION $WCS_FROM_EMAIL $WCS_REPLY_TO_EMAIL'
+zip -j "$FOLDER/_build/wcs-config.zip" "$FOLDER/_build/wcs-template/"*
+sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/_build/wcs-config.zip"
 
 if [ -f "$FOLDER/user-portal.json" ]; then
   echo "Importing user portal from $FOLDER/..."

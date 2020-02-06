@@ -31,20 +31,6 @@ do
 done
 cp /tmp/_common.py /etc/hobo-agent/settings.d/
 
-config-nginx.sh 
-for ORG in /tmp/sites/*/
-do
-  if [ -d "$ORG" ]; then
-    ORG=${ORG:11:-1}
-    config-nginx.sh $ORG
-  fi
-done
-
-mkdir -p /tmp/wcs-template
-subst.sh /tmp/wcs-config.json.template /tmp/wcs-template/config.json
-subst.sh /tmp/hobo-recipe.json.template /tmp/hobo-recipe.json
-zip -j /var/lib/wcs/skeletons/publik.zip /tmp/wcs-template/*
-
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs
 

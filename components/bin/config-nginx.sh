@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ORG=
-if [ "$#" -ne 0 ]; then
+if [ "$#" -ne 0 ] && [ ! -z "$1" ]; then
   ORG=$1.
 fi
 export ORG

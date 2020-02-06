@@ -24,3 +24,9 @@ envsubst '$SLUG $TITLE $THEME' < hobo-recipe.json.template > "$DEST.tmp"
 encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
 iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
 rm "$DEST.tmp"
+
+DEST="$DIR/wcs-env.sh"
+if [ ! -f "$DEST" ]; then
+  cp wcs-env.sh $DEST
+fi
+echo "Please edit $DEST"

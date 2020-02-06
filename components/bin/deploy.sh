@@ -1,24 +1,32 @@
 #!/bin/bash
 
+echo "###"
+echo "### Creating hobo recipe..."
+echo "###"
+TEMPL_PATH=/tmp/hobo-recipe.json.template
 RECIPE_PATH=/tmp/hobo-recipe.json
 ORG=
 URL_PREFIX=
-if [ "$#" -ne 0 ]; then
+
+if [ "$#" -ne 0 ] && [ ! -z "$1" ]; then
   ORG=$1
   URL_PREFIX="$ORG."
   TEMPL_PATH="/tmp/sites/$ORG/hobo-recipe.json.template"
-  if [ ! -f $TEMPL_PATH ]; then
-    echo "Cannot find hobo recipe $TEMPL_PATH"
-    exit 1
-  else
-    RECIPE_PATH="/tmp/sites/$ORG/hobo-recipe.json"
-    subst.sh $TEMPL_PATH $RECIPE_PATH
-    config-nginx.sh $ORG
-  fi
+  RECIPE_PATH="/tmp/sites/$ORG/_build/hobo-recipe.json"
+  mkdir -p "/tmp/sites/$ORG/_build"
 fi
 
-COMBO_OK="Combo fonctionne"
-AUTHENTIC_OK="Connexion"
+if [ ! -f $TEMPL_PATH ]; then
+  echo "Cannot find hobo recipe $TEMPL_PATH"
+  exit 1
+fi
+subst.sh $TEMPL_PATH $RECIPE_PATH
+
+echo "###"
+echo "### Configuring nginx..."
+echo "###"
+config-nginx.sh $ORG
+service nginx reload
 
 function retry() {
   local -r -i max_attempts="$1"; shift
@@ -89,6 +97,8 @@ set -e
 echo "###"
 echo "### Checking deployment..."
 echo "###"
+COMBO_OK="Combo fonctionne"
+AUTHENTIC_OK="Connexion"
 testHttpContains ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo $COMBO_OK
 testHttpContains ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent $COMBO_OK
 testHttpContains ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle $AUTHENTIC_OK
@@ -105,7 +115,7 @@ fi
 testHttpCode ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 200
 testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 200
 testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 302
-testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 302
+testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 200
 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
