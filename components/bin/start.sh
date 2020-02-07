@@ -34,6 +34,17 @@ cp /tmp/_common.py /etc/hobo-agent/settings.d/
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs
 
+config-nginx.sh
+for dir in /tmp/sites/*/
+do
+  if [ -d "$dir" ]; then
+    ORG=${dir:11:-1}
+    if [ "${ORG:0:1}" != "_" ]; then
+      config-nginx.sh $ORG
+    fi
+  fi
+done
+
 echo "*****************"
 echo "Starting services"
 echo "*****************"
