@@ -17,6 +17,8 @@ function generate_passwords {
 
 mkdir -p data
 
+./init-ssl.sh
+
 if [ ! -f .env ]; then
   cp .env.template .env
 fi

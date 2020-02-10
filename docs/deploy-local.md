@@ -72,6 +72,7 @@ Il faut faire pointer les urls des composants vers la machine locale. Attention 
 192.168.4.133       demarches.monserveur.fr
 192.168.4.133       documents.monserveur.fr
 192.168.4.133       rabbitmq.monserveur.fr
+192.168.4.133       pgadmin.monserveur.fr
 ```
 
 `ping citoyens.monserveur.fr` doit pointer sur l'ip locale.

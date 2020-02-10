@@ -4,6 +4,12 @@
 version: "2.1"
 
 services:
+  proxy:
+    links:
+      - components:components
+      - rabbitmq:rabbitmq
+      - pgadmin:pgadmin
+
   components:
     links:
       - db:db

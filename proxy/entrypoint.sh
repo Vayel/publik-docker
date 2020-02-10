@@ -26,7 +26,7 @@ then
 fi
 
 # Add tools to NGINX (pgadmin, ...)
-envsubst '${ENV} ${DOMAIN} ${RABBITMQ_MANAGEMENT_PORT}' < /etc/nginx/conf.d/tools.template \
+envsubst '${ENV} ${DOMAIN} ${RABBITMQ_MANAGEMENT_PORT} $PGADMIN_PORT' < /etc/nginx/conf.d/tools.template \
 	> /etc/nginx/conf.d/tools.conf
 
 # Create NGINX configuration for Publik containers
