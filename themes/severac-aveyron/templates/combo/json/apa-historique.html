@@ -1,0 +1,105 @@
+{% load combo %}
+
+{% if not detail_id %} {# list #}
+
+  <h2>Historique des demandes</h2>
+
+  <div class="apa-historique">
+    {% for dossier in json.data.demandeAsg %}
+
+      <div class="apa-dossier">
+      <h3>{{ dossier.demande.type }} ({{ dossier.demande.nature }})</h3>
+      <ul>
+        {% if dossier.complementDossier.dateArrivee %}
+          <li>Date d'arrivée : {{ dossier.complementDossier.dateArrivee|parse_date|date:"j F Y" }}</li>
+        {% endif %}
+        {% if dossier.complementDossier.dateDossierComplet %}
+          <li>Date de dossier complet : {{ dossier.complementDossier.dateDossierComplet|parse_date|date:"j F Y" }}</li>
+        {% endif %}
+
+        {% if dossier.visite.date %}
+          <li><strong>
+            Visite le {{ dossier.visite.date|parse_date|date:"j F Y" }} à {{ dossier.visite.heure|strptime:"%H%M"|date:"H:i" }}
+          </strong></li>
+        {% endif %}
+
+        <li>Décision : {{ dossier.suivi.decision }}
+        {% if dossier.suivi.date %}
+          (le {{ dossier.suivi.decision|parse_date|date:"j F Y" }})
+        {% endif %}
+        </li>
+
+        {% if dossier.droit.dateDebut %}
+        <li>Début des droits : {{ dossier.droit.dateDebut|parse_date|date:"j F Y" }}</li>
+        {% endif %}
+        {% if dossier.droit.dateFin %}
+        <li>Fin des droits : {{ dossier.droit.dateFin|parse_date|date:"j F Y" }}</li>
+        {% endif %}
+      </ul>
+      <p><a href="apa-historique/?user_id={{ user_id }}&detail_id={{ forloop.counter }}">
+        → consulter le dossier</a></p>
+      </div>
+
+    {% empty %}
+      <p>Pas de demande dans l'historique</p>
+    {% endfor %}
+
+  </div>
+
+{% else %} {# details #}
+
+  <h2>Consultation d'un dossier archivé</h2>
+
+  <div>
+
+  {% with individu=user_info.data.individu %}
+  <div class="grid-2-3 individu">
+    <h3>{% include "combo/json/apa-user-label.html" with individu=individu %}</h3>
+    <p><span class="label">Numéro classothèque :</span> {{ individu.apa.classotheque }}</p>
+  </div>
+  {% endwith %}
+
+  {% for dossier in json.data.demandeAsg %}
+    {% if forloop.counter|floatformat == detail_id %}
+
+      <div class="grid-2-3 dossier">
+      <h3>
+        Demande {{ dossier.demande.type }} / {{ dossier.demande.nature }}
+      </h3>
+
+      {% if dossier.complementDossier.dateArrivee %}
+        <p>Dossier arrivé le {{ dossier.complementDossier.dateArrivee|parse_date|date:"j F Y" }}</p>
+      {% endif %}
+
+      {% if dossier.complementDossier.dateDossierComplet %}
+        <p>Dossier complet le {{ dossier.complementDossier.dateDossierComplet|parse_date|date:"j F Y" }}</p>
+      {% endif %}
+
+      <p>
+        <strong>Décision : {{ dossier.suivi.decision }}</strong> le
+        {{ dossier.suivi.dateDecision|parse_date|date:"j F Y" }}
+      </p>
+
+      {% if dossier.droit.dateDebut %}
+        <p>Début des droits : {{ dossier.droit.dateDebut|parse_date|date:"j F Y" }}
+      {% endif %}
+
+      {% if dossier.droit.dateFin %}
+        <p>Fin des droits : {{ dossier.droit.dateFin|parse_date|date:"j F Y" }}
+      {% endif %}
+
+      </div> <!-- grid-2-3 -->
+
+      <div class="grid-1-3 contact">
+      {% with individu=user_info.data.individu %}
+        {% include "combo/json/apa-contact.html" with individu=individu dossier=dossier %}
+      {% endwith %}
+      </div>
+
+    {% endif %}
+  {% empty %}
+  <p>Pas de demande en cours</p>
+  {% endfor %}
+  </div>
+
+{% endif %}

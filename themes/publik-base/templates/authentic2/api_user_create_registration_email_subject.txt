@@ -1,0 +1,2 @@
+{% extends "emails/subject.txt" %}
+{% block email-subject %}finaliser la création de votre compte{% endblock %}

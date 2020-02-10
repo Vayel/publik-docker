@@ -1,0 +1,14 @@
+{% if results.data %}
+{% if cell.has_multiple_search_services %}<p class="search-service-label">{{ search_service.label }}</p>{% endif %}
+<div class="links-list">
+<ul>
+  {% for item in results.data %}
+  {% if forloop.counter == 6 %}<li class="see-more"><a href="#">voir tous les résultats</a></li>{% endif %}
+  <li {% if forloop.counter > 5 %}class="hidden"{% endif %}><a
+      {% if item.url %}href="{{ item.url }}"{% else %}class="nolink"{% endif %}>{{ item.text }}</a>
+          {% if item.description %}<div>{{ item.description|safe }}</div>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+</div>
+{% endif %}

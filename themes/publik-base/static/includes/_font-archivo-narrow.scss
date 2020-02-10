@@ -1,0 +1,17 @@
+@mixin archivonarrow-font($type, $weight, $style) {
+	@font-face {
+		font-family: 'Archivo Narrow';
+		src: url('/static/fonts/ArchivoNarrow/archivonarrow-#{$type}-webfont.woff2') format('woff2'),
+		     url('/static/fonts/ArchivoNarrow/archivonarrow-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin archivonarrow-font-pair($type, $weight) {
+	@include archivonarrow-font($type, $weight, normal);
+	@include archivonarrow-font('#{$type}italic', $weight, italic);
+}
+
+@include archivonarrow-font-pair('regular', 400);
+@include archivonarrow-font-pair('bold', 700);

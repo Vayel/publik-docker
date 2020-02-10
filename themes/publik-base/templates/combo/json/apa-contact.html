@@ -1,0 +1,14 @@
+{# included by other cells, with individu=... and optionnaly dossier=... #}
+<h2>Votre contact APA</h2>
+<p class="centre-autonomie"><strong>{{ individu.apa.centreAutonomie }}</strong></p>
+{% with inst=dossier.suivi.instructeur %}
+{% if inst %}
+<p class="contact-info">
+  {% if inst.prenom or inst.nom %}
+  <span class="name">{{ inst.civilite|default:"" }} {{ inst.prenom|default:"" }} {{ inst.nom|default:"" }}</span><br />
+  {% endif %}
+  {% if inst.telephone %}<span class="phone">{{ inst.telephone }}</span><br />{% endif %}
+  {% if inst.mail %}<span class="email">{{ inst.mail }}</span>{% endif %}
+</p>
+{% endif %}
+{% endwith %}

@@ -1,0 +1,31 @@
+{% extends "gadjo/base.html" %}
+{% load combo gadjo static i18n %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}portal-agent/css/agent-portal.css"/>
+{% endblock %}
+
+{% block extrascripts %}
+<script src="{% static "js/combo.public.js" %}"></script>
+<script src="/__services.js"></script>
+<script src="{% static "portal-agent/js/agent-portal.js" %}"></script>
+<script src="{% static "portal-agent/js/publik.js" %}"></script>
+{% endblock %}
+
+{% block page-title %}{% firstof site_title "Publik" %} - {{ page.title }}{% endblock %}
+{% block site-title %}{% firstof site_title "Publik" %}{% endblock %}
+{% block footer %}Combo — Copyright © Entr'ouvert{% endblock %}
+{% block logout-url %}{% url 'auth_logout' %}{% endblock %}
+{% block bodyargs %}
+data-api-root="{{ site_base }}/api/"
+{% if check_badges %}data-check-badges="true"{% endif %}
+{% endblock %}
+
+{% block content %}
+<div id="portal-agent-content">
+{% block combo-content %}
+{% trans "Content" as name %}
+{% placeholder "content" name=name %}
+{% endblock %}
+</div>
+{% endblock %}

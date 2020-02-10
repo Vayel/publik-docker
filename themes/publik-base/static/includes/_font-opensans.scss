@@ -1,0 +1,32 @@
+$opensans-font-path: '/static/xstatic/fonts' !default;
+
+@mixin opensans-font($type, $weight, $style: normal) {
+    @font-face {
+        font-family: 'Open Sans';
+        src: url('#{$opensans-font-path}/#{$type}/OpenSans-#{$type}.woff2') format('woff2'),
+             url('#{$opensans-font-path}/#{$type}/OpenSans-#{$type}.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+
+    @font-face {
+        font-family: 'OpenSans-#{$type}';
+        src: url('#{$opensans-font-path}/#{$type}/OpenSans-#{$type}.woff2') format('woff2'),
+             url('#{$opensans-font-path}/#{$type}/OpenSans-#{$type}.woff') format('woff');
+    }
+}
+
+@mixin opensans-font-pair($type, $weight) {
+    @include opensans-font($type, $weight);
+    @if $type == Regular {
+      @include opensans-font(Italic, $weight, italic);
+    } @else {
+      @include opensans-font(#{$type}Italic, $weight, italic);
+    }
+}
+
+@include opensans-font-pair('Light', 300);
+@include opensans-font-pair('Regular', 400);
+@include opensans-font-pair('SemiBold', 600);
+@include opensans-font-pair('Bold', 700);
+@include opensans-font-pair('Black', 900);

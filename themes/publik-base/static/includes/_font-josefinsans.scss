@@ -1,0 +1,32 @@
+$josefinsans-font-path: '/static/xstatic/fonts' !default;
+
+@mixin josefinsans-font($type, $weight, $style: normal) {
+    @font-face {
+        font-family: 'Josefin Sans';
+        src: url('#{$josefinsans-font-path}/#{$type}/JosefinSans-#{$type}.woff2') format('woff2'),
+             url('#{$josefinsans-font-path}/#{$type}/JosefinSans-#{$type}.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+
+    @font-face {
+        font-family: 'JosefinSans-#{$type}';
+        src: url('#{$josefinsans-font-path}/#{$type}/JosefinSans-#{$type}.woff2') format('woff2'),
+             url('#{$josefinsans-font-path}/#{$type}/JosefinSans-#{$type}.woff') format('woff');
+    }
+}
+
+@mixin josefinsans-font-pair($type, $weight) {
+    @include josefinsans-font($type, $weight);
+    @if $type == Regular {
+      @include josefinsans-font(Regular, $weight, normal);
+    } @else {
+      @include josefinsans-font(#{$type}Italic, $weight, italic);
+    }
+}
+
+@include josefinsans-font-pair('Thin', 200);
+@include josefinsans-font-pair('Light', 300);
+@include josefinsans-font-pair('Regular', 400);
+@include josefinsans-font-pair('SemiBold', 600);
+@include josefinsans-font-pair('Bold', 700);

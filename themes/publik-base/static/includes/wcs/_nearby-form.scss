@@ -1,0 +1,82 @@
+/*
+ *	Nearby form
+ *	
+ *	Ajout de styles à un champ carte pour sélectionner un signalement identique à proximité
+ *
+ *	Template
+ *		quommon/forms/widgets/nearby-forms.html
+ *	JS
+ *		static/js/plus1.js
+ */
+
+ 
+.nearby-forms {
+	margin: 0;
+	padding: 0;
+}
+
+.nearby-form {
+	margin: 5px auto;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-line-pack: center;
+	align-content: center;
+	-ms-flex-pack: space-between;
+	-ms-justify-content: space-between;
+	justify-content: space-between;
+	border: $widget-border;
+	padding: 5px;
+}
+
+.nearby-form--digest, .nearby-form--datetime, .nearby-form--marker-counter {
+	margin: 0 5px;
+}
+
+.nearby-form--digest {
+	width: 60%;
+}
+.nearby-form--datetime {
+	width: 20%;
+	@media screen and (max-width: $mobile-limit) {
+		width: 30%;
+	}
+}
+.nearby-form--marker-counter {
+	background: $button-background;
+	padding: 5px 10px;
+	color: $button-color;
+	min-width: 0.5em;
+	max-width: 1em;
+	border-radius: 3px;
+}
+
+.template-nearby-forms div.leaflet-div-icon {
+	padding: 3px;
+	margin: auto;
+	border-radius: 3px;
+	display: -ms-flexbox;
+	display: flex;
+	a {
+		line-height: 1;
+		margin: auto;
+	}
+}
+
+.signalements-thanks ~ .buttons {
+	.submit-button, .previous-button {
+		display: none;
+	}
+	.cancel-button button {
+		text-indent: -9999px;
+		line-height: 0;
+		&::after {
+			text-indent: 0;
+			line-height: initial;
+			display: block;
+			content: 'Continuer';
+		}
+	}
+}

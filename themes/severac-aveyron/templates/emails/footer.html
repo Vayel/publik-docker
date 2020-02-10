@@ -1,0 +1,11 @@
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+  <tr>
+    <td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; line-height:18px; text-align: center; color: #888888;" class="x-gmail-data-detectors">
+      {% block footer %}
+      {% if email_signature %}
+      {{ email_signature|linebreaks }}
+      {% endif %}
+      {% endblock %}
+    </td>
+  </tr>
+</table>

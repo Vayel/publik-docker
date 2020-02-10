@@ -1,0 +1,240 @@
+body .ui-front {
+	z-index: 1000;
+}
+
+.ui-helper-hidden {
+	display: none;
+}
+
+.ui-helper-hidden-accessible {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.ui-widget-content {
+	border: 1px solid #aaa;
+	background: white;
+	.ui-widget-header {
+		border: 1px solid #aaa;
+		background: #ccc;
+		position: relative;
+		text-align: center;
+		padding: 3px;
+		a {
+			color: #333;
+		}
+	}
+}
+
+.ui-datepicker {
+	display: none;
+	select.ui-datepicker-month, select.ui-datepicker-year {
+		width: 49%;
+	}
+	.ui-datepicker-title {
+		margin: 0 2.5em;
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		td {
+			text-align: right;
+			a {
+				background: #eee;
+				border: 1px solid #aaa;
+				display: block;
+				padding: 0.3em 0.7em;
+				&:hover {
+					border-color: #666;
+				}
+			}
+		}
+	}
+	a {
+		border-bottom: 0;
+	}
+	padding: .2em .2em 0;
+	.ui-datepicker-prev {
+		display: block;
+		position: absolute;
+		left: 0.3em;
+		cursor: pointer;
+		&::after {
+			font-family: FontAwesome;
+			content: "\f060";  // fa-arrow-left
+		}
+		span {
+			display: none;
+		}
+	}
+	.ui-datepicker-next {
+		display: block;
+		position: absolute;
+		right: 0.3em;
+		cursor: pointer;
+		&::after {
+			font-family: FontAwesome;
+			content: "\f061";  // fa-arrow-right
+		}
+		span {
+			display: none;
+		}
+	}
+}
+
+// dialog styling
+.ui-helper-clearfix {
+	min-height: 0;
+	&::before, &::after {
+		content: "";
+		display: table;
+		border-collapse: collapse;
+	}
+	&::after {
+		clear: both;
+	}
+}
+
+div.ui-widget-overlay {
+	background: #333;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+	z-index: 1000;
+}
+
+.ui-widget {
+	font-size: 1.1em;
+	.ui-widget {
+		font-size: 1em;
+	}
+}
+
+div.ui-dialog {
+	border: 0;
+	outline: 0;
+	background: white;
+	box-shadow: rgb(102, 102, 102) 0px 0px 20px 2px;
+	padding: 0;
+	border-radius: 0;
+	max-width: 80%;
+	min-width: 30%;
+	position: absolute;
+
+	.ui-dialog-titlebar {
+		background: #eee;
+		border-radius: 0;
+		border: none;
+		position: relative;
+		padding: 0.4em 1em;
+		cursor: move;
+		text-align: left;
+
+		.ui-dialog-title {
+			font-size: 130%;
+			font-weight: normal;
+		}
+
+		.ui-dialog-titlebar-close {
+			position: absolute;
+			right: .3em;
+			height: 20px;
+			min-width: 20px;
+			padding: 0;
+			color: transparent;
+			margin-right: 0;
+			outline: none;
+			.ui-icon-closethick::after {
+				color: #333;
+				content: "\f00d";  // fa-times
+				font-family: FontAwesome;
+				display: block;
+			}
+			.ui-button-text {
+				display: block;
+				text-indent: -9999999px;
+			}
+		}
+
+		button {
+			padding: 0;
+			border: 1px solid transparent;
+			background: transparent;
+			box-shadow: none;
+			cursor: pointer;
+		}
+	}
+
+	.ui-widget-content {
+		position: relative;
+		border: 0;
+		padding: .5em 1em;
+		background: none;
+		overflow: auto;
+	}
+
+	.ui-dialog-buttonpane {
+		position: relative;
+		background: #eee;
+		border-top: 1px solid #aaaaaa;
+		margin-top: 0.5em;
+		padding: 0.3em 1em 0.5em 0.4em;
+		.ui-dialog-buttonset {
+			float: right;
+		}
+		button {
+			margin: 0.5em 0 0.5em 1em;
+		}
+	}
+
+	form p input,
+	form p select,
+	form p textarea {
+		width: 100%;
+	}
+
+	form p input[type=radio], form p input[type=checkbox] {
+		width: auto;
+	}
+}
+
+.ui-tooltip {
+	display: inline-block;
+	box-shadow: #666 0px 0px 4px 0px;
+	z-index: 100000;
+	div.ui-tooltip-content {
+		background: white;
+		padding: 0.7em;
+	}
+}
+
+ul.ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: default;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	max-height: 15em;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	li {
+		margin: 0;
+		padding: 0 0.7em;
+		position: relative;
+		min-height: 0;
+		&:hover {
+			background: #eee;
+		}
+	}
+}

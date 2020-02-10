@@ -1,0 +1,19 @@
+{% extends "emails/body_base.html" %}
+
+{% block content %}
+<p>Votre facture n° {{ invoice.id }}, émise le {{ invoice.creation_date|date:"DATE_FORMAT" }}
+  d'un montant de {{ invoice.amount }}€ est disponible.</p>
+
+<p>Vous avez la possibilité de <a href="{{ portal_url }}">la voir en ligne</a>.</p>
+
+{% if invoice.online_payment %}
+<p>
+  Pour la régler en ligne, veuillez cliquer sur le bouton suivant :
+</p>
+{% include "emails/button-link.html" with url=payment_url label="Régler en ligne" %}
+{% endif %}
+
+{% if invoice.no_online_payment_reason == 'autobilling' %}
+<p>Le montant de la facture sera débité de votre compte le {{ invoice.payment_limit_date|date:"DATE_FORMAT" }}.</p>
+{% endif %}
+{% endblock %}

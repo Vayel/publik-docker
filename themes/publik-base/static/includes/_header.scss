@@ -1,0 +1,16 @@
+body.has-header-background {
+	.site-header {
+		background: url(/assets/header:background) top center no-repeat;
+		background-size: cover;
+	}
+}
+
+h1#logo.has-logo {
+	a {
+		background: transparent url(/assets/header:logo) center left no-repeat;
+		background-size: contain;
+		text-indent: -10000px;
+		min-width: 160px;
+		display: inline-block;
+	}
+}

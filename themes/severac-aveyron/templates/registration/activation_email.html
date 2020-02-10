@@ -1,0 +1,59 @@
+{% extends "emails/body_base.html" %}
+
+{% block content %}
+{% if existing_accounts %}
+<p>Bonjour,</p>
+
+<p>
+  Vous possédez déjà un compte associé à cette adresse électronique.
+</p>
+
+<p>
+  Pour vous connecter, vous pouvez cliquer sur le bouton suivant :
+</p>
+
+{% include "emails/button-link.html" with url=registration_url label="Me connecter" %}
+
+<p>
+  {% if expiration_days == 1 %}
+    Attention, ce bouton n'est valable que pendant 24h.
+  {% else %}
+    Attention, ce bouton n'est valable que pendant {{expiration_days}} jours.
+  {% endif %}
+</p>
+
+<p>
+  Après connexion vous pourrez si besoin modifier votre mot de passe sur la page de votre
+  compte.
+</p>
+
+<p>
+  En cas de mot de passe perdu, vous pouvez à tout moment utiliser le formulaire de récupération de
+  mot de passe sur la page de connexion.
+</p>
+
+{% else %}
+<p>Bonjour,</p>
+
+<p>
+  Vous venez de créer votre compte, nous vous en remercions.
+</p>
+
+<p>
+  Pour choisir un mot de passe et finaliser la création de votre compte, veuillez cliquer
+  sur le bouton suivant :
+</p>
+
+{% include "emails/button-link.html" with url=registration_url label="Finaliser l'inscription" %}
+
+<p>
+  {% if expiration_days == 1 %}
+    Attention, sans validation de votre part dans les 24 heures, votre demande de compte
+    sera annulée.
+  {% else %}
+    Attention, sans validation de votre part dans les {{expiration_days}} jours, votre
+    demande de compte sera annulée.
+  {% endif %}
+</p>
+{% endif %}
+{% endblock %}

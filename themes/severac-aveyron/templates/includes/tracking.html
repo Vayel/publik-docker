@@ -1,0 +1,16 @@
+{% load gadjo static %}
+
+{% if cnil_compliant_visits_tracking_js %}
+   <script type="text/javascript">
+   if (navigator.doNotTrack != '1') {
+     {{ cnil_compliant_visits_tracking_js|safe }}
+   }
+   </script>
+ {% elif visits_tracking_js %}
+   <script type="text/javascript" src="{{ site_base }}{% static 'js/cookie_usage_consent.js' %}?{% start_timestamp %}"></script>
+   <script type="text/javascript">
+     if (has_consent()) {
+      {{ visits_tracking_js|safe }}
+     }
+   </script>
+{% endif %}

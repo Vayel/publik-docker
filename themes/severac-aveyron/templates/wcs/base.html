@@ -1,0 +1,32 @@
+{% extends theme_base %}
+{% load static %}
+
+{% block extra-top-head %}
+{{script|safe}}
+<script src="{% static 'dataview.js' %}"></script>
+{% endblock %}
+
+{% block extra-body-class %}
+{{ block.super }}
+{% if global_context.form_slug %}
+  {% if global_context.category_slug %}formdef-category-{{global_context.category_slug}}{% endif %}
+  formdef-{{global_context.form_slug}}
+{% endif %}
+{% endblock %}
+
+{% block placeholder-content %}
+  {% block content %}
+    {% if gauche %}
+      <div id="gauche">
+        {{ gauche|safe }}
+      </div>
+    {% endif %}
+
+    <div id="{{bigdiv|default:'rub_service'}}" class="{% if gauche %}has-sidebox{% endif %}">
+    {% if title %}<h2>{{ title }}</h2>{% endif %}
+    {% block body %}
+    {{ body|safe }}
+    {% endblock %}
+    </div>
+  {% endblock %}
+{% endblock %}

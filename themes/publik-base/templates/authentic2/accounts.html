@@ -1,0 +1,78 @@
+{% extends "authentic2/base.html" %}
+{% load i18n %}
+
+{% block title %}Gestion du compte{% endblock %}
+{% block extra-body-class %}{{ block.super }} account-page{% endblock %}
+
+{% block content %}
+<div id="left" class="profile">
+  <div class="block" id="a2-profile">
+    {% block profile-data-title %}
+    <h2>Données du compte</h2>
+    {% endblock %}
+    {% block profile-data %}
+    <div id="profile">
+      {% if attributes %}
+        {% for attribute in attributes %}
+        <div class="field">
+        <span class="label">{{ attribute.attribute.label|capfirst }}</span>
+        <div class="value">
+          {% if attribute.values|length == 0 %}<span class="nodata">(non spécifié)</span>
+          {% elif attribute.values|length == 1 %}{{ attribute.values.0 }}{% else %}
+          <ul>
+            {% for value in attribute.values %}
+            <li>{{ value }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+      {% if LAST_LOGIN %}
+        <div class="field">
+          <span class="label">Dernière connexion</span>
+          <span class="value">{{ LAST_LOGIN }}</span>
+        </div>
+      {% endif %}
+    </div>
+    {% endblock %}
+  </div>
+</div>
+<div id="right" class="account-management">
+  <div class="block" id="account-management">
+    {% block account-management-title %}
+    <h2>Gestion du compte</h2>
+    {% endblock %}
+    {% block account-management-actions %}
+    <ul class="account-management">
+      {% block account-management-top-actions %}
+      {% endblock %}
+      {% if allow_email_change %}
+      <li class="email-change"><a href="{% url 'email-change' %}">Modifier le courriel associé</a></li>
+      {% endif %}
+      {{ frontends_block_by_id.password.content|safe }}
+      {% if profile_edit_url %}
+      <li class="profile-edit"><a href="{{ profile_edit_url }}">Éditer les données du compte</a></li>
+      {% elif allow_profile_edit %}
+      <li class="profile-edit"><a href="{% url 'profile_edit' %}">Éditer les données du compte</a></li>
+      {% endif %}
+      {% if allow_account_deletion %}
+      <li class="account-delete"><a href="{% url 'delete_account' %}">Supprimer le compte</a></li>
+      {% endif %}
+      {% block account-management-bottom-actions %}
+      {% endblock %}
+    </ul>
+    {% endblock %}
+  </div>
+  {% for id, block in frontends_block_by_id.items %}
+    {% if id != "password" %}
+    <div class="block" id="account-management-{{ id }}">
+      <h2>{{ block.name }}</h2>
+      {{ block.content|safe }}
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+<br class="clear" />
+{% endblock %}

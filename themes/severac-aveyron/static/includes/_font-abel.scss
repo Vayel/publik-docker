@@ -1,0 +1,13 @@
+$abel-font-path: '/static/fonts/Abel' !default;
+
+@mixin abel-font($type, $weight) {
+	@font-face {
+		font-family: 'Abel';
+		src: url('#{$abel-font-path}/abel-#{$type}-webfont.woff2') format('woff2'),
+		     url('#{$abel-font-path}/abel-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: normal;
+	}
+}
+
+@include abel-font('regular', 400);

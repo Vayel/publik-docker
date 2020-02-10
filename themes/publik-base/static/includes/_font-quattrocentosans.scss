@@ -1,0 +1,17 @@
+@mixin quattrocentosans-font($type, $weight, $style) {
+	@font-face {
+		font-family: 'Quattrocento Sans';
+		src: url('/static/fonts/QuattrocentoSans/quattrocentosans-#{$type}-webfont.woff2') format('woff2'),
+		     url('/static/fonts/QuattrocentoSans/quattrocentosans-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin quattrocentosans-font-pair($type, $weight) {
+	@include quattrocentosans-font($type, $weight, normal);
+	@include quattrocentosans-font('#{$type}italic', $weight, italic);
+}
+
+@include quattrocentosans-font-pair('regular', 400);
+@include quattrocentosans-font-pair('bold', 700);

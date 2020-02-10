@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<theme name="severac-aveyron" version="1.0">
+  <label>Sévérac d'Aveyron</label>
+  <desc>Theme for Publik deployments</desc>
+  <keywords>
+    <keyword>auquotidien-no-titles-in-section</keyword>
+    <keyword>auquotidien-welcome-in-services</keyword>
+  </keywords>
+</theme>

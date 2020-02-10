@@ -1,0 +1,42 @@
+{% load i18n %}
+  <div class="cartads-piece view-{{ view_name }} ">
+  <div class="title grid-1-1 newline">{% if piece.codePiece %}{{ piece.codePiece }} - {% endif %}{{ piece.text }}
+          {% if piece.reglementaire and view_name != 'validation' %}<span class="required">*</span>{% endif %}</div>
+
+  {% for file in piece.files %}
+  {% if view_name != 'validation' or file.token %}
+  <div class="file-upload-widget short {{ grid }} {% if file.token %}has-file{% endif %}">
+  <div class="file-button">
+    <input type="file" data-url="{{ file.url }}"
+       {% if piece.codePiece %}accept="application/pdf,image/jpeg"{% else %}accept="application/pdf"{% endif %}>
+    <input type="hidden" value="{{ file.token }}">
+    <div class="widget-message click-to-upload">
+     {% trans "Drop a file or click to select one" %}
+    </div>
+    <div class="widget-message upload-done">
+     {% if view_name != 'validation' %}{% trans "Upload done" %}{% endif %}
+    </div>
+    <style>.click-to-upload, .upload-done { display: none; }</style>
+    <div class="fileprogress" style="display: none;">
+     <div class="bar"
+       data-upload="{% trans "Upload in progress..." %}"
+       data-error="{% trans "Error during upload." %}"></div>
+     </div>
+    <div class="fileinfo">
+     <span class="filename">{{ file.name }}</span>
+     {% if view_name != 'validation' %}
+     <a href="#" class="remove" title="{% trans 'Remove this file' %}">{% trans "remove" %}</a>
+     {% endif %}
+    </div>
+  </div>
+  </div>
+  {% elif view_name == 'validation' and not piece.files.0.token %}
+  -
+  {% endif %}
+  {% endfor %}
+  {% if piece.max_files > 1 and view_name != 'validation' %}
+  <div class="grid-1-12 button-plus">
+  <button class="plus">+</button>
+  </div>
+  {% endif %}
+  </div>

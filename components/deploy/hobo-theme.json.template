@@ -1,0 +1,9 @@
+{
+  "steps": [
+    {
+      "set-theme": {
+        "theme": "$THEME"
+      }
+    }
+  ]
+}

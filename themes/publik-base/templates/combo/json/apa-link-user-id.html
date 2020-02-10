@@ -1,0 +1,9 @@
+<div class="links-list">
+  <ul>
+    {% for user in json.data %}{% if user_id == user.id %}
+    <li>
+       <a href="/apa/apa-details/?user_id={{ user_id }}">Retour au dossier de {{ user.text }}</a>
+    </li>
+    {% endif %}{% endfor %}
+  </ul>
+</div>

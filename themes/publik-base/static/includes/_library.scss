@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+// Library of general classes to be used in text cells and other places
+//
+// The classes are prefixed by pk-.
+
+$table-caption-color: $title-color !default;
+$table-caption-side: top !default;
+
+$table-headers-background: $title-background !default;
+$table-headers-color: $title-color !default;
+$table-headers-font-style: $title-font-style !default;
+$table-headers-font-size: $title-font-size !default;
+$table-headers-font-weight: $title-weight !default;
+$table-headers-text-transform: $title-transform !default;
+$table-headers-font-family: $title-font-family !default;
+
+a.pk-button {
+	@extend button.ui-button;
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	margin: 0;
+	height: auto;
+}
+
+a.pk-big-button {
+	@extend a.pk-button;
+	padding: 2rem 4rem;
+}
+
+.gru-content div.cell {
+	&.pk-transparent {
+		border-color: transparent;
+		background: transparent;
+	}
+}
+
+table.pk-data-table {
+	border-collapse: collapse;
+	caption {
+		caption-side: $table-caption-side;
+		color: $table-caption-color;
+		font-size: 120%;
+		padding: 1rem;
+	}
+	&.pk-table-headers thead th {
+		background: $table-headers-background;
+		color: $table-headers-color;
+		font-style: $table-headers-font-size;
+		font-weight: $table-headers-font-weight;
+		text-transform: $table-headers-text-transform;
+		font-family: $table-headers-font-family;
+	}
+	th, td {
+		padding: 0.3em 1.5em 0.3em 0.7em;
+		border-bottom: 1px solid #aaa;
+	}
+	th {
+		border-bottom-width: 2px;
+	}
+	&.pk-table-borders {
+		th, td {
+			border: 1px solid #aaa;
+		}
+		th {
+			border-bottom-width: 2px;
+		}
+	}
+	&.pk-table-center {
+		th, td {
+			text-align: center;
+		}
+	}
+	&.pk-table-🦓 tbody,
+	&.pk-table-zebra tbody {
+		tr:nth-child(2n+1) {
+			background: #eee;
+		}
+	}
+}

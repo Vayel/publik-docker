@@ -1,0 +1,2 @@
+{% extends "emails/subject.txt" %}
+{% block email-subject %}confirmation de changement d'adresse électronique{% endblock %}

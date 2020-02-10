@@ -1,0 +1,10 @@
+{% extends "emails/body_base.html" %}
+{% block content %}
+<p>Bonjour,</p>
+<p>Pour valider la demande de suppression de votre compte, veuillez cliquer sur le bouton suivant :</p>
+{% include "emails/button-link.html" with url=deletion_url label="Supprimer mon compte" %}
+<p>
+Toutes les données associées seront supprimées.
+Vous ne pouvez dorénavant plus vous connecter.
+</p>
+{% endblock  %}

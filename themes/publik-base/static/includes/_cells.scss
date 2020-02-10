@@ -1,0 +1,762 @@
+$cell-background: white !default;
+$cell-border: 1px solid #ccc !default;
+$cell-border-radius: $border-radius !default;
+$cell-color: inherit !default;
+
+$cell-title-cover-border: true !default;
+
+$cell-entry-color: $link-color !default;
+$cell-entry-border-color: #ccc !default;
+$cell-entry-hover-color: inherit !default;
+$cell-entry-hover-background: #eee !default;
+
+$footer-menucell-separator: none !default;
+
+// $cell-entry-hover-effect: effect applied when hovering an entry link in a
+// cell; possible values are:
+//  none: nothing special, light gray background;
+//  left-to-right: background expands from left to right;
+//  right-to-left: " from right to left;
+//  top-to-bottom: " from top to bottom;
+//  bottom-to-top: " from bottom to top;
+//  middle-to-edges: horizontally, from the middle to the edges.
+$cell-entry-hover-effect: none !default;
+
+// $cell-image-position: define where is set the associated image (in
+// "forms of category"; possible values are:
+//  top: top of the cell
+//  after-title: after the title (default)
+$cell-image-position: after-title !default;
+
+// $cell-image-padding: define padding of cell image.
+$cell-image-padding: 0.5rem !default;
+
+.gru-content #columns > .cell,
+div#left div.block,
+.gru-content #left .cell { margin-left: 0; }
+.gru-content #columns > .cell,
+div#right div.block,
+.gru-content #right .cell { margin-right: 0; }
+
+@media screen and (max-width: $mobile-limit) {
+	div#left div.block,
+	.gru-content #left .cell,
+	div#right div.block,
+	.gru-content #right .cell {
+		margin-right: 0;
+		margin-left: 0;
+	}
+}
+
+div.a2-block {
+	margin: 4em auto;
+	max-width: 45em;
+	& form, & p {
+		margin: 1em 0.5em;
+	}
+	@media screen and (max-width: $mobile-limit) {
+		margin: 0 auto;
+	}
+}
+
+div#sidebar + div#columns div.a2-block {
+	margin: 0 0 3em 0;
+}
+
+div.a2-continue,
+div#services > ul > li,
+div.a2-block,
+.gru-content div.cell,
+div.block {
+	text-align: left;
+	background: $cell-background;
+	color: $cell-color;
+	box-sizing: border-box;
+	border-radius: $border-radius;
+	border: $cell-border;
+}
+
+div#services > ul > li,
+div#left div.a2-block, div#right div.a2-block,
+.gru-content div.cell,
+div.block {
+	padding: 0;
+	margin: 0px 10px 10px 10px;
+
+	& h2 + div {
+		padding: 1rem;
+	}
+}
+
+.gru-content .cell.wcsformsofcategorycell {
+	h2 + div {
+		padding: 0;
+	}
+	h2 + div.intro {
+		padding: 1rem;
+	}
+}
+
+.gru-content div.cell.categoriescell div div,
+.gru-content div.cell.wcscurrentdraftscell div div,
+.gru-content div.cell.wcscurrentformscell div div,
+div#services > ul > li > strong {
+	padding: 0;
+	margin: 0;
+}
+
+div#rub_service div.category h3,
+.gru-content div.a2-block h2,
+.gru-content div.block h2,
+div.links-list h2,
+div#services > ul > li > strong > a,
+.gru-content div.textcell h2:first-child,
+.gru-content div.cell h2:first-child {
+	@extend %title;
+	position: relative;
+	@if $cell-title-cover-border == true {
+		margin: #{extract-width($cell-border) * -1};
+	}
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+div.links-list p {
+	margin: 1em;
+}
+
+div#rub_service div.category ul,
+div#services > ul > li > ul,
+div#account-management ul,
+div.links-list ul,
+div.menucell ul,
+div.wcsformcell,
+div.notificationscell ul,
+div.categoriescell ul,
+div.wcsformsofcategorycell ul,
+div.wcscurrentdraftscell ul,
+div.wcscurrentformscell ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	position: relative;
+	z-index: 0;
+
+	& > li > a {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-align-items: baseline;
+		align-items: baseline;
+
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		padding: 1rem;
+		color: $cell-entry-color;
+		border-bottom: 1px solid $cell-entry-border-color;
+		position: relative;
+
+		&:hover {
+			color: $cell-entry-hover-color;
+			@if $cell-entry-hover-effect != none {
+				&:after {
+					width: 100%;
+					height: 100%;
+				}
+			} @else {
+				background-color: $cell-entry-hover-background;
+			}
+		}
+		&:after {
+			@if $cell-entry-hover-effect != none {
+				background-color: $cell-entry-hover-background;
+				content: "";
+				position: absolute;
+				z-index: -1;
+				transition: all 0.3s ease;
+				box-sizing: border-box;
+				width: 0;
+			}
+			@if $cell-entry-hover-effect == left-to-right {
+				width: 0%; height: 100%; top: 0; left: 0;
+			}
+			@if $cell-entry-hover-effect == right-to-left {
+				width: 0%; height: 100%; top: 0; right: 0;
+			}
+			@if $cell-entry-hover-effect == top-to-bottom {
+				width: 100%; height: 0%; top: 0; left: 0;
+			}
+			@if $cell-entry-hover-effect == bottom-to-top {
+				width: 100%; height: 0%; bottom: 0; left: 0;
+			}
+			@if $cell-entry-hover-effect == middle-to-edges {
+				top: 50%;
+				left: 50%;
+				transition: translateY(-50%) translateX(-50%);
+			}
+		}
+	}
+
+	li.more-items a {
+		display: block;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+		text-align: center;
+	}
+
+	// make sure first/last children don't overflow the cell radius
+	> li:first-child a {
+		border-top-left-radius: $cell-border-radius;
+		border-top-right-radius: $cell-border-radius;
+	}
+	> li:last-child a {
+		border-bottom-left-radius: $cell-border-radius;
+		border-bottom-right-radius: $cell-border-radius;
+	}
+	ul > li:first-child a, ul > li:last-child a {
+		border-radius: 0;
+	}
+
+	li div.description {
+		position: relative;
+		top: -1px;
+		border-top: 1px solid $cell-background;
+		padding: 0 1rem;
+		font-size: 90%;
+		color: #666;
+		p {
+			margin-top: 0;
+			margin-bottom: 0.7em;
+		}
+		border-bottom: 1px solid $cell-entry-border-color;
+	}
+}
+
+.gru-content div.wcsformsofcategorycell {
+	picture img {
+		max-width: 100%;
+		display: block;
+		padding: $cell-image-padding;
+		box-sizing: border-box;
+	}
+	@if $cell-image-position == top {
+		> div {
+			display: -ms-flexbox;
+			display: flex;
+			flex-direction: column;
+			-ms-flex-direction: column;
+			div {
+				-ms-flex-order: 4;
+				order: 4;
+			}
+			div.intro {
+				-ms-flex-order: 2;
+				order: 2;
+			}
+			picture {
+				-ms-flex-order: 0;
+				order: 0;
+				img {
+					border-radius: $cell-border-radius $cell-border-radius 0 0;
+				}
+				@if $cell-title-cover-border == true {
+					margin: #{extract-width($cell-border) * -1};
+				}
+			}
+			> h2:first-child {
+				-ms-flex-order: 1;
+				order: 1;
+				border-radius: 0;
+			}
+		}
+		&.foldable {
+			> div > picture {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+div.list-of-forms {
+	span.form-number {
+		-ms-flex-grow: 1;
+		flex-grow: 1;
+
+		margin-right: 1rem;
+		opacity: 0.3;
+		font-size: 80%;
+	}
+	span.form-status {
+		margin-right: 0;
+		margin-left: auto;
+	}
+	span.form-title {
+		margin-right: 1rem;
+	}
+}
+
+div.cell {
+	div.intro {
+		p {
+			margin: 0;
+		}
+		p + p {
+			margin-top: 0.7em;
+		}
+	}
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+.gru-content div.cell {
+	&.no-bottom-margin {
+		margin-bottom: 0;
+		border-radius: $cell-border-radius $cell-border-radius 0 0;
+		border-bottom: 0;
+		p:last-child {
+			margin-bottom: 0;
+			padding-bottom: 0.7em;
+		}
+		+ div {
+			margin-top: 0;
+			border-radius: 0 0 $cell-border-radius $cell-border-radius;
+			border-top: 0;
+			&.no-bottom-margin {
+				border-radius: 0;
+			}
+			p:first-child {
+				margin-top: 0;
+				padding-top: 0.7em;
+			}
+		}
+	}
+	div.textcell {
+		/* don't include margins/borders for textcells embedded in
+		 * other cells (via extra placeholders) */
+		border: 0;
+		margin-left: 0;
+		margin-right: 0;
+		p, h3, h4, h5 {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
+div.menucell ul ul a {
+	padding-left: 3em;
+	font-size: 90%;
+}
+
+div.wcs-tracking-code-input form {
+	margin: 1em;
+}
+
+div.searchcell {
+	form {
+		position: relative;
+		display: -ms-flexbox;
+		display: flex;
+		padding: 1em;
+		input {
+			-ms-flex: 1;
+			flex: 1;
+			margin-right: 1rem;
+		}
+		button {
+			margin-right: 0;
+		}
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 3px;
+			background: #aaa;
+			width: 0%;
+		}
+		&.searching::after {
+			-webkit-animation: cell-loading-pulse 0.5s linear infinite alternate;
+			animation: cell-loading-pulse 0.5s linear infinite alternate;
+		}
+	}
+}
+
+#sidebar div.searchcell {
+	form {
+		display: block;
+		input {
+			width: 100%;
+		}
+	}
+}
+
+div.cell div.loading {
+	color: #444;
+	position: relative;
+}
+
+@-webkit-keyframes cell-loading-pulse {
+	to { width: 100%; }
+}
+
+@keyframes cell-loading-pulse {
+	to { width: 100%; }
+}
+
+div.cell div.loading span {
+	position: relative;
+	z-index: 10;
+	padding: 0.3rem;
+	display: inline-block;
+}
+
+div.cell div.loading::after {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	width: 0px;
+	background: #eee;
+	height: 100%;
+	-webkit-animation: cell-loading-pulse 2s linear infinite alternate;
+	animation: cell-loading-pulse 2s linear infinite alternate;
+}
+
+div.cell div.loading.error-loading {
+	background: #f44;
+}
+
+div.cell div.loading.error-loading::after {
+	content: none;
+}
+
+.gru-content div.cell.shown-because-admin {
+	h2 {
+		background: transparent;
+	}
+	opacity: 0.5;
+	background-image: repeating-linear-gradient(-45deg, #eee 0px, #eee 14px, transparent 15px, transparent 30px);
+	&:hover {
+		h2 {
+			background: inherit;
+		}
+		opacity: 1;
+		background-image: inherit;
+	}
+}
+
+div.lingobasketcell h3.regie-name {
+	margin: 1.5em 0.7em;
+	font-weight: normal;
+	border-bottom: 1px solid #aaa;
+}
+
+div.lingobasketcell ul {
+	padding-left: 1em;
+	list-style: circle;
+	list-style-position: inside;
+	li {
+		input {
+			display: none;
+		}
+		a {
+			display: inline-block;
+			padding-bottom: 0.7em;
+		}
+		&:last-child {
+			list-style: none;
+		}
+	}
+}
+
+div.lingobasketcell button, div.newsletterscell button,
+div.lingobasketcell input[type=submit], div.newsletterscell input[type=submit] {
+	margin: 0 1em 1em 1em;
+}
+
+// newsletters
+.newsletterscell table {
+	width: 100%;
+	font-size: 0.9em;
+	margin: 0.5em 0;
+
+	thead td, tbody td {
+		padding-left: 5px;
+	}
+	thead td {
+		font-weight: bold;
+		text-align: center;
+	}
+
+	tbody td:nth-child(1) {
+		text-align: left;
+	}
+	tbody td {
+		text-align: center;
+	}
+}
+
+div.feedcell h3 {
+	margin: 0 0 0.3em 0;
+}
+
+div.feedcell div.feed-content div,
+div.feedcell div.feed-content p {
+	margin: 0.3em 0 1em 0;
+}
+
+div.feedcell img {
+	max-width: 100%;
+}
+
+// booking calendar
+
+div.bookingcalendar {
+	p.paginator {
+		position: relative;
+		margin-top: 0;
+		text-align: center;
+		span.previous, span.next {
+			opacity: 0.5;
+		}
+		.previous {
+			position: absolute;
+			left: 0;
+		}
+		.next {
+			position: absolute;
+			right: 0;
+		}
+	}
+	table th {
+		text-align: center;
+		height: 2.2em;
+	}
+	table tbody th {
+		padding-right: 0.7em;
+	}
+	table td {
+		border: 1px solid #ddd;
+		position: relative;
+		input[type=checkbox] {
+			position: relative;
+			display: block;
+			width: 100%;
+			z-index: 10;
+		}
+		input[type=checkbox] + label {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: white;
+			transition: background 0.3s ease;
+		}
+		input[type=checkbox]:disabled + label {
+			background: #ccc;
+		}
+		&.active-column input,
+		&.active-column label {
+			pointer-events: none;
+		}
+		&.active-column.clickable input,
+		&.active-column.clickable label {
+			pointer-events: auto;
+		}
+		input[type=checkbox]:checked + label {
+			background: #00c500;
+		}
+		&.absent {
+			background: #eee;
+		}
+		&.unavailable {
+			background: #c50000;
+		}
+	}
+	table {
+		margin-bottom: 1em;
+	}
+}
+
+// login page
+
+#registration-blocks.methods2 > .a2-block,
+#login-page.methods2 > .block {
+	width: 50%;
+	width: calc(50% - 2em);
+	margin: 0;
+	margin-right: 2em;
+	float: left;
+	> div {
+		padding: 1em;
+	}
+}
+
+#registration-blocks.methods3 > .a2-block,
+#login-page.methods3 > .block {
+	width: 33%;
+	width: calc(33% - 2em);
+	margin: 0;
+	margin-right: 2em;
+	float: left;
+	> div {
+		padding: 1em;
+	}
+}
+
+#registration-blocks.methods2 > .a2-block,
+#registration-blocks.methods3 > .a2-block,
+#login-page.methods2 > .block,
+#login-page.methods3 > .block {
+	@media screen and (max-width: $mobile-limit) {
+		width: auto;
+		float: none;
+		margin: 0.7em;
+	}
+}
+
+div.cell hr {
+	width: 80%;
+}
+
+.gru-content div.tipipaymentformcell > div > div {
+	padding: 0 1em;
+	form {
+		// prevent grid display to set those <input> to take the whole
+		// width
+		#exer, #idligne, #idpce,
+		#rolrec, #roldeb, #roldet,
+		#montant_euros, #montant_cents {
+			width: auto;
+		}
+	}
+}
+
+// family cell styles
+
+div.familyinfoscell {
+	h3 {
+		padding: 5px 0;
+		margin: 5px 0;
+	}
+	div.address {
+		margin: 0.7em 0;
+		h4 {
+			margin: 0;
+		}
+	}
+	div.family-data {
+		padding-bottom: 1.5em;
+		border-bottom: $title-border-bottom;
+	}
+	div.family_unlink {
+		text-align: right;
+	}
+	div.family_members {
+		display: flex;
+		justify-content: space-between;
+		@media screen and (max-width: $mobile-limit) {
+			flex-direction: column;
+		}
+	}
+	div.family_adults, div.family_children {
+		width: 48%;
+		@media screen and (max-width: $mobile-limit) {
+			width: auto;
+		}
+		> div {
+			border-bottom: $title-border-bottom;
+			padding-bottom: 0.7em;
+			margin: 0.7em 0;
+		}
+		.name {
+			font-size: 115%;
+		}
+	}
+	p {
+		margin: 0;
+		padding: 0;
+		span.label {
+			font-weight: bold;
+		}
+	}
+}
+
+// support foldable cells
+div.cell {
+	&.foldable {
+		> div > h2:first-child {
+			&::after {
+				font-family: FontAwesome;
+				content: "\f106";  // angle-up
+				position: absolute;
+				right: 1em;
+			}
+			cursor: pointer;
+		}
+	}
+	&.foldable.folded {
+		> div > h2:first-child {
+			display: block;
+			&::after {
+				content: "\f107";  // angle-down
+			}
+			@if $cell-image-position == top {
+				+ picture {
+					display: block;
+				}
+			}
+		}
+		> div > * {
+			display: none;
+		}
+	}
+}
+
+#footer .menucell {
+	/* custom style for menu cells in footer, center links on a single line */
+	text-align: center;
+	li {
+		display: inline-block;
+		border-right: $footer-menucell-separator;
+		&:last-child {
+			border-right: none;
+		}
+		a {
+			border-radius: 0;
+			border: none;
+			color: text-color($footer-background);
+			padding: 0.5rem 1rem;
+			&:hover {
+				background: none;
+				&::after {
+					content: none;
+				}
+			}
+		}
+	}
+}
+
+div.gallerycell {
+	div.gallery {
+		text-align: center;
+		img {
+			max-width: 100%;
+			border: 1px solid #888;
+		}
+	}
+}
+
+div.gru-content div.cell div.cell-items-pagination {
+	padding: 1rem;
+	.cell-items-pagination-next {
+		float: right;
+		margin-right: 0;
+	}
+}

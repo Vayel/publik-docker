@@ -1,0 +1,55 @@
+{% extends "qommon/forms/widgets/map.html" %}
+{% load qommon l10n static %}
+
+{% block widget-title %}
+{% endblock %}
+
+{% block widget-content %}
+{% if form %}
+<input type="hidden" name="{{widget.name}}$latlng">
+<div id="map-{{widget.name}}" class="qommon-map nearby-forms--map"
+  data-readonly="true"
+  {% for key, value in widget.map_attributes.items %}{{key}}="{{value}}" {% endfor %}
+  {% localize off %}
+  data-init-lat="{{ form_var_carte_lat }}"
+  data-init-lng="{{ form_var_carte_lon }}"
+  {% endlocalize %}
+></div>
+{% block list-header %}
+  <h3>Si votre signalement ne figure pas dans la liste ci-dessous, continuez</h3>
+{% endblock %}
+<ul class="nearby-forms">
+  {% with distance=form_option_distance|default:100|add:50 %}
+  {% with demands=form.objects.pending|distance_filter:distance %}
+  {% for formdata in demands %}
+      <li data-id="{{formdata.number}}" class="nearby-form"
+           {% localize off %}
+           data-geoloc-lat="{{formdata.geoloc.base.lat}}"
+           data-geoloc-lon="{{formdata.geoloc.base.lon}}"
+           {% endlocalize %}
+           >
+              <span class="nearby-form--marker-counter" id="nearby-{{forloop.counter}}">{{forloop.counter}}</span>
+              {% block problem-digest %}
+              <span class="nearby-form--digest">{{ formdata.digest }}</span>
+              {% endblock %}
+              <span class="nearby-form--datetime">Signalé le <time datetime="{{ formdata.receipt_date|datetime|date:"c" }}">{{ formdata.receipt_date }}</time></span>
+              {% if activate_plus1_action == "True" %}
+              <button class="nearby-form--plus1" role="button" data-plus1-url="{{formdata.api_url}}hooks/plus1/" aria-label="Même signalement">+1</button>
+              {% endif %}
+      </li>
+  {% endfor %}
+{% endwith %}
+{% endwith %}
+</ul>
+<script src="{% static 'xstatic/jquery-ui.js' %}"></script>
+<script src="{% static 'js/plus1.js' %}"></script>
+{% else %} {# no form, this is the admin preview #}
+<div class="infonotice">
+  {% block preview-impossible %}
+  Signalements à proximité, prévisualisation impossible.
+  {% endblock %}
+</div>
+{% endif %}
+
+{% endblock %}
+

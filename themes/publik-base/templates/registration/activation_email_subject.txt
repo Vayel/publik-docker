@@ -1,0 +1,2 @@
+{% extends "emails/subject.txt" %}
+{% block email-subject %}{% if existing_accounts %}votre compte existe déjà{% else %}activation de votre compte{% endif %}{% endblock %}

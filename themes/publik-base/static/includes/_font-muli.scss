@@ -1,0 +1,22 @@
+$muli-font-path: '/static/fonts/Muli' !default;
+
+@mixin muli-font($type, $weight, $style: normal) {
+	@font-face {
+		font-family: 'Muli';
+		src: url('#{$muli-font-path}/muli-#{$type}-webfont.woff2') format('woff2'),
+		     url('#{$muli-font-path}/muli-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin muli-font-pair($type, $weight) {
+	@include muli-font($type, $weight);
+	@include muli-font(#{$type}italic, $weight, italic);
+}
+
+@include muli-font-pair('extralight', 200);
+@include muli-font-pair('light', 300);
+@include muli-font-pair('regular', 400);
+@include muli-font-pair('semibold', 600);
+@include muli-font-pair('bold', 700);

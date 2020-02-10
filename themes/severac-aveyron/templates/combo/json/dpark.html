@@ -1,0 +1,51 @@
+<h2>Informations abonnement stationnement</h2>
+<div>
+{% if not json.data %}
+<div><p>Vous pouvez relier votre compte Publik à votre compte D-Park via <a href="{{pairing_form_url}}">ce formulaire</a>.</p></div>
+{% else %}
+<div class="dpark-infos">
+{% for info in json.data %}
+    <h3>{{ info.text }}</h3>
+    <div class="dpark-info-identity section">
+        <h4>Identité</h4>
+        <div>
+	<div class="field"><span class="label">Civilité</span>: <span class="value">{% if info.demandeur_civilite == 2 %}Madame{% else %}Monsieur{% endif %}</span></div>
+        <div class="field"><span class="label">Nom</span>: <span class="value">{{info.demandeur_nomusuel}}</span></div>
+        <div class="field"><span class="label">Prénoms</span>: <span class="value">{{info.demandeur_prenom}}</span></div>
+        <div class="field"><span class="label">Téléphone fixe</span>: <span class="value">{{info.demandeur_telephonefixe}}</span></div>
+        <div class="field"><span class="label">Téléphone mobile</span>: <span class="value">{{info.demandeur_telephoneportable}}</span></div>
+        <div class="field"><span class="label">Adresse de courriel</span>: <span class="value">{{info.demandeur_email}}</span></div>
+        </div>
+    </div>
+    <div class="dpark-info-address section">
+        <h4>Adresse</h4>
+        <div>
+            <div class="field">
+                <span class="label">Adresse</span>:
+                <span class="value">{{info.adresse_numerovoie}} {{info.adresse_nomvoie}}, {{info.adresse_codepostal}} {{info.adresse_localite}} </span>
+            </div>
+            <div class="field"><span class="label">Quartier</span>: <span class="value">{{info.adresse_quartier}}</span></div>
+        </div>
+    </div>
+    <div class="dpark-info-subscription section">
+        <h4>Abonnement</h4>
+        <div class="field"><span class="label">Numéro de dossier</span>: <span class="value">{{info.demande_numerodossier}}</span></div>
+        <div class="field"><span class="label">Date de début d'abonnement</span>: <span class="value">{{info.demande_datedebutabo}}</span></div>
+        <div class="field"><span class="label">Date de fin d'abonnement</span>: <span class="value">{{info.demande_datefinabo}}</span></div>
+        <div class="field"><span class="label">Délai de renouvellement (en jours)</span>: <span class="value">{{info.demande_delaiautorise}}</span></div>
+    </div>
+    <div class="dpark-info-car section">
+        <h4>Premier véhicule</h4>
+        <div class="field"><span class="label">Immatriculation</span>: <span class="value">{{info.demande_immatvehicule1}}</span></div>
+        <div class="field"><span class="label">Modèle</span>: <span class="value">{{info.demande_modelevehicule1}}</span></div>
+        <div class="field"><span class="label">Marque</span>: <span class="value">{{info.demande_marquevehicule1}}</span></div>
+    </div>
+    <div class="dpark-info-car section">
+        <h4>Second véhicule</h4>
+        <div class="field"><span class="label">Immatriculation</span>: <span class="value">{{info.demande_immatvehicule2}}</span></div>
+        <div class="field"><span class="label">Modèle</span>: <span class="value">{{info.demande_modelevehicule2}}</span></div>
+        <div class="field"><span class="label">Marque</span>: <span class="value">{{info.demande_marquevehicule2}}</span></div>
+    </div>
+{% endfor %}
+</div>
+{% endif %}

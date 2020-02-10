@@ -1,0 +1,36 @@
+{% load i18n beid %}
+<h4 id="a2-beid-certificate-profile" class="a2-bied-certificate-profile-title">
+  {% trans "Belgian eID card" %}
+</h4>
+
+<div class="a2-beid-certificate-profile-body">
+  <ul class="a2-beid-certificate-list">
+  {% for certificate in certificates %}
+    <li class="a2-ssl-certificate-item">
+      <form action="{% url "delete_beid" certificate_pk=certificate.pk %}"
+            method="post">
+        {% csrf_token %}
+        <p class="a2-ssl-certificate-dn">
+          <dl class="a2-ssl-certificate-dn-parts">
+            {% for k, v in certificate.explode_subject_dn %}
+              <dt class="a2-ssl-certificate-dn-part-name">{{ k }}</dt>
+              <dd class="a2-ssl-certificate-dn-part-value">{{ v }}</dd>
+            {% endfor %}
+          </dl>
+        </p>
+        <button class="submit-button a2-ssl-certificate-submit-button">{% trans "Delete" %}</button>
+      </form>
+    </p>
+  {% endfor %}
+  </ul>
+  {% if not certificates %}
+  <form action="{% beid_url request %}{% url "add_beid" %}" method="get">
+    <p>
+      Si vous disposez d'une carte d'identité électronique, vous pouvez l'enregistrer
+      ici pour pouvoir ensuite vous connecter à votre compte en l'utilisant.
+    </p>
+      <input type="hidden" name="next" value="{% url "account_management" %}" />
+      <button class="submit-button a2-ssl-certificate-submit-button">Enregistrer ma carte</button>
+    </form>
+  {% endif %}
+</div>

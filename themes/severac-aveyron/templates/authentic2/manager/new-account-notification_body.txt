@@ -1,0 +1,17 @@
+{% extends "emails/body_base.txt" %}
+
+{% block content %}
+Bonjour,
+
+À votre demande, un compte vient de vous être créé :
+
+{% if user.username  %}* Identifiant : {{ user.username }}
+{% endif %}* Courriel : {{ user.email }}
+* Prénom : {{ user.first_name }}
+* Nom : {{ user.last_name }}
+
+{% if new_password %}Votre mot de passe est : {{ new_password }}{% endif %}
+
+{% if portal_user_url %}Accéder au site : {{ portal_user_url }}{% endif %}
+
+{% endblock %}

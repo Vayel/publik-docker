@@ -1,0 +1,24 @@
+@mixin montserrat-font($type, $weight, $style) {
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('/static/fonts/Montserrat/montserrat-#{$type}-webfont.woff2') format('woff2'),
+		     url('/static/fonts/Montserrat/montserrat-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin montserrat-font-pair($type, $weight) {
+	@include montserrat-font($type, $weight, normal);
+	@include montserrat-font('#{$type}italic', $weight, italic);
+}
+
+@include montserrat-font-pair('thin', 100);
+@include montserrat-font-pair('extralight', 200);
+@include montserrat-font-pair('light', 300);
+@include montserrat-font-pair('regular', 400);
+@include montserrat-font-pair('medium', 500);
+@include montserrat-font-pair('semibold', 600);
+@include montserrat-font-pair('bold', 700);
+@include montserrat-font-pair('extrabold', 800);
+@include montserrat-font-pair('black', 900);

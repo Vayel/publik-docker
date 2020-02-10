@@ -1,0 +1,11 @@
+{% extends "authentic2/base.html" %}
+
+{% block placeholder-content %}
+<div class="a2-block">
+  {% block form-title %}
+  {% if view.title %}<h2>{{ view.title }}</h2>{% endif %}
+  {% endblock %}
+  {% block content %}
+  {% endblock %}
+</div>
+{% endblock %}

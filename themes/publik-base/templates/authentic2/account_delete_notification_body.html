@@ -1,0 +1,8 @@
+{% extends "emails/body_base.html" %}
+{% block content %}
+<p>Bonjour {{ full_name }},</p>
+
+<p>Votre compte sur le site {{site}} a été supprimé.</p>
+<p>Toutes les données associées seront supprimées aujourd'hui.</p>
+<p>Vous ne pouvez dès à présent plus vous connecter.</p>
+{% endblock %}

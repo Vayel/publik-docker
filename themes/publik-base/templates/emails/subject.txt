@@ -1,0 +1,1 @@
+{% block subject-prefix %}{% autoescape off %}{% firstof global_email_prefix global_title site_name site "Compte Citoyen" %}{% endautoescape %} : {% endblock %}{% block email-subject %}{% endblock %}
