@@ -25,9 +25,13 @@ then
   exit 1
 fi
 
-# Add tools to NGINX (pgadmin, ...)
-envsubst '${ENV} ${DOMAIN} ${RABBITMQ_MANAGEMENT_PORT} $PGADMIN_PORT' < /etc/nginx/conf.d/tools.template \
+envsubst '$ENV $DOMAIN $RABBITMQ_MANAGEMENT_PORT' < /etc/nginx/conf.d/tools.template \
 	> /etc/nginx/conf.d/tools.conf
+
+if [ ! -z "$PGADMIN_PORT" ] && [ ! -z "$MAILCATCHER_HTTP_PORT" ]; then
+  envsubst '${ENV} ${DOMAIN} $PGADMIN_PORT $MAILCATCHER_HTTP_PORT' < /etc/nginx/conf.d/dev-tools.template \
+	  > /etc/nginx/conf.d/dev-tools.conf
+fi
 
 # Create NGINX configuration for Publik containers
 function generateconf() {

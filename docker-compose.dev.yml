@@ -1,5 +1,5 @@
 # To be used with docker-compose.yml
-# docker-compose -f docker-compose.yml -f docker-compose.db.yml xxx
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml xxx
 
 version: "2.1"
 
@@ -9,11 +9,13 @@ services:
       - components:components
       - rabbitmq:rabbitmq
       - pgadmin:pgadmin
+      - mailcatcher:webmail
 
   components:
     links:
       - db:db
       - rabbitmq:rabbitmq
+      - mailcatcher:webmail
     depends_on: 
       - db
       - rabbitmq
@@ -42,6 +44,13 @@ services:
       - db:db
     ports:
       - "${PGADMIN_PORT:-5050}:5050"
+
+  mailcatcher:
+    container_name: mailcatcher
+    image: ascendhit/mailcatcher
+    ports:
+      - "${SMTP_PORT:-1025}:1025"
+      - "${MAILCATCHER_HTTP_PORT:-1080}:1080"
 
 volumes:
   dbdata:
