@@ -76,7 +76,12 @@ script `install-on-debian.sh` et reproduire les commandes en les adaptant pour v
 
 #### Installation locale
 
-Pour une installation locale, il suffit d'avoir Docker et docker-compose installés.
+Pour une installation locale, il suffit d'avoir Docker et docker-compose installés
+et de lancer :
+
+```bash
+./init-ssl.sh
+```
 
 #### Installation sur un serveur Debian
 
