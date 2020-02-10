@@ -57,22 +57,30 @@ du déploiement :
 Comme indiqué en commentaires de ces fichiers, certaines variables peuvent être vides,
 d'autres non.
 
-Notons également que ces fichiers sont au format `ini` et ne sont PAS des scripts shell.
+Notons également que ces fichiers ne sont PAS des scripts shell, seulement une liste
+de `VAR=value`. En particulier, les guillemets autour de la valeur sont interprétés
+tels quels.
 
-## Déploiement
+## Installation
 
 ### Pré-requis
-
-Un script d'installation des dépendances est fourni mais suppose que la machine
-est de type Debian ou dérivée. Dans le cas contraire, vous pouvez consulter le
-script `sync-os.sh` et reproduire les commandes en les adaptant pour votre système.
 
 Caractéristiques minimales de la machine :
 
 * 4Go de RAM
 * 10 Go de disque (20 Go recommandé)
 
-### Installation
+Un script d'installation des dépendances est fourni mais suppose que la machine
+est de type Debian ou dérivée. Dans le cas contraire, vous pouvez consulter le
+script `install-on-debian.sh` et reproduire les commandes en les adaptant pour votre système.
+
+#### Installation locale
+
+Pour une installation locale, il suffit d'avoir Docker et docker-compose installés.
+
+#### Installation sur un serveur Debian
+
+Pour une installation sur un serveur de type Debian, se connecter en ssh puis :
 
 ```bash
 sudo apt-get update
@@ -85,11 +93,46 @@ sudo mv publik-docker /home/publik/
 sudo chown publik:publik /home/publik/publik-docker -R
 ```
 
-> Note aux utilisateurs derrière un PROXY : Penser à installer les certificats dans le magasin de l'OS 
-(/usr/local/share/ca-certificates) et déclarer le proxy dans la configuration docker
-(https://docs.docker.com/v1.13/engine/admin/systemd/#http-proxy).
-Il est également possible d'utiliser "--insecure" pour sync-os afin de faire des appels curls sans 
-vérification des certificats soit la commande complète "sudo ./sync-os.sh --insecure"
+> Note aux utilisateurs derrière un PROXY : penser à installer les certificats dans le magasin de l'OS 
+> (/usr/local/share/ca-certificates) et déclarer le proxy dans la configuration docker
+> (https://docs.docker.com/v1.13/engine/admin/systemd/#http-proxy).
+> Il est également possible d'utiliser "--insecure" pour install-on-debian afin de faire des appels curls sans 
+> vérification des certificats soit la commande complète "sudo ./install-on-debian.sh --insecure"
+
+Le code source a été installé dans `/home/publik/publik-docker`et sa propriéré a
+été donnée à l'utilisateur `publik`. Il faut se déconnecter et se reconnecter du
+shell pour que les changements soient pris en compte.
+
+Au moment de se reconnecter, l'accès au code se fait via :
+
+```bash
+su - publik
+cd publik-docker
+```
+
+### Configuration des urls
+
+Les composants Django se connaissent entre eux via des noms de domaine, chacun
+ayant la structure suivante : `<composant><ENV>.<DOMAIN>`
+
+`ENV` est simplement un suffixe pour distinguer d'éventuelles multiples instances
+de Publik (`test`, `dev`...).
+
+Par exemple, le composant Combo pourrait avoir pour adresse sur la machine
+`monserveur.fr` : `combo.monserveur.fr`, `combo-test.monserveur.fr`
+avec `ENV=-test`, `citoyens.monserveur.fr`...
+
+Les variables `ENV` et `DOMAIN`, ainsi que le préfixe utilisé par composant,
+sont configurables et, pour certaines, **doivent être configurées**. Pour cela :
+
+```bash
+./init-env.sh
+```
+
+Puis éditer si besoin les variables `ENV`, `DOMAIN` et `*_SUBDOMAIN` dans le fichier
+`data/config.env`.
+
+### Poursuivre l'installation
 
 Pour la suite, se référer à :
 

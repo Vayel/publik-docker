@@ -71,7 +71,7 @@ Dans un autre shell (en conservant le premier ouvert) :
 # OK: hobo is ready
 # Configuration OK (Hobo cook)
 
-./init-components.sh
+./deploy.sh
 
 # Doit se terminer sur :
 #
@@ -85,4 +85,8 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 
 ## Administration des conteneurs
 
-Se référer à `docs/manage.md`.
+```
+./up-prod.sh
+```
+
+Puis se référer à `docs/manage.md`.

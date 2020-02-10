@@ -1,47 +1,46 @@
 # Déploiement de développement
 
-Merci de lire au préalable le fichier `README.md` à la racine du projet.
-
 Suivre cette procédure pour déployer la version de **développement** des conteneurs
 sur une machine **accessible depuis Internet**.
 
-### Déclaration DNS
+Merci de lire au préalable le fichier `README.md` à la racine du projet. À ce
+stade, vous avez configuré les urls et installé les dépendances définies
+dans `install-on-debian.sh`.
 
-Les composants Django se connaissent entre eux via des noms de domaine, chacun
-ayant la structure suivante : `<composant><ENV>.<DOMAIN>`
+## Déclaration DNS
 
-`ENV` est simplement un suffixe pour distinguer d'éventuelles multiples instances
-de Publik (`test`, `dev`...).
-
-Par exemple, le composant Combo aura pour adresse sur la machine
-`monserveur.fr` : `combo.monserveur.fr` ou, par exemple, `combo-test.monserveur.fr`
-avec `ENV=-test`.
-
-Il faut donc faire pointer les domaines `*ENV.DOMAIN` vers la machine.
+Une fois les urls définies, il faut faire pointer les domaines `*ENV.DOMAIN` vers
+la machine de déploiement.
 
 Des certificats HTTPS Let's encrypt seront automatiquement générés durant le processus
 d'installation. C'est pourquoi il est important que le serveur soit accessible
 depuis Internet et que les enregistrement DNS ait été préalablement configurées
 avant de commencer.
 
-Vous pouvez vérifier votre configuration DNS en réalisant un ping sur une adresse. Exemple :
+Vous pouvez vérifier votre configuration DNS en réalisant un ping sur une adresse
+(penser à autoriser le ping de la machine). Exemple :
 
 ```
-ping combo.monserveur.fr
+# ping <COMBO_SUBDOMAIN><ENV>.<DOMAIN>
+ping citoyens.monserveur.fr
 ```
 
 L'IP affichée doit correspondre à celle de la machine de déploiement.
 
-### Déploiement
+## Déploiement
+
+Personnaliser si besoin les variables d'environnement dans les fichiers suivants :
+
+* `.env`
+* `data/config.env`
+* `data/secret.env`
+
+Notons que pour un déploiement de dev, la base de données utilisée est celle du
+conteneur Docker `db`, il n'y a donc rien à changer à ce niveau.
+
+TODO: mailcatcher
 
 ```bash
-./init-env.sh
-
-# Personnaliser si besoin les variables d'environnement dans les fichiers suivants :
-# .env
-# config.env
-# secret.env
-
 ./build.sh
 ./up.sh
 ```
@@ -49,6 +48,7 @@ L'IP affichée doit correspondre à celle de la machine de déploiement.
 Vous devez alors obtenir quelque chose comme :
 
 ```
+[ components     | memcached is running.
 [ components     | combo is running.
 [ components     | passerelle is running.
 [ components     | fargo is running.
@@ -73,7 +73,7 @@ Dans un autre shell (en conservant le premier ouvert) :
 # OK: hobo is ready
 # Configuration OK (Hobo cook)
 
-./init-components.sh
+./deploy.sh
 
 # Doit se terminer sur :
 #
@@ -87,4 +87,10 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 
 ## Administration des conteneurs
 
-Se référer à `docs/manage.md`.
+Pour démarrer les conteneurs, lancer :
+
+```
+./up.sh
+```
+
+Puis se référer à `docs/manage.md`.
