@@ -29,5 +29,13 @@ services:
       - dbdata:/var/lib/postgresql/data
       - ./postgresql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
 
+  pgadmin:
+    container_name: pgadmin
+    image: chorss/docker-pgadmin4
+    links:
+      - db:db
+    ports:
+      - "${PGADMIN_PORT:-5050}:5050"
+
 volumes:
   dbdata:
