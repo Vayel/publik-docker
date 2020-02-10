@@ -15,6 +15,8 @@ function generate_passwords {
   rm "$1.tmp"
 }
 
+mkdir -p data
+
 if [ ! -f .env ]; then
   cp .env.template .env
 fi
