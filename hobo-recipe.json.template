@@ -96,7 +96,7 @@
     },
     {
       "set-theme": {
-        "theme": "${THEME}" 
+        "theme": "${SLUG}" 
       }
     }
   ]
