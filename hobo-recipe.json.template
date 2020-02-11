@@ -24,8 +24,23 @@
           "collectivite": {
             "value": "${TITLE}"
           },
-          "org_url": {
+          "collectivite_site": {
             "value": "${SITE_URL}"
+          },
+          "collectivite_telephone": {
+            "value": "${PHONE}"
+          },
+          "collectivite_email": {
+            "value": "${EMAIL}"
+          },
+          "collectivite_adresse": {
+            "value": "${ADDR}"
+          },
+          "collectivite_adresse_complement": {
+            "value": "${ADDR2}"
+          },
+          "collectivite_code_postal": {
+            "value": "${POSTCODE}"
           }
         }
       }
@@ -44,8 +59,23 @@
           "collectivite": {
             "value": "${TITLE}"
           },
-          "org_url": {
+          "collectivite_site": {
             "value": "${SITE_URL}"
+          },
+          "collectivite_telephone": {
+            "value": "${PHONE}"
+          },
+          "collectivite_email": {
+            "value": "${EMAIL}"
+          },
+          "collectivite_adresse": {
+            "value": "${ADDR}"
+          },
+          "collectivite_adresse_complement": {
+            "value": "${ADDR2}"
+          },
+          "collectivite_code_postal": {
+            "value": "${POSTCODE}"
           }
         }
       }
@@ -60,8 +90,23 @@
           "collectivite": {
             "value": "${TITLE}"
           },
-          "org_url": {
+          "collectivite_site": {
             "value": "${SITE_URL}"
+          },
+          "collectivite_telephone": {
+            "value": "${PHONE}"
+          },
+          "collectivite_email": {
+            "value": "${EMAIL}"
+          },
+          "collectivite_adresse": {
+            "value": "${ADDR}"
+          },
+          "collectivite_adresse_complement": {
+            "value": "${ADDR2}"
+          },
+          "collectivite_code_postal": {
+            "value": "${POSTCODE}"
           }
         }
       }
@@ -75,8 +120,23 @@
           "collectivite": {
             "value": "${TITLE}"
           },
-          "org_url": {
+          "collectivite_site": {
             "value": "${SITE_URL}"
+          },
+          "collectivite_telephone": {
+            "value": "${PHONE}"
+          },
+          "collectivite_email": {
+            "value": "${EMAIL}"
+          },
+          "collectivite_adresse": {
+            "value": "${ADDR}"
+          },
+          "collectivite_adresse_complement": {
+            "value": "${ADDR2}"
+          },
+          "collectivite_code_postal": {
+            "value": "${POSTCODE}"
           }
         }
       }
@@ -91,8 +151,23 @@
           "collectivite": {
             "value": "${TITLE}"
           },
-          "org_url": {
+          "collectivite_site": {
             "value": "${SITE_URL}"
+          },
+          "collectivite_telephone": {
+            "value": "${PHONE}"
+          },
+          "collectivite_email": {
+            "value": "${EMAIL}"
+          },
+          "collectivite_adresse": {
+            "value": "${ADDR}"
+          },
+          "collectivite_adresse_complement": {
+            "value": "${ADDR2}"
+          },
+          "collectivite_code_postal": {
+            "value": "${POSTCODE}"
           }
         }
       }
@@ -106,8 +181,23 @@
           "collectivite": {
             "value": "${TITLE}"
           },
-          "org_url": {
+          "collectivite_site": {
             "value": "${SITE_URL}"
+          },
+          "collectivite_telephone": {
+            "value": "${PHONE}"
+          },
+          "collectivite_email": {
+            "value": "${EMAIL}"
+          },
+          "collectivite_adresse": {
+            "value": "${ADDR}"
+          },
+          "collectivite_adresse_complement": {
+            "value": "${ADDR2}"
+          },
+          "collectivite_code_postal": {
+            "value": "${POSTCODE}"
           }
         }
       }

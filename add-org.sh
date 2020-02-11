@@ -5,6 +5,12 @@ set -eu
 export THEME='$ORG_DEFAULT_THEME'
 CREATE_THEME=false
 export SITE_URL=
+export PHONE=
+export EMAIL=
+export ADDR=
+export ADDR2=
+export POSTCODE=
+export TOWN=
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -21,6 +27,31 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
     ;;
+    --phone)
+      PHONE="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --email)
+      EMAIL="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --addr)
+      ADDR="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --addr2)
+      ADDR2="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --postcode)
+      POSTCODE="$2"
+      shift # past argument
+      shift # past value
+    ;;
     *)
       POSITIONAL+=("$1")
       shift # past argument
@@ -31,10 +62,13 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ "$#" -ne 2 ]; then
   echo "Illegal number of parameters"
-  echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL]"
+  echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
+  echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE]"
   echo "Examples:"
   echo '  ./add-org.sh lyon Lyon'
-  echo '  ./add-org.sh mon-village "Mon village" --theme mon-village --url https://mon-village.fr'
+  echo '  ./add-org.sh mon-village "Mon village" --theme mon-village --url https://mon-village.fr \ '
+  echo '                            --phone 0123456789 --email a@b.c --addr "2 rue XXX" \ '
+  echo '                            --addr2 "Espace coworking" --postcode 12120'
   exit 1
 fi
 
@@ -43,7 +77,11 @@ export TITLE="$2"
 DIR="data/sites/$SLUG"
 THEME_DIR="themes/$THEME"
 
-echo "Creating $TITLE (slug: $SLUG)..."
+echo "Creating organization..."
+for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE
+do
+  echo "$VAR=${!VAR}"
+done
 
 if [ "$CREATE_THEME" == "false" ]; then
   echo "Using default theme"
@@ -63,7 +101,7 @@ fi
 echo "Creating config files in $DIR..."
 mkdir -p $DIR
 DEST="$DIR/hobo-recipe.json.template"
-envsubst '$SLUG $TITLE $THEME $SITE_URL' < hobo-recipe.json.template > "$DEST.tmp"
+envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE' < hobo-recipe.json.template > "$DEST.tmp"
 encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
 iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
 rm "$DEST.tmp"
