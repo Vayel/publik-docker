@@ -19,6 +19,11 @@ sudo -u combo combo-manage tenant_command export_site -d ${URL_PREFIX}${COMBO_AD
 echo "Exporting auth to $ROOT_FOLDER/..."
 sudo -u authentic-multitenant authentic2-multitenant-manage tenant_command export_site -d ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} > "$ROOT_FOLDER/auth.json"
 
+# TODO: formdefs is not exported like this in the web interface
+#echo "Exporting forms to $FOLDER/..."
+#cd /var/lib/wcs/${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}
+#zip -r "$FOLDER/wcs.zip" formdefs/ categories/
+
 echo "Please export wcs data from web interface:"
 echo "* URL: https://${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}"
 echo "* Dest: $FOLDER/wcs.zip"
