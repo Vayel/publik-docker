@@ -76,12 +76,7 @@ script `install-on-debian.sh` et reproduire les commandes en les adaptant pour v
 
 #### Installation locale
 
-Pour une installation locale, il suffit d'avoir Docker et docker-compose installés
-et de lancer :
-
-```bash
-./init-ssl.sh
-```
+Pour une installation locale, il suffit d'avoir Docker et docker-compose installés.
 
 #### Installation sur un serveur Debian
 
@@ -141,10 +136,10 @@ Puis éditer si besoin les variables `ENV`, `DOMAIN` et `*_SUBDOMAIN` dans le fi
 
 Pour la suite, se référer à :
 
-* `docs/deploy-local.md` pour une installation sur une machine **non accessible** depuis Internet
-* `docs/deploy-dev.md` pour une installation de développement sur une machine **accessible** depuis Internet
-* `docs/deploy-prod.md` pour une installation de production sur une machine **accessible** depuis Internet
-* `docs/manage.md` pour administrer des conteneurs déjà déployés
+* `docs/deploy-local.md` pour une installation des conteneurs sur une machine **non accessible** depuis Internet
+* `docs/deploy-dev.md` pour une installation de développement des conteneurs sur une machine **accessible** depuis Internet
+* `docs/deploy-prod.md` pour une installation de production des conteneurs sur une machine **accessible** depuis Internet
+* `docs/manage.md` pour administrer les conteneurs déjà déployés
 
 ## Contribution
 

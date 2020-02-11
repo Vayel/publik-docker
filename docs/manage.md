@@ -1,5 +1,8 @@
 # Administration des conteneurs
 
+Les instructions listées ici ne sont valables que si vous avez suivi avec succès
+une des procédures de déploiement `docs/deploy-xxx.md`.
+
 ## Arrêt
 
 Envoyer un signal `SIGINT` au processus `up.sh` ou `up-prod.sh`, par exemple
@@ -55,3 +58,5 @@ en compte.
 ## Importer des données
 
 TODO
+* Collectivités
+* Thèmes
