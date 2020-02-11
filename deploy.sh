@@ -19,6 +19,13 @@ function retry() {
     done
 }
 
+# Add nginx conf to proxy
+if [ "$#" -ne 0 ] && [ ! -z "$1" ]; then
+  echo "Configuring proxy..."
+  docker exec proxy configure.sh $1
+  docker exec proxy service nginx reload
+fi
+
 # hobo waits for db and rabbitmq so doesn't substitute env vars in /tmp.cook.sh.template
 # immediatly
 retry 3 docker exec components deploy.sh $@

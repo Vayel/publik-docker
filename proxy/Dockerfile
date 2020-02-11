@@ -17,8 +17,8 @@ RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
-COPY entrypoint.sh run-server.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/run-server.sh
+COPY entrypoint.sh run-server.sh configure.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/run-server.sh /usr/local/bin/configure.sh
 
 EXPOSE 80
 EXPOSE 443
