@@ -71,6 +71,7 @@ if [ "$#" -ne 2 ]; then
   echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
   echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE] \ "
   echo "                   [--position 'lat;lng']"
+  echo "If --theme is not specified, data/config.env:ORG_DEFAULT_THEME is used"
   echo "Examples:"
   echo '  ./add-org.sh lyon Lyon'
   echo '  ./add-org.sh mon-village "Mon village" --theme mon-village --url https://mon-village.fr \ '

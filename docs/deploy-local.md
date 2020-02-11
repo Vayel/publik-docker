@@ -73,6 +73,7 @@ Il faut faire pointer les urls des composants vers la machine locale. Attention 
 192.168.4.133       documents.monserveur.fr
 192.168.4.133       rabbitmq.monserveur.fr
 192.168.4.133       pgadmin.monserveur.fr
+192.168.4.133       webmail.monserveur.fr
 ```
 
 `ping citoyens.monserveur.fr` doit pointer sur l'ip locale.
@@ -86,9 +87,18 @@ Personnaliser si besoin les variables d'environnement dans les fichiers suivants
 * `data/secret.env`
 
 Notons que pour un déploiement de dev, la base de données utilisée est celle du
-conteneur Docker `db`, il n'y a donc rien à changer à ce niveau.
+conteneur Docker `db`, il n'y a donc rien à changer à ce niveau. Il est néanmoins
+possible d'utiliser une autre base en éditant :
 
-TODO: mailcatcher
+* Dans `.env` : `DB_HOST`, `DB_PORT`, `DB_ADMIN_USER`
+* Dans `data/secret.env` : `POSTGRES_PASSWORD`
+
+De même, le conteneur `mailcatcher` fait office de serveur SMTP : il intercepte
+les mails et les rend accessibles depuis `http://webmail<ENV>.<DOMAIN>` (en HTTP et
+non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en éditant :
+
+* Dans `.env` : `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT`
+* Dans `data/secret.env` : `SMTP_PASS`
 
 ```bash
 ./build.sh
@@ -109,9 +119,28 @@ Vous devez alors obtenir quelque chose comme :
 [ components     | nginx is running.
 ```
 
-Dans un autre shell (en conservant le premier ouvert) :
+Il faut alors déployer les services Publik avec la commande `./deploy.sh`. En
+plus de configurer nginx et de déployer les services, cette commande importe le
+contenu du site. Pour cela, elle va consulter le dossier `data/sites` et chercher
+les fichiers suivants (aucun n'est obligatoire) :
+
+* `user-portal.json` : les pages du portail citoyens
+* `agent-portal.json` : les pages du portail agents
+* `wcs.zip` : les démarches et les catégories (importer des workflows ne fonctionne pas pour le moment)
+
+Ces données sont exportées d'une autre instance Publik :
+
+* Soit depuis l'interface web
+    * `user-portal.json` s'obtient via `https://citoyens.DOMAIN/manage/site-export`
+    * `agent-portal.json` s'obtient via `https://agentsENV.DOMAIN/manage/site-export`
+    * `wcs.zip` s'obtient via `https://demarchesENV.DOMAIN/backoffice/settings/export`, **en cochant uniquement** les démarches et les catégories
+* Soit, si cette instance a été déployée à partir de ce dépôt, via la commande `./export-sites.sh`, qui sauvegarde les données dans `data/sites`.
+
+Il suffit alors de lancer dans un autre shell (en conservant le premier ouvert) :
 
 ```
+./deploy.sh
+
 # Prend un peu de temps. Doit se terminer sur :
 #
 # OK: combo is ready
@@ -122,15 +151,17 @@ Dans un autre shell (en conservant le premier ouvert) :
 # OK: fargo is ready
 # OK: hobo is ready
 # Configuration OK (Hobo cook)
-
-./deploy.sh
-
+#
 # Doit se terminer sur :
 #
 # Deployment looks OK
-
-./check-deployment.sh
 ```
+
+> **Attention :** parfois, un bug apparaît avec un template authentic, ce qui fait
+> que wcs renvoie un code HTTP 500 au lieu d'un 200. Il suffit alors normalement
+> d'attendre 5 minutes le temps que le cache se mette à jour. Puis de lancer :
+>
+> `./import-site.sh`
 
 Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 `https://citoyens.monserveur.fr`.
