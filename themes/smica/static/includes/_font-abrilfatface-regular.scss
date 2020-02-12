@@ -1,0 +1,6 @@
+$font-path: '/static/xstatic/fonts' !default;
+
+@font-face {
+	font-family: 'AbrilFatface-Regular';
+	src: url('#{$font-path}/Regular/abrilfatface-regular.woff') format('woff');
+}

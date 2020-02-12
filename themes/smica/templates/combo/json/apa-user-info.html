@@ -1,0 +1,64 @@
+{% load combo %}
+
+<h2>Le bénéficiaire</h2>
+
+<div class="apa-user-info">
+{% with individu=json.data.individu %}
+
+  <p class="date-situation"><em>Situation à la date du {% now "j F Y" %}</em></p>
+
+  <div class="individu">
+  <h3>{% include "combo/json/apa-user-label.html" with individu=individu %}</h3>
+
+  <p class="birthdate">
+    <span class="label">Date de naissance :</span> {{ individu.dateNaissance|parse_date|date:"j F Y" }}
+  </p>
+
+  <p class="address">
+    <span class="label">Adresse :</span>
+    {% with adresse=individu.adresse %}
+      {{ adresse.numeroLieu }} {{ adresse.natureLieu|default:"" }}
+        {{ adresse.nomLieu }} {{ adresse.finLieu|default:"" }}<br />
+      {% if adresse.complementLieu %}{{ adresse.complementLieu }}<br />{% endif %}
+      {% if adresse.cedex %}Cedex {{ adresse.cedex }}<br />{% endif %}
+      {{ adresse.codePostal }} {{ adresse.commune }}
+    {% endwith %}
+  </p>
+
+  <p class="contact-info">
+    <span class="label email">Adresse électronique :</span> {{ individu.contact.mail|default:"non renseignée" }}<br />
+    <span class="label phone">Téléphone :</span> {{ individu.contact.telephone|default:"non renseigné" }}
+  </p>
+  </div>
+
+  {% if individu.tutelles.tutelle %}
+    <div class="tutelles">
+    <h3>Tutelles</h3>
+    {% for tutelle in individu.tutelles.tutelle %}
+      <p>
+        {% if tutelle.mesure %}<em>{{ tutelle.mesure }}</em><br />{% endif %}
+        {{ tutelle.type }} : {{ tutelle.identite }}
+        {% if tutelle.natureAccord %}({{ tutelle.natureAccord }}){% endif %}
+        <br />
+        {% with adresse=tutelle.adresse %}
+          {{ adresse.numeroLieu }} {{ adresse.natureLieu|default:"" }}
+            {{ adresse.nomLieu }} {{ adresse.finLieu|default:"" }}<br />
+          {% if adresse.complementLieu %}{{ adresse.complementLieu }}<br />{% endif %}
+          {% if adresse.cedex %}Cedex {{ adresse.cedex }}<br />{% endif %}
+          {{ adresse.codePostal }} {{ adresse.commune }}
+        {% endwith %}
+        <br />
+        {% if tutelle.dateEffet %}
+          <strong>Date d'effet</strong> :
+          {{ tutelle.dateEffet|parse_date|date:"j F Y" }}<br />
+        {% endif %}
+        {% if tutelle.dateFin %}
+          <strong>Date de fin</strong> :
+          {{ tutelle.dateFin|parse_date|date:"j F Y" }}<br />
+        {% endif %}
+    {% endfor %}
+    </div>
+  {% endif %}
+
+{% endwith %}
+</div>

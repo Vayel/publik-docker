@@ -1,0 +1,16 @@
+{% extends "combo/page_template.html" %}
+{% load combo i18n %}
+
+{% block combo-content %}
+<div id="page-content">
+{% trans "Content" as name %}
+{% placeholder "content" name=name %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<aside id="sidebar">
+{% trans "Sidebar" as name %}
+{% placeholder "sidebar" name=name %}
+</aside>
+{% endblock %}

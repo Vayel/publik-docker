@@ -1,0 +1,36 @@
+$barlow-font-path: '/static/fonts/Barlow' !default;
+
+@mixin barlow-font($type, $weight, $style: normal) {
+    @font-face {
+        font-family: 'Barlow';
+        src: url('#{$barlow-font-path}/Barlow-#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+    @font-face {
+        font-family: 'Barlow Condensed';
+        src: url('#{$barlow-font-path}/BarlowCondensed-#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+    @font-face {
+        font-family: 'Barlow Semi Condensed';
+        src: url('#{$barlow-font-path}/BarlowSemiCondensed-#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+@mixin barlow-font-pair($type, $weight) {
+    @include barlow-font($type, $weight);
+    @include barlow-font(#{$type}Italic, $weight, italic);
+}
+
+@include barlow-font-pair('Thin', 100);
+@include barlow-font-pair('ExtraLight', 200);
+@include barlow-font-pair('Light', 300);
+@include barlow-font-pair('Regular', 400);
+@include barlow-font-pair('Medium', 500);
+@include barlow-font-pair('SemiBold', 600);
+@include barlow-font-pair('Bold', 700);
+@include barlow-font-pair('Black', 900);

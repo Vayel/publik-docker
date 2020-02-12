@@ -1,0 +1,16 @@
+@mixin nowalt-font($type, $weight) {
+	@font-face {
+		font-family: 'Now Alt';
+		src: url('/static/fonts/NowAlt/nowalt-#{$type}-webfont.woff2') format('woff2'),
+		     url('/static/fonts/NowAlt/nowalt-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: normal;
+	}
+}
+
+@include nowalt-font('thin', 100);
+@include nowalt-font('light', 300);
+@include nowalt-font('regular', 400);
+@include nowalt-font('medium', 500);
+@include nowalt-font('bold', 700);
+@include nowalt-font('black', 900);

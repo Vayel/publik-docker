@@ -1,0 +1,67 @@
+body.has-header-background {
+	.site-header {
+		background: url(/assets/header:background) top center no-repeat;
+		background-size: cover;
+	}
+}
+
+body header {
+  background: $primary-color;
+  min-height: 100px;
+
+  .logo-img {
+    display: block;
+    max-width: 300px;
+
+    @media screen and (max-width: 500px) {
+      max-width: 120px;
+    }
+  }
+
+  #header {
+    padding: 0;
+  }
+
+  .header-link {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .subtitle {
+    font-size: 1.2em;
+    font-weight: normal;
+    margin-left: 80px;
+
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  #logo {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+
+    @media screen and (max-width: 500px) {
+      justify-content: center;
+      align-items: center;
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+  }
+}
+
+h1#logo.has-logo {
+	a {
+		background: transparent url(/assets/header:logo) center left no-repeat;
+		background-size: contain;
+		text-indent: -10000px;
+		min-width: 160px;
+    display: inline-block;
+	}
+}

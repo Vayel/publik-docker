@@ -1,0 +1,26 @@
+$raleway-font-path: '/static/fonts/Raleway' !default;
+
+@mixin raleway-font($type, $weight, $style) {
+	@font-face {
+		font-family: 'Raleway';
+		src: url('#{$raleway-font-path}/raleway-#{$type}-webfont.woff2') format('woff2'),
+		     url('#{$raleway-font-path}/raleway-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin raleway-font-pair($type, $weight) {
+	@include raleway-font($type, $weight, normal);
+	@include raleway-font('#{$type}italic', $weight, italic);
+}
+
+@include raleway-font-pair('thin', 100);
+@include raleway-font-pair('extralight', 200);
+@include raleway-font-pair('light', 300);
+@include raleway-font-pair('regular', 400);
+@include raleway-font-pair('medium', 500);
+@include raleway-font-pair('semibold', 600);
+@include raleway-font-pair('bold', 700);
+@include raleway-font-pair('extrabold', 800);
+@include raleway-font-pair('black', 900);

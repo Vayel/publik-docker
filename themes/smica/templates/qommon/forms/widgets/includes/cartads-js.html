@@ -1,0 +1,42 @@
+<script type="text/javascript" src="/static/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/static/js/qommon.fileupload.js"></script>
+
+<script>
+$.CartaDs = {
+  change: function() {
+    var $widget = $(this).parents('.file-upload-widget');
+    var token = $widget.find('input[type=hidden]').val();
+    if (! token) return;
+    var url = $(this).data('url');
+    $widget.find('.remove').on('click', function() {
+      $.ajax({
+        url: url + token + '/delete/',
+        method: 'POST'
+      });
+    });
+  }
+}
+
+$('.file-upload-widget input[type=file]').on('change', $.CartaDs.change);
+$('.file-upload-widget.has-file input[type=file]').each($.CartaDs.change);
+
+$('button.plus').on('click', function() {
+  var $orig_file_button = $(this).parent().prev();
+  if (! $orig_file_button.is(':visible')) {
+    $orig_file_button.addClass('visible');
+    return false;
+  }
+  var $file_button = $orig_file_button.clone();
+  $file_button.find('div.title').remove();
+  $file_button.find('input[type=hidden]').val('');
+  $file_button.find('.fileinfo').hide();
+  $file_button.find('input[type=file]').show().on('change', $.CartaDs.change);
+  $file_button.removeClass('has-file').addClass('has-no-file');
+  $(this).parent().before($file_button);
+  $file_button.each($.WcsFileUpload.prepare);
+  if ($(this).parents('.cartads-piece').find('.file-upload-widget').length == 6) {
+    $(this).attr('disabled', true);
+  }
+  return false;
+});
+</script>

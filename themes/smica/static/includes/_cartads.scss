@@ -1,0 +1,44 @@
+div.cartads-piece {
+	div.file-upload-widget {
+		margin-bottom: 1rem;
+	}
+	button.plus {
+		margin-top: 60px;
+		&:disabled {
+			display: none;
+		}
+		@media screen and (max-width: $very-small-limit) {
+			margin-top: 0;
+			margin-bottom: 2rem;
+		}
+	}
+	div.title + div.grid-1-2 + div.grid-1-2 + div.button-plus,
+	div.title + div.grid-1-2 + div.grid-1-2 + div.grid-1-2 + div.grid-1-2 + div.button-plus,
+	div.title + div.grid-1-3 + div.grid-1-3 + div.grid-1-3 + div.button-plus {
+		// special case when there are three file upload
+		// widgets and the + button goes to a new line
+		button {
+			margin-top: 0;
+			margin-bottom: 2rem;
+		}
+	}
+	&.view-validation input[type=file] {
+		visibility: hidden;
+	}
+}
+
+div.pieces-specifiques ~ div.cartads-piece {
+	// for specific pieces don't display initial widget
+	div.title + div.file-upload-widget {
+		display: none;
+	}
+	div.title + div.file-upload-widget.visible {
+		display: block;
+	}
+	div.title + div.file-upload-widget:not(.visible) + div.button-plus {
+		button {
+			margin-top: 0;
+			margin-bottom: 2rem;
+		}
+	}
+}

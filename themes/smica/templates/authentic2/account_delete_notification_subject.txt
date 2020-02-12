@@ -1,0 +1,1 @@
+{% extends "emails/subject.txt" %}{% block email-subject %}suppression de compte{% endblock %}
