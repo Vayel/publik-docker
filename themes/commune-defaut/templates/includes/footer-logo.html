@@ -1,3 +1,28 @@
+{% if collectivite %}
+  <div>
+    <p>
+      {{collectivite}}<br>
+      {% if collectivite_adresse %}
+        {{collectivite_adresse}}<br>
+      {% endif %}
+      {% if collectivite_adresse_complement %}
+        {{collectivite_adresse_complement}}<br>
+      {% endif %}
+      {% if collectivite_code_postal and collectivite %}
+        {{collectivite_code_postal}} {{collectivite}}<br>
+      {% endif %}
+      {% if collectivite_email %}
+        Mail : <a href="mailto:{{collectivite_email}}" title="{{collectivite_email}}">{{collectivite_email}}</a><br>
+      {% endif %}
+      {% if collectivite_telephone %}
+        Tèl : <a href="tel:{{collectivite_telephone}}" title="{{collectivite_telephone}}">{{collectivite_telephone}}</a><br>
+      {% endif %}
+      {% if collectivite_site %}
+        Site : <a href="{{collectivite_site}}" title="{{collectivite_site}}" target="_blank">{{collectivite_site}}</a><br>
+      {% endif %}
+    </p>
+  </div>
+{% endif %}
 <div>
   <a href="https://www.monsitecommunal.fr/" class="logo-smica" target="_blank" title="Smica">
     <img src="../static/commune-defaut/img/logo.jpg" alt="">
