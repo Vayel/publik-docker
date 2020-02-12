@@ -1,0 +1,33 @@
+{% extends theme_base %}
+
+{% block extra-body-class %}{{ block.super }} authentic-page{% endblock %}
+
+{% block extra-body-args %}
+{% block bodyargs %}
+{% endblock %}
+{% endblock %}
+
+{% block placeholder-content %}
+  {% block content %}
+  {% endblock %}
+{% endblock %}
+
+{% block messages %}
+{% if messages %}
+  <div id="messages" class="messages-login">
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block extra-top-head %}
+  {% block extrascripts %}
+  {% endblock %}
+  {% block extra_scripts %}
+  {% endblock %}
+  {{ form.media }}
+{% endblock %}

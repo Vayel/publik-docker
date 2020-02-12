@@ -1,0 +1,25 @@
+{% load combo %}
+
+<h2>Les bénéficiaires reliés à mon compte</h2>
+
+<div class="apa-users">
+
+{% for item in json.data|dictsort:"id" %}
+{% with individu=item.information.individu %}
+ <div class="apa-user apa-user-{{ individu.civilite|slugify }} {{ apa_users_grid|default:"grid-1-2" }}">
+  <a class="apa-user-link" href="apa-details/?user_id={{ item.id }}">
+  <h3>{% include "combo/json/apa-user-label.html" with individu=individu %}</h3>
+  <p>
+    {{ individu.adresse.numeroLieu }} {{ individu.adresse.nomLieu }}<br />
+    {% if individu.adresse.complementLieu %}{{ individu.adresse.complementLieu }}<br />{% endif %}
+    {{ individu.adresse.codePostal }} {{ individu.adresse.commune }}
+  </p>
+  </a>
+  <a class="remove" href="{{ eservices_url }}suppression-du-lien-avec-un-dossier-apa/?user_id={{ item.id }}&cancelurl={{ site_base }}{{ cell.page.get_online_url }}">×</a>
+   </div>
+{% endwith %}
+{% endfor %}
+
+<div style="clear: both;"></div>
+
+</div>

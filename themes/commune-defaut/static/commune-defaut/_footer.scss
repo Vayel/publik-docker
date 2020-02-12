@@ -1,0 +1,41 @@
+
+footer {
+  border-top: 1px solid #ccc;
+}
+
+#footer {
+  display: flex;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
+
+  & > div {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      margin: 20px 0;
+    }
+  }
+
+  img {
+    display: block;
+    margin: auto;
+  }
+
+  .logo-smica img {
+    width: 50%;
+  }
+
+  .logo-laetis img {
+    width: 50%;
+  }
+
+  .logo-publik img {
+    width: 50%;
+  }
+}

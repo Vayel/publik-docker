@@ -1,0 +1,19 @@
+@mixin cabin-font($type, $weight, $style) {
+	@font-face {
+		font-family: 'Cabin';
+		src: url('/static/fonts/Cabin/Cabin-#{$type}.woff2') format('woff2'),
+		     url('/static/fonts/Cabin/Cabin-#{$type}.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@include cabin-font('Regular', 400, normal);
+@include cabin-font('Medium', 500, normal);
+@include cabin-font('SemiBold', 600, normal);
+@include cabin-font('Bold', 700, normal);
+
+@include cabin-font('RegularItalic', 400, italic);
+@include cabin-font('MediumItalic', 500, italic);
+@include cabin-font('SemiBoldItalic', 600, italic);
+@include cabin-font('BoldItalic', 700, italic);

@@ -1,0 +1,16 @@
+$bitter-font-path: '/static/fonts/Bitter' !default;
+
+@mixin bitter-font($type, $weight, $style) {
+    @font-face {
+        font-family: 'Bitter';
+        src: url('#{$bitter-font-path}/Bitter-#{$type}.woff2') format('woff2'),
+             url('#{$bitter-font-path}/Bitter-#{$type}.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+@include bitter-font('Regular', 400, normal);
+@include bitter-font('BoldItalic', 700, italic);
+@include bitter-font('Italic', 400, italic);
+@include bitter-font('Bold', 700, normal);

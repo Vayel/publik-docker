@@ -1,0 +1,20 @@
+@mixin titillium-font($type, $weight, $style) {
+	@font-face {
+		font-family: 'Titillium';
+		src: url('/static/fonts/Titillium/titillium-#{$type}-webfont.woff2') format('woff2'),
+		     url('/static/fonts/Titillium/titillium-#{$type}-webfont.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin titillium-font-pair($type, $weight) {
+	@include titillium-font($type, $weight, normal);
+	@include titillium-font('#{$type}italic', $weight, italic);
+}
+
+@include titillium-font-pair('thin', 200);
+@include titillium-font-pair('light', 300);
+@include titillium-font-pair('regular', 400);
+@include titillium-font-pair('semibold', 600);
+@include titillium-font-pair('bold', 700);

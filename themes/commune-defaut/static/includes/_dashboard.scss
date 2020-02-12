@@ -1,0 +1,112 @@
+$dashboard-selected-color: #DF017A !default;
+$dashboard-badge-color: $dashboard-selected-color !default;
+
+$dashboard-items: ((profil, profile), (demandes, requests), (liens, links),
+		   (porte-doc, documents), (famille, family), (paiements, billings));
+
+.gru-content div.dashboard-title,
+.gru-content div.dashboard-menu,
+.gru-content div.menu-dashboard {
+	border: none;
+	margin-top: 2em;
+}
+
+.gru-content div.dashboard-title h3 {
+	margin-left: 0;
+	font-size: 160%;
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #8F8F8F;
+	line-height: 120%;
+}
+
+.gru-content div.dashboard-title h3 strong {
+	font-weight: bold;
+}
+
+.gru-content div.cell.dashboard-menu ul li,
+.gru-content div.cell.menu-dashboard ul li {
+	display: inline-block;
+	width: 35%;
+	margin-right: 15%;
+	margin-bottom: 2em;
+
+	a {
+		border-bottom-color: #8F8F8F;
+		padding-top: 70px;
+		padding-bottom: 5px;
+		text-transform: uppercase;
+		background: transparent no-repeat top left;
+		padding-left: 0;
+		font-weight: bold;
+		color: #8F8F8F;
+		transition: opacity ease 0.2s;
+
+		&:hover {
+			opacity: 0.7;
+			&::after {
+				content: none;
+			}
+		}
+
+		span {
+			width: 0.7em;
+			display: inline-block;
+		}
+	}
+
+	&.selected a {
+		color: $dashboard-selected-color;
+		border-bottom-color: $dashboard-selected-color;
+	}
+
+
+	@each $dashboard_class, $dashboard_image in $dashboard_items {
+		&.menu-#{$dashboard_class} a { background-image: url(img/#{$dashboard_image}.png); }
+		&.selected.menu-#{$dashboard_class} a { background-image: url(img/#{$dashboard_image}-selected.png); }
+	}
+}
+
+.gru-content div.dashboard-menu.menucell,
+.gru-content div.menu-dashboard.menucell {
+	span.badge::before { content: none; }
+	span.badge::after { content: none; }
+	span.badge {
+		width: auto;
+		font-size: 80%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0.7em 1em;
+		border-radius: 2em;
+		background: $dashboard-badge-color;
+		@if (lightness($dashboard-badge-color) > 50) {
+			color: black;
+		} @else {
+			color: white;
+		}
+	}
+}
+
+// style for introduction text cells on dashboard pages
+@each $dashboard_class, $dashboard_image in $dashboard_items {
+	.gru-content div.cell.info-text-#{$dashboard_class} {
+		border: #EFEFEF;
+		box-shadow: 0px 0px 2px 0px #aaa;
+		padding-bottom: 0.7em;
+		h2 {
+			top: 0;
+			left: 0;
+			width: 100%;
+			font-size: 110%;
+			padding: 50px 0 50px 140px;
+			color: inherit;
+			text-transform: uppercase;
+			background: url(img/#{$dashboard_image}-title.png) no-repeat 20px 50%,
+				linear-gradient(to right, $primary-color 0%, $primary-color 120px, #F9F7F8 120px, #F9F7F8 100%);
+			&:after {
+				content: none;
+			}
+		}
+	}
+}

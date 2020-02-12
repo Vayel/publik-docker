@@ -1,0 +1,26 @@
+$lato-font-path: '/static/fonts/Lato' !default;
+
+@mixin lato-font($type, $weight, $style: normal) {
+	@font-face {
+		font-family: 'Lato';
+		src: url('#{$lato-font-path}/Lato-#{$type}.woff2') format('woff2'),
+		     url('#{$lato-font-path}/Lato-#{$type}.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin lato-font-pair($type, $weight) {
+	@include lato-font($type, $weight);
+	@include lato-font(#{$type}Italic, $weight, italic);
+}
+
+@include lato-font-pair('Hairline', 100);
+@include lato-font-pair('Thin', 200);
+@include lato-font-pair('Light', 300);
+@include lato-font-pair('Regular', 400);
+@include lato-font-pair('Medium', 500);
+@include lato-font-pair('Semibold', 600);
+@include lato-font-pair('Bold', 700);
+@include lato-font-pair('Heavy', 800);
+@include lato-font-pair('Black', 900);

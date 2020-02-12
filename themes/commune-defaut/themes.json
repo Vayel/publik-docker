@@ -1,0 +1,553 @@
+{
+  "parameters": {
+    "body-background": {
+      "description": "Couleur de fond de page",
+      "type": "color"
+    },
+    "border-radius": {
+      "description": "Taille de l'arrondi \u00e0 appliquer \u00e0 diff\u00e9rents \u00e9l\u00e9ments",
+      "type": "text"
+    },
+    "button-background": {
+      "description": "Couleur de fond des boutons",
+      "type": "color"
+    },
+    "button-border": {
+      "description": "Style de bordure des boutons",
+      "type": "text"
+    },
+    "button-border-radius": {
+      "description": "Taille de l'arrondi \u00e0 appliquer aux boutons",
+      "type": "text"
+    },
+    "button-color": {
+      "description": "Couleur du texte des boutons",
+      "type": "color"
+    },
+    "button-focus-outline": {
+      "description": "Style du contour des boutons quand ils sont actifs",
+      "type": "text"
+    },
+    "button-focus-outline-offset": {
+      "description": "D\u00e9calage du contour des boutons quand ils ont actifs",
+      "type": "text"
+    },
+    "button-hover-background": {
+      "description": "Couleur de fond des boutons au survol",
+      "type": "color"
+    },
+    "button-hover-color": {
+      "description": "Couleur du texte des boutons au survol",
+      "type": "color"
+    },
+    "carrousel-arrows": {
+      "description": "D\u00e9termine si les fl\u00e8ches (gauche/droite) permettant de passer d'un\n  \u00e9l\u00e9ment \u00e0 l'autre sont affich\u00e9es. (visible ou none)",
+      "type": "text"
+    },
+    "carrousel-height": {
+      "description": "Hauteur du carrousel",
+      "type": "size"
+    },
+    "carrousel-navigation": {
+      "description": "D\u00e9termine si la navigation permettant de passer d'un \u00e9l\u00e9ment \u00e0\n  l'autre est affich\u00e9e. (visible ou none)",
+      "type": "text"
+    },
+    "carrousel-navigation-bullet-border": {
+      "description": "Bordure du disque de navigation.",
+      "type": "text"
+    },
+    "carrousel-navigation-bullet-color": {
+      "description": "Couleur du disque de navigation.",
+      "type": "color"
+    },
+    "carrousel-navigation-bullet-size": {
+      "description": "Taille du disque de navigation.",
+      "type": "size"
+    },
+    "carrousel-text-position": {
+      "description": "Position du texte des diff\u00e9rentes pages; les valeurs possibles sont\n  middle (milieu de page) et bottom-left (en bas \u00e0 gauche).",
+      "type": "text"
+    },
+    "cell-background": {
+      "description": "Couleur de fond des cellules",
+      "type": "color"
+    },
+    "cell-border": {
+      "description": "Bordure des cellules",
+      "type": "text"
+    },
+    "cell-border-radius": {
+      "description": "Taille de l'arrondi des cellules",
+      "type": "text"
+    },
+    "cell-color": {
+      "description": "Couleur du texte des cellules",
+      "type": "color"
+    },
+    "cell-entry-border-color": {
+      "description": "Couleur de la bordure des \u00e9l\u00e9ments de cellule",
+      "type": "color"
+    },
+    "cell-entry-color": {
+      "description": "Couleur du texte (lien) d'un \u00e9l\u00e9ment",
+      "type": "color"
+    },
+    "cell-entry-hover-background": {
+      "description": "Couleur de fond d'un \u00e9l\u00e9ment survol\u00e9",
+      "type": "color"
+    },
+    "cell-entry-hover-color": {
+      "description": "Couleur du texte d'un \u00e9l\u00e9ment survol\u00e9",
+      "type": "color"
+    },
+    "cell-entry-hover-effect": {
+      "description": "Effet au survol des \u00e9l\u00e9ments dans les cellules, none pour un fond\n  directement uni, left-to-right pour faire appara\u00eetre celui-ci de gauche \u00e0\n  droit, right-to-left de droite \u00e0 gauche, top-to-bottom de haut en bas,\n  bottom-to-top de bas en haut et middle-to-edges, horizontalement du milieu\n  vers les bords.",
+      "type": "text"
+    },
+    "cell-image-padding": {
+      "description": "Espace autour de l'image qui peut \u00eatre associ\u00e9e \u00e0 une cellule \u00ab\u00a0d\u00e9marches\n  d'une cat\u00e9gorie\u00a0\u00bb.",
+      "type": "size"
+    },
+    "cell-image-position": {
+      "description": "Position de l'image qui peut \u00eatre associ\u00e9e \u00e0 une cellule \u00ab\u00a0d\u00e9marches\n  d'une cat\u00e9gorie\u00a0\u00bb, les valeurs possibles sont top pour\n  avoir l'image en haut de cellule et after-title pour avoir\n  l'image apr\u00e8s le titre de cellule.",
+      "type": "text"
+    },
+    "cell-title-cover-border": {
+      "description": "D\u00e9termine si le titre des cellules doit couvrir la bordure",
+      "type": "boolean"
+    },
+    "font-color": {
+      "description": "Couleur du texte",
+      "type": "color"
+    },
+    "font-family": {
+      "description": "Famille de police du texte",
+      "type": "family"
+    },
+    "footer-background": {
+      "description": "Couleur de fond du pied de page",
+      "type": "color"
+    },
+    "footer-color": {
+      "description": "Couleur du texte du pied de page",
+      "type": "color"
+    },
+    "footer-menucell-separator": {
+      "description": "Style de bordure utilis\u00e9e comme s\u00e9parateur vertical entre les entr\u00e9es\n  d'une cellule menu plac\u00e9e dans le pied de page",
+      "type": "text"
+    },
+    "form-sidebar-position": {
+      "description": "Position du code de suivi et des \u00e9tapes, \u00ab\u00a0left\u00a0\u00bb, \u00ab\u00a0right\u00a0\u00bb ou\n  \u00ab\u00a0top\u00a0\u00bb.",
+      "type": "text"
+    },
+    "form-style": {
+      "description": "Style g\u00e9n\u00e9ral des formulaires, soit \u00ab\u00a0classic\u00a0\u00bb, soit \u00ab\u00a0light\u00a0\u00bb pour\n  un rendu avec les libell\u00e9s plus l\u00e9gers et uniquement une bordure basse\n  pour les \u00e9l\u00e9ments.",
+      "type": "text"
+    },
+    "grid-gutter": {
+      "description": "Espace (\u00ab\u00a0goutti\u00e8re\u00a0\u00bb) entre les \u00e9l\u00e9ments dispos\u00e9s en grille.",
+      "type": "size"
+    },
+    "link-color": {
+      "description": "Couleur des liens",
+      "type": "color"
+    },
+    "mobile-limit": {
+      "description": "Largeur sous laquelle adopter le style \"mobile\"",
+      "type": "size"
+    },
+    "nav-active-color": {
+      "description": "Couleur \"active\", utilis\u00e9e comme valeur par d\u00e9faut pour des \u00e9l\u00e9ments\n  ci-dessous",
+      "type": "color"
+    },
+    "nav-after-image": {
+      "description": "Ajout sous la navigation d'un bandeau avec l'image associ\u00e9e \u00e0 la page.\n  (ne fonctionne pas avec Internet Explorer)",
+      "type": "boolean"
+    },
+    "nav-after-image-height": {
+      "description": "Hauteur de l'\u00e9ventuel bandeau image.",
+      "type": "size"
+    },
+    "nav-background": {
+      "description": "Couleur de fond",
+      "type": "color"
+    },
+    "nav-border-color": {
+      "description": "Couleur des bordures",
+      "type": "color"
+    },
+    "nav-button-background": {
+      "description": "Couleur de fond du bouton de navigation (menu hamburger)",
+      "type": "color"
+    },
+    "nav-button-color": {
+      "description": "Couleur des traits du bouton de navigation (menu hamburger)",
+      "type": "color"
+    },
+    "nav-color": {
+      "description": "Couleur du texte",
+      "type": "color"
+    },
+    "nav-full-width-background": {
+      "description": "Extension de la couleur de fond de la navigation \u00e0 la largeur de l'\u00e9cran\n  (plut\u00f4t que la largeur du contenu).",
+      "type": "boolean"
+    },
+    "nav-height": {
+      "description": "Hauteur",
+      "type": "text"
+    },
+    "nav-item-background": {
+      "description": "Couleur de fond des \u00e9l\u00e9ments",
+      "type": "color"
+    },
+    "nav-item-hover-background": {
+      "description": "Couleur de fond d'un \u00e9l\u00e9ment au survol",
+      "type": "color"
+    },
+    "nav-item-hover-border": {
+      "description": "Style de la bordure de l'\u00e9l\u00e9ment survol\u00e9.",
+      "type": "text"
+    },
+    "nav-item-hover-color": {
+      "description": "Couleur du texte d'un \u00e9l\u00e9ment au survol",
+      "type": "color"
+    },
+    "nav-item-hover-mode": {
+      "description": "Mode d'affichage du menu survol\u00e9, soit background pour en changer\n  la couleur du fond, soit bottom-border pour ajouter une bordure sous lui.",
+      "type": "text"
+    },
+    "nav-item-selected-background": {
+      "description": "Couleur de fond de la page active",
+      "type": "color"
+    },
+    "nav-item-selected-border": {
+      "description": "Style de la bordure de l'\u00e9l\u00e9ment s\u00e9lectionn\u00e9.",
+      "type": "text"
+    },
+    "nav-item-selected-color": {
+      "description": "Couleur du texte de la page active",
+      "type": "color"
+    },
+    "nav-item-selected-mode": {
+      "description": "Mode d'affichage du menu s\u00e9lectionn\u00e9, soit background pour en changer\n  la couleur du fond, soit bottom-border pour ajouter une bordure sous lui.",
+      "type": "text"
+    },
+    "nav-item-spacing": {
+      "description": "Espace entre les \u00e9l\u00e9ments",
+      "type": "size"
+    },
+    "nav-menu-color": {
+      "description": "Couleur des lignes dans le menu de navigation",
+      "type": "color"
+    },
+    "nav-menu-side": {
+      "description": "Taille d'un bord du bouton de navigation",
+      "type": "size"
+    },
+    "nav-mobile-bottom-bar-background": {
+      "description": "Couleur du fond",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-badge-background": {
+      "description": "Couleur de fond du badge reprenant le nombre de notifications.",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-badge-color": {
+      "description": "Couleur du texte du badge reprenant le nombre de notifications.",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-color": {
+      "description": "Couleur du texte",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-height": {
+      "description": "Hauteur de la barre de navigation en mode mobile.",
+      "type": "size"
+    },
+    "nav-mobile-bottom-bar-item-hover-background": {
+      "description": "Couleur de fond d'un \u00e9l\u00e9ment au survol",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-item-hover-color": {
+      "description": "Couleur du texte d'un \u00e9l\u00e9ment au survol",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-item-selected-background": {
+      "description": "Couleur de fond de l'\u00e9l\u00e9ment actif",
+      "type": "color"
+    },
+    "nav-mobile-bottom-bar-item-selected-color": {
+      "description": "Couleur du texte de l'\u00e9l\u00e9ment actif",
+      "type": "color"
+    },
+    "nav-mobile-limit": {
+      "description": "Largeur sous laquelle adopter la navigation \"mobile\"",
+      "type": "text"
+    },
+    "nav-mobile-menu-background": {
+      "description": "Couleur de fond du menu en mode mobile",
+      "type": "color"
+    },
+    "nav-mobile-menu-item-color": {
+      "description": "Couleur des entr\u00e9es du menu en mode mobile",
+      "type": "color"
+    },
+    "nav-mobile-mode": {
+      "description": "Rendu de la navigation en mode mobile, none pour conserver\n  le rendu \u00ab\u00a0desktop\u00a0\u00bb, hamburger pour placer la navigation dans un\n  menu \u00ab\u00a0hamburger\u00a0\u00bb, bottom-bar pour placer la navigation dans une\n  barre en bas d'\u00e9cran, hidden pour cacher la navigation.\n  Les param\u00e8tres suppl\u00e9mentaires pour le rendu bottom-bar sont\n  d\u00e9taill\u00e9s dans la section application mobile.\n  ",
+      "type": "text"
+    },
+    "notification-style": {
+      "description": "Rendu des notifications (messages, erreurs, etc.), soit \u00ab\u00a0classic\u00a0\u00bb\n  soit \u00ab\u00a0border-icon\u00a0\u00bb pour un rendu pla\u00e7ant l'ic\u00f4ne en couleur sur une bordure\n  \u00e0 gauche.",
+      "type": "text"
+    },
+    "primary-color": {
+      "type": "color"
+    },
+    "responsive-menu": {
+      "description": "Apparence du menu de navigation responsive, soit top-to-bottom, soit\n  left-to-right",
+      "type": "text"
+    },
+    "sidebar-max-width": {
+      "description": "Largeur maximale de la barre lat\u00e9rale, utile dans le cas o\u00f9 la valeur de $sidebar-width est d\u00e9finie en %",
+      "type": "text"
+    },
+    "sidebar-min-width": {
+      "description": "Largeur minimale de la barre lat\u00e9rale, utile dans le cas o\u00f9 la valeur de $sidebar-width est d\u00e9finie en %",
+      "type": "text"
+    },
+    "sidebar-position": {
+      "description": "Position de la barre lat\u00e9rale (left/right)",
+      "type": "text"
+    },
+    "sidebar-width": {
+      "description": "Largeur de la barre lat\u00e9rale",
+      "type": "size"
+    },
+    "table-caption-color": {
+      "description": "Couleur du texte de la l\u00e9gende des tableaux",
+      "type": "color"
+    },
+    "table-caption-side": {
+      "description": "Position de la l\u00e9gende par rapport au tableau; les valeurs possibles sont\n  top (au-dessus) et bottom (en-dessous).",
+      "type": "text"
+    },
+    "table-headers-background": {
+      "description": "Couleur de fond de l'ent\u00eate",
+      "type": "color"
+    },
+    "table-headers-color": {
+      "description": "Couleur du texte de l'ent\u00eate",
+      "type": "color"
+    },
+    "table-headers-font-family": {
+      "description": "Famille de police de l'ent\u00eate",
+      "type": "family"
+    },
+    "table-headers-font-size": {
+      "description": "Taille de la police de l'ent\u00eate",
+      "type": "size"
+    },
+    "table-headers-font-style": {
+      "description": "Style de la police de l'ent\u00eate",
+      "type": "text"
+    },
+    "table-headers-font-weight": {
+      "description": "Graisse de la police de l'ent\u00eate",
+      "type": "weight"
+    },
+    "table-headers-text-transform": {
+      "description": "Transformation des caract\u00e8res de l'ent\u00eate",
+      "type": "text"
+    },
+    "title-background": {
+      "description": "Couleur de fond des titres",
+      "type": "color"
+    },
+    "title-border-bottom": {
+      "description": "Bordure pour le bas des titres",
+      "type": "text"
+    },
+    "title-border-radius": {
+      "description": "Taille de l'arrondi \u00e0 appliquer aux titres",
+      "type": "text"
+    },
+    "title-border-top": {
+      "description": "Bordure pour le haut des titres",
+      "type": "text"
+    },
+    "title-color": {
+      "description": "Couleur du texte des titres",
+      "type": "color"
+    },
+    "title-font-family": {
+      "description": "Famille de police pour les titres",
+      "type": "family"
+    },
+    "title-font-size": {
+      "description": "Taille de la police des titres",
+      "type": "size"
+    },
+    "title-font-style": {
+      "description": "Style de la police des titres",
+      "type": "text"
+    },
+    "title-padding": {
+      "description": "Padding des titres",
+      "type": "size"
+    },
+    "title-transform": {
+      "description": "Transformation des caract\u00e8res des titres",
+      "type": "text"
+    },
+    "title-weight": {
+      "description": "Graisse de la police des titres",
+      "type": "weight"
+    },
+    "top-logo-width": {
+      "description": "Largeur du logo",
+      "type": "text"
+    },
+    "wcs-step-background": {
+      "description": "Couleur de fond des \u00e9tapes",
+      "type": "color"
+    },
+    "wcs-step-border-bottom": {
+      "description": "\n        \n          \u00c9paisseur et couleur du filet qui s\u00e9pare les \u00e9tapes en mode vertical et du filet pr\u00e9sent sous les marqueurs en mode horizontal.\n          la valeur none supprimera les filets.\n        \n      ",
+      "type": "text"
+    },
+    "wcs-step-color": {
+      "description": "Couleur du texte des \u00e9tapes non courantes",
+      "type": "color"
+    },
+    "wcs-step-current-background": {
+      "description": "Couleur de fond de l'\u00e9tape courante",
+      "type": "color"
+    },
+    "wcs-step-current-border-bottom": {
+      "description": "\n        \n          \u00c9paisseur et couleur du filet de l'\u00e9tape courante.\n          Si $wcs-step-border-bottom est \u00e0 none, ce filet sera automatiquement none \u00e9galement.\n        \n      ",
+      "type": "text"
+    },
+    "wcs-step-current-color": {
+      "description": "Couleur du label de l'\u00e9tape courante",
+      "type": "color"
+    },
+    "wcs-step-current-label-color": {
+      "description": "\n        \n          Cette option ne fonctionnera que si $wcs-step-marker-background est une couleur pleine.\n          Avec la valeur gradient, elle permet de g\u00e9n\u00e9rer un d\u00e9grad\u00e9 en fond des marqueurs non courant permettant de souligner visuellement la progression.\n        \n      ",
+      "type": "color"
+    },
+    "wcs-step-current-marker-background": {
+      "description": "Couleur de fond du marqueur d'\u00e9tape courante",
+      "type": "color"
+    },
+    "wcs-step-current-marker-color": {
+      "description": "Couleur du chiffre du marqueur d'\u00e9tape courante",
+      "type": "color"
+    },
+    "wcs-step-current-marker-enlarge": {
+      "description": "Facteur d'agrandissement de la taille du marqueur courant. Une valeur de 1.1 agrandira le marqueur de 110%",
+      "type": "text"
+    },
+    "wcs-step-marker-background": {
+      "description": "Couleur de fond des marqueurs d'\u00e9tapes non courantes",
+      "type": "color"
+    },
+    "wcs-step-marker-background-type": {
+      "description": "\n        \n          Cette option ne fonctionnera que si $wcs-step-marker-background est une couleur pleine.\n          Avec la valeur gradient, elle permet de g\u00e9n\u00e9rer un d\u00e9grad\u00e9 en fond des marqueurs non courant permettant de souligner visuellement la progression.\n        \n      ",
+      "type": "text"
+    },
+    "wcs-step-marker-color": {
+      "description": "Couleur du chiffre des marqueurs d'\u00e9tapes non courantes",
+      "type": "color"
+    },
+    "wcs-step-marker-size": {
+      "description": "Taille du marqueur. La taille du marquer n'influe pas sur la taille du chiffre",
+      "type": "size"
+    },
+    "wcs-step-marker-type": {
+      "description": "\n        \n          D\u00e9fini le style des marqueurs. Les marqueurs peuvent \u00eatre sous forme de carr\u00e9s (par d\u00e9faut), de cercles mais \u00e9galement li\u00e9s entre eux (par une ligne).\n          Valeurs possibles: tied, disc, disc tied.\n          Il est possible de g\u00e9rer le rendu de la ligne avec les variables $wcs-step-marker-tie-color et $wcs-step-marker-tie-width\n        \n      ",
+      "type": "text"
+    },
+    "wcs-steps-background": {
+      "description": "Couleur de fond du bloc",
+      "type": "color"
+    },
+    "wcs-steps-small-layout-limit": {
+      "description": "Fixe la valeur du point de rupture entre le rendu mobile et horizontal",
+      "type": "text"
+    },
+    "wcs-steps-spacing": {
+      "description": "\n        Fixe la taille des espacements entre les diff\u00e9rents blocs, mais \u00e9galement entre les marqueurs chiffres et leur label\n      ",
+      "type": "size"
+    },
+    "widget-background": {
+      "description": "Couleur de fond des champs de formulaire (texte, liste\u2026)",
+      "type": "color"
+    },
+    "widget-border": {
+      "description": "Style de bordure des champs de formulaire (texte, liste\u2026)",
+      "type": "text"
+    },
+    "widget-border-radius": {
+      "description": "Taille de l'arrondi \u00e0 appliquer aux champs de formulaire (texte, liste\u2026)",
+      "type": "text"
+    },
+    "widget-color": {
+      "description": "Couleur du texte des champs de formulaire (texte, liste\u2026)",
+      "type": "color"
+    },
+    "widget-custom-radio-checkbox": {
+      "description": "Rendu personnalis\u00e9 des cases \u00e0 cocher et des boutons radios (plut\u00f4t\n  que le rendu standard propos\u00e9 par le navigateur).",
+      "type": "boolean"
+    },
+    "widget-custom-radio-checkbox-color": {
+      "description": "Couleur des cases \u00e0 cocher et boutons radios quand leur rendu est\n  personnalis\u00e9.",
+      "type": "color"
+    },
+    "widget-focus-background": {
+      "description": "Couleur de fond des champs de formulaire lorsqu'ils sont actifs (texte, liste\u2026)",
+      "type": "color"
+    },
+    "widget-focus-border": {
+      "description": "Style de bordure des champs de formulaire lorsqu'ils sont actifs (texte, liste\u2026)",
+      "type": "text"
+    },
+    "widget-focus-box-shadow": {
+      "description": "Ombre des champs de formulaire quand ils sont actifs",
+      "type": "text"
+    },
+    "widget-focus-color": {
+      "description": "Couleur du texte des champs de formulaire lorsqu'ils sont actifs (texte, liste\u2026)",
+      "type": "color"
+    },
+    "widget-focus-outline": {
+      "description": "Style du contour des champs de formulaire quand ils sont actifs",
+      "type": "text"
+    },
+    "widget-focus-outline-offset": {
+      "description": "D\u00e9calage du contour des champs de formulaire quand ils sont actifs",
+      "type": "text"
+    },
+    "widget-unique-checkbox-position": {
+      "description": "Positionnement de la case \u00e0 cocher d'un champ de type \u00ab\u00a0Case \u00e0\n  cocher (choix unique); soit \u00ab\u00a0bottom\u00a0\u00bb pour un rendu sous le libell\u00e9 du\n  champ (option par d\u00e9faut), soit \u00ab\u00a0left\u00a0\u00bb pour un rendu \u00e0 la gauche du\n  libell\u00e9.",
+      "type": "text"
+    },
+    "width": {
+      "description": "Largeur maximale de la page",
+      "type": "size"
+    },
+    "wsc-step-before-piled": {
+      "description": "\n        \n          Cette option n'est valable qu'en mode vertical et si $wcs-step-background a une valeur diff\u00e9rente de transparent.\n          Avec la valeur true, elle va superposer les \u00e9tapes pass\u00e9e les unes sur les autres pour gagner de la place.\n        \n      ",
+      "type": "boolean"
+    }
+  },
+  "themes": [
+    {
+      "id": "commune-defaut",
+      "label": "Commune par défaut",
+      "variables": {
+        "css_variant": "commune-defaut",
+        "theme_color": "#0e6ba4"
+      }
+    }
+  ]
+}

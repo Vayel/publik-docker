@@ -1,0 +1,324 @@
+@import '../includes/font-roboto';
+
+$header-width: 1240px;
+$header-height: 288px;
+
+div#header {
+	background: url(header.png) top left no-repeat;
+	height: $header-height;
+	transition: all 0.3s ease;
+	@media screen and (min-width: $header-width - 100px) {
+		max-width: $header-width;
+		left: 50%;
+		margin-left: -$header-width/2;
+	}
+	@media screen and (max-width: $header-width - 100px) {
+		width: calc(100% + #{$header-width / 12});
+		overflow: hidden;
+		left: - $header-width / 12;
+	}
+
+	@media screen and (max-width: $mobile-limit) {
+		height: 100px;
+		background-position: 60px -70px;
+	}
+}
+
+h1#logo {
+	padding-top: 35px;
+	font-size: 25px;
+	font-weight: normal;
+	& a {
+		color: transparent;
+		margin-top: 30px;
+		display: block;
+		width: 400px;
+		height: 100px;
+		text-decoration: none;
+	}
+}
+
+#nav-wrapper {
+	background: $nav-background;
+	width: 100%;
+	left: 0;
+	text-align: center;
+	font-size: 120%;
+	#nav {
+		letter-spacing: 1px;
+		margin: 0 auto;
+		width: auto;
+		text-transform: uppercase;
+		height: 100%;
+		a {
+			line-height: 2.5em;
+		}
+	}
+	@media screen and (max-width: $mobile-limit) {
+		background: transparent;
+		text-align: left;
+	}
+}
+
+div#nav,
+div#nav ul {
+	margin: 0;
+}
+
+div#services > ul > li > strong > a,
+#content div.textcell h2:first-child,
+#content div.cell h2:first-child {
+	overflow: hidden;
+}
+
+div#services > ul > li > strong > a:after,
+#content div.textcell h2:first-child:after,
+#content div.cell h2:first-child:after {
+	width: 20%;
+	height: 200%;
+	background: rgba(255, 255, 255, 0.1) none repeat scroll 0% 0%;
+	z-index: 1;
+	right: -10%;
+	top: 0px;
+	margin: -5px 0px 0px -5px;
+	transform-origin: 0px 0px 0px;
+	transform: rotate(-20deg);
+	content: "";
+	position: absolute;
+	transition: all 0.3s ease 0s
+}
+
+div#services > ul > li:hover > strong > a:after,
+#content div.textcell:hover h2:first-child:after,
+#content div.cell:hover h2:first-child:after {
+	width: 30%;
+}
+
+div#main-content {
+	min-height: auto;
+}
+
+div#content {
+	padding-top: 1em;
+	min-height: calc(100vh - 430px);
+}
+
+#footer-wrapper {
+	background: #6D2080;
+	min-height: 6em;
+}
+
+#content #sidebar {
+	-ms-flex: 0 0 400px;
+	flex: 0 0 400px;
+	max-width: none;
+	order: -1;
+	margin: 0;
+	margin-top: -1em; /* cancel #content padding-top */
+	background: linear-gradient(to left, rgba(1, 1, 1, 0.1) 0%, rgba(0, 0, 0, 0) 20px);
+	@media screen and (max-width: $mobile-limit) {
+		-ms-flex: auto;
+		flex: auto;
+	}
+}
+
+#content #sidebar .cell {
+	margin: 0;
+	margin-bottom: 1em;
+	border: 0;
+	background: transparent;
+}
+
+#content #sidebar .cell h2 {
+	background: none;
+	color: #7a7a7a;
+	text-transform: uppercase;
+	font-size: 170%;
+	position: static;
+	width: auto;
+}
+
+#content #sidebar .cell h2:after {
+	content: none;
+}
+
+#content #sidebar div.cell {
+	margin-right: 0;
+}
+
+#content #sidebar .cell.highlight {
+	background: linear-gradient(to left, rgba(1, 1, 1, 0.1) 0%, rgba(0, 0, 0, 0) 20px), $primary-color;
+	position: relative;
+	color: white;
+}
+
+#content #sidebar .cell.highlight :first-child {
+	padding: 1ex 0;
+}
+
+#content #sidebar .cell.highlight h2 {
+	color: white;
+}
+
+#content #sidebar .cell.highlight::before {
+	content: "";
+	display: block;
+	left: calc(0px - (100vw - #{$width}) / 2);
+	width: calc((100vw - #{$width}) / 2);
+	height: 100%;
+	background: $primary-color;
+	position: absolute;
+}
+
+#footer-wrapper {
+	position: relative;
+}
+
+#footer:before {
+	width: 400px;
+	content: "";
+	background: linear-gradient(to left, rgba(1, 1, 1, 0.1) 0%, rgba(0, 0, 0, 0) 20px);
+	display: block;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	@media screen and (max-width: 400px) {
+		content: none;
+	}
+}
+
+#content #columns {
+	margin-left: 10px;
+	@media screen and (max-width: $mobile-limit) {
+		margin-left: 0;
+	}
+}
+
+#main-content > br.clear {
+	display: none;
+}
+
+/* wcs */
+
+div#gauche {
+	width: 390px;
+	margin-top: -1em;
+	padding-top: 15px;
+	background: linear-gradient(to left, rgba(1, 1, 1, 0.1) 0%, rgba(0, 0, 0, 0) 20px);
+	min-height: 100%;
+}
+
+div#tracking-code {
+	background: linear-gradient(to left, rgba(1, 1, 1, 0.1) 0%, rgba(0, 0, 0, 0) 20px), $primary-color;
+	position: relative;
+	color: white;
+
+	h3 {
+		background: transparent;
+		font-weight: bold;
+	}
+}
+
+div#tracking-code::before {
+	content: "";
+	display: block;
+	left: calc(-10px - (100vw - #{$width}) / 2);
+	width: calc(10px + (100vw - #{$width}) / 2);
+	height: 100%;
+	background: $primary-color;
+	position: absolute;
+}
+
+// Steps
+.wcs-steps {
+	@include desktop-vertical-steps() {
+		position: relative;
+		z-index: -1;
+		font-size: 1.5rem;
+	}
+}
+.wcs-step {
+	padding: 0;
+	&--marker {
+		font-weight: bold;
+		font-size: 1.2em;
+	}
+
+	&--label {
+		top: calc(100% + 0.35em);
+		// padding-left: .7em;
+	}
+
+	&.current & {
+		&--marker {
+			@include desktop-vertical-steps() {
+				position: relative;
+
+				&::before {
+					content: "";
+					display: block;
+					left: calc(-10px - (100vw - #{$width}) / 2);
+					width: calc(10px + (100vw - #{$width}) / 2);
+					height: 100%;
+					background: $secondary-color;
+					position: absolute;
+				}
+			}
+		}
+	}	
+}
+
+div#gauche + div#rub_service {
+	width: calc(100% - 420px);
+}
+
+div#rub_service {
+	margin-top: 0;
+}
+
+div#rub_service div h2 {
+	background: transparent;
+	color: $primary-color;
+	text-transform: uppercase;
+	text-align: left;
+	border-bottom: 1px solid $primary-color;
+}
+
+#evolutions:after {
+	background: $primary-color;
+	top: -1em;
+	height: 100%;
+}
+
+ul#evolutions li span.item {
+	border-color: $primary-color;
+	background: white !important;
+	color: $primary-color !important;
+	line-height: 36px;
+}
+
+ul#evolutions li:after {
+	background: $primary-color;
+}
+
+ul#evolutions div.evolution-metadata {
+	text-transform: uppercase;
+	color: $primary-color;
+}
+
+#evolutions .msg-system {
+	padding-top: 0;
+}
+
+
+@media screen and (max-width: $mobile-limit) {
+	div#gauche {
+		width: auto;
+		min-height: auto;
+		padding-bottom: 1ex;
+	}
+
+	div#gauche + div#rub_service {
+		width: 100%;
+	}
+}

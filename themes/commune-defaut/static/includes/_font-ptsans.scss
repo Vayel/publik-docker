@@ -1,0 +1,19 @@
+@mixin ptsans-font($type, $weight) {
+	@font-face {
+		font-family: 'PT Sans';
+		src: url('/static/fonts/PTSans/PTSans-#{$type}.woff2') format('woff2'),
+		     url('/static/fonts/PTSans/PTSans-#{$type}.woff') format('woff');
+		font-weight: $weight;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'PT Sans';
+		src: url('/static/fonts/PTSans/PTSans-#{$type}Italic.woff2') format('woff2'),
+		     url('/static/fonts/PTSans/PTSans-#{$type}Italic.woff') format('woff');
+		font-weight: $weight;
+		font-style: italic;
+	}
+}
+
+@include ptsans-font('Regular', 400);
+@include ptsans-font('Bold', 700);

@@ -1,0 +1,11 @@
+<div class="links-list">
+  <ul>
+    {% if json.data %}
+    {% for user in json.data|dictsort:"id" %}
+      <li>
+         <a href="/apa/apa-details/?user_id={{ user.id }}">{{ user.text }}</a>
+      </li>
+    {% endfor %}
+    {% endif %}
+  </ul>
+</div>

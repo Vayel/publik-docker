@@ -1,0 +1,20 @@
+$din-font-path: '/static/fonts/din' !default;
+
+@font-face {
+	font-family: 'Din';
+	src: url('#{$din-font-path}/DIN.otf') format('opentype');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'Din';
+	src: url('#{$din-font-path}/DINBold.otf') format('opentype');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'Din';
+	src: url('#{$din-font-path}/DINItalic.otf') format('opentype');
+	font-weight: normal;
+	font-style: italic;
+}

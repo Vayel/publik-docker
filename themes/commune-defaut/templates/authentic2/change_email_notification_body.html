@@ -1,0 +1,16 @@
+{% extends "emails/body_base.html" %}
+{% block content %}
+<p>Bonjour,</p>
+
+<p>
+Vous avez demandé à changer l'adresse électronique de votre compte
+de {{ old_email }} à {{ email }}.
+</p>
+
+<p>
+Pour valider ce changement, veuillez cliquer sur le bouton suivant :
+</p>
+
+{% include "emails/button-link.html" with url=link label="Valider le changement" %}
+
+{% endblock %}

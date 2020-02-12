@@ -1,0 +1,47 @@
+$notosans-font-path: '/static/fonts/NotoSans' !default;
+
+@mixin notosans-font($type, $weight, $style: normal) {
+	@font-face {
+        font-family: 'Noto Sans';
+        src: url('#{$notosans-font-path}/notosans-#{$type}-webfont.woff2') format('woff2'),
+	         url('#{$notosans-font-path}/notosans-#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+	@font-face {
+        font-family: 'Noto Sans Semi Condensed';
+        src : url('#{$notosans-font-path}/notosans-semicondensed#{$type}-webfont.woff2') format('woff2'),
+	          url('#{$notosans-font-path}/notosans-semicondensed#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+	@font-face {
+        font-family: 'Noto Sans Condensed';
+        src : url('#{$notosans-font-path}/notosans-condensed#{$type}-webfont.woff2') format('woff2'),
+	          url('#{$notosans-font-path}/notosans-condensed#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+	@font-face {
+        font-family: 'Noto Sans Extra Condensed';
+        src : url('#{$notosans-font-path}/notosans-extracondensed#{$type}-webfont.woff2') format('woff2'),
+              url('#{$notosans-font-path}/notosans-extracondensed#{$type}-webfont.woff') format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+@mixin notosans-font-pair($type, $weight) {
+    @include notosans-font($type, $weight);
+    @include notosans-font(#{$type}italic, $weight, italic);
+}
+
+@include notosans-font-pair('thin', 100);
+@include notosans-font-pair('extralight', 200);
+@include notosans-font-pair('light', 300);
+@include notosans-font-pair('regular', 400);
+@include notosans-font-pair('medium', 500);
+@include notosans-font-pair('semibold', 600);
+@include notosans-font-pair('bold', 700);
+@include notosans-font-pair('extrabold', 800);
+@include notosans-font-pair('black', 900);
