@@ -65,6 +65,8 @@ function generateall() {
   generateconf ${ORG}${HOBO_SUBDOMAIN} https
   generateconf ${ORG}${WCS_SUBDOMAIN} https
   generateconf ${ORG}${PASSERELLE_SUBDOMAIN} https
+
+  echo 'Configuration generated !'
 }
 
 if [ "$#" -eq 0 ]; then
