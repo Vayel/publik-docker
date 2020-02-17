@@ -16,13 +16,19 @@ function generateconf() {
 function generatecertificate() {
 	if [ ! -d /etc/letsencrypt/live/$1${ENV}.${DOMAIN} ]; then
     echo "generating $1"
-		service nginx start
+
+    # Avoid break program with set -eu
+    ret_code=$(service nginx start; echo $?)
+
     # https://certbot.eff.org/docs/using.html#certbot-command-line-options
 		certbot certonly --webroot -n --agree-tos \
 			-w /home/http \
 			-d $1${ENV}.${DOMAIN} \
 			--email ${ADMIN_MAIL_ADDR}
-		service nginx stop
+    
+    if [ "$ret_code" -eq 0 ]; then
+		  service nginx stop
+    fi
 	fi
 }
 
