@@ -18,7 +18,8 @@ function generatecertificate() {
     echo "generating $1"
 
     # Avoid break program with set -eu
-    ret_code=$(service nginx start; echo $?)
+    ret_code=0
+    service nginx start || ret_code=$?
 
     # https://certbot.eff.org/docs/using.html#certbot-command-line-options
 		certbot certonly --webroot -n --agree-tos \
@@ -26,7 +27,7 @@ function generatecertificate() {
 			-d $1${ENV}.${DOMAIN} \
 			--email ${ADMIN_MAIL_ADDR}
     
-    if [ "$ret_code" -eq 0 ]; then
+    if [ "$ret_code" == '0' ]; then
 		  service nginx stop
     fi
 	fi

@@ -51,9 +51,11 @@ echo "*****************"
 function check_services {
   for S in memcached combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
   do
-    ret_code=$(service $S status; echo $?)
+    ret_code=0
+
+    service $S status || ret_code=$?
     
-    if [ "$ret_code" -ne 0 ]; then
+    if [ "$ret_code" != '0' ]; then
       service $S stop
       sleep 2
       service $S start
