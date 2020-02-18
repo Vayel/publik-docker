@@ -1,5 +1,0 @@
-{% extends "emails/body_base.txt" %}
-
-{% block content %}
-{{ content }}
-{% endblock %}

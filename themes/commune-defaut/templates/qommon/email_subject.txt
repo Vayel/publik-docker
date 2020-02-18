@@ -1,2 +1,0 @@
-{% extends "emails/subject.txt" %}
-{% block email-subject %}{{ subject }}{% endblock %}

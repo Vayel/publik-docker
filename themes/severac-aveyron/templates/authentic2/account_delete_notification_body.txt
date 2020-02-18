@@ -1,6 +1,0 @@
-{% extends "emails/body_base.txt" %}{% block content %}{% autoescape off %}Bonjour {{ full_name }},
-
-Votre compte sur le site {{site}} a été supprimé.
-Toutes les données associées seront supprimées aujourd'hui.
-Vous ne pouvez dès à présent plus vous connecter.
-{% endautoescape %}{% endblock %}

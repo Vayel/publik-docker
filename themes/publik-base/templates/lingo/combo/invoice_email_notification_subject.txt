@@ -1,2 +1,0 @@
-{% extends "emails/subject.txt" %}
-{% block email-subject %}votre facture n° {{ invoice.id }} est disponible en ligne{% endblock %}

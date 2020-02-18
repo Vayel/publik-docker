@@ -1,2 +1,0 @@
-{% extends "emails/subject.txt" %}
-{% block email-subject %}changement de l'adresse électronique de votre compte{% endblock %}

@@ -1,1 +1,0 @@
-{% extends "authentic2/api_user_create_registration_email_subject.txt" %}

@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<theme name="smica" version="1.0">
-  <label>Smica</label>
-  <desc>Theme for Smica deployments</desc>
-  <keywords>
-    <keyword>auquotidien-no-titles-in-section</keyword>
-    <keyword>auquotidien-welcome-in-services</keyword>
-  </keywords>
-</theme>

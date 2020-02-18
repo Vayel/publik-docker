@@ -1,9 +1,0 @@
-{% autoescape off %}## {% firstof global_title "Compte Citoyen" %} ##{% endautoescape %}
-
-{% block content %}
-{% endblock %}
-
-{% block footer %}
-{% if email_signature %}-- 
-{{ email_signature|safe }}{% endif %}
-{% endblock %}

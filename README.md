@@ -63,6 +63,11 @@ tels quels.
 
 ## Installation
 
+
+```bash
+git clone https://github.com/Vayel/publik-docker --recurse-submodules
+```
+
 ### Pré-requis
 
 Caractéristiques minimales de la machine :

@@ -1,2 +1,0 @@
-{% extends "emails/subject.txt" %}
-{% block email-subject %}votre compte a été créé{% endblock %}

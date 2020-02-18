@@ -101,14 +101,9 @@ if [ "$CREATE_THEME" == "false" ]; then
 elif [ -d "$THEME_DIR" ]; then
   echo "Using existing theme $THEME_DIR"
 else
-  echo "Creating theme in $THEME_DIR..."
-  mkdir -p $THEME_DIR
-  cp -R themes/publik-base/* $THEME_DIR
-  sed -i "s/Publik/$TITLE/g" "$THEME_DIR/desc.xml"
-  sed -i "s/publik-base/$THEME/g" "$THEME_DIR/desc.xml"
-  sed -i "s/publik/$THEME/g" "$THEME_DIR/themes.json"
-  sed -i "s/Publik/$TITLE/g" "$THEME_DIR/themes.json"
-  mv "$THEME_DIR/static/publik" "$THEME_DIR/static/$THEME"
+  cd themes
+  ./add-theme.sh $SLUG "$TITLE"
+  cd ..
 fi
 
 echo "Creating config files in $DIR..."
