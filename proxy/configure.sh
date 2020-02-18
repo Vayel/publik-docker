@@ -17,7 +17,8 @@ function generatecertificate() {
 	if [ ! -d /etc/letsencrypt/live/$1${ENV}.${DOMAIN} ]; then
     echo "generating $1"
 
-    # Avoid break program with set -eu
+    # If nginx is already started, the command returns an error
+    # We use the "or" to avoid exiting the script
     ret_code=0
     service nginx start || ret_code=$?
 
@@ -27,7 +28,7 @@ function generatecertificate() {
 			-d $1${ENV}.${DOMAIN} \
 			--email ${ADMIN_MAIL_ADDR}
     
-    if [ "$ret_code" == '0' ]; then
+    if [ "$ret_code" == "0" ]; then
 		  service nginx stop
     fi
 	fi
@@ -66,7 +67,7 @@ function generateall() {
   generateconf ${ORG}${WCS_SUBDOMAIN} https
   generateconf ${ORG}${PASSERELLE_SUBDOMAIN} https
 
-  echo 'Configuration generated !'
+  echo 'Configuration generated!'
 }
 
 if [ "$#" -eq 0 ]; then
