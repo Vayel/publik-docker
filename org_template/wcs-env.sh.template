@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# "lat;lng"
-export DEFAULT_POSITION="$DEFAULT_POSITION"
-
-export WCS_FROM_EMAIL=$EMAIL
-export WCS_REPLY_TO_EMAIL=$WCS_FROM_EMAIL  # Edit if you want it different from $WCS_FROM_EMAIL

@@ -77,4 +77,4 @@ service nginx start
 sleep 2
 
 check_services
-echo "If all services are running, run ./deploy-org.sh in another shell"
+echo "If all services are running, run ./deploy.sh in another shell"

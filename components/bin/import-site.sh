@@ -16,11 +16,6 @@ fi
 #  sudo -u authentic-multitenant authentic2-multitenant-manage tenant_command import_site -d ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/auth.json"
 #fi
 
-if [ -f "$FOLDER/wcs.zip" ]; then
-  echo "Importing wcs content from $FOLDER/..."
-  sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/wcs.zip"
-fi
-
 echo "Importing wcs config from $FOLDER/..."
 if [ -f "$FOLDER/wcs-env.sh" ]; then
   . "$FOLDER/wcs-env.sh"
@@ -50,3 +45,12 @@ elif [ -f "$ROOT_FOLDER/agent-portal.json" ]; then
   echo "Importing agent portal from $ROOT_FOLDER/..."
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/agent-portal.json"
 fi
+
+# Forms refer to categories so the second must be imported first
+for fname in categories forms
+do
+  if [ -f "$FOLDER/$fname.zip" ]; then
+    echo "Importing $fname from $FOLDER/..."
+    sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/$fname.zip"
+  fi
+done
