@@ -13,6 +13,7 @@ export ADDR2=
 export POSTCODE=
 export TOWN=
 export TEMPLATE=
+export MAIN_COLOR="#0e6ba4"
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -64,6 +65,11 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
     ;;
+    --main-color)
+      MAIN_COLOR="$2"
+      shift # past argument
+      shift # past value
+    ;;
     *)
       POSITIONAL+=("$1")
       shift # past argument
@@ -76,7 +82,7 @@ if [ "$#" -ne 2 ]; then
   echo "Illegal number of parameters"
   echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
   echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE] \ "
-  echo "                   [--position 'lat;lng'] [--template TEMPLATE]"
+  echo "                   [--position 'lat;lng'] [--template TEMPLATE] [--main-color MAIN_COLOR]"
   echo "Notes:"
   echo "  * If --theme is not specified, the default theme data/config.env:ORG_DEFAULT_THEME is used"
   echo "  * TEMPLATE refers to folders in org-templates/"
@@ -92,6 +98,7 @@ if [ "$#" -ne 2 ]; then
   echo '      --postcode 12120 \ '
   echo '      --position "48.866667;2.333333"'
   echo '      --template mon-modele-de-commune'
+  echo '      --main-color "#0e6ba4"'
   exit 1
 fi
 
@@ -107,8 +114,10 @@ if [ -d "$DIR" ]; then
   exit 1
 fi
 
+mkdir -p "$DIR"
+
 echo "Creating organization..."
-for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POSITION TEMPLATE
+for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POSITION TEMPLATE MAIN_COLOR
 do
   echo "$VAR=${!VAR}"
 done
@@ -125,28 +134,30 @@ fi
 
 echo "Creating config files in $DIR..."
 if [ ! -z "$TEMPLATE" ]; then
-  cp -R "$TEMPLATE_DIR" "$DIR"
+  cp -R "$TEMPLATE_DIR"/* "$DIR"
 fi
 
 # Copy all files in $TEMPLATES_DIR that are not in $DIR
-for path in "$TEMPLATES_DIR/*"
+for path in "$TEMPLATES_DIR"/*
 do
-  if [[ path == "$TEMPLATES_DIR/README.md" ]]; then
+  if [ "$path" == "$TEMPLATES_DIR/README.md" ]; then
     continue
   fi
-  if [[ -f path ]]; then
+  if [ -f "$path" ]; then
     cp -n "$path" "$DIR"
   fi
 done
 
 DEST="$DIR/hobo-recipe.json.template"
-envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
+envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $MAIN_COLOR' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
 encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
 iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
 rm "$DEST.tmp"
 
 for prefix in user agent
 do
-  envsubst '$SLUG $TITLE' < "$DIR/$prefix-portal.json.template" > "$DIR/$prefix-portal.json"
-  rm "$DIR/$prefix-portal.json.template"
+  if [ -f "$DIR/$prefix-portal.json.template" ]; then
+    envsubst '$SLUG $TITLE' < "$DIR/$prefix-portal.json.template" > "$DIR/$prefix-portal.json"
+    rm "$DIR/$prefix-portal.json.template"
+  fi
 done
