@@ -13,7 +13,8 @@ export ADDR2=
 export POSTCODE=
 export TOWN=
 export TEMPLATE=
-export MAIN_COLOR="#0e6ba4"
+export BACKGROUND_COLOR="#0e6ba4"
+export TEXT_COLOR="#FFFFFF"
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -65,8 +66,13 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
     ;;
-    --main-color)
-      MAIN_COLOR="$2"
+    --bgcolor)
+      BACKGROUND_COLOR="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --textcolor)
+      TEXT_COLOR="$2"
       shift # past argument
       shift # past value
     ;;
@@ -82,7 +88,8 @@ if [ "$#" -ne 2 ]; then
   echo "Illegal number of parameters"
   echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
   echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE] \ "
-  echo "                   [--position 'lat;lng'] [--template TEMPLATE] [--main-color MAIN_COLOR]"
+  echo "                   [--position 'lat;lng'] [--template TEMPLATE] \ "
+  echo "                   [--bgcolor BACKGROUND_COLOR] [--textcolor TEXT_COLOR]"
   echo "Notes:"
   echo "  * If --theme is not specified, the default theme data/config.env:ORG_DEFAULT_THEME is used"
   echo "  * TEMPLATE refers to folders in org-templates/"
@@ -98,7 +105,8 @@ if [ "$#" -ne 2 ]; then
   echo '      --postcode 12120 \ '
   echo '      --position "48.866667;2.333333"'
   echo '      --template mon-modele-de-commune'
-  echo '      --main-color "#0e6ba4"'
+  echo '      --bgcolor "#0e6ba4"'
+  echo '      --textcolor "#FFFFFF"'
   exit 1
 fi
 
@@ -117,7 +125,7 @@ fi
 mkdir -p "$DIR"
 
 echo "Creating organization..."
-for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POSITION TEMPLATE MAIN_COLOR
+for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POSITION TEMPLATE BACKGROUND_COLOR TEXT_COLOR
 do
   echo "$VAR=${!VAR}"
 done
@@ -149,7 +157,7 @@ do
 done
 
 DEST="$DIR/hobo-recipe.json.template"
-envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $MAIN_COLOR' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
+envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $BACKGROUND_COLOR $TEXT_COLOR' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
 encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
 iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
 rm "$DEST.tmp"
