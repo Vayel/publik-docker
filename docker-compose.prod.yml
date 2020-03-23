@@ -4,7 +4,11 @@ services:
   proxy:
     environment:
       - DEBUG=
+      - PGADMIN_PORT=
+      - MAILCATCHER_HTTP_PORT=
 
   components:
     environment:
       - DEBUG=
+      - PGADMIN_PORT=
+      - MAILCATCHER_HTTP_PORT=
