@@ -83,6 +83,8 @@ RUN mkdir -p /etc/wcs/settings.d/
 COPY wcs.settings.py /etc/wcs/settings.d/custom.py
 RUN usermod wcs -s /bin/bash
 
+COPY commit-build.log /tmp/commit-build.log
+
 ENTRYPOINT ["entrypoint.sh"]
 
 EXPOSE 8080
