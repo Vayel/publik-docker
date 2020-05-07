@@ -9,4 +9,4 @@ if ! ./check-version.sh; then
   echo ""
 fi
 
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --no-build --abort-on-container-exit
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --no-build --abort-on-container-exit "$@"
