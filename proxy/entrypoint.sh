@@ -54,5 +54,16 @@ if [ -d "/tmp/sites" ]; then
   done
 fi
 
+function update_certificates {
+  while true
+  do
+    echo "Renewing HTTPS certificates"
+    update-certificates.sh
+    sleep 12h
+  done
+}
+
+update_certificates & # Run in background
+
 # Execute Docker command
 exec "$@"
