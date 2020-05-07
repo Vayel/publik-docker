@@ -1,4 +1,4 @@
 #!/bin/bash
 
 certbot renew
-servive nginx reload
+service nginx reload
