@@ -57,8 +57,8 @@ fi
 function update_certificates {
   while true
   do
-    echo "Renewing HTTPS certificates"
-    update-certificates.sh
+    date > /tmp/cert-renew.log
+    update-certificates.sh >> /tmp/cert-renew.log
     sleep 12h
   done
 }
