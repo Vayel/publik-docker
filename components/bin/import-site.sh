@@ -46,8 +46,9 @@ elif [ -f "$ROOT_FOLDER/agent-portal.json" ]; then
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/agent-portal.json"
 fi
 
-# Forms refer to categories so the second must be imported first
-for fname in categories forms
+# The order is important
+# Warning: workflows CANNOT refer to roles as they are not imported yet
+for fname in categories workflows forms
 do
   if [ -f "$FOLDER/$fname.zip" ]; then
     echo "Importing $fname from $FOLDER/..."

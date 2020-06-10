@@ -94,9 +94,9 @@ if [ "$#" -ne 2 ]; then
   echo "  * If --theme is not specified, the default theme data/config.env:ORG_DEFAULT_THEME is used"
   echo "  * TEMPLATE refers to folders in org-templates/"
   echo "Examples:"
-  echo '  ./add-org.sh lyon Lyon default'
+  echo '  ./add-org.sh lyon Lyon'
   echo '  ./add-org.sh mon-village "Mon village" \ '
-  echo '      --theme mon-village \'
+  echo '      --theme commune-defaut \'
   echo '      --url https://mon-village.fr \ '
   echo '      --phone 0123456789 \'
   echo '      --email a@b.c \ '
@@ -104,7 +104,7 @@ if [ "$#" -ne 2 ]; then
   echo '      --addr2 "Espace coworking" \ '
   echo '      --postcode 12120 \ '
   echo '      --position "48.866667;2.333333" \ '
-  echo '      --template mon-modele-de-commune \ '
+  echo '      --template mairie-defaut \ '
   echo '      --bgcolor "#0e6ba4" \ '
   echo '      --textcolor "#FFFFFF"'
   exit 1
