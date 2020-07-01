@@ -69,8 +69,15 @@ LOGGING['handlers']['console'] = {
     'class': 'logging.StreamHandler',
     'formatter': 'simple'
 }
+LOGGING['handlers']['mail_admins'] = {
+    'level': 'ERROR',
+    'filters': ['require_debug_false'],
+    'class': 'django.utils.log.AdminEmailHandler',
+    'formatter': 'simple',
+    'include_html': True,
+}
 LOGGING['loggers'][''] = {
-    'handlers': ['console'],
+    'handlers': ['console', 'mail_admins'],
     'level': LOG_LEVEL,
     'disabled': False
 }
