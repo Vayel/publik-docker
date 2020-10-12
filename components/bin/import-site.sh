@@ -46,15 +46,14 @@ elif [ -f "$ROOT_FOLDER/agent-portal.json" ]; then
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/agent-portal.json"
 fi
 
-# The order is important
 # Warning: workflows CANNOT refer to roles as they are not imported yet
-# TODO: gives "Le sous-système d’authentification n’est pas encore configuré" for wcs
-#for fname in categories workflows forms
-#do
-#  if [ -f "$FOLDER/$fname.zip" ]; then
-#    echo "Importing $fname from $FOLDER/..."
-#    sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/$fname.zip"
-#  fi
-#done
+# Forms also need a role to be created
+for fname in categories # workflows forms
+do
+  if [ -f "$FOLDER/$fname.zip" ]; then
+    echo "Importing $fname from $FOLDER/..."
+    sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/$fname.zip"
+  fi
+done
 
 echo "Site successfully imported. You can now import categories, workflows and forms from the web interface."
