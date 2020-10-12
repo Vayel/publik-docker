@@ -58,7 +58,7 @@ except NameError:
     LOGGING = {}
 
 LOGGING['version'] = LOGGING.get('version', 1)
-for k in ['formatters', 'handlers', 'loggers']:
+for k in ['filters', 'formatters', 'handlers', 'loggers']:
   LOGGING[k] = LOGGING.get(k, {})
 
 LOGGING['formatters']['simple'] = {
@@ -67,11 +67,10 @@ LOGGING['formatters']['simple'] = {
 }
 LOGGING['handlers']['console'] = {
     'class': 'logging.StreamHandler',
-    'formatter': 'simple'
+    'formatter': 'simple',
 }
 LOGGING['handlers']['mail_admins'] = {
     'level': 'ERROR',
-    'filters': ['require_debug_false'],
     'class': 'django.utils.log.AdminEmailHandler',
     'formatter': 'simple',
     'include_html': True,
