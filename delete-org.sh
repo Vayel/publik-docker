@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec components delete-org.sh "$@"
+docker exec -it components delete-org.sh "$@"
