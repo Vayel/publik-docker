@@ -21,8 +21,9 @@ function delete_tenant() {
     CMD="${SERVICE}-manage"
   fi
   TENANT="${ORG}.$2.${DOMAIN}"
+  echo
   echo "Deleting $TENANT"
-  sudo -u $SERVICE $CMD delete_tenant $TENANT
+  sudo -u $SERVICE $CMD delete_tenant $TENANT --force-drop
 }
 
 # In the reverse order of hobo-recipe
