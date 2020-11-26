@@ -92,7 +92,12 @@ function cook {
 
 cook $RECIPE_PATH
 
-# After cook, test all services
+echo "###"
+echo "### Importing site data..."
+echo "###"
+import-site.sh $ORG
+
+# Test all services
 set -e
 echo "###"
 echo "### Checking deployment..."
@@ -120,10 +125,6 @@ testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo
 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
 echo "###"
-echo "### Importing site data..."
-echo "###"
-import-site.sh $ORG
-
-echo "###"
 echo "### Configuration OK (Hobo cook)"
 echo "###"
+echo "Go to https://${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT}"
