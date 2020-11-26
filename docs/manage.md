@@ -73,6 +73,12 @@ La seconde étape consiste en trois type d'opérations :
 2. Déployer les services Publik
 3. Importer le contenu du site
 
+### Supprimer une collectivité
+
+```
+./delete-org.sh <slug>
+```
+
 ### Importer des pages
 
 TODO
