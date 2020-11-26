@@ -14,9 +14,21 @@ then
   exit 1
 fi
 
-sudo -u hobo hobo-manage delete_tenant ${ORG}.${HOBO_SUBDOMAIN}.${DOMAIN}
-sudo -u combo combo-manage delete_tenant ${ORG}.${COMBO_SUBDOMAIN}.${DOMAIN}
-sudo -u combo combo-manage delete_tenant ${ORG}.${COMBO_ADMIN_SUBDOMAIN}.${DOMAIN}
-sudo -u passerelle passerelle-manage delete_tenant ${ORG}.${PASSERELLE_SUBDOMAIN}.${DOMAIN}
-sudo -u fargo fargo-manage delete_tenant ${ORG}.${FARGO_SUBDOMAIN}.${DOMAIN}
-sudo rm -rf /var/lib/wcs/${ORG}.${WCS_SUBDOMAIN}.${DOMAIN}
+function delete_tenant() {
+  SERVICE=$1
+  CMD=$3
+  if [ -z "$CMD" ]; then
+    CMD="${SERVICE}-manage"
+  fi
+  TENANT="${ORG}.$2.${DOMAIN}"
+  echo "Deleting $TENANT"
+  sudo -u $SERVICE $CMD delete_tenant $TENANT
+}
+
+# In the reverse order of hobo-recipe
+delete_tenant fargo ${FARGO_SUBDOMAIN}
+delete_tenant wcs ${WCS_SUBDOMAIN} wcsctl
+delete_tenant passerelle ${PASSERELLE_SUBDOMAIN}
+delete_tenant combo ${COMBO_ADMIN_SUBDOMAIN}
+delete_tenant combo ${COMBO_SUBDOMAIN}
+delete_tenant hobo ${HOBO_SUBDOMAIN}

@@ -79,6 +79,9 @@ La seconde étape consiste en trois type d'opérations :
 ./delete-org.sh <slug>
 ```
 
+Puis se rendre dans l'admin Authentic (en ajoutant `admin` à la fin de l'url) et
+supprimer l'entité de votre commune dans "Authentic2 RBAC" > "Entités".
+
 ### Importer des pages
 
 TODO
