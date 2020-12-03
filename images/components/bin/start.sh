@@ -77,4 +77,4 @@ service nginx start
 sleep 2
 
 check_services
-echo "If all services are running, run ./deploy.sh in another shell"
+echo "If all services are running, call ./manage/publik/deploy.sh in another shell"

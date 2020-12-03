@@ -138,6 +138,9 @@ Il suffit alors de lancer dans un autre shell (en conservant le premier ouvert) 
 
 ```
 ./manage/publik/deploy.sh
+# /!\ Peut generer l'erreur "tput: unknown terminal 'unknown'"
+# Si c'est le cas, mettre HOBO_DEPLOY_VERBOSITY=0 dans le .env
+#
 # Prend un peu de temps. Doit se terminer sur :
 #
 # OK: combo is ready
