@@ -7,12 +7,13 @@ if [ -z "$BACKUP_DIR" ]; then
   exit 1
 fi
 
-read -p "Are you sure to restore ${BACKUP_DIR}? It will ERASE the actual data. [y/n] " -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-  echo "Operation aborted."
-  exit 1
-fi
+echo "Making a backup first..."
+./manage/backup.sh
 
+echo
+echo "Restoring /var/lib data..."
+echo "TODO"
+
+echo
+echo "Restoring database..."
 echo "TODO"
