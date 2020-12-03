@@ -59,11 +59,6 @@ tels quels.
 
 ## Installation
 
-
-```bash
-git clone https://github.com/Vayel/publik-docker --recurse-submodules
-```
-
 ### Pré-requis
 
 Caractéristiques minimales de la machine :
@@ -77,7 +72,12 @@ script `install-on-debian.sh` et reproduire les commandes en les adaptant pour v
 
 #### Installation locale
 
-Pour une installation locale, il suffit d'avoir Docker et docker-compose installés.
+Pour une installation locale, il suffit d'avoir Docker et docker-compose installés. Puis :
+
+```bash
+git clone https://github.com/Vayel/publik-docker --recurse-submodules
+cd publik-docker
+```
 
 #### Installation sur un serveur Debian
 

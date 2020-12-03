@@ -56,7 +56,7 @@ Dans un autre shell (en conservant le premier ouvert) :
 ```
 ./manage/docker/deploy.sh
 # /!\ Peut generer l'erreur "tput: unknown terminal 'unknown'"
-# Si c'est le cas, mettre HOBO_DEPLOY_VERBOSITY=0 dans le .env
+# Si c'est le cas, mettre HOBO_DEPLOY_VERBOSITY=1 dans le .env
 #
 # Prend un peu de temps. Doit se terminer sur :
 #
