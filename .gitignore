@@ -1,4 +1,4 @@
 data/
 shellinstall
 *.env
-*/commit-build.log
+**/commit-build.log
