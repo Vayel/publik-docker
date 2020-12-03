@@ -56,6 +56,9 @@ services:
       - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
     env_file:
       - .env
+    environment:
+      - "RABBITMQ_DEFAULT_USER=$RABBITMQ_USER"
+      - "RABBITMQ_DEFAULT_PASS=$PASS_RABBITMQ"
 
 volumes:
   authentic2data:

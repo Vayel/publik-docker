@@ -49,7 +49,13 @@ sudo zip -r letsencrypt.zip letsencrypt
 ```
 
 Récupérez `letsencrypt.zip` sur votre machine locale (avec `scp` par exemple)
-puis dézippez-le dans le dossier `data`.
+puis dézippez-le dans le dossier `data` :
+
+```
+scp -i <ssh_key> <user>@<ip>:/home/publik/publik-docker/data/letsencrypt.zip ./data/
+cd data
+unzip letsencrypt.zip
+```
 
 Vous pouvez désormais éteindre la machine Debian temporaire.
 
