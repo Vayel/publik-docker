@@ -1,10 +1,9 @@
 # See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 
-FROM postgres
+FROM postgres:9.6
 
 MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 
-# TIMEZONE
 # TIMEZONE
 RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime \
@@ -21,4 +20,3 @@ RUN rm /etc/localtime \
 ENV LANG fr_FR.UTF-8
 ENV LANGUAGE fr_FR.UTF-8
 ENV LC_ALL fr_FR.UTF-8
-
