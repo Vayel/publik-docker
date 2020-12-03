@@ -52,8 +52,8 @@ Crée un dossier à la date courante dans `data/backups` avec deux fichiers :
 ### Restauration
 
 ```
-./manage/restore_backup.sh <nom_du_dossier>
-# Ex : ./manage/restore_backup.sh 03-12-2020_14h44m48s
+./manage/restore-backup.sh <chemin_du_dossier>
+# Ex : ./manage/restore-backup.sh data/backups/03-12-2020_14h44m48s/
 ```
 
 ## Logging

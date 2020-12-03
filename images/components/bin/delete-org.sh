@@ -7,10 +7,11 @@ if [ -z "$ORG" ]; then
   exit 1
 fi
 
-read -p "Are you sure to delete ${ORG}? " -r
+read -p "Are you sure to delete ${ORG}? [y/n] " -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
+  echo "Operation aborted."
   exit 1
 fi
 
