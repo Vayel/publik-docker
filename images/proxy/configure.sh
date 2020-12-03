@@ -6,16 +6,18 @@ set -eu
 function generateconf() {
 	export APP_URL=$1
   export PROTOCOL=$2
-	if [ ! -f /etc/nginx/conf.d/${APP_URL}-$PROTOCOL.conf ]; then
+  URI=${APP_URL}${ENV}
+	if [ ! -f /etc/nginx/conf.d/${URI}-$PROTOCOL.conf ]; then
 		envsubst '${APP_URL} ${ENV} ${DOMAIN}' \
 			< /etc/nginx/conf.d/app-$PROTOCOL.template \
-			> /etc/nginx/conf.d/${APP_URL}-$PROTOCOL.conf
+			> /etc/nginx/conf.d/${URI}-$PROTOCOL.conf
 	fi
 }
 
 function generatecertificate() {
-	if [ ! -d /etc/letsencrypt/live/$1${ENV}.${DOMAIN} ]; then
-    echo "generating $1"
+  URI=$1${ENV}.${DOMAIN}
+	if [ ! -d /etc/letsencrypt/live/$URI ]; then
+    echo "generating $URI"
 
     # If nginx is already started, the command returns an error
     # We use the "or" to avoid exiting the script
@@ -25,7 +27,7 @@ function generatecertificate() {
     # https://certbot.eff.org/docs/using.html#certbot-command-line-options
 		certbot certonly --webroot -n --agree-tos \
 			-w /home/http \
-			-d $1${ENV}.${DOMAIN} \
+			-d $URI \
 			--email ${ADMIN_MAIL_ADDR}
     
     if [ "$ret_code" == "0" ]; then
