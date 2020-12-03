@@ -9,7 +9,7 @@ function generate_passwords {
       echo "$line$pass" >> "$1"
       sleep 1  # To increase the date
     else
-      echo $line >> "$1"
+      echo "$line" >> "$1"
     fi
   done
   rm "$1.tmp"
