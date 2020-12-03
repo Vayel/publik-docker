@@ -19,6 +19,25 @@ Ou sinon :
 * `./manage/docker/reset.sh` pour supprimer les conteneurs et les volumes, mais conserver les images
 * `./manage/docker/clean.sh` pour supprimer conteneurs, volumes et images
 
+## Base de données locale
+
+Quand la base de données utilisée est celle définie dans `docker-compose.dev.yml`,
+il est possible de s'y connecter depuis pgAdmin : [http://localhost:5050/browser/](http://localhost:5050/browser/)
+
+Le mot de passe central est la valeur de `PASS_POSTGRES` dans le fichier `.env`.
+
+Pour consulter la base, il faut l'ajouter :
+
+* Clic droit sur "Servers" à gauche puis "Create" > "Server"
+* Dans l'onglet "General" :
+    * `Name` : `publik`
+* Dans l'onglet "Connection" :
+    * `Host` : `db`
+    * `Port` : `DB_PORT` dans le `.env`
+    * `Username` : `DB_ADMIN_USER` dans le `.env`
+    * `Password` : `PASS_POSTGRES` dans le `.env`
+* "Save"
+
 ## Logging
 
 Il est possible de personnaliser le niveau de logging via la variable `LOG_LEVEL`

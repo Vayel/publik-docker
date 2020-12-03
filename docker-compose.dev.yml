@@ -43,6 +43,9 @@ services:
       - db:db
     ports:
       - "${PGADMIN_PORT:-5050}:5050"
+    environment:
+      - "PGADMIN_SETUP_EMAIL=$ADMIN_MAIL_ADDR"
+      - "PGADMIN_SETUP_PASSWORD=$PASS_POSTGRES"
 
   mailcatcher:
     container_name: mailcatcher
