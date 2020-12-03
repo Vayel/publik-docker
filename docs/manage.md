@@ -38,6 +38,24 @@ Pour consulter la base, il faut l'ajouter :
     * `Password` : `PASS_POSTGRES` dans le `.env`
 * "Save"
 
+## Sauvegarde
+
+```
+./manage/backup.sh
+```
+
+Crée un dossier à la date courante dans `data/backups` avec deux fichiers :
+
+* `var_lib.tar` : les dossiers des composants Publik dans `/var/lib/` du conteneur `components`
+* `db_dump.gz` : une sauvegarde de la base avec `pg_dumpall` compressée avec gzip (cf. [doc](https://www.postgresql.org/docs/10/backup-dump.html#BACKUP-DUMP-LARGE))
+
+### Restauration
+
+```
+./manage/restore_backup.sh <nom_du_dossier>
+# Ex : ./manage/restore_backup.sh 03-12-2020_14h44m48s
+```
+
 ## Logging
 
 Il est possible de personnaliser le niveau de logging via la variable `LOG_LEVEL`

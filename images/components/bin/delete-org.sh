@@ -7,7 +7,7 @@ if [ -z "$ORG" ]; then
   exit 1
 fi
 
-read -p "Are you sure to delete ${ORG}? " -n 1 -r
+read -p "Are you sure to delete ${ORG}? " -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
