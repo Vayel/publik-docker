@@ -37,24 +37,21 @@
       "create-combo": {
         "url": "https://${combo}/",
         "slug": "portal-user",
-        "title": "Compte citoyen",
-        "template_name": "portal-user"
+        "title": "Compte citoyen"
       }
     },
     {
       "create-combo": {
         "url": "https://${combo_agent}/",
         "slug": "portal-agent",
-        "title": "Portail agent",
-        "template_name": "portal-agent"
+        "title": "Portail agent"
       }
     },
     {
       "create-wcs": {
         "url": "https://${wcs}/",
         "slug": "wcs",
-        "title": "Démarches",
-        "template_name": "publik.zip"
+        "title": "Démarches"
 	    }
     },
     {
@@ -73,7 +70,7 @@
     },
     {
       "set-theme": {
-        "theme": "publik"
+        "theme": "${ORG_DEFAULT_THEME}"
       }
     }
   ]

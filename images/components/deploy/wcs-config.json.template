@@ -1,6 +1,6 @@
 {
     "branding": {
-        "theme": "publik"
+        "theme": "${ORG_DEFAULT_THEME}"
     },
     "debug": {
         "error_email": "${ADMIN_MAIL_ADDR}"
@@ -21,6 +21,13 @@
         "reply_to": "$WCS_REPLY_TO_EMAIL"
     },
     "postgresql": {
+        "createdb-connection-params": {
+            "database": "$DB_ADMIN_USER",
+            "host": "${DB_HOST}",
+            "user": "wcs",
+            "password": "${PASS_DB_WCS}",
+            "port": ${DB_PORT}
+        },
         "database-template-name": "wcs_%s",
         "database": "$DB_ADMIN_USER",
         "host": "${DB_HOST}",

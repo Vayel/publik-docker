@@ -1,0 +1,9 @@
+[options]
+postgresql = true
+default-to-global-view = true
+workflow-global-actions = true
+workflow-criticality-levels = true
+workflow-resubmit-action = false
+workflow-functions-only = true
+formdef-captcha-option = false
+default_position = ${DEFAULT_POSITION}

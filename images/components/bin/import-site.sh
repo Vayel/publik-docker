@@ -16,6 +16,9 @@ fi
 #  sudo -u authentic-multitenant authentic2-multitenant-manage tenant_command import_site -d ${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/auth.json"
 #fi
 
+#
+# WCS
+#
 echo "Importing wcs config from $FOLDER/..."
 if [ -f "$FOLDER/wcs-env.sh" ]; then
   . "$FOLDER/wcs-env.sh"
@@ -25,11 +28,20 @@ else
 fi
 export URL_PREFIX
 mkdir -p "$FOLDER/_build/wcs-template"
+# Need to inject variables from both .env and site-specific config
 subst.sh /tmp/wcs-config.json.template "$FOLDER/_build/wcs-template/config.json"
 subst.sh "$FOLDER/_build/wcs-template/config.json" "$FOLDER/_build/wcs-template/config.json" '$URL_PREFIX $DEFAULT_POSITION $WCS_FROM_EMAIL $WCS_REPLY_TO_EMAIL'
+
+# Need to inject variables from both .env and site-specific config
+subst.sh /tmp/wcs-site-options.cfg.template "$FOLDER/_build/wcs-template/site-options.cfg"
+subst.sh "$FOLDER/_build/wcs-template/site-options.cfg" "$FOLDER/_build/wcs-template/site-options.cfg" '$URL_PREFIX $DEFAULT_POSITION $WCS_FROM_EMAIL $WCS_REPLY_TO_EMAIL'
+
 zip -j "$FOLDER/_build/wcs-config.zip" "$FOLDER/_build/wcs-template/"*
 sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/_build/wcs-config.zip"
 
+#
+# User portal
+#
 if [ -f "$FOLDER/user-portal.json" ]; then
   echo "Importing user portal from $FOLDER/..."
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/user-portal.json"
@@ -38,6 +50,9 @@ elif [ -f "$ROOT_FOLDER/user-portal.json" ]; then
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/user-portal.json"
 fi
 
+#
+# Agent portal
+#
 if [ -f "$FOLDER/agent-portal.json" ]; then
   echo "Importing agent portal from $FOLDER/..."
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/agent-portal.json"
@@ -46,6 +61,9 @@ elif [ -f "$ROOT_FOLDER/agent-portal.json" ]; then
   sudo -u combo combo-manage tenant_command import_site -d ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} "$ROOT_FOLDER/agent-portal.json"
 fi
 
+#
+# Categories, forms and workflows
+#
 # Warning: workflows CANNOT refer to roles as they are not imported yet
 # Forms also need a role to be created
 for fname in categories # workflows forms
