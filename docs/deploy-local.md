@@ -34,7 +34,7 @@ jusqu'à ce niveau. Puis :
 
 ```bash
 ./manage/docker/build.certificates.sh
-./create-certificates.sh
+./manage/create-certificates.sh
 ```
 
 Les certificats seront créés dans `data/letsencrypt`. Le dossier contient des

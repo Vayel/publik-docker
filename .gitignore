@@ -2,3 +2,4 @@ data/
 shellinstall
 *.env
 **/commit-build.log
+*.swp
