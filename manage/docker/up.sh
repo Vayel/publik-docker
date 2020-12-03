@@ -2,7 +2,7 @@
 
 . ./init-env.sh
 
-if ! ./check-version.sh; then
+if ! ./manage/check-version.sh; then
   echo "/!\\/!\\/!\\"
   echo "WARNING: last-build commit different from current commit. Rebuild needed?"
   echo "/!\\/!\\/!\\"
