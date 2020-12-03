@@ -1,0 +1,7 @@
+commit 296c5374006e05631d42a3a4e3d536cd7eb7d7d8
+Author: Vincent Lefoulon <vincent.lefoulon@free.fr>
+Date:   Wed Jul 1 11:20:45 2020 +0200
+
+    Activate admin mail logging
+
+M	components/common.py.template

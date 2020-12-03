@@ -33,7 +33,7 @@ Se connecter en SSH et reproduire la procédure d'installation sur serveur Debia
 jusqu'à ce niveau. Puis :
 
 ```bash
-./build.certificates.sh
+./manage/docker/build.certificates.sh
 ./create-certificates.sh
 ```
 
@@ -93,8 +93,8 @@ non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en é
 `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT` et `PASS_SMTP`.
 
 ```bash
-./build.sh
-./up.sh
+./manage/docker/build.sh
+./manage/docker/up.sh
 ```
 
 Vous devez alors obtenir quelque chose comme :
@@ -111,7 +111,7 @@ Vous devez alors obtenir quelque chose comme :
 [ components     | nginx is running.
 ```
 
-Il faut alors déployer les services Publik avec la commande `./deploy.sh`. En
+Il faut alors déployer les services Publik avec la commande `./manage/publik/deploy.sh`. En
 plus de configurer nginx et de déployer les services, cette commande importe le
 contenu du site. Pour cela, elle va consulter le dossier `data/sites` et chercher
 les fichiers suivants (aucun n'est obligatoire) :
@@ -126,13 +126,12 @@ Ces données sont exportées d'une autre instance Publik :
     * `user-portal.json` s'obtient via `https://citoyens.DOMAIN/manage/site-export`
     * `agent-portal.json` s'obtient via `https://agentsENV.DOMAIN/manage/site-export`
     * `wcs.zip` s'obtient via `https://demarchesENV.DOMAIN/backoffice/settings/export`, **en cochant uniquement** les démarches et les catégories
-* Soit, si cette instance a été déployée à partir de ce dépôt, via la commande `./export-sites.sh`, qui sauvegarde les données dans `data/sites`.
+* Soit, si cette instance a été déployée à partir de ce dépôt, via la commande `./manage/publik/export-sites.sh`, qui sauvegarde les données dans `data/sites`.
 
 Il suffit alors de lancer dans un autre shell (en conservant le premier ouvert) :
 
 ```
-./deploy.sh
-
+./manage/publik/deploy.sh
 # Prend un peu de temps. Doit se terminer sur :
 #
 # OK: combo is ready
@@ -153,7 +152,7 @@ Il suffit alors de lancer dans un autre shell (en conservant le premier ouvert) 
 > que wcs renvoie un code HTTP 500 au lieu d'un 200. Il suffit alors normalement
 > d'attendre 5 minutes le temps que le cache se mette à jour. Puis de lancer :
 >
-> `./import-site.sh`
+> `./manage/publik/import-site.sh`
 
 Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 `https://citoyens.monserveur.fr`.
@@ -163,7 +162,7 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 Pour démarrer les conteneurs, lancer :
 
 ```
-./up.sh
+./manage/docker/up.sh
 ```
 
 Puis se référer à `docs/manage.md`.

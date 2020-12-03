@@ -4,7 +4,7 @@ services:
   proxy:
     container_name: proxy
     build:
-      context: ./proxy
+      context: ./images/proxy
     image: publik-proxy
     tty: true
     ports:
@@ -24,7 +24,7 @@ services:
   components:
     container_name: components
     build:
-      context: ./components
+      context: ./images/components
     image: publik-components
     command: /bin/bash
     volumes:

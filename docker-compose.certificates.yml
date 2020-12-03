@@ -5,7 +5,7 @@ services:
     container_name: proxy
     command: ["echo", "'Certificates generated, exiting...'"]
     build:
-      context: ./proxy
+      context: ./images/proxy
     image: publik-proxy
     tty: true
     links:

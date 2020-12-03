@@ -33,8 +33,8 @@ Il est **nécessaire** de personnaliser les variables suivantes :
 
 
 ```bash
-./build.sh
-./up-prod.sh  # /!\ Commande différente par rapport à la version de dev
+./manage/docker/build.sh
+./manage/docker/up-prod.sh  # /!\ Commande différente par rapport à la version de dev
 ```
 
 Vous devez alors obtenir quelque chose comme :
@@ -54,6 +54,7 @@ Vous devez alors obtenir quelque chose comme :
 Dans un autre shell (en conservant le premier ouvert) :
 
 ```
+./manage/docker/deploy.sh
 # Prend un peu de temps. Doit se terminer sur :
 #
 # OK: combo is ready
@@ -65,13 +66,10 @@ Dans un autre shell (en conservant le premier ouvert) :
 # OK: hobo is ready
 # Configuration OK (Hobo cook)
 
-./deploy.sh
-
+./manage/publik/check-deployment.sh
 # Doit se terminer sur :
 #
 # Deployment looks OK
-
-./check-deployment.sh
 ```
 
 Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
@@ -80,7 +78,7 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 ## Administration des conteneurs
 
 ```
-./up-prod.sh
+./manage/docker/up-prod.sh
 ```
 
 Puis se référer à `docs/manage.md`.

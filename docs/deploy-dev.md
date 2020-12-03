@@ -41,13 +41,11 @@ et `PASS_POSTGRES`.
 De même, le conteneur `mailcatcher` fait office de serveur SMTP : il intercepte
 les mails et les rend accessibles depuis `http://webmail<ENV>.<DOMAIN>` (en HTTP et
 non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en éditant :
-
-* Dans `.env` : `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT`
-* Dans `data/secret.env` : `PASS_SMTP`
+`SMTP_HOST`, `SMTP_USER`, `SMTP_PORT` et `PASS_SMTP`.
 
 ```bash
-./build.sh
-./up.sh
+./manage/docker/build.sh
+./manage/docker/up.sh
 ```
 
 Vous devez alors obtenir quelque chose comme :
@@ -67,6 +65,7 @@ Vous devez alors obtenir quelque chose comme :
 Dans un autre shell (en conservant le premier ouvert) :
 
 ```
+./manage/publik/deploy.sh
 # Prend un peu de temps. Doit se terminer sur :
 #
 # OK: combo is ready
@@ -78,13 +77,10 @@ Dans un autre shell (en conservant le premier ouvert) :
 # OK: hobo is ready
 # Configuration OK (Hobo cook)
 
-./deploy.sh
-
+./check-deployment.sh
 # Doit se terminer sur :
 #
 # Deployment looks OK
-
-./check-deployment.sh
 ```
 
 Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
@@ -95,7 +91,7 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 Pour démarrer les conteneurs, lancer :
 
 ```
-./up.sh
+./manage/docker/up.sh
 ```
 
 Puis se référer à `docs/manage.md`.

@@ -130,9 +130,9 @@ sont configurables et, pour certaines, **doivent être configurées**. Pour cela
 ./init-env.sh
 ```
 
-**Obligatoire :** éditer `DOMAIN` et `ADMIN_MAIL_ADDR` dans `data/config.env`.
+**Obligatoire :** éditer `DOMAIN` et `ADMIN_MAIL_ADDR` dans `.env`.
 
-**Facultatif :** éditer `ENV` et `*_SUBDOMAIN` dans `data/config.env`.
+**Facultatif :** éditer `ENV` et `*_SUBDOMAIN` dans `.env`.
 
 ### Poursuivre l'installation
 

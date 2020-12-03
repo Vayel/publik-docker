@@ -11,13 +11,13 @@ avec `Ctrl+C`.
 Ou sinon :
 
 ```
-./stop.sh
+./manage/docker/stop.sh
 ```
 
 ## Suppression
 
-* `./reset.sh` pour supprimer les conteneurs et les volumes, mais conserver les images
-* `./clean.sh` pour supprimer conteneurs, volumes et images
+* `./manage/docker/reset.sh` pour supprimer les conteneurs et les volumes, mais conserver les images
+* `./manage/docker/clean.sh` pour supprimer conteneurs, volumes et images
 
 ## Logging
 
@@ -31,8 +31,8 @@ qui les sauvegarde dans des fichiers (cf. plus bas).
 Pour consulter les messages de logging, se connecter au conteneur (une fois démarré) :
 
 ```bash
-./connect.sh  # Par défaut, se connecte à "components"
-# Ou : ./connect.sh nom_ou_id_du_conteneur
+./manage/docker/connect.sh  # Par défaut, se connecte à "components"
+# Ou : ./manage/docker/connect.sh <nom_ou_id_du_conteneur>
 ```
 
 Il y a alors deux types de logs :
@@ -61,11 +61,11 @@ en compte.
 
 Créer une collectivité se fait en deux étapes :
 
-1. Créer la configuration : exécuter `./add-org.sh` puis consulter la documentation affichée.
-2. Déployer les nouveaux services : `./deploy.sh <org-slug>`
+1. Créer la configuration : exécuter `./manage/publik/add-org.sh` puis consulter la documentation affichée.
+2. Déployer les nouveaux services : `./manage/publik/deploy.sh <org-slug>`
 
 La première étape crée un dossier `data/sites/<org>/` comportant le contenu de
-`org_template/` adapté selon les arguments fournis à `./add-org.sh`.
+`org_template/` adapté selon les arguments fournis à `./manage/publik/add-org.sh`.
 
 La seconde étape consiste en trois type d'opérations :
 
@@ -76,7 +76,7 @@ La seconde étape consiste en trois type d'opérations :
 ### Supprimer une collectivité
 
 ```
-./delete-org.sh <slug>
+./manage/publik/delete-org.sh <slug>
 ```
 
 Puis se rendre dans l'admin Authentic (en ajoutant `admin` à la fin de l'url) et
@@ -100,5 +100,5 @@ En créant une collectivité avec un thème spécifique, un dossier est créé dans
 `themes` et ce thème est associé à la collectivité au moment du déploiement des
 services.
 
-Mais il est possible de changer de thème par la suite. En exécutant `./set-theme.sh`,
+Mais il est possible de changer de thème par la suite. En exécutant `./manage/publik/set-theme.sh`,
 des instructions apparaissent pour ce faire.

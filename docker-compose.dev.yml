@@ -23,7 +23,7 @@ services:
   db:
     container_name: db
     build:
-      context: ./postgresql
+      context: ./images/postgresql
     image: publik-pgsql
     ports:
       - "${DB_PORT:-5432}:5432"
@@ -31,6 +31,7 @@ services:
       - .env
     environment:
       - "POSTGRES_USER=$DB_ADMIN_USER"
+      - "POSTGRES_PASSWORD=$PASS_POSTGRES"
     volumes:
       - dbdata:/var/lib/postgresql/data
       - ./postgresql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
