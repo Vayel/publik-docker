@@ -87,7 +87,7 @@ Pour une installation sur un serveur de type Debian, se connecter en ssh puis :
 sudo apt-get update
 sudo apt-get install -y git
 git clone https://github.com/Vayel/publik-docker.git
-cd publik
+cd publik-docker
 sudo ./install-on-debian.sh
 cd ..
 sudo mv publik-docker /home/publik/
