@@ -25,16 +25,11 @@ L'IP affichée doit correspondre à celle de la machine de déploiement.
 
 ### Déploiement
 
-Personnaliser si besoin les variables d'environnement dans les fichiers suivants :
-
-* `.env`
-* `data/config.env`
-* `data/secret.env`
+Personnaliser si besoin les variables d'environnement dans le fichier `.env`.
 
 Il est **nécessaire** de personnaliser les variables suivantes :
-
-* Dans `.env` : `DB_HOST`, `DB_PORT`, `DB_ADMIN_USER`, `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT`
-* Dans `data/secret.env` : `POSTGRES_PASSWORD`, `SMTP_PASS`
+`DB_HOST`, `DB_PORT`, `DB_ADMIN_USER`, `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT`,
+`PASS_POSTGRES`, `PASS_SMTP`.
 
 
 ```bash

@@ -5,7 +5,7 @@
 # See shared settings
 DATABASES['default']['NAME'] = 'combo'
 DATABASES['default']['USER'] = 'combo'
-DATABASES['default']['PASSWORD'] = DB_COMBO_PASS
+DATABASES['default']['PASSWORD'] = PASS_DB_COMBO
 
 # Zone
 LANGUAGE_CODE = 'fr-fr'

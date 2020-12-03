@@ -5,7 +5,7 @@
 # See shared settings
 DATABASES['default']['NAME'] = 'fargo'
 DATABASES['default']['USER'] = 'fargo'
-DATABASES['default']['PASSWORD'] = DB_FARGO_PASS
+DATABASES['default']['PASSWORD'] = PASS_DB_FARGO
 
 # Zone
 LANGUAGE_CODE = 'fr-fr'

@@ -21,8 +21,6 @@ services:
       - ./data/sites:/tmp/sites
     env_file:
       - .env
-      - ./data/config.env
-      - ./data/secret.env
 
   debian:
     container_name: fake_components

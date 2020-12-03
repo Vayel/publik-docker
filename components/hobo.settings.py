@@ -5,7 +5,7 @@
 # See shared settings
 DATABASES['default']['NAME'] = 'hobo'
 DATABASES['default']['USER'] = 'hobo'
-DATABASES['default']['PASSWORD'] = DB_HOBO_PASS
+DATABASES['default']['PASSWORD'] = PASS_DB_HOBO
 
 LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'Europe/Paris'

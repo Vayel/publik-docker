@@ -5,7 +5,7 @@
 # See shared settings
 DATABASES['default']['NAME'] = 'passerelle'
 DATABASES['default']['USER'] = 'passerelle'
-DATABASES['default']['PASSWORD'] = DB_PASSERELLE_PASS
+DATABASES['default']['PASSWORD'] = PASS_DB_PASSERELLE
 
 # Zone
 LANGUAGE_CODE = 'fr-fr'

@@ -16,7 +16,7 @@
     "emails": {
         "smtp_server": "$SMTP_HOST:$SMTP_PORT",
         "smtp_login": "$SMTP_USER",
-        "smtp_password": "$SMTP_PASS",
+        "smtp_password": "$PASS_SMTP",
         "from": "$WCS_FROM_EMAIL",
         "reply_to": "$WCS_REPLY_TO_EMAIL"
     },
@@ -25,7 +25,7 @@
         "database": "$DB_ADMIN_USER",
         "host": "${DB_HOST}",
         "user": "wcs",
-        "password": "${DB_WCS_PASS}",
+        "password": "${PASS_DB_WCS}",
         "port": ${DB_PORT}
     }
 }

@@ -4,7 +4,7 @@
 # Databases
 DATABASES['default']['NAME'] = 'authentic'
 DATABASES['default']['USER'] = 'authentic'
-DATABASES['default']['PASSWORD'] = DB_AUTHENTIC_PASS
+DATABASES['default']['PASSWORD'] = PASS_DB_AUTHENTIC
 
 # Zone
 LANGUAGE_CODE = 'fr-fr'

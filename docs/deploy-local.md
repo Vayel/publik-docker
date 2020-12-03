@@ -80,25 +80,17 @@ Il faut faire pointer les urls des composants vers la machine locale. Attention 
 
 ## Déploiement
 
-Personnaliser si besoin les variables d'environnement dans les fichiers suivants :
-
-* `.env`
-* `data/config.env`
-* `data/secret.env`
+Personnaliser si besoin les variables d'environnement dans le fichier `.env`.
 
 Notons que pour un déploiement de dev, la base de données utilisée est celle du
 conteneur Docker `db`, il n'y a donc rien à changer à ce niveau. Il est néanmoins
-possible d'utiliser une autre base en éditant :
-
-* Dans `.env` : `DB_HOST`, `DB_PORT`, `DB_ADMIN_USER`
-* Dans `data/secret.env` : `POSTGRES_PASSWORD`
+possible d'utiliser une autre base en éditant `DB_HOST`, `DB_PORT`, `DB_ADMIN_USER`
+et `PASS_POSTGRES`.
 
 De même, le conteneur `mailcatcher` fait office de serveur SMTP : il intercepte
 les mails et les rend accessibles depuis `http://webmail<ENV>.<DOMAIN>` (en HTTP et
 non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en éditant :
-
-* Dans `.env` : `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT`
-* Dans `data/secret.env` : `SMTP_PASS`
+`SMTP_HOST`, `SMTP_USER`, `SMTP_PORT` et `PASS_SMTP`.
 
 ```bash
 ./build.sh

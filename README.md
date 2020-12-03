@@ -46,13 +46,9 @@ variables à substituer ont pour extension `.template`. Comme la valeur des vari
 d'environnement peut changer d'une exécution à l'autre, il est important de conserver
 le modèle d'origine et de ne pas faire une substitution en place.
 
-Les variables sont définies dans trois fichiers `xxx.env.template`. Il ne faut
-PAS les éditer, une copie `xxx.env` non traquée par git en sera faite au moment
-du déploiement :
-
-* `.env` : hostnames et ports, utilisés dans les fichiers `docker-compose<.xxx>.yml`
-* `secret.env` : les mots de passe
-* `config.env` : d'autres variables
+Les variables sont définies dans `.env.template`. Il ne faut
+PAS l'éditer, une copie `.env` non traquée par git en sera faite au moment
+du déploiement.
 
 Comme indiqué en commentaires de ces fichiers, certaines variables peuvent être vides,
 d'autres non.
