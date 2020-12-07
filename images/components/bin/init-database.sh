@@ -30,10 +30,10 @@ PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER"
     ALTER USER fargo WITH PASSWORD '${PASS_DB_FARGO}';
     CREATE USER wcs CREATEDB;
     ALTER USER wcs WITH PASSWORD '${PASS_DB_WCS}';
-    CREATE USER authentic-multitenant;
+    CREATE USER "authentic-multitenant";
     CREATE DATABASE authentic2_multitenant TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
-    GRANT ALL PRIVILEGES ON DATABASE authentic2_multitenant TO authentic-multitenant;
-    ALTER USER authentic-multitenant WITH PASSWORD '${PASS_DB_AUTHENTIC}';
+    GRANT ALL PRIVILEGES ON DATABASE authentic2_multitenant TO "authentic-multitenant";
+    ALTER USER "authentic-multitenant" WITH PASSWORD '${PASS_DB_AUTHENTIC}';
     \c combo;
     CREATE EXTENSION unaccent;
     \c authentic2_multitenant;
