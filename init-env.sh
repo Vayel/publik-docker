@@ -15,7 +15,8 @@ function generate_passwords {
   rm "$1.tmp"
 }
 
-mkdir -p data
+# We need to create mounted folders now so that the user can write them
+mkdir -p data/backups data/letsencrypt data/sites data/ssl
 
 ./init-ssl.sh
 

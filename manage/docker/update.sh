@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 . ./manage/colors.sh
 
 ./manage/backup.sh
