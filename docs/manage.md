@@ -5,7 +5,7 @@ une des procédures de déploiement `docs/deploy-xxx.md`.
 
 ## Arrêt
 
-Envoyer un signal `SIGINT` au processus `up.sh` ou `up-prod.sh`, par exemple
+Envoyer un signal `SIGINT` au processus `up-dev.sh` ou `up-prod.sh`, par exemple
 avec `Ctrl+C`.
 
 Ou sinon :

@@ -100,7 +100,7 @@ non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en é
 
 ```bash
 ./manage/docker/build.sh
-./manage/docker/up.sh
+./manage/docker/up-dev.sh
 ```
 
 Vous devez alors obtenir quelque chose comme :
@@ -168,7 +168,7 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 Pour démarrer les conteneurs, lancer :
 
 ```
-./manage/docker/up.sh
+./manage/docker/up-dev.sh
 ```
 
 Puis se référer à `docs/manage.md`.
