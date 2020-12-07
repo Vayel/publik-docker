@@ -2,6 +2,7 @@
 
 HOBO_VERBOSITY=2
 
+echo
 echo "###"
 echo "### Creating hobo recipe..."
 echo "###"
@@ -19,11 +20,12 @@ if [ "$#" -ne 0 ] && [ ! -z "$1" ]; then
 fi
 
 if [ ! -f $TEMPL_PATH ]; then
-  echo "Cannot find hobo recipe $TEMPL_PATH"
+  >&2 echo "Cannot find hobo recipe $TEMPL_PATH"
   exit 1
 fi
 subst.sh $TEMPL_PATH $RECIPE_PATH
 
+echo
 echo "###"
 echo "### Configuring nginx..."
 echo "###"
@@ -39,7 +41,7 @@ function retry() {
   do
     if (( attempt_num == max_attempts ))
     then
-      echo "Component not ready and there are no more attempts left!"
+      >&2 echo "Component not ready and there are no more attempts left!"
       exit 1
     else
       echo "Component not ready yet. Trying again in 10 seconds..."
@@ -53,7 +55,7 @@ function testHttpCode {
   t=`wget --spider --max-redirect 0 -S https://$1 2>&1 | grep "HTTP/" | awk '{print $2}'`
   if [ "$t" != "$3" ]
   then
-    echo "ERROR: $2 returned http code $t instead of expected $3"
+    >&2 echo "ERROR: $2 returned http code $t instead of expected $3"
     return 1
   fi
   echo "OK: $2 returned the expected $3 http code"
@@ -63,13 +65,14 @@ function testHttpContains {
   t=`wget -O - https://$1 2>&1 | grep $3 | wc -l`
   if [ $t -eq 0 ]
   then
-    echo "ERROR: $2 html does not contain $3"
+    >&2 echo "ERROR: $2 html does not contain $3"
     return 1
   fi
   echo "OK: $2 returned a html containing $3"
 }
 
 # Before cook, wait for all services to be ready
+echo
 echo "###"
 echo "### Checking components..."
 echo "###"
@@ -81,6 +84,7 @@ retry 300 testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTT
 retry 300 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 404
 retry 300 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 404
 
+echo
 echo "###"
 echo "### Deploying components..."
 echo "###"
@@ -94,11 +98,13 @@ function cook {
 
 cook $RECIPE_PATH
 
+echo
 echo "###"
 echo "### Setting theme..."
 echo "###"
 set-theme.sh ${ORG_DEFAULT_THEME} $ORG
 
+echo
 echo "###"
 echo "### Importing site data..."
 echo "###"
@@ -106,6 +112,7 @@ import-site.sh $ORG
 
 # Test all services
 set -e
+echo
 echo "###"
 echo "### Checking deployment..."
 echo "###"
@@ -131,6 +138,7 @@ testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 200
 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
+echo
 echo "###"
 echo "### Configuration OK (Hobo cook)"
 echo "###"
