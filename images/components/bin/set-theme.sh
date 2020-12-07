@@ -18,6 +18,12 @@ else
   exit 1
 fi
 
+THEME_PATH="/usr/share/publik/themes/$THEME"
+if [ ! -d "$THEME_PATH" ]; then
+  echo "Theme $THEME_PATH does not exist. Is the 'themes' folder mounted?"
+  exit 1
+fi
+
 echo "Setting theme $THEME to org $ORG"
 
 export THEME

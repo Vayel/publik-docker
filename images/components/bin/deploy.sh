@@ -3,6 +3,11 @@
 HOBO_VERBOSITY=2
 
 echo "###"
+echo "### Checking theme..."
+echo "###"
+
+
+echo "###"
 echo "### Creating hobo recipe..."
 echo "###"
 TEMPL_PATH=/tmp/hobo-recipe.json.template
@@ -93,6 +98,11 @@ function cook {
 }
 
 cook $RECIPE_PATH
+
+echo "###"
+echo "### Setting theme..."
+echo "###"
+set-theme.sh ${ORG_DEFAULT_THEME} $ORG
 
 echo "###"
 echo "### Importing site data..."
