@@ -21,8 +21,13 @@ psql -U "$POSTGRES_USER" -v ON_ERROR_STOP=1 <<-EOSQL
     ALTER USER fargo WITH PASSWORD '${PASS_DB_FARGO}';
     CREATE USER wcs CREATEDB;
     ALTER USER wcs WITH PASSWORD '${PASS_DB_WCS}';
-    CREATE USER authentic;
-    CREATE DATABASE authentic TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
-    GRANT ALL PRIVILEGES ON DATABASE authentic TO authentic;
-    ALTER USER authentic WITH PASSWORD '${PASS_DB_AUTHENTIC}';
+    CREATE USER authentic-multitenant;
+    CREATE DATABASE authentic2_multitenant TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
+    GRANT ALL PRIVILEGES ON DATABASE authentic2_multitenant TO authentic-multitenant;
+    ALTER USER authentic-multitenant WITH PASSWORD '${PASS_DB_AUTHENTIC}';
+    \c combo;
+    CREATE EXTENSION unaccent;
+    \c authentic2_multitenant;
+    CREATE EXTENSION unaccent;
+    CREATE EXTENSION pg_trgm;
 EOSQL
