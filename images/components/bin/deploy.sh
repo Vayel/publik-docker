@@ -105,12 +105,6 @@ cook $RECIPE_PATH
 
 echo
 echo "###"
-echo "### Setting theme..."
-echo "###"
-set-theme.sh ${ORG_DEFAULT_THEME} $ORG
-
-echo
-echo "###"
 echo "### Importing site data..."
 echo "###"
 import-site.sh $ORG
