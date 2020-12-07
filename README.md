@@ -77,6 +77,7 @@ Pour une installation locale, il suffit d'avoir Docker et docker-compose install
 ```bash
 git clone https://github.com/Vayel/publik-docker --recurse-submodules
 cd publik-docker
+git submodule update --init --recursive
 ```
 
 #### Installation sur un serveur Debian
