@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec components export-sites.sh
+docker exec -it components export-sites.sh

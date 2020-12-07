@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec components set-theme.sh $@
+docker exec -it components set-theme.sh $@

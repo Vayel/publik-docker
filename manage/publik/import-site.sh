@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec components import-site.sh "$@"
+docker exec -it components import-site.sh "$@"
