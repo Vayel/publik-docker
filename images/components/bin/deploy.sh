@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. colors.sh
+
 HOBO_VERBOSITY=2
 
 echo
@@ -20,7 +22,8 @@ if [ "$#" -ne 0 ] && [ ! -z "$1" ]; then
 fi
 
 if [ ! -f $TEMPL_PATH ]; then
-  >&2 echo "Cannot find hobo recipe $TEMPL_PATH"
+  echo_error "Cannot find hobo recipe $TEMPL_PATH"
+  echo
   exit 1
 fi
 subst.sh $TEMPL_PATH $RECIPE_PATH
@@ -41,10 +44,12 @@ function retry() {
   do
     if (( attempt_num == max_attempts ))
     then
-      >&2 echo "Component not ready and there are no more attempts left!"
+      echo_error "Component not ready and there are no more attempts left!"
+      echo
       exit 1
     else
-      echo "Component not ready yet. Trying again in 10 seconds..."
+      echo_warning "Component not ready yet. Trying again in 10 seconds..."
+      echo
       let attempt_num++
 	    sleep 10
     fi
@@ -55,20 +60,20 @@ function testHttpCode {
   t=`wget --spider --max-redirect 0 -S https://$1 2>&1 | grep "HTTP/" | awk '{print $2}'`
   if [ "$t" != "$3" ]
   then
-    >&2 echo "ERROR: $2 returned http code $t instead of expected $3"
+    echo_error "ERROR: $2 returned http code $t instead of expected $3"
     return 1
   fi
-  echo "OK: $2 returned the expected $3 http code"
+  echo_success "OK: $2 returned the expected $3 http code"
 }
 
 function testHttpContains {
   t=`wget -O - https://$1 2>&1 | grep $3 | wc -l`
   if [ $t -eq 0 ]
   then
-    >&2 echo "ERROR: $2 html does not contain $3"
+    echo_error "ERROR: $2 html does not contain $3"
     return 1
   fi
-  echo "OK: $2 returned a html containing $3"
+  echo_success "OK: $2 returned a html containing $3"
 }
 
 # Before cook, wait for all services to be ready
@@ -139,7 +144,6 @@ testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo
 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
 echo
-echo "###"
-echo "### Configuration OK (Hobo cook)"
-echo "###"
+echo_success "Configuration OK (Hobo cook)"
+echo
 echo "Go to https://${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT}"

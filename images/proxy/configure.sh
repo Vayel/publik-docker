@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. colors.sh
+
 # Fail on errors
 set -eu
 
@@ -17,7 +19,7 @@ function generateconf() {
 function generatecertificate() {
   URI=$1${ENV}.${DOMAIN}
 	if [ ! -d /etc/letsencrypt/live/$URI ]; then
-    echo "generating $URI"
+    echo "Generating $URI"
 
     # If nginx is already started, the command returns an error
     # We use the "or" to avoid exiting the script
@@ -69,7 +71,7 @@ function generateall() {
   generateconf ${ORG}${WCS_SUBDOMAIN} https
   generateconf ${ORG}${PASSERELLE_SUBDOMAIN} https
 
-  echo 'Configuration generated!'
+  echo_success 'Configuration generated!'
 }
 
 if [ "$#" -eq 0 ]; then

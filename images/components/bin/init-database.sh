@@ -1,10 +1,12 @@
 #!/bin/bash
 
+. colors.sh
+
 count=`PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" --no-password -q -l | grep hobo | wc -l`
 
 if [ "$count" != "0" ]; then
-  echo "Database already configured"
-  echo ""
+  echo_success "Database already configured"
+  echo
   exit 0
 fi
 

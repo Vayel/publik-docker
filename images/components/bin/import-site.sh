@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. colors.sh
+
 URL_PREFIX=
 ROOT_FOLDER=/tmp/sites
 FOLDER=$ROOT_FOLDER
@@ -74,4 +76,4 @@ do
   fi
 done
 
-echo "Site successfully imported. You can now import categories, workflows and forms from the web interface."
+echo_success "Site successfully imported. You can now import categories, workflows and forms from the web interface."

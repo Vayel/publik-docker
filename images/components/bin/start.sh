@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. colors.sh
+
 # Fail on errors
 set -eu
 
@@ -12,11 +14,13 @@ wait-for-it.sh -t 60 $RABBITMQ_HOST:${RABBITMQ_PORT}
 echo "*********************"
 echo "Initializing database"
 echo "*********************"
+echo
 init-database.sh
 
 echo "*********************"
 echo "Substituting env vars"
 echo "*********************"
+echo
 
 # To pass env vars to Python scripts run by Publik in services which remove custom env vars:
 # https://unix.stackexchange.com/questions/44370/how-to-make-unix-service-see-environment-variables
@@ -48,6 +52,7 @@ done
 echo "*****************"
 echo "Starting services"
 echo "*****************"
+echo
 function check_services {
   for S in memcached combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
   do
@@ -77,4 +82,4 @@ service nginx start
 sleep 2
 
 check_services
-echo "If all services are running, call ./manage/publik/deploy.sh in another shell"
+echo_info "If all services are running, call ./manage/publik/deploy.sh in another shell"

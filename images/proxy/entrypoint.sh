@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. colors.sh
+
 # Fail on errors
 set -eu
 
@@ -12,16 +14,17 @@ for VAR in DOMAIN RABBITMQ_MANAGEMENT_PORT ADMIN_MAIL_ADDR
 do
   if [ -z "${!VAR}" ]
   then
-    echo "ERROR: $VAR MUST be set and MUST NOT be empty"
+    echo_error "ERROR: $VAR MUST be set and MUST NOT be empty"
     err=true
   fi
 done
 
 if [ "$err" = true ]
 then
-  echo "***************************************************************"
-  echo "ERROR: some env vars are invalid. See the error messages above."
-  echo "***************************************************************"
+  echo_error "***************************************************************"
+  echo_error "ERROR: some env vars are invalid. See the error messages above."
+  echo_error "***************************************************************"
+  echo
   exit 1
 fi
 

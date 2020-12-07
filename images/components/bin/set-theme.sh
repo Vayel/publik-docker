@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. colors.sh
+
 ORG=global
 URL_PREFIX=
 
@@ -20,7 +22,8 @@ fi
 
 THEME_PATH="/usr/share/publik/themes/$THEME"
 if [ ! -d "$THEME_PATH" ]; then
-  >&2 echo "Theme $THEME_PATH does not exist. Is the 'themes' folder mounted?"
+  echo_error "Theme $THEME_PATH does not exist. Is the 'themes' folder mounted?"
+  echo
   exit 1
 fi
 

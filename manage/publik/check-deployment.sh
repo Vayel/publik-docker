@@ -2,17 +2,19 @@
 
 # https://doc-publik.entrouvert.com/guide-de-l-administrateur-systeme/installation/deploiement-des-instances/#verification-du-deploiement
 
+. ./manage/colors.sh
+
 check() {
   container=components
   folder=$1
   docker exec $container ls "$folder" >> /dev/null # Make sure folder exists
   if [ $? -ne 0 ]; then
-    echo "ERROR: $folder on $container doesn't exist but should"
+    echo_error "ERROR: $folder on $container doesn't exist but should"
     exit 1
   fi
   c=`docker exec $container ls "$folder" | wc -l`
   if [ "$c" -eq "0" ]; then 
-    echo "ERROR: $folder on $container is empty but shouldn't"
+    echo_error "ERROR: $folder on $container is empty but shouldn't"
     exit 1
   fi
 }
