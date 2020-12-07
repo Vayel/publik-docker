@@ -1,5 +1,7 @@
 #!/bin/bash
 
+HOBO_VERBOSITY=2
+
 echo "###"
 echo "### Creating hobo recipe..."
 echo "###"
@@ -85,9 +87,9 @@ echo "###"
 function cook {
   echo "*** Deploying $1"
   # Execute cook in hobo (Many time as recommended by Entr'ouvert)
-  sudo -u hobo hobo-manage cook $1 -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
-  sudo -u hobo hobo-manage cook $1 -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
-  sudo -u hobo hobo-manage cook $1 -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
 }
 
 cook $RECIPE_PATH

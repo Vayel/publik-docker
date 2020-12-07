@@ -23,4 +23,4 @@ echo "Setting theme $THEME to org $ORG"
 export THEME
 envsubst '$THEME' < /tmp/hobo-theme.json.template > /tmp/hobo-theme.json
 
-sudo -u hobo hobo-manage tenant_command cook /tmp/hobo-theme.json -d ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} -v ${HOBO_DEPLOY_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+sudo -u hobo hobo-manage tenant_command cook /tmp/hobo-theme.json -d ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} -v 2 --timeout=${HOBO_DEPLOY_TIMEOUT}
