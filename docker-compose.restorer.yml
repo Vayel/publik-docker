@@ -1,0 +1,28 @@
+# We need a separate container to restore backups as the "components"
+# service locks the /var/lib folders so we can replace them with backup data.
+# Restoring a backup needs to "components" service to be stopped.
+
+version: "2.1"
+
+services:
+  restorer:
+    container_name: restorer
+    build:
+      context: ./images/restorer
+    image: publik-restorer
+    volumes:
+      - authentic2data:/var/lib/authentic2-multitenant/tenants
+      - combodata:/var/lib/combo/tenants
+      - fargodata:/var/lib/fargo/tenants
+      - hobodata:/var/lib/hobo/tenants
+      - passerelledata:/var/lib/passerelle/tenants
+      - wcsdata:/var/lib/wcs
+      - ./data/backups/to_restore:/tmp/backup_to_restore
+
+volumes:
+  authentic2data:
+  combodata:
+  fargodata:
+  hobodata:
+  passerelledata:
+  wcsdata:

@@ -46,10 +46,13 @@ Pour consulter la base, il faut l'ajouter :
 
 Crée un dossier à la date courante dans `data/backups` avec deux fichiers :
 
-* `var_lib.tar` : les dossiers des composants Publik dans `/var/lib/` du conteneur `components`
+* `*.tar` : les volumes montés dans `/var/lib/` par le conteneur `components`. Attention, `wcs.tar` contient tout le dossier `/var/lib/wcs` alors que les autres archives ne comportent que le sous-dossier `/var/lib/*/tenants/`.
 * `db_dump.gz` : une sauvegarde de la base avec `pg_dumpall` compressée avec gzip (cf. [doc](https://www.postgresql.org/docs/10/backup-dump.html#BACKUP-DUMP-LARGE))
 
 ### Restauration
+
+**Attention :** efface les données existantes. Il est conseillé de faire une
+sauvegarde avant d'en restaurer une plus ancienne.
 
 ```
 ./manage/restore-backup.sh <chemin_du_dossier>

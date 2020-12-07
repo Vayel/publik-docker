@@ -36,8 +36,8 @@ services:
       - wcsdata:/var/lib/wcs
       - ./data/hosts:/etc/hosts
       - ./data/sites:/tmp/sites
-      - ./data/backups:/tmp/backups
       - ./themes:/usr/share/publik/themes
+      - ./data/backups/last:/tmp/backup
     links:
       - rabbitmq:rabbitmq
     depends_on: 
