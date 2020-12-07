@@ -142,3 +142,10 @@ services.
 
 Mais il est possible de changer de thème par la suite. En exécutant `./manage/publik/set-theme.sh`,
 des instructions apparaissent pour ce faire.
+
+## Mise à jour
+
+```
+git pull --recurse-submodules
+./manage/docker/update.sh
+```
