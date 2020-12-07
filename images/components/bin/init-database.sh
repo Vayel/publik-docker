@@ -31,12 +31,12 @@ PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER"
     CREATE USER wcs CREATEDB;
     ALTER USER wcs WITH PASSWORD '${PASS_DB_WCS}';
     CREATE USER authentic;
-    CREATE DATABASE authentic2_multitenant TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
-    GRANT ALL PRIVILEGES ON DATABASE authentic2_multitenant TO authentic;
+    CREATE DATABASE authentic TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
+    GRANT ALL PRIVILEGES ON DATABASE authentic TO authentic;
     ALTER USER authentic WITH PASSWORD '${PASS_DB_AUTHENTIC}';
     \c combo;
     CREATE EXTENSION unaccent;
-    \c authentic2_multitenant;
+    \c authentic;
     CREATE EXTENSION unaccent;
     CREATE EXTENSION pg_trgm;
 EOSQL

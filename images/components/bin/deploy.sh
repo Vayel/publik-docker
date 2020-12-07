@@ -3,11 +3,6 @@
 HOBO_VERBOSITY=2
 
 echo "###"
-echo "### Checking theme..."
-echo "###"
-
-
-echo "###"
 echo "### Creating hobo recipe..."
 echo "###"
 TEMPL_PATH=/tmp/hobo-recipe.json.template
