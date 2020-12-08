@@ -14,5 +14,5 @@ cd /tmp
 # Docker image
 git clone $THEMES_REPO_URL publik-themes
 cd publik-themes
-rsync -av --progress $BASE_THEME_DIR publik-base-theme --exclude .git
+rsync $BASE_THEME_DIR/* publik-base-theme --exclude .git
 ./deploy.sh
