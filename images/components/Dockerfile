@@ -31,9 +31,16 @@ RUN apt-get update \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \
-    && apt-get install -y zip ca-certificates-entrouvert libreoffice publik-base-theme publik-common \
+    && apt-get install -y zip ca-certificates-entrouvert libreoffice publik-base-theme publik-common nodejs \
     && apt-get install -y combo passerelle fargo hobo hobo-agent authentic2-multitenant wcs wcs-au-quotidien \
     && rm -rf /var/lib/apt/lists/*
+
+# THEMES
+# We clone the repo to be able to build custom themes without having to pull
+# the repo every time
+RUN npm install -g sass \
+    && cd /usr/share/publik \
+    && git clone http://git.entrouvert.org/publik-base-theme.git
 
 # NGINX
 COPY nginx/*.template /etc/nginx/conf.d/ 

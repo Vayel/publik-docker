@@ -7,7 +7,12 @@ if [ -z "$THEMES_REPO_URL" ]; then
   exit
 fi
 
+BASE_THEME_DIR=/usr/share/publik/publik-base-theme
+
 cd /tmp
-git clone $THEMES_REPO_URL --recurse-submodules publik-themes
+# No need to --recurse-submodules as the publik-base-theme repo was pulled in the
+# Docker image
+git clone $THEMES_REPO_URL publik-themes
 cd publik-themes
+rsync -av --progress $BASE_THEME_DIR publik-base-theme --exclude .git
 ./deploy.sh
