@@ -20,7 +20,7 @@ ENV LC_ALL fr_FR.UTF-8
 
 # DEBIAN PACKAGES
 RUN apt-get update \
-    && apt-get install -y wget gnupg \
+    && apt-get install -y wget gnupg curl \
     && echo "deb http://httpredir.debian.org/debian stretch main" >> /etc/apt/sources.list \
     && echo "deb http://ftp.fr.debian.org/debian stretch-updates main" >> /etc/apt/sources.list \
     && echo "deb http://ftp.fr.debian.org/debian stretch-backports main" >> /etc/apt/sources.list \
