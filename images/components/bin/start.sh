@@ -49,14 +49,11 @@ do
   fi
 done
 
-echo "*****************"
-echo "Copying publik-base theme"
-echo "*****************"
+echo "*******************"
+echo "Initializing themes"
+echo "*******************"
 echo
-# Because we want the publik-base theme to be updated, we use the one from
-# the Debian package publik-base-theme
-rm -rf /usr/share/publik/custom_themes/publik-base
-cp -R /usr/share/publik/themes/publik-base /usr/share/publik/custom_themes/publik-base
+init-themes.sh
 
 echo "*****************"
 echo "Starting services"

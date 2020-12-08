@@ -136,19 +136,16 @@ Pour le moment, ce n'est pas possible.
 
 ### Changer de thème
 
-En créant une collectivité avec un thème spécifique, un dossier est créé dans
-`themes` et ce thème est associé à la collectivité au moment du déploiement des
-services.
+Les thèmes utilisables sont définis dans le dépôt `THEMES_REPO_URL` du fichier
+`.env`.
 
-Mais il est possible de changer de thème par la suite. En exécutant `./manage/publik/set-theme.sh`,
-des instructions apparaissent pour ce faire.
+Pour créer/supprimer des thèmes, se référer à son README.
 
-Les thèmes sont stockés dans `/usr/share/publik/custom_themes/`. En plus des thèmes
-du sous-module git `themes`, nous récupérons le thème `/usr/share/publik/themes/publik-base`.
-Le récupérer dynamiquement plutôt que de le stocker dans le sous-module git permet
-de profiter facilement des mises à jour.
+Pour associer un thème à une collectivité :
 
-Le dossier des thèmes est défini dans `images/components/hobo.settings.py`.
+```
+./manage/publik/set-theme.sh <theme> [<org>]
+```
 
 ## Mise à jour
 

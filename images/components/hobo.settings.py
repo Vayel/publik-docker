@@ -11,5 +11,3 @@ LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = 'Europe/Paris'
 
 EMAIL_SUBJECT_PREFIX = '[hobo] '
-
-THEMES_DIRECTORY = '/usr/share/publik/custom_themes/'
