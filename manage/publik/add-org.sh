@@ -2,8 +2,11 @@
 
 set -eu
 
-export THEME='$ORG_DEFAULT_THEME'
-CREATE_THEME=false
+function get_default_theme() {
+  cat .env | grep ORG_DEFAULT_THEME | cut -c19-
+}
+
+export THEME=
 export DEFAULT_POSITION="48.866667;2.333333"
 export SITE_URL=
 export PHONE=
@@ -12,7 +15,7 @@ export ADDR=
 export ADDR2=
 export POSTCODE=
 export TOWN=
-export TEMPLATE='$ORG_DEFAULT_TEMPLATE'
+export TEMPLATE=
 export BACKGROUND_COLOR="#0e6ba4"
 export TEXT_COLOR="#FFFFFF"
 
@@ -22,7 +25,6 @@ while [[ $# -gt 0 ]]; do
   case $key in
     --theme)
       THEME="$2"
-      CREATE_THEME=true
       shift # past argument
       shift # past value
     ;;
@@ -111,7 +113,7 @@ if [ "$#" -ne 2 ]; then
 fi
 
 if [ -z "$THEME" ]; then
-  read -p "No theme supplied. Continue [y/n]? " -r
+  read -p "No theme supplied. Default '$(get_default_theme)' defined in .env will be used. Continue [y/n]? " -r
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo "Operation aborted."
     exit
@@ -119,7 +121,7 @@ if [ -z "$THEME" ]; then
 fi
 
 if [ -z "$TEMPLATE" ]; then
-  read -p "No template supplied. Continue [y/n]? " -r
+  read -p "No template supplied. User and agent portals won't be initialized and no categories will be imported. Continue [y/n]? " -r
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo "Operation aborted."
     exit
@@ -129,7 +131,6 @@ fi
 export SLUG=$1
 export TITLE="$2"
 DIR="data/sites/$SLUG"
-THEME_DIR="themes/$THEME"
 TEMPLATES_DIR="org-templates"
 TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE"
 
@@ -146,14 +147,11 @@ do
   echo "$VAR=${!VAR}"
 done
 
-if [ "$CREATE_THEME" == "false" ]; then
-  echo "Using default theme"
-elif [ -d "$THEME_DIR" ]; then
-  echo "Using existing theme $THEME_DIR"
+if [ -z "$THEME" ]; then
+  echo "Using default theme '$(get_default_theme)' defined in .env"
+  THEME='$ORG_DEFAULT_THEME'
 else
-  cd themes
-  ./add-theme.sh $SLUG "$TITLE"
-  cd ..
+  echo "Using theme $THEME"
 fi
 
 echo "Creating config files in $DIR..."
