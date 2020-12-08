@@ -2,8 +2,8 @@
 # AFTER /etc/authentic2-multitenant/settings.d/_settings.py
 
 # Databases
-DATABASES['default']['NAME'] = 'authentic'
-DATABASES['default']['USER'] = 'authentic'
+DATABASES['default']['NAME'] = 'authentic2_multitenant'
+DATABASES['default']['USER'] = 'authentic-multitenant'
 DATABASES['default']['PASSWORD'] = PASS_DB_AUTHENTIC
 
 # Zone

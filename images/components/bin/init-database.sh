@@ -13,6 +13,8 @@ fi
 set -e
 
 # Create all databases except WCS one which is created when first started
+#
+# Users and databases names are defined in "images/components/*.settings.py"
 PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" -v ON_ERROR_STOP=1 --no-password <<-EOSQL
     CREATE USER hobo;
     CREATE DATABASE hobo TEMPLATE=template0 ENCODING 'UTF8' LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
@@ -32,10 +34,10 @@ PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER"
     ALTER USER fargo WITH PASSWORD '${PASS_DB_FARGO}';
     CREATE USER wcs CREATEDB;
     ALTER USER wcs WITH PASSWORD '${PASS_DB_WCS}';
-    CREATE USER authentic;
-    CREATE DATABASE authentic TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
-    GRANT ALL PRIVILEGES ON DATABASE authentic TO authentic;
-    ALTER USER authentic WITH PASSWORD '${PASS_DB_AUTHENTIC}';
+    CREATE USER "authentic-multitenant";
+    CREATE DATABASE authentic2_multitenant TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
+    GRANT ALL PRIVILEGES ON DATABASE authentic2_multitenant TO "authentic-multitenant";
+    ALTER USER "authentic-multitenant" WITH PASSWORD '${PASS_DB_AUTHENTIC}';
     \c combo;
     CREATE EXTENSION unaccent;
     \c authentic;
