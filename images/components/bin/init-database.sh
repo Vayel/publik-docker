@@ -40,7 +40,7 @@ PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER"
     ALTER USER "authentic-multitenant" WITH PASSWORD '${PASS_DB_AUTHENTIC}';
     \c combo;
     CREATE EXTENSION unaccent;
-    \c authentic;
+    \c authentic2_multitenant;
     CREATE EXTENSION unaccent;
     CREATE EXTENSION pg_trgm;
 EOSQL
