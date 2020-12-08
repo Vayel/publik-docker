@@ -37,14 +37,16 @@
       "create-combo": {
         "url": "https://${combo}/",
         "slug": "portal-user",
-        "title": "Compte citoyen"
+        "title": "Compte citoyen",
+        "template_name": "portal-user"
       }
     },
     {
       "create-combo": {
         "url": "https://${combo_agent}/",
         "slug": "portal-agent",
-        "title": "Portail agent"
+        "title": "Portail agent",
+        "template_name": "portal-agent"
       }
     },
     {
