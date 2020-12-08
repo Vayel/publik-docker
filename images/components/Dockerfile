@@ -26,6 +26,7 @@ RUN apt-get update \
     && echo "deb http://ftp.fr.debian.org/debian stretch-backports main" >> /etc/apt/sources.list \
     && echo "deb http://deb.entrouvert.org/ stretch main" > /etc/apt/sources.list.d/entrouvert-tmp.list \
     && wget -q -O- https://deb.entrouvert.org/entrouvert.gpg | apt-key add - \
+    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
     && apt-get update \
     && apt-get install -y entrouvert-repository \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
