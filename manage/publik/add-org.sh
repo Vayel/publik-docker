@@ -2,8 +2,10 @@
 
 set -eu
 
+BASE_DIR=`pwd`
+
 function get_default_theme() {
-  cat .env | grep ORG_DEFAULT_THEME | cut -c19-
+  cat $BASE_DIR/.env | grep ORG_DEFAULT_THEME | cut -c19-
 }
 
 export THEME=
@@ -112,6 +114,17 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
+export SLUG=$1
+export TITLE="$2"
+DIR="data/sites/$SLUG"
+TEMPLATES_DIR="org-templates"
+TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE"
+
+if [ -d "$DIR" ]; then
+  echo "$DIR already exists, please remove it"
+  exit 1
+fi
+
 if [ -z "$THEME" ]; then
   read -p "No theme supplied. Default '$(get_default_theme)' defined in .env will be used. Continue [y/n]? " -r
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -126,17 +139,6 @@ if [ -z "$TEMPLATE" ]; then
     echo "Operation aborted."
     exit
   fi
-fi
-
-export SLUG=$1
-export TITLE="$2"
-DIR="data/sites/$SLUG"
-TEMPLATES_DIR="org-templates"
-TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE"
-
-if [ -d "$DIR" ]; then
-  echo "$DIR already exists, please remove it"
-  exit 1
 fi
 
 mkdir -p "$DIR"
