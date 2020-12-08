@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./init-env.sh
+. ./manage/init-env.sh
 
 git log --name-status HEAD^..HEAD > images/components/commit-build.log
 

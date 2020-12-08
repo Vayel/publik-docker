@@ -4,7 +4,7 @@ set -eu
 
 . ./manage/colors.sh
 
-. ./init-env.sh
+. ./manage/init-env.sh
 
 docker-compose -f docker-compose.certificates.yml up --no-build --abort-on-container-exit
 

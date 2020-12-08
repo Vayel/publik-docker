@@ -18,7 +18,7 @@ function generate_passwords {
 # We need to create mounted folders now so that the user can write them
 mkdir -p data/backups data/letsencrypt data/sites data/ssl
 
-./init-ssl.sh
+./manage/init-ssl.sh
 
 if [ ! -f .env ]; then
   cp .env.template .env

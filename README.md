@@ -128,7 +128,7 @@ Les variables `ENV` et `DOMAIN`, ainsi que le préfixe utilisé par composant,
 sont configurables et, pour certaines, **doivent être configurées**. Pour cela :
 
 ```bash
-./init-env.sh
+./manage/init-env.sh
 ```
 
 **Obligatoire :** éditer `DOMAIN` et `ADMIN_MAIL_ADDR` dans `.env`.

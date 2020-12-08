@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./init-env.sh
+. ./manage/init-env.sh
 
 . ./manage/colors.sh
 

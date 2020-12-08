@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./init-env.sh
+. ./manage/init-env.sh
 
 read -p "Are you sure to delete both containers AND volumes [y/n]? " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then

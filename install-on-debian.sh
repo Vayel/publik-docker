@@ -77,6 +77,6 @@ echo "Add some convenients tools"
 
 apt-get install -y build-essential gettext vim git
 
-./init-ssl.sh
+./manage/init-ssl.sh
 
 chown publik:publik data -R
