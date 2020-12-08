@@ -20,27 +20,25 @@ ENV LC_ALL fr_FR.UTF-8
 
 # DEBIAN PACKAGES
 RUN apt-get update \
-    && apt-get install -y wget gnupg curl \
+    && apt-get install -y wget gnupg \
     && echo "deb http://httpredir.debian.org/debian stretch main" >> /etc/apt/sources.list \
     && echo "deb http://ftp.fr.debian.org/debian stretch-updates main" >> /etc/apt/sources.list \
     && echo "deb http://ftp.fr.debian.org/debian stretch-backports main" >> /etc/apt/sources.list \
     && echo "deb http://deb.entrouvert.org/ stretch main" > /etc/apt/sources.list.d/entrouvert-tmp.list \
     && wget -q -O- https://deb.entrouvert.org/entrouvert.gpg | apt-key add - \
-    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
     && apt-get update \
     && apt-get install -y entrouvert-repository \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \
-    && apt-get install -y zip ca-certificates-entrouvert libreoffice publik-base-theme publik-common nodejs \
+    && apt-get install -y zip ca-certificates-entrouvert libreoffice publik-base-theme publik-common sassc \
     && apt-get install -y combo passerelle fargo hobo hobo-agent authentic2-multitenant wcs wcs-au-quotidien \
     && rm -rf /var/lib/apt/lists/*
 
 # THEMES
 # We clone the repo to be able to build custom themes without having to pull
 # the repo every time
-RUN npm install -g sass \
-    && cd /usr/share/publik \
+RUN cd /usr/share/publik \
     && git clone http://git.entrouvert.org/publik-base-theme.git
 
 # NGINX
