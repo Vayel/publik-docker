@@ -59,14 +59,18 @@ function retry() {
 function testHttpCode {
   t=`wget --spider --max-redirect 0 -S https://$1 2>&1 | grep "HTTP/" | awk '{print $2}'`
   first_digit="$(echo $t | head -c 1)"
+  if [ "$t" == "$3" ]; then
+    echo_success "OK: $2 returned the expected $3 http code"
+    return 0
+  fi
   if [ "$first_digit" == "4" ] || [ "$first_digit" == "5" ]; then
     echo_error "ERROR: $2 returned http error code $t instead of expected $3"
     return 1
-  elif [ "$t" != "$3" ]; then
+  fi
+  if [ "$t" != "$3" ]; then
     echo_warning "WARNING: $2 returned http code $t instead of expected $3"
     return 0
   fi
-  echo_success "OK: $2 returned the expected $3 http code"
 }
 
 function testHttpContains {
