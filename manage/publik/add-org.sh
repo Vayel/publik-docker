@@ -12,7 +12,7 @@ export ADDR=
 export ADDR2=
 export POSTCODE=
 export TOWN=
-export TEMPLATE=
+export TEMPLATE='$ORG_DEFAULT_TEMPLATE'
 export BACKGROUND_COLOR="#0e6ba4"
 export TEXT_COLOR="#FFFFFF"
 
@@ -108,6 +108,22 @@ if [ "$#" -ne 2 ]; then
   echo '      --bgcolor "#0e6ba4" \ '
   echo '      --textcolor "#FFFFFF"'
   exit 1
+fi
+
+if [ -z "$THEME" ]; then
+  read -p "No theme supplied. Continue [y/n]? " -r
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Operation aborted."
+    exit
+  fi
+fi
+
+if [ -z "$TEMPLATE" ]; then
+  read -p "No template supplied. Continue [y/n]? " -r
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Operation aborted."
+    exit
+  fi
 fi
 
 export SLUG=$1
