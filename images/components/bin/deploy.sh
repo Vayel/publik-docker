@@ -58,10 +58,13 @@ function retry() {
 
 function testHttpCode {
   t=`wget --spider --max-redirect 0 -S https://$1 2>&1 | grep "HTTP/" | awk '{print $2}'`
-  if [ "$t" != "$3" ]
-  then
-    echo_error "ERROR: $2 returned http code $t instead of expected $3"
+  first_digit="$(echo $t | head -c 1)"
+  if [ "$first_digit" == "4" ] || [ "$first_digit" == "5" ]; then
+    echo_error "ERROR: $2 returned http error code $t instead of expected $3"
     return 1
+  elif [ "$t" != "$3" ]; then
+    echo_warning "WARNING: $2 returned http code $t instead of expected $3"
+    return 0
   fi
   echo_success "OK: $2 returned the expected $3 http code"
 }
@@ -133,7 +136,7 @@ fi
 testHttpCode ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 200
 testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 200
 testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 302
-testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 200
+testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 302
 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
 
