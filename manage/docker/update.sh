@@ -8,6 +8,7 @@ echo "Package versions before update:"
 echo
 ./manage/publik/list-component-versions.sh
 echo
+git pull --recurse-submodules
 ./manage/backup.sh
 # no-cache so that debian packages are updated
 ./manage/docker/build.sh --no-cache

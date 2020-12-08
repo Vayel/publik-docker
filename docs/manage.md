@@ -143,9 +143,15 @@ services.
 Mais il est possible de changer de thème par la suite. En exécutant `./manage/publik/set-theme.sh`,
 des instructions apparaissent pour ce faire.
 
+Les thèmes sont stockés dans `/usr/share/publik/custom_themes/`. En plus des thèmes
+du sous-module git `themes`, nous récupérons le thème `/usr/share/publik/themes/publik-base`.
+Le récupérer dynamiquement plutôt que de le stocker dans le sous-module git permet
+de profiter facilement des mises à jour.
+
+Le dossier des thèmes est défini dans `images/components/hobo.settings.py`.
+
 ## Mise à jour
 
 ```
-git pull --recurse-submodules
 ./manage/docker/update.sh
 ```
