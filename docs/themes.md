@@ -13,6 +13,7 @@ Le dossier `data/themes` doit avoir la structure suivante :
 themes/
   mon_theme/
     static/
+      images/
     templates/
   mon_autre_theme/
     static/
@@ -22,9 +23,26 @@ themes.json
 
 Chaque thème est une extension du [thème Publik de base](https://repos.entrouvert.org/publik-base-theme.git/tree/).
 
+### `static`
+
 Le dossier `static` d'un thème doit contenir un fichier`style.scss`, qui sera compilé
 avec les [fichiers statiques du thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/static/publik).
 Des exemples sont disponibles [ici](https://github.com/Vayel/publik-docker-themes).
+
+Le dossier `static` contient à minima un fichier `style.scss` qui lui-même importe
+le style du thème de base, lequel sera placé dans `publik-base-theme` au même niveau
+que `themes.json` :
+
+```sass
+@import '../../../publik-base-theme/static/includes/publik';
+```
+
+Pour être affichées, les images ont besoin d'être converties en base64, ce qui
+est fait par `images/components/bin/make_theme_data_uris.py`. Ce script va
+chercher les images dans le dossier `static/images`, veuillez donc y placer vos
+images. Le dossier peut ne pas exister.
+
+### `templates`
 
 Le dossier `templates` d'un thème suit la même architecture que les [templates
 du thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/templates).
@@ -35,6 +53,8 @@ Des exemples sont disponibles [ici](https://github.com/Vayel/publik-docker-theme
 Il est important, dans les thèmes personnalisés, de ne redéfinir que ce qui a
 besoin de l'être. Copier/coller des templates du thème de base sans les modifier
 fait que vous ne profiterez pas des mises à jour.
+
+### `themes.json`
 
 Le fichier `themes.json` liste les thèmes utilisables par Publik, qui se base sur
 la clé `id` :
@@ -88,4 +108,14 @@ dans `data/themes` avec un `git clone`.
 
 ```
 ./manage/publik/set-theme.sh <theme_id> [<org>]
+```
+
+Peut aussi être fait depuis l'interface web : 
+
+```
+# Theme de la collectivite par defaut
+https://hobo.<monserveurpublik.fr>/theme/
+
+# Theme de la collectivite "ma-commune"
+https://ma-commune.hobo.<monserveurpublik.fr>/theme/
 ```
