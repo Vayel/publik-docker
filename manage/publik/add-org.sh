@@ -14,8 +14,6 @@ export ADDR2=
 export POSTCODE=
 export TOWN=
 export TEMPLATE=
-export BACKGROUND_COLOR="#0e6ba4"
-export TEXT_COLOR="#FFFFFF"
 NOINPUT=false
 
 POSITIONAL=()
@@ -67,16 +65,6 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
     ;;
-    --bgcolor)
-      BACKGROUND_COLOR="$2"
-      shift # past argument
-      shift # past value
-    ;;
-    --textcolor)
-      TEXT_COLOR="$2"
-      shift # past argument
-      shift # past value
-    ;;
     --noinput)
       NOINPUT=true
       shift # past argument
@@ -90,11 +78,10 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ "$#" -ne 2 ]; then
-  echo_error "Illegal number of parameters"
+  echo_error "Illegal number of arguments"
   echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
   echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE] \ "
   echo "                   [--position 'lat;lng'] [--template TEMPLATE] \ "
-  echo "                   [--bgcolor BACKGROUND_COLOR] [--textcolor TEXT_COLOR] \ "
   echo "                   [--noinput]"
   echo
   echo "Notes:"
@@ -112,9 +99,7 @@ if [ "$#" -ne 2 ]; then
   echo '      --addr "2 rue XXX" \ '
   echo '      --addr2 "Espace coworking" \ '
   echo '      --postcode 12120 \ '
-  echo '      --position "48.866667;2.333333" \ '
-  echo '      --bgcolor "#0e6ba4" \ '
-  echo '      --textcolor "#FFFFFF"'
+  echo '      --position "48.866667;2.333333"'
   exit 1
 fi
 
@@ -207,7 +192,7 @@ do
 done
 
 DEST="$DIR/hobo-recipe.json.template"
-envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $BACKGROUND_COLOR $TEXT_COLOR' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
+envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
 encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
 iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
 rm "$DEST.tmp"

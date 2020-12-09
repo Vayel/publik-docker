@@ -107,18 +107,6 @@
         "name": "collectivite_code_postal", 
         "value": "${POSTCODE}"
       }
-    },
-    {
-      "set-variable": {
-        "name": "couleur_fond", 
-        "value": "${BACKGROUND_COLOR}"
-      }
-    },
-    {
-      "set-variable": {
-        "name": "couleur_texte", 
-        "value": "${TEXT_COLOR}"
-      }
     }
   ]
 }
