@@ -107,6 +107,12 @@
         "name": "collectivite_code_postal", 
         "value": "${POSTCODE}"
       }
+    },
+    {
+      "set-variable": {
+        "name": "portal_url", 
+        "value": "https://${organization}.${combo}/"
+      }
     }
   ]
 }

@@ -74,6 +74,12 @@
       "set-theme": {
         "theme": "publik"
       }
+    },
+    {
+      "set-variable": {
+        "name": "portal_url", 
+        "value": "https://${combo}/"
+      }
     }
   ]
 }
