@@ -14,10 +14,11 @@ function copy_dir() {
 }
 
 DEST_DIR=/usr/share/publik/themes/publik-base
-BASE_DIR=$1
 
-if [ -z "$BASE_DIR" ]; then
+if [ $# -eq 0 ]; then
   BASE_DIR=/tmp/themes
+else
+  BASE_DIR=$1
 fi
 
 if [ ! -d "$BASE_DIR" ] || [ -z "$(ls -A $BASE_DIR)" ]; then
