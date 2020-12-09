@@ -99,19 +99,7 @@ en compte.
 
 ### Créer une collectivité
 
-Créer une collectivité se fait en deux étapes :
-
-1. Créer la configuration : exécuter `./manage/publik/add-org.sh` puis consulter la documentation affichée.
-2. Déployer les nouveaux services : `./manage/publik/deploy.sh <org-slug>`
-
-La première étape crée un dossier `data/sites/<org>/` comportant le contenu de
-`org_template/` adapté selon les arguments fournis à `./manage/publik/add-org.sh`.
-
-La seconde étape consiste en trois type d'opérations :
-
-1. Générer la configuration nginx (certificats HTTPS et fichiers de routing). **Note :** les certificats HTTPS ne pourront être générés si la machine n'est pas accessible depuis Internet (dans le cadre d'une installation locale), aussi il faudra les générer au préalable, avec la même procédure que suivie dans `docs/deploy-local.md`.
-2. Déployer les services Publik
-3. Importer le contenu du site
+Se référer à [docs/multi-sites.md](multi-sites.md).
 
 ### Supprimer une collectivité
 
@@ -136,7 +124,7 @@ Pour le moment, ce n'est pas possible.
 
 ### Changer de thème
 
-Se référer à [`docs/themes.md`](themes.md).
+Se référer à [docs/themes.md](themes.md).
 
 ## Mise à jour
 

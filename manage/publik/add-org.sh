@@ -99,7 +99,7 @@ if [ "$#" -ne 2 ]; then
   echo
   echo "Notes:"
   echo "  * If --theme is not specified, the default theme data/config.env:ORG_DEFAULT_THEME is used"
-  echo "  * TEMPLATE refers to folders in org-templates/"
+  echo "  * TEMPLATE refers to folders in data/site-templates/"
   echo
   echo "Examples:"
   echo '  ./add-org.sh lyon Lyon'
@@ -123,12 +123,19 @@ export TITLE="$2"
 
 BASE_DIR=`pwd`
 DIR="$BASE_DIR/data/sites/$SLUG"
-TEMPLATES_DIR="$BASE_DIR/org-templates"
+BASE_TEMPLATE_DIR="$BASE_DIR/site-template"
+TEMPLATES_DIR="$BASE_DIR/data/site-templates"
 THEMES_DIR="$BASE_DIR/data/themes/themes"
 
 if [ -d "$DIR" ]; then
   echo_error "$DIR already exists, please remove it"
   exit 1
+fi
+
+if [ ! -d "$TEMPLATES_DIR" ]; then
+  echo_warning "$TEMPLATES_DIR/ does not exist. Creating it from $BASE_TEMPLATE_DIR"
+  mkdir -p $TEMPLATES_DIR
+  cp -R $BASE_TEMPLATE_DIR/* $TEMPLATES_DIR/
 fi
 
 if [ -z "$THEME" ]; then
@@ -151,7 +158,7 @@ if [ -z "$THEME" ]; then
 fi
 
 if [ -z "$TEMPLATE" ]; then
-  if [ ! -d "$TEMPLATES_DIR" ] || $NOINPUT; then
+  if $NOINPUT; then
     TEMPLATE=""
   else
     echo_error "No templates supplied."
