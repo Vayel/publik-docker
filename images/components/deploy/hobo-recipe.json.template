@@ -80,6 +80,30 @@
         "name": "portal_url", 
         "value": "https://${combo}/"
       }
+    },
+    {
+      "set-variable": {
+        "name": "global_title", 
+        "value": "Collectivité par défaut"
+      }
+    },
+    {
+      "set-variable": {
+        "name": "default_from_email", 
+        "value": "${FROM_EMAIL}"
+      }
+    },
+    {
+      "set-variable": {
+        "name": "email_sender_name", 
+        "value": "${EMAIL_SENDER_NAME}"
+      }
+    },
+    {
+      "set-variable": {
+        "name": "global_email_prefix", 
+        "value": "${EMAIL_SUBJECT_PREFIX}"
+      }
     }
   ]
 }

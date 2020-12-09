@@ -14,6 +14,9 @@ export ADDR2=
 export POSTCODE=
 export TOWN=
 export TEMPLATE=
+export FROM_EMAIL='$FROM_EMAIL'
+export EMAIL_SENDER_NAME='$EMAIL_SENDER_NAME'
+export EMAIL_SUBJECT_PREFIX='$EMAIL_SUBJECT_PREFIX'
 NOINPUT=false
 
 POSITIONAL=()
@@ -65,6 +68,21 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
     ;;
+    --from-email)
+      FROM_EMAIL="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --email-sender)
+      EMAIL_SENDER_NAME="$2"
+      shift # past argument
+      shift # past value
+    ;;
+    --email-subject-prefix)
+      EMAIL_SUBJECT_PREFIX="$2"
+      shift # past argument
+      shift # past value
+    ;;
     --noinput)
       NOINPUT=true
       shift # past argument
@@ -79,9 +97,11 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ "$#" -ne 2 ]; then
   echo_error "Illegal number of arguments"
-  echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
-  echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE] \ "
-  echo "                   [--position 'lat;lng'] [--template TEMPLATE] \ "
+  echo "Help: ./add-org.sh SLUG TITLE [--theme <folder_in_data/themes/themes>] [--url <url>] [--phone <phone>] \ "
+  echo "                   [--email <email> [--addr <text>] [--addr2 <text>] [--postcode <text>] \ "
+  echo "                   [--position 'lat;lng'] [--template <folder_in_data/site-templates>] \ "
+  echo "                   [--from-email <email>] [--email-sender <name>] \ "
+  echo "                   [--email-subject-prefix <text>] \ "
   echo "                   [--noinput]"
   echo
   echo "Notes:"
@@ -99,6 +119,9 @@ if [ "$#" -ne 2 ]; then
   echo '      --addr "2 rue XXX" \ '
   echo '      --addr2 "Espace coworking" \ '
   echo '      --postcode 12120 \ '
+  echo '      --from-email repasrepondre@monsitepublik.fr \ '
+  echo '      --email-sender "John Doe"  \ '
+  echo '      --email-subject-prefix "Publik"  \ '
   echo '      --position "48.866667;2.333333"'
   exit 1
 fi
@@ -170,7 +193,7 @@ TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE"
 mkdir -p "$DIR"
 
 echo "Creating organization..."
-for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POSITION TEMPLATE
+for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POSITION TEMPLATE FROM_EMAIL EMAIL_SENDER_NAME EMAIL_SUBJECT_PREFIX
 do
   echo "$VAR=${!VAR}"
 done
@@ -192,7 +215,7 @@ do
 done
 
 DEST="$DIR/hobo-recipe.json.template"
-envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
+envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $FROM_EMAIL $EMAIL_SENDER_NAME $EMAIL_SUBJECT_PREFIX' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
 encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
 iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
 rm "$DEST.tmp"
