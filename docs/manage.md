@@ -136,16 +136,7 @@ Pour le moment, ce n'est pas possible.
 
 ### Changer de thème
 
-Les thèmes utilisables sont définis dans le dépôt `THEMES_REPO_URL` du fichier
-`.env`.
-
-Pour créer/supprimer des thèmes, se référer à son README.
-
-Pour associer un thème à une collectivité :
-
-```
-./manage/publik/set-theme.sh <theme> [<org>]
-```
+Se référer à [`docs/themes.md`](themes.md).
 
 ## Mise à jour
 
