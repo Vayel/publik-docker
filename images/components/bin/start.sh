@@ -53,7 +53,7 @@ echo "*******************"
 echo "Initializing themes"
 echo "*******************"
 echo
-init-themes.sh
+deploy-themes.sh
 
 echo "*****************"
 echo "Starting services"

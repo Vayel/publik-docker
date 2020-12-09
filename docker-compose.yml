@@ -37,6 +37,7 @@ services:
       - ./data/hosts:/etc/hosts
       - ./data/sites:/tmp/sites
       - ./data/backups/last:/tmp/backup
+      - ./data/themes:/tmp/themes
     links:
       - rabbitmq:rabbitmq
     depends_on: 
