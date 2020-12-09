@@ -39,3 +39,5 @@ do
 done
 
 cp "$BASE_DIR/themes.json" "$DEST_DIR/themes.json"
+
+echo_success "Themes deployed."

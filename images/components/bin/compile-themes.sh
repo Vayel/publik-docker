@@ -2,11 +2,13 @@
 
 set -eu
 
+. colors.sh
+
 BASE_DIR=$1
 BASE_THEME_DIR=/usr/share/publik/publik-base-theme
 
 cd $BASE_DIR
-if [ ! -d "publik-base-theme" ]; then
+if [ ! -d "publik-base-theme" ] || [ -z "$(ls -A publik-base-theme)" ]; then
   rsync -r $BASE_THEME_DIR/* publik-base-theme --exclude .git
 fi
 
@@ -26,3 +28,5 @@ do
   cd $static_dir && sassc style.scss style.css
 	rm -rf $static_dir/.sass-cache/
 done
+
+echo_success "Themes compiled."
