@@ -1,6 +1,6 @@
 {
     "branding": {
-        "theme": "${ORG_DEFAULT_THEME}"
+        "theme": "publik"
     },
     "debug": {
         "error_email": "${ADMIN_MAIL_ADDR}"

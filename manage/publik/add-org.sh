@@ -2,11 +2,7 @@
 
 set -eu
 
-BASE_DIR=`pwd`
-
-function get_default_theme() {
-  cat $BASE_DIR/.env | grep ORG_DEFAULT_THEME | cut -c19-
-}
+. ./manage/colors.sh
 
 export THEME=
 export DEFAULT_POSITION="48.866667;2.333333"
@@ -20,6 +16,7 @@ export TOWN=
 export TEMPLATE=
 export BACKGROUND_COLOR="#0e6ba4"
 export TEXT_COLOR="#FFFFFF"
+NOINPUT=false
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -80,6 +77,10 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
     ;;
+    --noinput)
+      NOINPUT=true
+      shift # past argument
+    ;;
     *)
       POSITIONAL+=("$1")
       shift # past argument
@@ -89,26 +90,29 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ "$#" -ne 2 ]; then
-  echo "Illegal number of parameters"
+  echo_error "Illegal number of parameters"
   echo "Help: ./add-org.sh SLUG TITLE [--theme THEME] [--url URL] [--phone PHONE] \ "
   echo "                   [--email EMAIL] [--addr ADDR] [--addr2 ADDR2] [--postcode POSTCODE] \ "
   echo "                   [--position 'lat;lng'] [--template TEMPLATE] \ "
-  echo "                   [--bgcolor BACKGROUND_COLOR] [--textcolor TEXT_COLOR]"
+  echo "                   [--bgcolor BACKGROUND_COLOR] [--textcolor TEXT_COLOR] \ "
+  echo "                   [--noinput]"
+  echo
   echo "Notes:"
   echo "  * If --theme is not specified, the default theme data/config.env:ORG_DEFAULT_THEME is used"
   echo "  * TEMPLATE refers to folders in org-templates/"
+  echo
   echo "Examples:"
   echo '  ./add-org.sh lyon Lyon'
   echo '  ./add-org.sh mon-village "Mon village" \ '
-  echo '      --theme commune-defaut \'
-  echo '      --url https://mon-village.fr \ '
+  echo '      --theme smica \'
+  echo '      --template mairie-defaut \ '
+  echo '      --url https://site-officiel-de-mon-village.fr \ '
   echo '      --phone 0123456789 \'
-  echo '      --email a@b.c \ '
+  echo '      --email contact@mon-village.fr \ '
   echo '      --addr "2 rue XXX" \ '
   echo '      --addr2 "Espace coworking" \ '
   echo '      --postcode 12120 \ '
   echo '      --position "48.866667;2.333333" \ '
-  echo '      --template mairie-defaut \ '
   echo '      --bgcolor "#0e6ba4" \ '
   echo '      --textcolor "#FFFFFF"'
   exit 1
@@ -116,31 +120,61 @@ fi
 
 export SLUG=$1
 export TITLE="$2"
-DIR="data/sites/$SLUG"
-TEMPLATES_DIR="org-templates"
-TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE"
+
+BASE_DIR=`pwd`
+DIR="$BASE_DIR/data/sites/$SLUG"
+TEMPLATES_DIR="$BASE_DIR/org-templates"
+THEMES_DIR="$BASE_DIR/data/themes/themes"
 
 if [ -d "$DIR" ]; then
-  echo "$DIR already exists, please remove it"
+  echo_error "$DIR already exists, please remove it"
   exit 1
 fi
 
 if [ -z "$THEME" ]; then
-  read -p "No theme supplied. Default '$(get_default_theme)' defined in .env will be used. Continue [y/n]? " -r
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Operation aborted."
-    exit
+  if [ ! -d "$THEMES_DIR" ] || $NOINPUT; then
+    THEME=publik
+  else
+    echo_error "No theme supplied."
+    PS3="Choose theme: "
+    select theme in publik $(ls $THEMES_DIR); do
+      if [ -z "$REPLY" ] || [ -z "$theme" ]; then
+        echo "Please select a valid theme number."
+      elif [ "$theme" == "publik" ] || [ -d "$THEMES_DIR/$theme" ]; then
+        THEME=$theme
+        break
+      else
+        echo "Unexisting theme $THEMES_DIR/$theme"
+      fi
+    done
   fi
 fi
 
 if [ -z "$TEMPLATE" ]; then
-  read -p "No template supplied. User and agent portals won't be initialized and no categories will be imported. Continue [y/n]? " -r
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Operation aborted."
-    exit
+  if [ ! -d "$TEMPLATES_DIR" ] || $NOINPUT; then
+    TEMPLATE=""
+  else
+    echo_error "No templates supplied."
+    cd $TEMPLATES_DIR
+    PS3="Choose template: "
+    select template in "" $(ls -d */); do
+      if [ -z "$REPLY" ]; then
+        echo "Please select a valid theme number."
+      elif [ -z "$template" ]; then
+        TEMPLATE=""
+        break
+      elif [ -d "$TEMPLATES_DIR/$template" ]; then
+        TEMPLATE=$(echo $template | rev | cut -c 2- | rev)
+        break
+      else
+        echo "Unexisting template $TEMPLATES_DIR/$template"
+      fi
+    done
   fi
 fi
 
+cd $BASE_DIR
+TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE"
 mkdir -p "$DIR"
 
 echo "Creating organization..."
@@ -148,13 +182,6 @@ for VAR in SLUG TITLE THEME SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE DEFAULT_POS
 do
   echo "$VAR=${!VAR}"
 done
-
-if [ -z "$THEME" ]; then
-  echo "Using default theme '$(get_default_theme)' defined in .env"
-  THEME='$ORG_DEFAULT_THEME'
-else
-  echo "Using theme $THEME"
-fi
 
 echo "Creating config files in $DIR..."
 if [ ! -z "$TEMPLATE" ]; then

@@ -72,7 +72,7 @@
     },
     {
       "set-theme": {
-        "theme": "${ORG_DEFAULT_THEME}"
+        "theme": "publik"
       }
     }
   ]
