@@ -75,9 +75,8 @@ script `install-on-debian.sh` et reproduire les commandes en les adaptant pour v
 Pour une installation locale, il suffit d'avoir Docker et docker-compose installés. Puis :
 
 ```bash
-git clone https://github.com/Vayel/publik-docker --recurse-submodules
+git clone https://github.com/Vayel/publik-docker
 cd publik-docker
-git submodule update --init --recursive
 ```
 
 #### Installation sur un serveur Debian

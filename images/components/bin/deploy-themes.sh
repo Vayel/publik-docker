@@ -8,9 +8,11 @@ function copy_dir() {
   SRC=$1
   DEST=$2
 
-  rm -rf $DEST
-  mkdir -p $DEST
-  cp -R $SRC/* $DEST
+  if [ -d "$SRC" ]; then
+    rm -rf $DEST
+    mkdir -p $DEST
+    cp -R $SRC/* $DEST
+  fi
 }
 
 DEST_DIR=/usr/share/publik/themes/publik-base
