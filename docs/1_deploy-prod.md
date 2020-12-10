@@ -81,4 +81,4 @@ Rendez-vous sur `https://<COMBO_SUBDOMAIN><ENV>.<DOMAIN>`. Par exemple :
 ./manage/docker/up-prod.sh
 ```
 
-Puis se référer à `docs/manage.md`.
+Puis se référer à [docs/manage.md](2_manage.md).

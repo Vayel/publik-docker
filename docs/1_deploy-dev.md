@@ -94,4 +94,4 @@ Pour démarrer les conteneurs, lancer :
 ./manage/docker/up-dev.sh
 ```
 
-Puis se référer à `docs/manage.md`.
+Puis se référer à [docs/manage.md](2_manage.md).
