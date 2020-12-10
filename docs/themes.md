@@ -27,11 +27,11 @@ Chaque thème est une extension du [thème Publik de base](https://repos.entrouv
 
 Le dossier `static` d'un thème doit contenir un fichier`style.scss`, qui sera compilé
 avec les [fichiers statiques du thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/static/publik).
-Des exemples sont disponibles [ici](https://github.com/Vayel/publik-docker-themes).
+La compilation est faite par `images/components/bin/compile-themes.sh`.
 
 Le dossier `static` contient à minima un fichier `style.scss` qui lui-même importe
-le style du thème de base, lequel sera placé dans `publik-base-theme` au même niveau
-que `themes.json` :
+le style du thème de base, lequel sera placé au moment du *build* dans `publik-base-theme/`
+au même niveau que `themes.json` :
 
 ```sass
 @import '../../../publik-base-theme/static/includes/publik';
@@ -42,17 +42,52 @@ est fait par `images/components/bin/make_theme_data_uris.py`. Ce script va
 chercher les images dans le dossier `static/images`, veuillez donc y placer vos
 images. Le dossier peut ne pas exister.
 
+Des exemples sont disponibles [ici](https://github.com/Vayel/publik-docker-themes).
+
 ### `templates`
 
 Le dossier `templates` d'un thème suit la même architecture que les [templates
 du thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/templates).
-Il ne contient que les fichiers HTML spécifiques au thème ; ceux non surchargés
-seront récupérés dans le thème de base.
+Il ne contient que les fichiers HTML spécifiques au thème.
+
+Côté Django, les templates sont chargés par `hobo.multitenant.template_loader.FilesystemLoader`
+(cf. [https://repos.entrouvert.org/hobo.git/tree/debian/debian_config_common.py#n222](https://repos.entrouvert.org/hobo.git/tree/debian/debian_config_common.py#n222)),
+qui lui-même cherche en priorité dans :
+
+```
+/var/lib/combo/tenants/<tenant>/templates/variants/<theme>/
+/var/lib/combo/tenants/<tenant>/theme/templates/variants/<theme>/
+/var/lib/combo/tenants/<tenant>/templates/
+/var/lib/combo/tenants/<tenant>/theme/templates/
+```
+
+Le dossier `/var/lib/combo/tenants/<tenant>/theme/` est un lien symbolique vers
+`/usr/share/publik/themes/publik-base`.
+
+Si un template est surchargé dans le thème personnalisé, il sera chargé via
+lors de la lecture de `/var/lib/combo/tenants/<tenant>/theme/templates/variants/<theme>/`.
+Les autres templates seront récupérés dans `/var/lib/combo/tenants/<tenant>/theme/templates/`,
+c'est-à-dire dans le thème de base.
+
 Des exemples sont disponibles [ici](https://github.com/Vayel/publik-docker-themes).
 
 Il est important, dans les thèmes personnalisés, de ne redéfinir que ce qui a
 besoin de l'être. Copier/coller des templates du thème de base sans les modifier
 fait que vous ne profiterez pas des mises à jour.
+
+Il convient de ce fait de ne redéfinir que les blocs souhaités d'un template,
+pas tout le template. Par exemple, pour personnaliser le pied de page :
+
+```html
+{% extends "theme.html" %}
+
+{% block footer-top %}
+Blablabla
+{% endblock %}
+```
+
+Ici, le `extends` ira chercher `/var/lib/combo/tenants/<tenant>/theme/templates/theme.html`,
+c'est-à-dire le fichier `theme.html` du [thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/templates/theme.html).
 
 ### `themes.json`
 
