@@ -17,6 +17,13 @@ server {
       proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
   }
 
+  # hobo security requirements
+  # https://repos.entrouvert.org/hobo.git/tree/hobo/environment/models.py#n253
+  add_header X-Content-Type-Options nosniff;
+  add_header X-XSS-Protection 1;
+  add_header X-Frame-Options sameorigin;
+  add_header Strict-Transport-Security max-age=31536000;
+
   #### SSL
   ssl_certificate /etc/letsencrypt/live/${APP_URL}${ENV}.${DOMAIN}/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/${APP_URL}${ENV}.${DOMAIN}/privkey.pem;
