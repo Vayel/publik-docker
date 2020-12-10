@@ -23,7 +23,7 @@ themes.json
 
 Chaque thème est une extension du [thème Publik de base](https://repos.entrouvert.org/publik-base-theme.git/tree/).
 
-### `static`
+### CSS
 
 Le dossier `static` d'un thème doit contenir un fichier`style.scss`, qui sera compilé
 avec les [fichiers statiques du thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/static/publik).
@@ -37,14 +37,50 @@ au même niveau que `themes.json` :
 @import '../../../publik-base-theme/static/includes/publik';
 ```
 
-Pour être affichées, les images ont besoin d'être converties en base64, ce qui
-est fait par `images/components/bin/make_theme_data_uris.py`. Ce script va
-chercher les images dans le dossier `static/images`, veuillez donc y placer vos
-images. Le dossier peut ne pas exister.
+Pour des petites images, il peut être intéressant d'optimiser le chargement en
+incluant directement l'image dans le fichier CSS, en utilisant une URI data.
+`images/components/bin/compile-themes.sh` appelle `images/components/bin/make_theme_data_uris.py`,
+qui lit les images de taille inférieure à 10MB dans le dossier `static/images`,
+les convertit en base64 et stocke ces valeurs dans des variables SASS au format
+`$data_uri_<nom_image_sans_extension>`.
+
+Donc si j'ai un fichier `static/images/logo.png`, la variable SASS `$data_uri_logo`
+contiendra le code base64 de l'image et pourra être utilisée de la sorte :
+
+```css
+#logo {
+  background-image: url($data_uri_logo);
+}
+```
+
+Le dossier `static/images` peut ne pas exister s'il n'y a pas d'images.
 
 Des exemples sont disponibles [ici](https://github.com/Vayel/publik-docker-themes).
 
-### `templates`
+### Autres fichiers statiques
+
+`images/components/bin/deploy-themes.sh` copie récursivement le contenu des
+dossiers `themes/<theme>/static` dans `/usr/share/publik/themes/publik-base/static/<theme>`.
+Ce second dossier est lui-même inclus dans le dossier du *tenant* par un lien
+symbolique :
+
+```
+lrwxrwxrwx 1 combo combo   36 déc.   9 16:35 theme -> /usr/share/publik/themes/publik-base
+```
+
+Le dossier `/var/lib/<service>/tenants/<tenant>/theme/static` est alors servi
+par le nginx configuré par `images/components/nginx/*.template`.
+
+Utiliser un fichier statique dans un template Django se fait donc aussi simplement
+que :
+
+```html
+{% static "" %}{{ theme }}/foo/bar/file.txt
+```
+
+Si votre fichier se situe à l'origine dans `themes/<theme>/static/foo/bar/file.txt`.
+
+### Templates Django
 
 Le dossier `templates` d'un thème suit la même architecture que les [templates
 du thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/templates).
