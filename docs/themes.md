@@ -89,6 +89,21 @@ Blablabla
 Ici, le `extends` ira chercher `/var/lib/combo/tenants/<tenant>/theme/templates/theme.html`,
 c'est-à-dire le fichier `theme.html` du [thème de base](https://repos.entrouvert.org/publik-base-theme.git/tree/templates/theme.html).
 
+Il faut bien sûr faire attention aux blocs qui sont surchargés par les templates
+enfants. Par exemple, pour personnaliser le pied de page, nous pourrions être
+tentés de définir le fichier `theme.html` suivant :
+
+```html
+{% extends "theme.html" %}
+
+{% block footer %}
+Blablabla
+{% endblock %}
+```
+
+Seulement, cela sera sans effet car `combo/page_template.html`, qui est utilisé
+pour les portails Combo et hérite de `theme.html`, [remplace complètement le contenu de ce bloc](https://repos.entrouvert.org/publik-base-theme.git/tree/templates/combo/page_template.html#n129).
+
 ### `themes.json`
 
 Le fichier `themes.json` liste les thèmes utilisables par Publik, qui se base sur
