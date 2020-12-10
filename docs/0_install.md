@@ -80,8 +80,8 @@ sont configurables et, pour certaines, **doivent être configurées**. Pour cela
 
 Pour la suite, se référer à :
 
-* [docs/deploy-local.md](1_deploy-local.md) pour une installation des conteneurs sur une machine **non accessible** depuis Internet
-* [docs/deploy-dev.md](1_deploy-dev.md) pour une installation de développement des conteneurs sur une machine **accessible** depuis Internet
-* [docs/deploy-prod.md](1_deploy-prod.md) pour une installation de production des conteneurs sur une machine **accessible** depuis Internet
+* [docs/deploy-local.md](1_deploy-local.md) pour une installation de **développement** sur une machine **non accessible** depuis Internet
+* [docs/deploy-dev.md](1_deploy-dev.md) pour une installation de **développement** sur une machine **accessible** depuis Internet
+* [docs/deploy-prod.md](1_deploy-prod.md) pour une installation de **production** sur une machine **accessible** depuis Internet
 
 
