@@ -205,3 +205,12 @@ https://hobo.<monserveurpublik.fr>/theme/
 # Theme de la collectivite "ma-commune"
 https://ma-commune.hobo.<monserveurpublik.fr>/theme/
 ```
+
+## Tester un thème
+
+1. Ajouter le thème dans `data/themes`
+2. Lancer les conteneurs avec `./manage/docker/up-XXX.sh`
+3. Ouvrir un autre shell
+4. Modifier le contenu de `data/themes/<theme>`
+5. Mettre à jour le thème dans le conteneur : `./manage/publik/deploy-themes.sh`
+6. Observer le résultat et revenir en 4
