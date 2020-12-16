@@ -98,9 +98,6 @@ les mails et les rend accessibles depuis `http://webmail<ENV>.<DOMAIN>` (en HTTP
 non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en éditant :
 `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT` et `PASS_SMTP`.
 
-**Vous devez spécifier les versions des composants Publik** dans le `.env`. Les
-dernières sont ici : [https://deb.entrouvert.org/](https://deb.entrouvert.org/).
-
 ```bash
 ./manage/docker/build.sh
 ./manage/docker/up-dev.sh

@@ -29,7 +29,7 @@ Personnaliser si besoin les variables d'environnement dans le fichier `.env`.
 
 Il est **nécessaire** de personnaliser les variables suivantes :
 `DB_HOST`, `DB_PORT`, `DB_ADMIN_USER`, `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT`,
-`PASS_POSTGRES`, `PASS_SMTP` et toutes les versions des composants Publik (les dernières sont ici : [https://deb.entrouvert.org/](https://deb.entrouvert.org/)).
+`PASS_POSTGRES`, `PASS_SMTP`.
 
 
 ```bash

@@ -25,16 +25,6 @@ services:
     container_name: components
     build:
       context: ./images/components
-      args:
-        - authentic_version=$AUTHENTIC_VERSION
-        - combo_version=$COMBO_VERSION
-        - fargo_version=$FARGO_VERSION
-        - hobo_version=$HOBO_VERSION
-        - hobo_agent_version=$HOBO_AGENT_VERSION
-        - passerelle_version=$PASSERELLE_VERSION
-        - wcs_version=$WCS_VERSION
-        - wcs_au_quotidien_version=$WCS_AU_QUOTIDIEN_VERSION
-        - publik_common_version=$PUBLIK_COMMON_VERSION
     image: publik-components
     command: /bin/bash
     volumes:

@@ -4,16 +4,6 @@ FROM debian:buster
 
 MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 
-ARG authentic_version
-ARG combo_version
-ARG fargo_version
-ARG hobo_version
-ARG hobo_agent_version
-ARG passerelle_version
-ARG wcs_version
-ARG wcs_au_quotidien_version
-ARG publik_common_version
-
 # TIMEZONE
 RUN echo "Europe/Paris" > /etc/timezone \
     && apt-get update \
@@ -42,15 +32,15 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \
     && apt-get install -y zip ca-certificates-entrouvert libreoffice sassc \
-    && apt-get install -y publik-common=$publik_common_version \
-      authentic2-multitenant=$authentic_version \
-      combo=$combo_version \
-      fargo=$fargo_version \
-      hobo=$hobo_version \
-      hobo-agent=$hobo_agent_version \
-      passerelle=$passerelle_version \
-      wcs=$wcs_version \
-      wcs-au-quotidien=$wcs_au_quotidien_version \
+    && apt-get install -y publik-common \
+      authentic2-multitenant \
+      combo \
+      fargo \
+      hobo \
+      hobo-agent \
+      passerelle \
+      wcs \
+      wcs-au-quotidien \
     && rm -rf /var/lib/apt/lists/*
 
 # NGINX
