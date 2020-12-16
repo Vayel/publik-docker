@@ -1,6 +1,6 @@
 # See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 
-FROM debian:stretch
+FROM debian:buster
 
 MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 
@@ -31,13 +31,13 @@ ENV LC_ALL fr_FR.UTF-8
 # DEBIAN PACKAGES
 RUN apt-get update \
     && apt-get install -y wget gnupg \
-    && echo "deb http://httpredir.debian.org/debian stretch main" >> /etc/apt/sources.list \
-    && echo "deb http://ftp.fr.debian.org/debian stretch-updates main" >> /etc/apt/sources.list \
-    && echo "deb http://ftp.fr.debian.org/debian stretch-backports main" >> /etc/apt/sources.list \
-    && echo "deb http://deb.entrouvert.org/ stretch main" > /etc/apt/sources.list.d/entrouvert-tmp.list \
+    && echo "deb http://httpredir.debian.org/debian buster main" >> /etc/apt/sources.list \
+    && echo "deb http://ftp.fr.debian.org/debian buster-updates main" >> /etc/apt/sources.list \
+    && echo "deb http://ftp.fr.debian.org/debian buster-backports main" >> /etc/apt/sources.list \
+    && echo "deb http://deb.entrouvert.org/ buster main" > /etc/apt/sources.list.d/entrouvert-tmp.list \
     && wget -q -O- https://deb.entrouvert.org/entrouvert.gpg | apt-key add - \
     && apt-get update \
-    && apt-get install -y entrouvert-repository \
+    && apt-get install -y entrouvert-repository entrouvert-repository-hotfix \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \

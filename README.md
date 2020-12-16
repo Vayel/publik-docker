@@ -15,7 +15,7 @@ Publik est composé de briques de plusieurs types :
 * RabbitMQ. Les composants Django communiquent via un serveur RabbitMQ.
 * Nginx. Un serveur web fait office de proxy, c'est-à-dire de point d'entrée HTTP redirigeant les requêtes vers chaque composant Django.
 
-Publik ne fonctionne que sous Debian 9 (stretch). PostgreSQL, RabbitMQ et Nginx sont installés
+Publik ne fonctionne que sous Debian 10 (buster). PostgreSQL, RabbitMQ et Nginx sont installés
 via les paquets officiels tandis que des paquets Debian sont créés pour chaque composant
 Django.
 
