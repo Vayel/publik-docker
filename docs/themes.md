@@ -10,6 +10,7 @@ sont compilés (SASS -> CSS) et placés dans le dossier lu par Publik (cf.
 Le dossier `data/themes` doit avoir la structure suivante :
 
 ```
+publik-base-theme/
 themes/
   mon_theme/
     static/
@@ -22,6 +23,9 @@ themes.json
 ```
 
 Chaque thème est une extension du [thème Publik de base](https://repos.entrouvert.org/publik-base-theme.git/tree/).
+
+Le dossier `publik-base-theme/` est une copie de ce thème de base (par exemple
+sous forme de sous-module git).
 
 ### CSS
 

@@ -12,7 +12,6 @@ ARG hobo_agent_version
 ARG passerelle_version
 ARG wcs_version
 ARG wcs_au_quotidien_version
-ARG publik_base_theme_version
 ARG publik_common_version
 
 # TIMEZONE
@@ -43,8 +42,7 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \
     && apt-get install -y zip ca-certificates-entrouvert libreoffice sassc \
-    && apt-get install -y publik-base-theme=$publik_base_theme_version \
-      publik-common=$publik_common_version \
+    && apt-get install -y publik-common=$publik_common_version \
       authentic2-multitenant=$authentic_version \
       combo=$combo_version \
       fargo=$fargo_version \
@@ -54,12 +52,6 @@ RUN apt-get update \
       wcs=$wcs_version \
       wcs-au-quotidien=$wcs_au_quotidien_version \
     && rm -rf /var/lib/apt/lists/*
-
-# THEMES
-# We clone the repo to be able to build custom themes without having to pull
-# the repo every time
-RUN cd /usr/share/publik \
-    && git clone https://git.entrouvert.org/publik-base-theme.git
 
 # NGINX
 COPY nginx/*.template /etc/nginx/conf.d/ 

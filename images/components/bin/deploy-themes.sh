@@ -32,6 +32,9 @@ compile-themes.sh $BASE_DIR
 
 mkdir -p "$DEST_DIR/templates/variants"
 
+rm -rf $DEST_DIR
+cp -R $BASE_DIR/publik-base-theme $DEST_DIR/publik-base
+
 cd $BASE_DIR/themes
 for theme in *
 do
