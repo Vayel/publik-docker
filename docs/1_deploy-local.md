@@ -86,7 +86,7 @@ Il faut faire pointer les urls des composants vers la machine locale. Attention 
 
 ## Déploiement
 
-Personnaliser si besoin les variables d'environnement dans le fichier `.env`.
+Personnaliser les variables d'environnement dans le fichier `.env`.
 
 Notons que pour un déploiement de dev, la base de données utilisée est celle du
 conteneur Docker `db`, il n'y a donc rien à changer à ce niveau. Il est néanmoins
@@ -97,6 +97,9 @@ De même, le conteneur `mailcatcher` fait office de serveur SMTP : il intercepte
 les mails et les rend accessibles depuis `http://webmail<ENV>.<DOMAIN>` (en HTTP et
 non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en éditant :
 `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT` et `PASS_SMTP`.
+
+**Vous devez spécifier les versions des composants Publik** dans le `.env`. Les
+dernières sont ici : [https://deb.entrouvert.org/](https://deb.entrouvert.org/).
 
 ```bash
 ./manage/docker/build.sh

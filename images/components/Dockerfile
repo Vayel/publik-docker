@@ -4,6 +4,17 @@ FROM debian:stretch
 
 MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 
+ARG authentic_version
+ARG combo_version
+ARG fargo_version
+ARG hobo_version
+ARG hobo_agent_version
+ARG passerelle_version
+ARG wcs_version
+ARG wcs_au_quotidien_version
+ARG publik_base_theme_version
+ARG publik_common_version
+
 # TIMEZONE
 RUN echo "Europe/Paris" > /etc/timezone \
     && apt-get update \
@@ -31,15 +42,24 @@ RUN apt-get update \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
     && apt-get update \
     && apt-get install -y vim gettext nginx-full quilt gnupg git \
-    && apt-get install -y zip ca-certificates-entrouvert libreoffice publik-base-theme publik-common sassc \
-    && apt-get install -y combo passerelle fargo hobo hobo-agent authentic2-multitenant wcs wcs-au-quotidien \
+    && apt-get install -y zip ca-certificates-entrouvert libreoffice sassc \
+    && apt-get install -y publik-base-theme=$publik_base_theme_version \
+      publik-common=$publik_common_version \
+      authentic2-multitenant=$authentic_version \
+      combo=$combo_version \
+      fargo=$fargo_version \
+      hobo=$hobo_version \
+      hobo-agent=$hobo_agent_version \
+      passerelle=$passerelle_version \
+      wcs=$wcs_version \
+      wcs-au-quotidien=$wcs_au_quotidien_version \
     && rm -rf /var/lib/apt/lists/*
 
 # THEMES
 # We clone the repo to be able to build custom themes without having to pull
 # the repo every time
 RUN cd /usr/share/publik \
-    && git clone http://git.entrouvert.org/publik-base-theme.git
+    && git clone https://git.entrouvert.org/publik-base-theme.git
 
 # NGINX
 COPY nginx/*.template /etc/nginx/conf.d/ 
