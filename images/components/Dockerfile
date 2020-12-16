@@ -33,7 +33,7 @@ RUN apt-get update \
     && apt-get install -y entrouvert-repository entrouvert-repository-hotfix \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
     && apt-get update \
-    && apt-get install -y
+    && apt-get install -y \
       # Text editor
       vim \
       # Translations
@@ -53,7 +53,8 @@ RUN apt-get update \
       # To compile Publik themes styles
       sassc \
     # Install Publik components (see https://deb.entrouvert.org)
-    && apt-get install -y publik-common \
+    && apt-get install -y \
+      publik-common \
       publik-base-theme \
       authentic2-multitenant \
       combo \

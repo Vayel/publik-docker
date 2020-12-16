@@ -128,6 +128,15 @@ Se référer à [docs/themes.md](themes.md).
 
 ## Mise à jour
 
+Comme expliqué dans la [documentation officielle](https://doc-publik.entrouvert.com/guide-de-l-administrateur-systeme/exploitation/mises-a-jour-des-composants/) :
+
+> Entr'ouvert livre une nouvelle version de Publik les soirs des 2ème et 4ème jeudi de chaque mois. L'installation peut être faite aussitôt, mais nous conseillons à des hébergeurs tiers non infogérés par Entr'ouvert de faire la mise à jour le mardi suivant.
+
+Attendre le mardi suivant permet de profiter des *hotfixes*.
+
+La mise à jour fait au préalable une sauvegarde donc il faut que les conteneurs
+soient démarrés.
+
 ```
 ./manage/docker/update.sh
 ```

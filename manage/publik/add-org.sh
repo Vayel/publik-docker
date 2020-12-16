@@ -105,24 +105,21 @@ if [ "$#" -ne 2 ]; then
   echo "                   [--noinput]"
   echo
   echo "Notes:"
-  echo "  * If --theme is not specified, the default theme data/config.env:ORG_DEFAULT_THEME is used"
-  echo "  * TEMPLATE refers to folders in data/site-templates/"
+  echo "  * If --theme or --template is not specified, interactive selection is asked"
   echo
   echo "Examples:"
-  echo '  ./add-org.sh lyon Lyon'
-  echo '  ./add-org.sh mon-village "Mon village" \ '
-  echo '      --theme smica \'
-  echo '      --template mairie-defaut \ '
+  echo '  ./manage/publik/add-org.sh lyon Lyon'
+  echo '  ./manage/publik/add-org.sh mon-village "Mon village" \ '
   echo '      --url https://site-officiel-de-mon-village.fr \ '
-  echo '      --phone 0123456789 \'
+  echo '      --phone "01 23 45 67 89" \'
   echo '      --email contact@mon-village.fr \ '
   echo '      --addr "2 rue XXX" \ '
   echo '      --addr2 "Espace coworking" \ '
   echo '      --postcode 12120 \ '
-  echo '      --from-email repasrepondre@monsitepublik.fr \ '
+  echo '      --from-email repasrepondre@mon-publik.fr \ '
   echo '      --email-sender "John Doe"  \ '
   echo '      --email-subject-prefix "Publik"  \ '
-  echo '      --position "48.866667;2.333333"'
+  echo '      --position "44.1833;2.66667"'
   exit 1
 fi
 

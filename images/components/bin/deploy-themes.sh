@@ -32,11 +32,6 @@ compile-themes.sh $BASE_DIR
 
 mkdir -p "$DEST_DIR/templates/variants"
 
-# We do not delete the directory itself as it is referenced with symbolic links
-# by tenants
-rm -rf $DEST_DIR/*
-cp -R $BASE_DIR/publik-base-theme/* $DEST_DIR
-
 cd $BASE_DIR/themes
 for theme in *
 do
