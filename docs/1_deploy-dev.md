@@ -60,6 +60,9 @@ Vous devez alors obtenir quelque chose comme :
 [ components     | nginx is running.
 ```
 
+Si le service `nginx` échoue, connectez-vous au conteneur (`./manage/docker/connect.sh`)
+et lancez `nginx -t`.
+
 Dans un autre shell (en conservant le premier ouvert) :
 
 ```

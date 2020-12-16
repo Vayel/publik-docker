@@ -8,6 +8,7 @@ MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 RUN echo "Europe/Paris" > /etc/timezone \
     && apt-get update \
     && apt-get install -y locales \
+    # Clean the cache to make the image smaller
     && rm -rf /var/lib/apt/lists/* \
     && dpkg-reconfigure -f noninteractive tzdata \
     && sed -i -e 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen \
@@ -20,6 +21,7 @@ ENV LC_ALL fr_FR.UTF-8
 
 # DEBIAN PACKAGES
 RUN apt-get update \
+    # Install packages to fetch Entrouvert's repos
     && apt-get install -y wget gnupg \
     && echo "deb http://httpredir.debian.org/debian buster main" >> /etc/apt/sources.list \
     && echo "deb http://ftp.fr.debian.org/debian buster-updates main" >> /etc/apt/sources.list \
@@ -27,12 +29,32 @@ RUN apt-get update \
     && echo "deb http://deb.entrouvert.org/ buster main" > /etc/apt/sources.list.d/entrouvert-tmp.list \
     && wget -q -O- https://deb.entrouvert.org/entrouvert.gpg | apt-key add - \
     && apt-get update \
+    # Add Entrouvert's repos to apt-get sources
     && apt-get install -y entrouvert-repository entrouvert-repository-hotfix \
     && rm /etc/apt/sources.list.d/entrouvert-tmp.list \
     && apt-get update \
-    && apt-get install -y vim gettext nginx-full quilt gnupg git \
-    && apt-get install -y zip ca-certificates-entrouvert libreoffice sassc \
+    && apt-get install -y
+      # Text editor
+      vim \
+      # Translations
+      gettext \
+      # HTTP proxy
+      nginx-full \
+      # diff command
+      quilt \
+      gnupg \
+      git \
+      # To create wcs site template
+      zip \
+      # For Publik LDAP
+      ca-certificates-entrouvert \
+      # For Publik documents
+      libreoffice \
+      # To compile Publik themes styles
+      sassc \
+    # Install Publik components (see https://deb.entrouvert.org)
     && apt-get install -y publik-common \
+      publik-base-theme \
       authentic2-multitenant \
       combo \
       fargo \
@@ -41,6 +63,7 @@ RUN apt-get update \
       passerelle \
       wcs \
       wcs-au-quotidien \
+    # Clean the cache to make the image smaller
     && rm -rf /var/lib/apt/lists/*
 
 # NGINX

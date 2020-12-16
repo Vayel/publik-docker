@@ -117,6 +117,9 @@ Vous devez alors obtenir quelque chose comme :
 [ components     | nginx is running.
 ```
 
+Si le service `nginx` échoue, connectez-vous au conteneur (`./manage/docker/connect.sh`)
+et lancez `nginx -t`.
+
 Il faut alors déployer les services Publik avec la commande `./manage/publik/deploy.sh`. En
 plus de configurer nginx et de déployer les services, cette commande importe le
 contenu du site. Pour cela, elle va consulter le dossier `data/sites` et chercher
