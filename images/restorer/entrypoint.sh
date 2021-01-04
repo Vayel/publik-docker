@@ -21,16 +21,14 @@ tar -xf "$SRC_DIR/var_lib_wcs.tar" --strip-components=1
 echo
 echo "Restoring database..."
 
-function dbcmd() {
-  cmd=$1
-  shift
-  PGPASSWORD="$PASS_POSTGRES" $cmd -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" "$@"
-}
+# wcs creates tables in admin db but we cannot drop the admin db so we need to
+# delete the tables manually
+PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" --quiet -c "DROP OWNED BY wcs;"
 
-dbcmd psql -d $DB_ADMIN_USER -c "DROP OWNED BY wcs CASCADE;"
-
-# Clean instructions were added to the dump file so we don't need to do it ourselves
-gunzip -c "$SRC_DIR/db_dump.gz" | dbcmd psql --set ON_ERROR_STOP=on
+cd $SRC_DIR
+for fname in *.sql; do
+  PGPASSWORD="$PASS_POSTGRES" psql -f "$fname" -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" --quiet
+done
 
 echo
 echo "Backup successfully restored!"

@@ -4,7 +4,7 @@ BACKUP_DIR=$1
 DEV=false
 
 if [ -z "$BACKUP_DIR" ]; then
-  echo "Usage: restore-backup.sh <path>"
+  echo "Usage: restore-backup.sh <path> [--dev]"
   exit 1
 fi
 
@@ -24,7 +24,7 @@ fi
 # See docker-compose.restorer.yml
 SRC_DIR=data/backups/to_restore
 mkdir -p $SRC_DIR
-rm -rf "$SRC_DIR/*"
+rm -rf $SRC_DIR/*
 cp -R $BACKUP_DIR/* $SRC_DIR
 
 if [ $DEV ]; then

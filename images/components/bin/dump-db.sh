@@ -7,5 +7,7 @@ if [ -z "$DEST_DIR" ]; then
   exit 1
 fi
 
-# We need to remove drop instructions concerning the admin
-PGPASSWORD="$PASS_POSTGRES" pg_dumpall -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" --clean | grep --invert-match "DROP ROLE $DB_ADMIN_USER" | grep --invert-match "CREATE ROLE $DB_ADMIN_USER" | gzip > "$DEST_DIR/db_dump.gz"
+for db in authentic2_multitenant combo fargo hobo passerelle $DB_ADMIN_USER; do
+  # We prevent admin db deletion as we need it for the import
+  PGPASSWORD="$PASS_POSTGRES" pg_dump -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" $db --clean --create | grep --invert-match "DROP DATABASE $DB_ADMIN_USER" | grep --invert-match "CREATE DATABASE $DB_ADMIN_USER" > "$DEST_DIR/$db.sql"
+done
