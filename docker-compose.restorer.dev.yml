@@ -1,0 +1,24 @@
+# To be used with docker-compose.restorer.yml
+# docker-compose -f docker-compose.restorer.yml -f docker-compose.restorer.dev.yml xxx
+
+
+version: "2.1"
+
+services:
+  db:
+    container_name: db
+    build:
+      context: ./images/postgresql
+    image: publik-pgsql
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    env_file:
+      - .env
+    environment:
+      - "POSTGRES_USER=$DB_ADMIN_USER"
+      - "POSTGRES_PASSWORD=$PASS_POSTGRES"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

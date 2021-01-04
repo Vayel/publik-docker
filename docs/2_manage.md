@@ -59,6 +59,9 @@ sauvegarde avant d'en restaurer une plus ancienne.
 # Ex : ./manage/restore-backup.sh data/backups/03-12-2020_14h44m48s/
 ```
 
+Pour un déploiement de développement, avec la base de données dans un conteneur,
+ajouter l'option `--dev` après le chemin du dossier.
+
 ## Logging
 
 Il est possible de personnaliser le niveau de logging via la variable `LOG_LEVEL`

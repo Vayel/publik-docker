@@ -10,6 +10,11 @@ services:
     build:
       context: ./images/restorer
     image: publik-restorer
+    env_file:
+      - .env
+    environment:
+      - "POSTGRES_USER=$DB_ADMIN_USER"
+      - "POSTGRES_PASSWORD=$PASS_POSTGRES"
     volumes:
       - authentic2data:/var/lib/authentic2-multitenant/tenants
       - combodata:/var/lib/combo/tenants
