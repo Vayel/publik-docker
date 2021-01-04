@@ -47,7 +47,7 @@ Pour consulter la base, il faut l'ajouter :
 Crée un dossier à la date courante dans `data/backups` avec deux fichiers :
 
 * `*.tar` : les volumes montés dans `/var/lib/` par le conteneur `components`. Attention, `wcs.tar` contient tout le dossier `/var/lib/wcs` alors que les autres archives ne comportent que le sous-dossier `/var/lib/*/tenants/`.
-* `db_dump.gz` : une sauvegarde de la base avec `pg_dumpall` compressée avec gzip (cf. [doc](https://www.postgresql.org/docs/10/backup-dump.html#BACKUP-DUMP-LARGE))
+* `*.sql` : une sauvegarde de chaque base avec `pg_dump`
 
 ### Restauration
 
@@ -58,9 +58,6 @@ sauvegarde avant d'en restaurer une plus ancienne.
 ./manage/restore-backup.sh <chemin_du_dossier>
 # Ex : ./manage/restore-backup.sh data/backups/03-12-2020_14h44m48s/
 ```
-
-Pour un déploiement de développement, avec la base de données dans un conteneur,
-ajouter l'option `--dev` après le chemin du dossier.
 
 ## Logging
 

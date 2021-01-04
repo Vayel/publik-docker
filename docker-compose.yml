@@ -37,6 +37,7 @@ services:
       - ./data/hosts:/etc/hosts
       - ./data/sites:/tmp/sites
       - ./data/backups/last:/tmp/backup
+      - ./data/backups/to_restore:/tmp/backup_to_restore
       - ./data/themes:/tmp/themes
     links:
       - rabbitmq:rabbitmq

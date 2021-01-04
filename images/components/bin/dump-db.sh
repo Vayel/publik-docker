@@ -8,6 +8,10 @@ if [ -z "$DEST_DIR" ]; then
 fi
 
 for db in authentic2_multitenant combo fargo hobo passerelle $DB_ADMIN_USER; do
+  options="--clean --create"
   # We prevent admin db deletion as we need it for the import
-  PGPASSWORD="$PASS_POSTGRES" pg_dump -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" $db --clean --create | grep --invert-match "DROP DATABASE $DB_ADMIN_USER" | grep --invert-match "CREATE DATABASE $DB_ADMIN_USER" > "$DEST_DIR/$db.sql"
+  if [ "$db" == "$DB_ADMIN_USER" ]; then
+    options=""
+  fi
+  PGPASSWORD="$PASS_POSTGRES" pg_dump -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" $db $options > "$DEST_DIR/$db.sql"
 done
