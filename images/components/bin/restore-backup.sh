@@ -36,7 +36,7 @@ echo "Restoring database..."
 echo "Deleting wcs tables in admin db"
 # wcs creates tables in admin db but we cannot drop the admin db so we need to
 # delete the tables manually
-PGPASSWORD="$PASS_POSTGRES" psql -v ON_ERROR_STOP=ON -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER" --quiet -c "DROP OWNED BY wcs;"
+PGPASSWORD="$PASS_DB_WCS" psql -v ON_ERROR_STOP=ON -h "$DB_HOST" -p "$DB_PORT" -U wcs -c "DROP OWNED BY wcs;"
 
 cd $SRC_DIR
 for fname in *.sql; do
