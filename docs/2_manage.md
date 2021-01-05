@@ -62,11 +62,12 @@ sauvegarde avant d'en restaurer une plus ancienne.
 ## Logging
 
 Il est possible de personnaliser le niveau de logging via la variable `LOG_LEVEL`
-dans le fichier `config.env`. Les logs sont configurÃ©s dans les fichiers de
-configuration nginx `components/nginx/*` et dans `components/tools.pyenv.template`.
+dans le fichier `.env`. Les logs sont configurés dans les fichiers de
+configuration nginx `images/components/nginx/*` et dans `images/components/common.py.template`.
 
-Les logs des composants Django sont Ã©crits dans la console et capturÃ©s par `service`
-qui les sauvegarde dans des fichiers (cf. plus bas).
+Les logs des composants Django sont écrits dans la console et capturés par `service`
+qui les sauvegarde dans des fichiers (voir `debian/<component>.init` dans le code
+source).
 
 Pour consulter les messages de logging, se connecter au conteneur (une fois démarré) :
 
@@ -80,20 +81,14 @@ Il y a alors deux types de logs :
 * `/var/log/nginx/` : les logs de nginx (uniquement dans les conteneurs `proxy` et `components`)
 * `/var/log/uwsgi.COMPOSANT.log` : les logs du composant Django (uniquement dans le conteneur `components`)
 
-TODO: authentic
-
 ## Debug
 
 Pour débuguer le code Python d'un composant, nous procédons de la façon suivante :
 
-1. Identifier le dossier contenant les sources (à priori `/usr/lib/python2.7/dist-packages/<component>`)
-2. Le copier dans `data` : `docker cp components:<src-folder> data/<component>`
-3. Ajouter une règle dans `components.volumes` de `docker-compose.yml` : `- ./data/<component>:/usr/lib/python2.7/dist-packages/<component>`
-
-Il est alors possible d'insérer des messages de debug dans le code directement en
-l'éditant dans le dossier monté dans `data`. A priori, il n'y a pas besoin de
-redémarrer les conteneurs pour que les modifications dans le code soient prises
-en compte.
+1. Identifier le dossier contenant les sources (à priori `/usr/lib/python3/dist-packages/<component>`)
+2. Se connecter au conteneur : `./manage/docker/connect.sh`
+3. Ajouter des instructions de debug dans les sources
+4. Redémarrer les services : `stop-services.sh && start-services.sh`
 
 ## Importer des données
 

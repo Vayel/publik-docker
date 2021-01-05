@@ -20,7 +20,7 @@ else
   exit 1
 fi
 
-THEME_PATH="/usr/share/publik/themes/$THEME"
+THEME_PATH="/usr/share/publik/themes/publik-base/static/$THEME"
 if [ ! -d "$THEME_PATH" ]; then
   echo_error "Theme $THEME_PATH does not exist. Is the 'themes' folder mounted?"
   echo

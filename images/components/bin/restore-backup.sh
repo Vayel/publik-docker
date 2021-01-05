@@ -25,6 +25,7 @@ do
 done
 
 cd /var/lib/wcs
+echo "Restoring $(pwd)"
 rm -rf *
 tar -xf "$SRC_DIR/var_lib_wcs.tar" --strip-components=1
 chown -R wcs:wcs *

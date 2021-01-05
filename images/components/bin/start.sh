@@ -28,12 +28,13 @@ echo
 #
 # The common settings must be imported first by hobo, which uses the alphabetical order
 # (hence the "_")
+#
+# In the Dockerfile, we also define custom settings per component
 subst.sh /tmp/common.py.template /tmp/_common.py
-for COMP in authentic2-multitenant combo fargo hobo passerelle wcs
+for COMP in authentic2-multitenant combo fargo hobo hobo-agent passerelle wcs
 do
   cp /tmp/_common.py "/etc/$COMP/settings.d/"
 done
-cp /tmp/_common.py /etc/hobo-agent/settings.d/
 
 # To be allowed to write logs
 chown -R wcs:wcs /var/lib/wcs
