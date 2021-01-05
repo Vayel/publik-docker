@@ -24,12 +24,12 @@
         "createdb-connection-params": {
             "database": "$DB_ADMIN_USER",
             "host": "${DB_HOST}",
-            "user": "wcs",
-            "password": "${PASS_DB_WCS}",
+            "user": "$DB_ADMIN_USER",
+            "password": "${PASS_POSTGRES}",
             "port": ${DB_PORT}
         },
         "database-template-name": "wcs_%s",
-        "database": "$DB_ADMIN_USER",
+        "database": "wcs",
         "host": "${DB_HOST}",
         "user": "wcs",
         "password": "${PASS_DB_WCS}",
