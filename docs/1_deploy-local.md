@@ -99,7 +99,7 @@ non en HTTPS). Il est néanmoins possible d'utiliser un autre serveur SMTP en é
 `SMTP_HOST`, `SMTP_USER`, `SMTP_PORT` et `PASS_SMTP`.
 
 ```bash
-./manage/docker/build.sh
+./manage/docker/build-dev.sh
 ./manage/docker/up-dev.sh
 ```
 
