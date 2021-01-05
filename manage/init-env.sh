@@ -16,7 +16,8 @@ function generate_passwords {
 }
 
 # We need to create mounted folders now so that the user can write them
-mkdir -p data/backups data/letsencrypt data/sites data/ssl
+# Otherwise it would be owned by root
+mkdir -p data/backups data/backups/last data/backups/to_restore data/letsencrypt data/sites data/ssl
 
 ./manage/init-ssl.sh
 
