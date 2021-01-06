@@ -126,3 +126,9 @@ soient démarrés.
 ```
 ./manage/docker/update.sh
 ```
+
+Puis vous souhaitez sûrement supprimer les images Docker [inutilisées](https://docs.docker.com/config/pruning/) :
+
+```
+docker image prune
+```
