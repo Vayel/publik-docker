@@ -36,6 +36,26 @@ Tout cela se fait avec :
 ./manage/publik/deploy.sh <site>
 ```
 
+Parfois, il est indiqué que le système d'authentification n'est pas configué (c'est
+le cas notamment lorsque dans le hobo de la collectivité, on n'a pas le menu
+a gauche). Il faut alors créer manuellement les fournisseurs d'identité SAML :
+`https://auth.<monsite.fr>/admin/saml/libertyprovider/`
+
+Une collectivité demande les fournisseurs suivants, qui peuvent être créés au
+besoin via le bouton "Ajouter depuis une URL" en haut à droite (s'inspirer de
+ce qui existe déjà) :
+
+* Liaison au hobo maître :
+  * Nom : `<nom de la commune>`
+  * Raccourci : `hobo-<slug-commune>`
+  * Collectivité : `Collectivité par défaut`
+  * URL des métadonnées : `https://<commune>.hobo.<monsite.fr>/accounts/mellon/metadata/`
+* Pour chaque composant Publik :
+  * Nom : `<composant>`
+  * Raccourci : `_hobo_<slug-commune>_<composant>-<slug-commune>`
+  * Collectivité : `<commune>`
+  * URL des métadonnées : `https://<commune>.<composant>.<monsite.fr>/accounts/mellon/metadata/`
+
 ## Supprimer une collectivité
 
 ```
@@ -45,4 +65,7 @@ Tout cela se fait avec :
 Puis se rendre dans l'admin Authentic (en ajoutant `admin` à la fin de l'url) et
 supprimer l'entité de votre commune dans "Authentic2 RBAC" > "Entités".
 
-Il 
+Enfin, se connecter à la base avec pgAdmin et dans les tables `environment_*` du
+schéma `hobo_<mon_site>` de la base de données `hobo`, supprimer les lignes
+dont le slug est celui de la collectivité supprimée. Pour la table `environment_variable`,
+il s'agit de la colonne `value`.
