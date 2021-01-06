@@ -11,7 +11,7 @@ function copy_dir() {
   if [ -d "$SRC" ] && [ ! -z "$(ls -A $SRC)" ]; then
     rm -rf $DEST
     mkdir -p $DEST
-    cp -R $SRC/* $DEST
+    cp -RL $SRC/* $DEST
   fi
 }
 
