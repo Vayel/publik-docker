@@ -96,15 +96,6 @@ Pour débuguer le code Python d'un composant, nous procédons de la façon suivante
 
 Se référer à [docs/multi-sites.md](multi-sites.md).
 
-### Supprimer une collectivité
-
-```
-./manage/publik/delete-org.sh <slug>
-```
-
-Puis se rendre dans l'admin Authentic (en ajoutant `admin` à la fin de l'url) et
-supprimer l'entité de votre commune dans "Authentic2 RBAC" > "Entités".
-
 ### Importer des pages
 
 TODO

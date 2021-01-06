@@ -25,9 +25,13 @@ do
     --dest $static_dir/_data_uris.scss \
     --dest $BASE_DIR/publik-base-theme/static/includes/_data_uris.scss
 
-  echo "Compiling CSS for $theme..."
-  cd $static_dir && sassc style.scss style.css
-	rm -rf $static_dir/.sass-cache/
+  if [[ "$theme" = __* ]]; then
+    echo "Skipping CSS compilation for abstract theme $theme"
+  else
+    echo "Compiling CSS for $theme..."
+    cd $static_dir && sassc style.scss style.css
+    rm -rf $static_dir/.sass-cache/
+  fi
 done
 
 echo_success "Themes compiled."

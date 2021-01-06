@@ -8,7 +8,7 @@ function copy_dir() {
   SRC=$1
   DEST=$2
 
-  if [ -d "$SRC" ]; then
+  if [ -d "$SRC" ] && [ ! -z "$(ls -A $SRC)" ]; then
     rm -rf $DEST
     mkdir -p $DEST
     cp -R $SRC/* $DEST
@@ -35,6 +35,11 @@ mkdir -p "$DEST_DIR/templates/variants"
 cd $BASE_DIR/themes
 for theme in *
 do
+  if [ "$theme" = __* ]; then
+    echo "Skipping deployment for abstract theme $theme"
+    continue
+  fi
+
   echo "Deploying $theme..."
   copy_dir "$BASE_DIR/themes/$theme/static" "$DEST_DIR/static/$theme"
   copy_dir "$BASE_DIR/themes/$theme/templates" "$DEST_DIR/templates/variants/$theme"

@@ -188,11 +188,19 @@ Un objet suit le schéma suivant :
 
 * `id` : le nom du dossier du thème dans `themes`
 * `css_variant` : désigne le sous-dossier dans `static` où Django récupérera les fichiers statiques. Ici, **identique à `id`**.
-* `theme_color` : variable utilisée dans les templates du thème de base
+* `theme_color` : couleur utilisée pour l'icône du thème sur la page de sélection des thèmes dans hobo
 * `une_autre_variable_utilisee_dans_les_templates`, `une_variable`... : des variables utilisables dans les templates du thème personnalisé
 
 Il est conseillé de stocker ses thèmes dans un dépôt git dédié et de les placer
 dans `data/themes` avec un `git clone`.
+
+Les thèmes commençant par `__` seront ignorés et sont qualifiés d'abstraits. Ils
+servent de base à d'autres thèmes et peuvent avoir du SCSS incomplet (par exemple,
+des variables de couleur non définies, qui le seront par les thèmes enfants).
+
+Un exemple de thème abstrait est disponible [ici](https://github.com/Vayel/publik-docker-themes/tree/master/themes/__smica-base).
+[Ce thème](https://github.com/Vayel/publik-docker-themes/tree/master/themes/smica-bleu)
+est un exemple de thème enfant d'un thème abstrait.
 
 ## Associer un thème à une collectivité
 

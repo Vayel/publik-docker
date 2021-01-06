@@ -35,3 +35,14 @@ Tout cela se fait avec :
 ```
 ./manage/publik/deploy.sh <site>
 ```
+
+## Supprimer une collectivité
+
+```
+./manage/publik/delete-org.sh <slug>
+```
+
+Puis se rendre dans l'admin Authentic (en ajoutant `admin` à la fin de l'url) et
+supprimer l'entité de votre commune dans "Authentic2 RBAC" > "Entités".
+
+Il 
