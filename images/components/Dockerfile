@@ -57,6 +57,7 @@ RUN apt-get update \
       publik-common \
       publik-base-theme \
       authentic2-multitenant \
+      chrono \
       combo \
       fargo \
       hobo \
@@ -96,6 +97,13 @@ COPY fargo.settings.py /etc/fargo/settings.d/custom.py
 COPY secret /etc/fargo
 RUN chmod 755 /etc/fargo/secret
 RUN usermod fargo -s /bin/bash
+
+# CHRONO
+RUN mkdir -p /etc/chrono/settings.d/ 
+COPY chrono.settings.py /etc/chrono/settings.d/custom.py
+COPY secret /etc/chrono
+RUN chmod 755 /etc/chrono/secret
+RUN usermod chrono -s /bin/bash
 
 # HOBO
 COPY deploy/* /tmp/

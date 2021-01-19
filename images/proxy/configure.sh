@@ -49,6 +49,7 @@ function generateall() {
 
   generateconf ${ORG}${COMBO_SUBDOMAIN} http
   generateconf ${ORG}${COMBO_ADMIN_SUBDOMAIN} http
+  generateconf ${ORG}${CHRONO_SUBDOMAIN} http
   generateconf ${ORG}${FARGO_SUBDOMAIN} http
   generateconf ${ORG}${AUTHENTIC_SUBDOMAIN} http
   generateconf ${ORG}${HOBO_SUBDOMAIN} http
@@ -57,6 +58,7 @@ function generateall() {
 
   generatecertificate ${ORG}${COMBO_SUBDOMAIN}
   generatecertificate ${ORG}${COMBO_ADMIN_SUBDOMAIN}
+  generatecertificate ${ORG}${CHRONO_SUBDOMAIN}
   generatecertificate ${ORG}${FARGO_SUBDOMAIN}
   generatecertificate ${ORG}${AUTHENTIC_SUBDOMAIN}
   generatecertificate ${ORG}${HOBO_SUBDOMAIN}
@@ -65,6 +67,7 @@ function generateall() {
 
   generateconf ${ORG}${COMBO_SUBDOMAIN} https
   generateconf ${ORG}${COMBO_ADMIN_SUBDOMAIN} https
+  generateconf ${ORG}${CHRONO_SUBDOMAIN} https
   generateconf ${ORG}${FARGO_SUBDOMAIN} https
   generateconf ${ORG}${AUTHENTIC_SUBDOMAIN} https
   generateconf ${ORG}${HOBO_SUBDOMAIN} https
