@@ -33,4 +33,5 @@ delete_tenant wcs ${WCS_SUBDOMAIN} wcsctl
 delete_tenant passerelle ${PASSERELLE_SUBDOMAIN}
 delete_tenant combo ${COMBO_ADMIN_SUBDOMAIN}
 delete_tenant combo ${COMBO_SUBDOMAIN}
+delete_tenant chrono ${CHRONO_SUBDOMAIN}
 delete_tenant hobo ${HOBO_SUBDOMAIN}

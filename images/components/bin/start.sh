@@ -31,7 +31,7 @@ echo
 #
 # In the Dockerfile, we also define custom settings per component
 subst.sh /tmp/common.py.template /tmp/_common.py
-for COMP in authentic2-multitenant combo fargo hobo hobo-agent passerelle wcs
+for COMP in authentic2-multitenant combo chrono fargo hobo hobo-agent passerelle wcs
 do
   cp /tmp/_common.py "/etc/$COMP/settings.d/"
 done

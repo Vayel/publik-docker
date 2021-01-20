@@ -32,6 +32,10 @@ PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER"
     CREATE DATABASE fargo TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
     GRANT ALL PRIVILEGES ON DATABASE fargo TO fargo;
     ALTER USER fargo WITH PASSWORD '${PASS_DB_FARGO}';
+    CREATE USER chrono;
+    CREATE DATABASE chrono TEMPLATE=template0 LC_COLLATE='fr_FR.UTF_8' LC_CTYPE='fr_FR.UTF-8';
+    GRANT ALL PRIVILEGES ON DATABASE chrono TO chrono;
+    ALTER USER chrono WITH PASSWORD '${PASS_DB_CHRONO}';
     CREATE USER wcs CREATEDB;
     ALTER USER wcs WITH PASSWORD '${PASS_DB_WCS}';
     CREATE USER "authentic-multitenant";
@@ -43,4 +47,6 @@ PGPASSWORD="$PASS_POSTGRES" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_ADMIN_USER"
     \c authentic2_multitenant;
     CREATE EXTENSION unaccent;
     CREATE EXTENSION pg_trgm;
+    \c chrono;
+    CREATE EXTENSION btree_gist;
 EOSQL

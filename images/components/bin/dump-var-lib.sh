@@ -8,7 +8,7 @@ if [ -z "$DEST_DIR" ]; then
 fi
 
 mkdir -p $DEST_DIR
-for comp in authentic2-multitenant combo fargo hobo passerelle
+for comp in authentic2-multitenant combo chrono fargo hobo passerelle
 do
   cd "/var/lib/$comp" && tar -cf "$DEST_DIR/var_lib_${comp}_tenants.tar" tenants
 done

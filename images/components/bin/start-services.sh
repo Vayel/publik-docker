@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function check_services {
-  for S in memcached combo passerelle fargo hobo supervisor authentic2-multitenant wcs nginx
+  for S in memcached combo passerelle chrono fargo hobo supervisor authentic2-multitenant wcs nginx
   do
     # We use the "or" to avoid exiting the script if the status returns a non-zero
     # code
@@ -20,6 +20,7 @@ service memcached start
 service combo start
 service passerelle start
 service fargo start
+service chrono start
 service hobo start
 service supervisor start
 service authentic2-multitenant start

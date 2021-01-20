@@ -9,7 +9,7 @@ stop-services.sh
 
 SRC_DIR=/tmp/backup_to_restore
 
-for comp in authentic2-multitenant combo fargo hobo passerelle
+for comp in authentic2-multitenant combo chrono fargo hobo passerelle
 do
   dest="/var/lib/$comp/tenants"
   echo "Restoring $dest"

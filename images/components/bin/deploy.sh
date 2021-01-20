@@ -56,31 +56,49 @@ function retry() {
   done
 }
 
+function find_ip {
+  ping -c 2 $1 | head -2 | tail -1 | awk '{print $5}' | sed 's/[(:)]//g'
+}
+
 function testHttpCode {
-  t=`wget --spider --max-redirect 0 -S https://$1 2>&1 | grep "HTTP/" | awk '{print $2}'`
+  domain=$1
+  port=$2
+  component=$3
+  http_code=$4
+  t=`wget --spider --max-redirect 0 -S https://$domain:$port 2>&1 | grep "HTTP/" | awk '{print $2}'`
   first_digit="$(echo $t | head -c 1)"
-  if [ "$t" == "$3" ]; then
-    echo_success "OK: $2 returned the expected $3 http code"
+  if [ "$t" == "$http_code" ]; then
+    echo_success "OK: $component returned the expected $http_code http code on $domain:$port"
     return 0
   fi
-  if [ "$first_digit" == "4" ] || [ "$first_digit" == "5" ]; then
-    echo_error "ERROR: $2 returned http error code $t instead of expected $3"
+  if [ -z "$t" ]; then
+    ip=`find_ip $domain`
+    echo_error "ERROR: $component is unreachable on $domain ($ip)"
     return 1
   fi
-  if [ "$t" != "$3" ]; then
-    echo_warning "WARNING: $2 returned http code $t instead of expected $3"
+  if [ "$first_digit" == "4" ] || [ "$first_digit" == "5" ]; then
+    echo_error "ERROR: $component returned http error code $t instead of expected $http_code on $domain"
+    return 1
+  fi
+  if [ "$t" != "$http_code" ]; then
+    echo_warning "WARNING: $component returned http code $t instead of expected $http_code on $domain"
     return 0
   fi
 }
 
 function testHttpContains {
-  t=`wget -O - https://$1 2>&1 | grep $3 | wc -l`
+  domain=$1
+  port=$2
+  component=$3
+  content=$4
+  t=`wget -O - https://$domain:$port 2>&1 | grep $content | wc -l`
   if [ $t -eq 0 ]
   then
-    echo_error "ERROR: $2 html does not contain $3"
+    ip=`find_ip $domain`
+    echo_error "ERROR: $component html does not contain $content on $domain ($ip)"
     return 1
   fi
-  echo_success "OK: $2 returned a html containing $3"
+  echo_success "OK: $component returned a html containing $content on $domain"
 }
 
 # Before cook, wait for all services to be ready
@@ -88,13 +106,14 @@ echo
 echo "###"
 echo "### Checking components..."
 echo "###"
-retry 300 testHttpCode ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 404
-retry 300 testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 404
-retry 300 testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 404
-retry 300 testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 404
-retry 300 testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic 404
-retry 300 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 404
-retry 300 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 404
+retry 300 testHttpCode ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} combo 404
+retry 300 testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} combo_agent 404
+retry 300 testHttpCode ${URL_PREFIX}${CHRONO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} chrono 404
+retry 300 testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} passerelle 404
+retry 300 testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} wcs 404
+retry 300 testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic 404
+retry 300 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} fargo 404
+retry 300 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} hobo 404
 
 echo
 echo "###"
@@ -124,25 +143,27 @@ echo "### Checking deployment..."
 echo "###"
 COMBO_OK="Combo fonctionne"
 AUTHENTIC_OK="Connexion"
-testHttpContains ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo $COMBO_OK
-testHttpContains ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent $COMBO_OK
-testHttpContains ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle $AUTHENTIC_OK
-testHttpContains ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs $AUTHENTIC_OK
-testHttpContains ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo $AUTHENTIC_OK
-testHttpContains ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo $AUTHENTIC_OK
+testHttpContains ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} combo $COMBO_OK
+testHttpContains ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} combo_agent $COMBO_OK
+testHttpContains ${URL_PREFIX}${CHRONO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} chrono $AUTHENTIC_OK
+testHttpContains ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} passerelle $AUTHENTIC_OK
+testHttpContains ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} wcs $AUTHENTIC_OK
+testHttpContains ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} fargo $AUTHENTIC_OK
+testHttpContains ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} hobo $AUTHENTIC_OK
 
 # Do not check authentic for organizations
 if [ -z "$ORG" ]; then
-  testHttpContains ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic $COMBO_OK
-  testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} authentic 302
+  testHttpContains ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic $COMBO_OK
+  testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic 302
 fi
 
-testHttpCode ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo 200
-testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} combo_agent 200
-testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} passerelle 302
-testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} wcs 302
-testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} fargo 302
-testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN}:${HTTPS_PORT} hobo 302
+testHttpCode ${URL_PREFIX}${COMBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} combo 200
+testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} combo_agent 200
+testHttpCode ${URL_PREFIX}${CHRONO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} chrono 302
+testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} passerelle 302
+testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} wcs 302
+testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} fargo 302
+testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} hobo 302
 
 echo
 echo_success "Configuration OK (Hobo cook)"
