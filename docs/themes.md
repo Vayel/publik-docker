@@ -44,7 +44,7 @@ au même niveau que `themes.json` :
 Pour des petites images, il peut être intéressant d'optimiser le chargement en
 incluant directement l'image dans le fichier CSS, en utilisant une URI data.
 `images/components/bin/compile-themes.sh` appelle `images/components/bin/make_theme_data_uris.py`,
-qui lit les images de taille inférieure à 10MB dans le dossier `static/images`,
+qui lit les images de taille inférieure à 50kB dans le dossier `static/images`,
 les convertit en base64 et stocke ces valeurs dans des variables SASS au format
 `$data_uri_<nom_image_sans_extension>`.
 

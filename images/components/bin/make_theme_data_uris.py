@@ -21,7 +21,7 @@ def data_uri(sourcepath):
         if not mimetype:
             continue
         filesize = os.stat(filename).st_size
-        if filesize > 10000:
+        if filesize > 50000:
             continue
         filecontent = open(filename, 'rb').read()
         b64 = base64.encodebytes(filecontent).decode('ascii').replace('\n', '')
