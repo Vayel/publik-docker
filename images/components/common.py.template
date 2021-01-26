@@ -91,3 +91,5 @@ BROKER_URL = 'amqp://{user}:{password}@{host}:{port}//'.format(
     port=RABBITMQ_PORT,
 )
 BROKER_TASK_EXPIRES = $HOBO_DEPLOY_TIMEOUT
+
+EMAIL_REGISTRATION_OPEN = bool('$EMAIL_REGISTRATION_OPEN')

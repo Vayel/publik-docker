@@ -1,5 +1,6 @@
 # This file is imported in the original settings.py file,
 # AFTER /etc/authentic2-multitenant/settings.d/_settings.py
+# Then it can use the settings defined in "common.py.template"
 
 # Databases
 DATABASES['default']['NAME'] = 'authentic2_multitenant'
@@ -39,3 +40,5 @@ CACHES = {
 
 # Role provisionning via local RabbitMQ
 HOBO_ROLE_EXPORT = True
+
+REGISTRATION_OPEN = EMAIL_REGISTRATION_OPEN
