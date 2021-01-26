@@ -50,6 +50,8 @@ do
   fi
 done
 
+set-var-lib-ownership.sh
+
 echo "*******************"
 echo "Initializing themes"
 echo "*******************"

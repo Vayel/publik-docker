@@ -16,19 +16,14 @@ do
   cd $dest
   rm -rf *
   tar -xf "$SRC_DIR/var_lib_${comp}_tenants.tar" --strip-components=1
-  if [ "$comp" == "authentic2-multitenant" ]; then
-    user="authentic-multitenant"
-  else
-    user=$comp
-  fi
-  chown -R $user:$user *
 done
 
 cd /var/lib/wcs
 echo "Restoring $(pwd)"
 rm -rf *
 tar -xf "$SRC_DIR/var_lib_wcs.tar" --strip-components=1
-chown -R wcs:wcs *
+
+set-var-lib-ownership.sh
 
 echo
 echo "Restoring database..."
