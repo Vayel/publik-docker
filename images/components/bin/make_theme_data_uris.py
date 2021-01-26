@@ -6,6 +6,8 @@ import sys
 import argparse
 
 
+MAX_IMG_SIZE = 50000
+
 def data_uri(sourcepath):
     if not os.path.isdir(sourcepath):
         return []
@@ -21,8 +23,10 @@ def data_uri(sourcepath):
         if not mimetype:
             continue
         filesize = os.stat(filename).st_size
-        if filesize > 50000:
+        if filesize > MAX_IMG_SIZE:
+            print("Skipping too-large image {}: {} > {}".format(filename, filesize, MAX_IMG_SIZE))
             continue
+        print("base64-encoding {}".format(filename))
         filecontent = open(filename, 'rb').read()
         b64 = base64.encodebytes(filecontent).decode('ascii').replace('\n', '')
         data_uris.append('$data_uri_%(varname)s: "data:%(mimetype)s;base64,%(b64)s";' % locals())
