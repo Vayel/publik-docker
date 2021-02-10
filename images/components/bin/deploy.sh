@@ -122,9 +122,9 @@ echo "###"
 function cook {
   echo "*** Deploying $1"
   # Execute cook in hobo (Many time as recommended by Entr'ouvert)
-  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
-  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
-  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT}
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT} --traceback
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT} --traceback
+  sudo -u hobo hobo-manage cook $1 -v ${HOBO_VERBOSITY} --timeout=${HOBO_DEPLOY_TIMEOUT} --traceback
 }
 
 cook $RECIPE_PATH
