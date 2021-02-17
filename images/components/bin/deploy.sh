@@ -35,6 +35,12 @@ echo "###"
 config-nginx.sh $ORG
 service nginx reload
 
+echo
+echo "###"
+echo "### Configuring wcs..."
+echo "###"
+build-wcs-template.sh "/tmp/wcs-template.zip" $ORG
+
 function retry() {
   local -r -i max_attempts="$1"; shift
   local -r cmd="$@"

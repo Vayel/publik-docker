@@ -29,7 +29,6 @@
             "port": ${DB_PORT}
         },
         "database-template-name": "wcs_%s",
-        "database": "wcs",
         "host": "${DB_HOST}",
         "user": "wcs",
         "password": "${PASS_DB_WCS}",

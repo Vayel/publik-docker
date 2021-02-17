@@ -2,6 +2,7 @@
 
 . colors.sh
 
+ORG=
 URL_PREFIX=
 ROOT_FOLDER=/tmp/sites
 FOLDER=$ROOT_FOLDER
@@ -21,25 +22,8 @@ fi
 #
 # WCS
 #
-echo "Importing wcs config from $FOLDER/..."
-if [ -f "$FOLDER/wcs-env.sh" ]; then
-  . "$FOLDER/wcs-env.sh"
-else
-  export WCS_FROM_EMAIL="$ADMIN_MAIL_ADDR"
-  export WCS_REPLY_TO_EMAIL="$ADMIN_MAIL_ADDR"
-fi
-export URL_PREFIX
-mkdir -p "$FOLDER/_build/wcs-template"
-# Need to inject variables from both .env and site-specific config
-subst.sh /tmp/wcs-config.json.template "$FOLDER/_build/wcs-template/config.json"
-subst.sh "$FOLDER/_build/wcs-template/config.json" "$FOLDER/_build/wcs-template/config.json" '$URL_PREFIX $DEFAULT_POSITION $WCS_FROM_EMAIL $WCS_REPLY_TO_EMAIL'
-
-# Need to inject variables from both .env and site-specific config
-subst.sh /tmp/wcs-site-options.cfg.template "$FOLDER/_build/wcs-template/site-options.cfg"
-subst.sh "$FOLDER/_build/wcs-template/site-options.cfg" "$FOLDER/_build/wcs-template/site-options.cfg" '$URL_PREFIX $DEFAULT_POSITION $WCS_FROM_EMAIL $WCS_REPLY_TO_EMAIL'
-
-zip -j "$FOLDER/_build/wcs-config.zip" "$FOLDER/_build/wcs-template/"*
-sudo -u wcs wcs-manage import_site -d ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} "$FOLDER/_build/wcs-config.zip"
+# We do not import WCS, otherwise we would override the config built during the
+# deployment (e.g. the database name)
 
 #
 # User portal
