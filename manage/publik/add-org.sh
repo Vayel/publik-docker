@@ -211,16 +211,16 @@ do
   fi
 done
 
-DEST="$DIR/hobo-recipe.json.template"
-envsubst '$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $FROM_EMAIL $EMAIL_SENDER_NAME $EMAIL_SUBJECT_PREFIX' < "$TEMPLATES_DIR/hobo-recipe.json.template" > "$DEST.tmp"
-encoding=`file -i "$DEST.tmp" | cut -f 2 -d";" | cut -f 2 -d=`
-iconv -f $encoding -t utf-8 "$DEST.tmp" > $DEST
-rm "$DEST.tmp"
+SUBST_STR='$SLUG $TITLE $THEME $SITE_URL $PHONE $EMAIL $ADDR $ADDR2 $POSTCODE $FROM_EMAIL $EMAIL_SENDER_NAME $EMAIL_SUBJECT_PREFIX'
+
+./manage/subst-env.sh "$DIR/hobo-recipe.json.template" "$DIR/hobo-recipe.json.template" "$SUBST_STR"
+./manage/subst-env.sh "$DIR/hobo-recipe.json.template" "$DIR/hobo-recipe.json"
 
 for prefix in user agent
 do
   if [ -f "$DIR/$prefix-portal.json.template" ]; then
-    envsubst '$SLUG $TITLE' < "$DIR/$prefix-portal.json.template" > "$DIR/$prefix-portal.json"
+    ./manage/subst-env.sh "$DIR/$prefix-portal.json.template" "$DIR/$prefix-portal.json.template" "$SUBST_STR"
+    ./manage/subst-env.sh "$DIR/$prefix-portal.json.template" "$DIR/$prefix-portal.json"
     rm "$DIR/$prefix-portal.json.template"
   fi
 done
