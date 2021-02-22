@@ -4,7 +4,7 @@
 
 
 CONF_FOLDER=/tmp/sites
-DEST_DIR=/tmp/sites
+DEST_DIR=/tmp/sites/_build
 OUTPUT_FILE=$1
 TEMPLATE_NAME=main.zip
 URL_PREFIX=
@@ -13,7 +13,7 @@ if [ "$#" -ne 1 ]; then
   ORG=$2
   URL_PREFIX="$ORG."
   TEMPLATE_NAME="$ORG.zip"
-  CONF_FOLDER="/tmp/sites/$ORG"
+  CONF_FOLDER="/tmp/sites/$ORG/_build"
 fi
 
 mkdir -p $DEST_DIR

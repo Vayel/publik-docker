@@ -149,7 +149,7 @@ if [ -z "$THEME" ]; then
   else
     echo_error "No theme supplied."
     PS3="Choose theme: "
-    select theme in publik $(ls $THEMES_DIR); do
+    select theme in publik $(ls $THEMES_DIR | grep -v "^__"); do
       if [ -z "$REPLY" ] || [ -z "$theme" ]; then
         echo "Please select a valid theme number."
       elif [ "$theme" == "publik" ] || [ -d "$THEMES_DIR/$theme" ]; then
