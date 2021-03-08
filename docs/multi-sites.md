@@ -68,4 +68,12 @@ supprimer l'entité de votre commune dans "Authentic2 RBAC" > "Entités".
 Enfin, se connecter à la base avec pgAdmin et dans les tables `environment_*` du
 schéma `hobo_<mon_site>` de la base de données `hobo`, supprimer les lignes
 dont le slug est celui de la collectivité supprimée. Pour la table `environment_variable`,
-il s'agit de la colonne `value`.
+il s'agit de la colonne `value`. Exemples :
+
+```
+# La meme chose pour "environment_fargo", "environment_wcs"...
+DELETE FROM hobo_monpublik_fr.environment_combo WHERE slug LIKE '%ma-commune%';
+
+# Pour "environment_variable", c'est la colonne "value" et non "slug"
+DELETE FROM hobo_monpublik_fr.environment_variable WHERE value LIKE '%ma-commune%';
+```
