@@ -145,7 +145,10 @@ fi
 
 for varname in SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE TOWN LATITUDE LONGITUDE
 do
-  val=${!varname}
+  if [ -v $varname ];
+  then
+    val=${!varname}
+  fi
   if [ -z "$val" ]; then
     read -p "$varname: "
     eval "$varname"="'$REPLY'"
