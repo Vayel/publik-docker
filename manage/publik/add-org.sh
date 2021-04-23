@@ -143,6 +143,20 @@ if [ ! -d "$TEMPLATES_DIR" ]; then
   cp -R $BASE_TEMPLATE_DIR/* $TEMPLATES_DIR/
 fi
 
+for varname in SITE_URL PHONE EMAIL ADDR ADDR2 POSTCODE TOWN LATITUDE LONGITUDE
+do
+  val=${!varname}
+  if [ -z "$val" ]; then
+    read -p "$varname: "
+    eval "$varname"="'$REPLY'"
+  fi
+done
+
+if [ ! -z "$LATITUDE" ] && [ ! -z "$LONGITUDE" ];
+then
+  DEFAULT_POSITION="$LATITUDE;$LONGITUDE"
+fi
+
 if [ -z "$THEME" ]; then
   if [ ! -d "$THEMES_DIR" ] || $NOINPUT; then
     THEME=publik
