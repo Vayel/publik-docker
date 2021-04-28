@@ -38,23 +38,23 @@ Tout cela se fait avec :
 
 Parfois, il est indiqué que le système d'authentification n'est pas configué (c'est
 le cas notamment lorsque dans le hobo de la collectivité, on n'a pas le menu
-a gauche). Il faut alors créer manuellement les fournisseurs d'identité SAML :
+a gauche). Il faut alors créer des objets depuis l'administration d'authentic.
+
+Tout d'abord, créez la collectivité si elle ne l'a pas été :
+`https://auth.<monsite.fr>/admin/a2_rbac/organizationalunit/`
+
+Puis créez manuellement les fournisseurs d'identité SAML :
 `https://auth.<monsite.fr>/admin/saml/libertyprovider/`
 
-Une collectivité demande les fournisseurs suivants, qui peuvent être créés au
-besoin via le bouton "Ajouter depuis une URL" en haut à droite (s'inspirer de
-ce qui existe déjà) :
+Une collectivité demande plusieurs fournisseurs à créer via le bouton "Ajouter
+depuis une URL" en haut à droite (s'inspirer de ce qui existe déjà). Pour connaître
+les valeurs des champs pour chaque fournisseur d'identité, exécutez le script suivant :
 
-* Liaison au hobo maître :
-  * Nom : `<nom de la commune>`
-  * Raccourci : `hobo-<slug-commune>`
-  * Collectivité : `Collectivité par défaut`
-  * URL des métadonnées : `https://<commune>.hobo.<monsite.fr>/accounts/mellon/metadata/`
-* Pour chaque composant Publik :
-  * Nom : `<composant>`
-  * Raccourci : `_hobo_<slug-commune>_<composant>-<slug-commune>`
-  * Collectivité : `<commune>`
-  * URL des métadonnées : `https://<commune>.<composant>.<monsite.fr>/accounts/mellon/metadata/`
+```
+./manage/publik/generate-saml-conf.sh <org-slug> <org-name>
+# Ex :
+# ./manage/publik/generate-saml-conf.sh mon-village "Mon village"
+```
 
 ## Supprimer une collectivité
 
