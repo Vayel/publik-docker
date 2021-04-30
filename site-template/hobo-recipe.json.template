@@ -21,7 +21,7 @@
       "create-hobo": {
         "url": "https://${organization}.${hobo}/",
         "slug": "hobo-${organization}",
-        "title": "Hobo | ${TITLE}"
+        "title": "${TITLE}"
       }
     },
     {
