@@ -4,8 +4,8 @@
 
 # Databases
 # See shared settings
-DATABASES['default']['NAME'] = 'chrono'
-DATABASES['default']['USER'] = 'chrono'
+DATABASES['default']['NAME'] = DB_CHRONO
+DATABASES['default']['USER'] = USER_DB_CHRONO
 DATABASES['default']['PASSWORD'] = PASS_DB_CHRONO
 
 # Zone

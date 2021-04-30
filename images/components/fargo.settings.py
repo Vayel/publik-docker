@@ -4,8 +4,8 @@
 
 # Databases
 # See shared settings
-DATABASES['default']['NAME'] = 'fargo'
-DATABASES['default']['USER'] = 'fargo'
+DATABASES['default']['NAME'] = DB_FARGO
+DATABASES['default']['USER'] = USER_DB_FARGO
 DATABASES['default']['PASSWORD'] = PASS_DB_FARGO
 
 # Zone

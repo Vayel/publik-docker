@@ -30,7 +30,7 @@
         },
         "database-template-name": "wcs_%s",
         "host": "${DB_HOST}",
-        "user": "wcs",
+        "user": "${USER_DB_WCS}",
         "password": "${PASS_DB_WCS}",
         "port": ${DB_PORT}
     }

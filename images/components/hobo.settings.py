@@ -4,8 +4,8 @@
 
 # Databases
 # See shared settings
-DATABASES['default']['NAME'] = 'hobo'
-DATABASES['default']['USER'] = 'hobo'
+DATABASES['default']['NAME'] = DB_HOBO
+DATABASES['default']['USER'] = USER_DB_HOBO
 DATABASES['default']['PASSWORD'] = PASS_DB_HOBO
 
 LANGUAGE_CODE = 'fr-fr'

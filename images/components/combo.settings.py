@@ -4,8 +4,8 @@
 
 # Databases
 # See shared settings
-DATABASES['default']['NAME'] = 'combo'
-DATABASES['default']['USER'] = 'combo'
+DATABASES['default']['NAME'] = DB_COMBO
+DATABASES['default']['USER'] = USER_DB_COMBO
 DATABASES['default']['PASSWORD'] = PASS_DB_COMBO
 
 # Zone

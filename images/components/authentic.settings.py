@@ -3,8 +3,8 @@
 # Then it can use the settings defined in "common.py.template"
 
 # Databases
-DATABASES['default']['NAME'] = 'authentic2_multitenant'
-DATABASES['default']['USER'] = 'authentic-multitenant'
+DATABASES['default']['NAME'] = DB_AUTHENTIC
+DATABASES['default']['USER'] = USER_DB_AUTHENTIC
 DATABASES['default']['PASSWORD'] = PASS_DB_AUTHENTIC
 
 # Zone

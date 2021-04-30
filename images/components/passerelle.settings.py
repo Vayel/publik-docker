@@ -4,8 +4,8 @@
 
 # Databases
 # See shared settings
-DATABASES['default']['NAME'] = 'passerelle'
-DATABASES['default']['USER'] = 'passerelle'
+DATABASES['default']['NAME'] = DB_PASSERELLE
+DATABASES['default']['USER'] = USER_DB_PASSERELLE
 DATABASES['default']['PASSWORD'] = PASS_DB_PASSERELLE
 
 # Zone
