@@ -117,9 +117,12 @@ retry 300 testHttpCode ${URL_PREFIX}${COMBO_ADMIN_SUBDOMAIN}${ENV}.${DOMAIN} ${H
 retry 300 testHttpCode ${URL_PREFIX}${CHRONO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} chrono 404
 retry 300 testHttpCode ${URL_PREFIX}${PASSERELLE_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} passerelle 404
 retry 300 testHttpCode ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} wcs 404
-retry 300 testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic 404
 retry 300 testHttpCode ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} fargo 404
 retry 300 testHttpCode ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} hobo 404
+# Do not check authentic for non-default organizations
+if [ -z "$ORG" ]; then
+  retry 300 testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic 404
+fi
 
 echo
 echo "###"
@@ -157,7 +160,7 @@ testHttpContains ${URL_PREFIX}${WCS_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} wcs
 testHttpContains ${URL_PREFIX}${FARGO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} fargo $AUTHENTIC_OK
 testHttpContains ${URL_PREFIX}${HOBO_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} hobo $AUTHENTIC_OK
 
-# Do not check authentic for organizations
+# Do not check authentic for non-default organizations
 if [ -z "$ORG" ]; then
   testHttpContains ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic $COMBO_OK
   testHttpCode ${URL_PREFIX}${AUTHENTIC_SUBDOMAIN}${ENV}.${DOMAIN} ${HTTPS_PORT} authentic 302
