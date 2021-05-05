@@ -44,19 +44,6 @@ fi
 
 configure.sh
 
-# Generate certificates for organizations
-if [ -d "/tmp/sites" ]; then
-  for dir in /tmp/sites/*/
-  do
-    if [ -d "$dir" ]; then
-      ORG=${dir:11:-1}
-      if [ "${ORG:0:1}" != "_" ]; then
-        configure.sh $ORG
-      fi
-    fi
-  done
-fi
-
 function update_certificates {
   while true
   do
