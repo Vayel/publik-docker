@@ -50,7 +50,6 @@ services:
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3-management
-    mem_limit: 512M
     hostname: rabbitmq
     ports:
       - "${RABBITMQ_PORT:-5672}:5672"
