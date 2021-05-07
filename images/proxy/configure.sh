@@ -33,5 +33,8 @@ fi
 
 generate-conf.sh "$@"
 generate-certificates.sh "$@"
-service nginx reload
+if (( $(ps -ef | grep -v grep | grep nginx | wc -l) > 0 ))
+then
+  service nginx reload
+fi
 echo_success 'Proxy configuration generated!'
