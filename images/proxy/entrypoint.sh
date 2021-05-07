@@ -28,20 +28,6 @@ then
   exit 1
 fi
 
-envsubst '$ENV $DOMAIN $RABBITMQ_MANAGEMENT_PORT' < /etc/nginx/conf.d/rabbitmq.template \
-	> /etc/nginx/conf.d/rabbitmq.conf
-
-if [ ! -z "$PGADMIN_PORT" ];
-then
-  envsubst '${ENV} ${DOMAIN} $PGADMIN_PORT' < /etc/nginx/conf.d/pgadmin.template \
-	  > /etc/nginx/conf.d/pgadmin.conf
-fi
-
-if [ ! -z "$MAILCATCHER_HTTP_PORT" ]; then
-  envsubst '${ENV} ${DOMAIN} $MAILCATCHER_HTTP_PORT' < /etc/nginx/conf.d/mailcatcher.template \
-	  > /etc/nginx/conf.d/mailcatcher.conf
-fi
-
 configure.sh
 
 function update_certificates {

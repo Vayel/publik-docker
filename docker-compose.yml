@@ -15,6 +15,7 @@ services:
       - ./data/letsencrypt:/etc/letsencrypt
       - ./data/hosts:/etc/hosts
       - ./data/sites:/tmp/sites
+      - ./data/proxy/nginx:/etc/nginx/conf.d
     links:
       - components:components
       - rabbitmq:rabbitmq

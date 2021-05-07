@@ -9,16 +9,16 @@ RUN apt-get update \
 	  && apt-get install -y certbot \
     && rm -rf /var/lib/apt/lists/*
 
-COPY http.conf /etc/nginx/conf.d/ 
-COPY *.template /etc/nginx/conf.d/ 
+RUN mkdir -p /etc/nginx/base_conf/
+COPY http.conf *.template /etc/nginx/base_conf/ 
 
 # TIMEZONE
 RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata
 
-COPY entrypoint.sh run-server.sh configure.sh update-certificates.sh colors.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/run-server.sh /usr/local/bin/configure.sh /usr/local/bin/update-certificates.sh /usr/local/bin/colors.sh
+COPY entrypoint.sh run-server.sh configure.sh update-certificates.sh colors.sh generate-certificates.sh generate-conf.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*.sh
 
 EXPOSE 80
 EXPOSE 443
