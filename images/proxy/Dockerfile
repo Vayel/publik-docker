@@ -6,7 +6,7 @@ MAINTAINER Vincent Lefoulon <vincent.lefoulon@laetis.fr>
 
 # HTTPS AUTO Let's encrypt certificates
 RUN apt-get update \
-	  && apt-get install -y certbot \
+	  && apt-get install -y certbot procps \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/nginx/base_conf/
