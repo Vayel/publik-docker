@@ -33,4 +33,5 @@ fi
 
 generate-conf.sh "$@"
 generate-certificates.sh "$@"
+service nginx reload
 echo_success 'Proxy configuration generated!'
